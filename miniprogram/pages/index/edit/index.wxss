@@ -7,3 +7,17 @@
 .diary-input {
     font-size: 1rem;
 }
+
+.recent-view {
+    padding: 0 15px;
+}
+
+.recent-item {
+    margin-right: 15px;
+    background-color: #fff !important;
+    font-weight: normal !important;
+}
+
+.recent-item-hover {
+    background-color: #ddd !important;
+}

@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon'
 import { DIARY_OPTION_LIST } from '../../../constants/index'
+import { getCache, cacheInput } from '../../../utils/recentRecordStore'
 
 const app = getApp()
 
@@ -9,15 +10,18 @@ Page({
     date: null,
     dateStr: '',
     record: null,
-    value: ''
+    value: '',
+    recent: []
   },
   onLoad ({ diaryOptionIndex, ts }) {
     wx.showLoading({
       mask: true,
       title: '加载中...'
     })
+    const type = DIARY_OPTION_LIST[Number(diaryOptionIndex)]
     this.setData({
-      type: DIARY_OPTION_LIST[Number(diaryOptionIndex)],
+      type,
+      recent: getCache(type.key),
       date: DateTime.fromMillis(Number(ts))
     }, () => {
       this.prepareViewData()
@@ -49,8 +53,16 @@ Page({
       dateStr: this.data.date.toFormat('yyyy年L月d日')
     })
   },
-  doSave (e) {
-    if (!e.detail.value.record) {
+  onChange ({ detail: { value } }) {
+    this.setData({ value })
+  },
+  onRecentClick ({ currentTarget: { dataset: { value } } }) {
+    this.setData({
+      value: (this.data.value + '\n' + value).trim()
+    })
+  },
+  doSave () {
+    if (!this.data.value) {
       wx.showToast({
         title: '写点东西吧',
         icon: 'none',
@@ -66,10 +78,11 @@ Page({
     if (this.data.record) {
       db.collection('records').doc(this.data.record._id).update({
         data: {
-          [this.data.type.key]: e.detail.value.record
+          [this.data.type.key]: this.data.value
         }
       })
         .then(res => {
+          cacheInput(this.data.type.key, this.data.value)
           app.globalData.needReload = true
           wx.navigateBack()
         })
@@ -81,10 +94,11 @@ Page({
         // data 字段表示需新增的 JSON 数据
         data: {
           date: this.data.date.toFormat('yyyy/LL/dd'),
-          [this.data.type.key]: e.detail.value.record
+          [this.data.type.key]: this.data.value
         }
       })
         .then(res => {
+          cacheInput(this.data.type.key, this.data.value)
           app.globalData.needReload = true
           wx.navigateBack()
         })

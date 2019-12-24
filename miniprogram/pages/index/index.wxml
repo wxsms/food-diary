@@ -1,12 +1,15 @@
-<!--index.wxml-->
 <view class="container">
-    <view wx:if="{{!logged}}" class="container-inner">
-        <view class="loading wx_dot_loading wx_dot_loading_white"></view>
+    <view class="date-view">
+        <view class="date" bindtap="goPrevDay">
+            <text>{{prevDateStr}}</text>
+        </view>
+        <view class="date today">
+            <text>{{currentDateStr}}</text>
+            <text>{{currentDateWeekDay}}</text>
+        </view>
+        <view class="date" bindtap="goNextDay">
+            <text>{{nextDateStr}}</text>
+        </view>
     </view>
-    <view wx:else class="container-inner">
-        <text class="title">今天吃了什么？</text>
-        <navigator url="/pages/dashboard/dashboard">
-            <button class="weui-btn mini-btn" type="default" size="mini">+</button>
-        </navigator>
-    </view>
+    <button bindtap="showAddSheet" class="weui-btn mini-btn add-btn" type="default" size="mini">+</button>
 </view>

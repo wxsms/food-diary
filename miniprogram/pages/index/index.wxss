@@ -16,12 +16,18 @@
     justify-content: center;
 }
 
+.date-icon {
+    width: 10px;
+    height: 10px;
+}
+
 .date {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     flex: 1;
+    font-size: 0.8rem;
 }
 
 .date.today {
@@ -29,7 +35,7 @@
     padding-right: 0;
     flex: 1;
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -38,5 +44,32 @@
 
 .add-btn {
     margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.cards {
+    width: 100%;
+}
+
+.card {
+    margin: 5px 20px 0;
+    padding: 35px 35px 15px;
+    background-color: #fff;
+    position: relative;
+}
+
+.card-badge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #888;
+    color: #fff;
+    font-size: 0.8rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 23px;
 }
 

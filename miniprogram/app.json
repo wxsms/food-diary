@@ -4,10 +4,10 @@
     "pages/index/edit/index"
   ],
   "window": {
-    "backgroundColor": "#83d5a9",
-    "backgroundTextStyle": "light",
+    "backgroundColor": "#EDEDED",
+    "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "Food Diary",
+    "navigationBarTitleText": "IBD 日记",
     "navigationBarTextStyle": "black"
   },
   "style": "v2",

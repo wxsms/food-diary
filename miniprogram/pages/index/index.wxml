@@ -1,15 +1,36 @@
 <view class="container">
     <view class="date-view">
         <view class="date" bindtap="goPrevDay">
-            <text>{{prevDateStr}}</text>
+            <text class="fa fa-angle-left"></text>
+            <text decode>&nbsp;{{prevDateStr}}</text>
         </view>
         <view class="date today">
             <text>{{currentDateStr}}</text>
             <text>{{currentDateWeekDay}}</text>
         </view>
         <view class="date" bindtap="goNextDay">
-            <text>{{nextDateStr}}</text>
+            <text decode>{{nextDateStr}}&nbsp;</text>
+            <text class="fa fa-angle-right"></text>
         </view>
     </view>
-    <button bindtap="showAddSheet" class="weui-btn mini-btn add-btn" type="default" size="mini">+</button>
+    <view class="cards">
+        <view class="card" wx:if="{{record && record.breakfast}}" bindtap="goEditBreakfast">
+            <view class="card-badge">早餐</view>
+            <text>{{record.breakfast}}</text>
+        </view>
+        <view class="card" wx:if="{{record && record.lunch}}" bindtap="goEditLunch">
+            <view class="card-badge">午餐</view>
+            <text>{{record.lunch}}</text>
+        </view>
+        <view class="card" wx:if="{{record && record.dinner}}" bindtap="goEditDinner">
+            <view class="card-badge">晚餐</view>
+            <text>{{record.dinner}}</text>
+        </view>
+        <view class="card" wx:if="{{record && record.weight}}" bindtap="goEditWeight">
+            <view class="card-badge">体重</view>
+            <text>{{record.weight}}</text>
+        </view>
+    </view>
+
+    <button bindtap="showAddSheet" class="weui-btn add-btn" type="primary">添加记录</button>
 </view>

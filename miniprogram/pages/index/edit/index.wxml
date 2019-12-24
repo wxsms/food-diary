@@ -1,4 +1,23 @@
 <!--index.wxml-->
 <view class="container">
-    <view>{{dateStr}}的{{type.label}}</view>
+    <view class="page__hd">
+        <view class="page__title">{{dateStr}}</view>
+        <view class="page__desc">{{type.label}}</view>
+    </view>
+    <view class="page__bd">
+        <form bindsubmit="doSave">
+            <view class="weui-cells weui-cells_after-title">
+                <view class="weui-cell">
+                    <view class="weui-cell__bd">
+                        <textarea value="{{value}}" auto-height class="weui-textarea"
+                                placeholder="多条记录请用换行分隔" name="record"/>
+                    </view>
+                </view>
+            </view>
+            <view class="weui-btn-area">
+                <button class="weui-btn" type="primary" form-type="submit">保存</button>
+                <button wx:if="{{record && value}}" class="weui-btn" type="warn" bindtap="deleteRecord">删除</button>
+            </view>
+        </form>
+    </view>
 </view>

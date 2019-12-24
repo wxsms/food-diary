@@ -1,0 +1,12 @@
+<!--index.wxml-->
+<view class="container">
+    <view wx:if="{{!logged}}" class="container-inner">
+        <view class="loading wx_dot_loading wx_dot_loading_white"></view>
+    </view>
+    <view wx:else class="container-inner">
+        <text class="title">今天吃了什么？</text>
+        <navigator url="/pages/dashboard/dashboard">
+            <button class="weui-btn mini-btn" type="default" size="mini">+</button>
+        </navigator>
+    </view>
+</view>

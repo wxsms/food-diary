@@ -17,8 +17,11 @@ Page({
     this.setData({
       currentDate: DateTime.local().startOf('day')
     }, this.prepareViewData)
-    this.login()
-      .then(this.fetchData)
+    wx.showLoading({
+      mask: true,
+      title: '加载中...'
+    })
+    this.login().then(this.fetchData)
   },
   onShow () {
     if (app.globalData.needReload) {
@@ -56,10 +59,6 @@ Page({
   },
   login () {
     // 调用云函数
-    wx.showLoading({
-      mask: true,
-      title: '加载中...'
-    })
     return wx.cloud.callFunction({
       name: 'login',
       data: {}
@@ -73,9 +72,6 @@ Page({
       })
       .catch(err => {
         console.error('[云函数] [login] 调用失败', err)
-      })
-      .finally(() => {
-        wx.hideLoading()
       })
   },
   prepareViewData () {

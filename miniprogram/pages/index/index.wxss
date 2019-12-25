@@ -3,7 +3,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    height: 100%;
 }
 
 .date-view {
@@ -42,7 +41,7 @@
     justify-content: center;
 }
 
-.add-btn {
+.btns {
     margin-top: 20px;
     margin-bottom: 50px;
 }
@@ -62,7 +61,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    background-color: #888;
+    background-color: rgba(136, 136, 136, 0.5);
     color: #fff;
     font-size: 0.8rem;
     display: flex;
@@ -70,6 +69,6 @@
     align-items: center;
     justify-content: center;
     width: 80px;
-    height: 23px;
+    height: 25px;
 }
 

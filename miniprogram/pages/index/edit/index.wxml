@@ -14,7 +14,6 @@
                     </view>
                 </view>
             </view>
-
             <view wx:if="{{recent.length > 0}}">
                 <view class="weui-cells__title">最近使用</view>
                 <view class="recent-view">

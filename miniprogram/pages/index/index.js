@@ -24,6 +24,13 @@ Page({
     if (app.globalData.needReload) {
       app.globalData.needReload = false
       this.fetchData()
+    } else if (app.globalData.needRelocate) {
+      this.setData({
+        currentDate: DateTime.fromMillis(app.globalData.needRelocate)
+      }, () => {
+        app.globalData.needRelocate = null
+        this.fetchData().then(this.prepareViewData)
+      })
     }
   },
   fetchData () {
@@ -34,7 +41,7 @@ Page({
     const db = wx.cloud.database()
     return db.collection('records').where({
       _openid: app.globalData.openid,
-      date: this.data.currentDate.toFormat('yyyy/LL/dd')
+      date: this.data.currentDate.startOf('day').ts
     })
       .get()
       .then(({ data }) => {
@@ -122,9 +129,24 @@ Page({
       url: `/pages/index/edit/index?diaryOptionIndex=${DIARY_OPTION_LIST.indexOf(DIARY_TYPES.DINNER)}&ts=${this.data.currentDate.ts}`
     })
   },
-  goEditWeight () {
+  goEditSupplement () {
     wx.navigateTo({
-      url: `/pages/index/edit/index?diaryOptionIndex=${DIARY_OPTION_LIST.indexOf(DIARY_TYPES.WEIGHT)}&ts=${this.data.currentDate.ts}`
+      url: `/pages/index/edit/index?diaryOptionIndex=${DIARY_OPTION_LIST.indexOf(DIARY_TYPES.SUPPLEMENT)}&ts=${this.data.currentDate.ts}`
+    })
+  },
+  goEditOthers () {
+    wx.navigateTo({
+      url: `/pages/index/edit/index?diaryOptionIndex=${DIARY_OPTION_LIST.indexOf(DIARY_TYPES.OTHERS)}&ts=${this.data.currentDate.ts}`
+    })
+  },
+  goEditAbnormal () {
+    wx.navigateTo({
+      url: `/pages/index/edit/index?diaryOptionIndex=${DIARY_OPTION_LIST.indexOf(DIARY_TYPES.ABNORMAL)}&ts=${this.data.currentDate.ts}`
+    })
+  },
+  goCalendar () {
+    wx.navigateTo({
+      url: `/pages/index/calendar/index?ts=${this.data.currentDate.ts}`
     })
   }
 })

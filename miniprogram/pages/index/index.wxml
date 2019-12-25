@@ -26,11 +26,21 @@
             <view class="card-badge">晚餐</view>
             <text>{{record.dinner}}</text>
         </view>
-        <view class="card" wx:if="{{record && record.weight}}" bindtap="goEditWeight">
-            <view class="card-badge">体重</view>
-            <text>{{record.weight}}</text>
+        <view class="card" wx:if="{{record && record.supplement}}" bindtap="goEditSupplement">
+            <view class="card-badge">补充</view>
+            <text>{{record.supplement}}</text>
+        </view>
+        <view class="card" wx:if="{{record && record.others}}" bindtap="goEditOthers">
+            <view class="card-badge">其它</view>
+            <text>{{record.others}}</text>
+        </view>
+        <view class="card" wx:if="{{record && record.abnormal}}" bindtap="goEditAbnormal">
+            <view class="card-badge">异常</view>
+            <text>{{record.abnormal}}</text>
         </view>
     </view>
-
-    <button bindtap="showAddSheet" class="weui-btn add-btn" type="primary">添加记录</button>
+    <view class="btns">
+        <button bindtap="showAddSheet" class="weui-btn" type="primary">添加</button>
+        <button bindtap="goCalendar" class="weui-btn" type="default">日历</button>
+    </view>
 </view>

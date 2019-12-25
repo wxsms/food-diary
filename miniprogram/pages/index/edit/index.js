@@ -11,7 +11,8 @@ Page({
     dateStr: '',
     record: null,
     value: '',
-    recent: []
+    recent: [],
+    othersRecent: ['体重', '排便', '异常']
   },
   onLoad ({ diaryOptionIndex, ts }) {
     wx.showLoading({
@@ -22,7 +23,7 @@ Page({
     this.setData({
       type,
       recent: getCache(type.key),
-      date: DateTime.fromMillis(Number(ts))
+      date: DateTime.fromMillis(Number(ts)).startOf('day')
     }, () => {
       this.prepareViewData()
       this.fetchData()
@@ -32,7 +33,7 @@ Page({
     const db = wx.cloud.database()
     db.collection('records').where({
       _openid: app.globalData.openid,
-      date: this.data.date.toFormat('yyyy/LL/dd')
+      date: this.data.date.ts
     })
       .get()
       .then(({ data }) => {
@@ -93,7 +94,7 @@ Page({
       db.collection('records').add({
         // data 字段表示需新增的 JSON 数据
         data: {
-          date: this.data.date.toFormat('yyyy/LL/dd'),
+          date: this.data.date.ts,
           [this.data.type.key]: this.data.value
         }
       })

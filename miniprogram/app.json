@@ -8,7 +8,7 @@
     "backgroundColor": "#EDEDED",
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "IBD 日记",
+    "navigationBarTitleText": "IBD日记",
     "navigationBarTextStyle": "black"
   },
   "style": "v2",

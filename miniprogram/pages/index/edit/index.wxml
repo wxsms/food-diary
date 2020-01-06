@@ -10,7 +10,8 @@
                 <view class="weui-cell">
                     <view class="weui-cell__bd">
                         <textarea value="{{value}}" auto-height class="weui-textarea"
-                                placeholder="多条记录请用换行分隔" name="record" bindinput="onChange"/>
+                                placeholder="多条记录请用换行分隔" name="record" bindinput="onChange"
+                                bindconfirm="doSave"/>
                     </view>
                 </view>
             </view>

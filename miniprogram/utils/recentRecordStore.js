@@ -1,4 +1,6 @@
-import { uniq, chunk, reverse } from 'lodash'
+import uniq from 'lodash.uniq'
+import reverse from 'lodash.reverse'
+import chunk from 'lodash.chunk'
 
 const maxSize = 6
 

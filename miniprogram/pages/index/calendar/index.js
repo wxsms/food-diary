@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon'
-import { find, chunk } from 'lodash'
+import find from 'lodash.find'
+import chunk from 'lodash.chunk'
 
 const app = getApp()
 

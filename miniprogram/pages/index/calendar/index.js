@@ -26,15 +26,17 @@ Page({
       title: '加载中...'
     })
     const db = wx.cloud.database()
-    const cmd = db.command
     const monthStart = this.data.currentDate.startOf('month')
     const monthEnd = this.data.currentDate.endOf('month')
-    return db.collection('records').where({
-      _openid: app.globalData.openid,
-      date: cmd.gte(monthStart.ts).and(cmd.lt(monthEnd.ts))
+    return wx.cloud.callFunction({
+      name: 'calendar',
+      data: {
+        from: monthStart.ts,
+        to: monthEnd.ts
+      }
     })
-      .get()
-      .then(({ data }) => {
+      .then((res) => {
+        const data = res.result.data
         const records = []
         const monthStartWeekday = monthStart.weekday
         const placeholdersNum = monthStartWeekday === 7 ? 0 : monthStartWeekday

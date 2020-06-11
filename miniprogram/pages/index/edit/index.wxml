@@ -1,33 +1,35 @@
 <!--index.wxml-->
 <view class="container">
-    <view class="page__hd">
-        <view class="page__title">{{dateStr}}</view>
-        <view class="page__desc">{{type.label}}</view>
-    </view>
-    <view class="page__bd">
-        <form bindsubmit="doSave">
-            <view class="weui-cells weui-cells_after-title">
-                <view class="weui-cell">
-                    <view class="weui-cell__bd">
-                        <textarea value="{{value}}" auto-height class="weui-textarea"
-                                placeholder="多条记录请用换行分隔" name="record" bindinput="onChange"
-                                bindconfirm="doSave"/>
-                    </view>
-                </view>
-            </view>
-            <view wx:if="{{recent.length > 0}}">
-                <view class="weui-cells__title">最近使用</view>
-                <view class="recent-view">
-                    <button wx:for="{{recent}}" wx:key="item" hover-class="recent-item-hover" class="weui-btn mini-btn recent-item"
-                            type="default" size="mini" data-value="{{item}}" bindtap="onRecentClick">
-                        <text>{{item}}</text>
-                    </button>
-                </view>
-            </view>
-            <view class="weui-btn-area">
-                <button class="weui-btn" type="primary" form-type="submit">保存</button>
-                <button wx:if="{{record && value}}" class="weui-btn" type="warn" bindtap="deleteRecord">删除</button>
-            </view>
-        </form>
-    </view>
+  <view class="page__hd">
+    <view class="page__title">{{dateStr}}</view>
+    <view class="page__desc">{{type.label}}</view>
+  </view>
+  <view class="page__bd">
+    <form bindsubmit="doSave">
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <textarea value="{{value}}" auto-height class="weui-textarea"
+                      placeholder="多条记录请用换行分隔" name="record" bindinput="onChange"
+                      bindconfirm="doSave"/>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{recent.length > 0}}">
+        <view class="weui-cells__title">最近使用</view>
+        <view class="recent-view">
+          <button wx:for="{{recent}}" wx:key="item" hover-class="recent-item-hover"
+                  class="weui-btn mini-btn recent-item"
+                  type="default" size="mini" data-value="{{item}}" bindtap="onRecentClick"
+                  bindlongpress="onRecentDelete">
+            <text>{{item}}</text>
+          </button>
+        </view>
+      </view>
+      <view class="weui-btn-area">
+        <button class="weui-btn" type="primary" form-type="submit">保存</button>
+        <button wx:if="{{record && value}}" class="weui-btn" type="warn" bindtap="deleteRecord">删除</button>
+      </view>
+    </form>
+  </view>
 </view>

@@ -14,6 +14,19 @@ export function cacheInput (key, str) {
   })
 }
 
+export function cacheDelete (key, str) {
+  const cache = getCache(key)
+  const index = cache.indexOf(str)
+  if (index >= 0) {
+    cache.splice(index, 1)
+    wx.setStorage({
+      key: `cache_${key}`,
+      data: cache
+    })
+  }
+  return cache
+}
+
 export function getCache (key) {
   const cache = wx.getStorageSync(`cache_${key}`)
   return cache ? cache : []

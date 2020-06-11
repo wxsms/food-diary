@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon'
 import { DIARY_OPTION_LIST } from '../../../constants/index'
-import { getCache, cacheInput } from '../../../utils/recentRecordStore'
+import { getCache, cacheInput, cacheDelete } from '../../../utils/recentRecordStore'
 
 const app = getApp()
 
@@ -60,6 +60,20 @@ Page({
   onRecentClick ({ currentTarget: { dataset: { value } } }) {
     this.setData({
       value: (this.data.value + '\n' + value).trim()
+    })
+  },
+  onRecentDelete ({ currentTarget: { dataset: { value } } }) {
+    wx.showModal({
+      content: '删除本项？',
+      confirmText: '删除',
+      confirmColor: '#fa5151',
+      success: (res) => {
+        if (res.confirm) {
+          this.setData({
+            recent: cacheDelete(this.data.type.key, value)
+          })
+        }
+      }
     })
   },
   doSave () {

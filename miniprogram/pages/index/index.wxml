@@ -41,6 +41,7 @@
     </view>
     <view class="btns">
         <button bindtap="showAddSheet" class="weui-btn" type="primary">添加</button>
+        <button bindtap="copyYesterday" wx:if="{{yesterdayData !== null && !record}}" class="weui-btn" type="default">同前</button>
         <button bindtap="goCalendar" class="weui-btn" type="default">日历</button>
     </view>
 </view>

@@ -11,7 +11,8 @@ Page({
     currentDateWeekDay: '',
     prevDateStr: '',
     nextDateStr: '',
-    record: null
+    record: null,
+    yesterdayData: null
   },
   onLoad () {
     this.setData({
@@ -36,21 +37,45 @@ Page({
       })
     }
   },
+  copyYesterday () {
+    wx.showLoading({
+      mask: true,
+      title: '请稍候...'
+    })
+    const _data = this.data.yesterdayData
+    delete _data._openid
+    delete _data._id
+    const db = wx.cloud.database()
+    db.collection('records').add({
+      data: {
+        ..._data,
+        date: this.data.currentDate.startOf('day').ts
+      }
+    })
+      .finally(this.fetchData)
+  },
   fetchData () {
     wx.showLoading({
       mask: true,
       title: '加载中...'
     })
     const db = wx.cloud.database()
-    return db.collection('records').where({
-      _openid: app.globalData.openid,
-      date: this.data.currentDate.startOf('day').ts
-    })
-      .get()
-      .then(({ data }) => {
-        const record = data[0] || null
+    return Promise.all([
+      db.collection('records').where({
+        _openid: app.globalData.openid,
+        date: this.data.currentDate.startOf('day').ts
+      }).get(),
+      db.collection('records').where({
+        _openid: app.globalData.openid,
+        date: this.data.currentDate.startOf('day').minus({ days: 1 }).ts
+      }).get()
+    ])
+      .then(res => {
+        const record = res[0].data[0] || null
+        const yesterdayData = res[1].data[0] || null
         this.setData({
-          record
+          record,
+          yesterdayData
         })
       })
       .finally(() => {

@@ -9,10 +9,10 @@
       <view wx:if="{{loaded}}">
         <mp-cells title="状况" wx:if="{{showWeight || showDefecation}}">
           <mp-cell title="体重 (kg)" wx:if="{{showWeight}}">
-            <input bindinput="formInputChange" class="weui-input" placeholder="请输入数字"/>
+            <input type="number" value="{{weight}}" class="weui-input" placeholder="请输入数字" bindinput="onWeightChange"/>
           </mp-cell>
           <mp-cell title="排便次数" wx:if="{{showDefecation}}">
-            <input bindinput="formInputChange" class="weui-input" placeholder="请输入数字"/>
+            <input type="number" value="{{defecation}}" class="weui-input" placeholder="请输入数字" bindinput="onDefecationChange"/>
           </mp-cell>
         </mp-cells>
       </view>
@@ -48,7 +48,7 @@
             <button class="weui-btn" type="primary">添加...</button>
           </picker>
         </view>
-        <button class="weui-btn" type="primary" form-type="submit">保存</button>
+        <button class="weui-btn" type="primary" bindtap="doSave">保存</button>
         <button wx:if="{{record && value}}" class="weui-btn" type="warn" bindtap="deleteRecord">删除</button>
       </view>
     </mp-form>

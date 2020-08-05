@@ -15,6 +15,8 @@ Page({
     dateStr: '',
     record: null,
     value: '',
+    weight: '',
+    defecation: '',
     recent: [],
     othersRecent: ['体重', '排便', '异常'],
     scdFoods: [],
@@ -78,7 +80,9 @@ Page({
         if (record) {
           this.setData({
             record,
-            value: record[this.data.type.key] || ''
+            value: record[this.data.type.key] || '',
+            weight: typeof record[DIARY_TYPES.WEIGHT.key] === 'number' ? record[DIARY_TYPES.WEIGHT.key] : '',
+            defecation: typeof record[DIARY_TYPES.DEFECATION.key] === 'number' ? record[DIARY_TYPES.DEFECATION.key] : ''
           })
         }
       })
@@ -93,6 +97,12 @@ Page({
   },
   onChange ({ detail: { value } }) {
     this.setData({ value })
+  },
+  onWeightChange ({ detail: { value } }) {
+    this.setData({ weight: value })
+  },
+  onDefecationChange ({ detail: { value } }) {
+    this.setData({ defecation: value })
   },
   onRecentClick ({ currentTarget: { dataset: { value } } }) {
     this.setData({
@@ -114,7 +124,12 @@ Page({
     })
   },
   doSave () {
-    if (!this.data.value) {
+    const hasValue = !!this.data.value
+    const hasWeight = this.data.showWeight ? !!this.data.weight : false
+    const hasDefecation = this.data.showDefecation ? !!this.data.defecation : false
+    const hasContent = hasValue || hasWeight || hasDefecation
+
+    if (!hasContent) {
       wx.showToast({
         title: '写点东西吧',
         icon: 'none',
@@ -122,16 +137,43 @@ Page({
       })
       return
     }
+
+    const weightInvalid = this.data.showWeight ? Number.isNaN(Number(this.data.weight)) : false
+    if (weightInvalid) {
+      wx.showToast({
+        title: '体重需输入数字',
+        icon: 'none',
+        duration: 2000
+      })
+      return
+    }
+    const defecationInvalid = this.data.showDefecation ? Number.isNaN(Number(this.data.defecation)) : false
+    if (defecationInvalid) {
+      wx.showToast({
+        title: '排便次数需输入数字',
+        icon: 'none',
+        duration: 2000
+      })
+      return
+    }
+
     wx.showLoading({
       mask: true,
       title: '正在保存...'
     })
     const db = wx.cloud.database()
+    const toSave = {
+      [this.data.type.key]: this.data.value
+    }
+    if (this.data.showWeight) {
+      toSave[DIARY_TYPES.WEIGHT.key] = Number(this.data.weight)
+    }
+    if (this.data.showDefecation) {
+      toSave[DIARY_TYPES.DEFECATION.key] = Number(this.data.defecation)
+    }
     if (this.data.record) {
       db.collection('records').doc(this.data.record._id).update({
-        data: {
-          [this.data.type.key]: this.data.value
-        }
+        data: toSave
       })
         .then(res => {
           cacheInput(this.data.type.key, this.data.value)
@@ -146,7 +188,7 @@ Page({
         // data 字段表示需新增的 JSON 数据
         data: {
           date: this.data.date.ts,
-          [this.data.type.key]: this.data.value
+          ...toSave
         }
       })
         .then(res => {

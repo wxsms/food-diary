@@ -13,6 +13,7 @@ const TYPES = {
   OTHERS: { label: '其它', key: 'others' },
   ABNORMAL: { label: '异常', key: 'abnormal' }
 }
+
 // 云函数入口函数
 exports.main = async ({ from, to }, context) => {
   try {
@@ -55,10 +56,9 @@ exports.main = async ({ from, to }, context) => {
       name: sheetName,
       data: sheet
     }])
-    //4，把excel文件保存到云存储里
     const { fileID } = await cloud.uploadFile({
       cloudPath: `${wxContext.OPENID}-${sheetName}.xlsx`,
-      fileContent: buffer, //excel二进制文件
+      fileContent: buffer,
     })
     const res = await cloud.getTempFileURL({
       fileList: [fileID]

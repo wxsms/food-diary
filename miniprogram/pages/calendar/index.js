@@ -11,7 +11,8 @@ Page({
     currentDateStr: '',
     prevDateStr: '',
     nextDateStr: '',
-    records: []
+    records: [],
+    hasRecordInMonth: false
   },
   onLoad ({ ts }) {
     this.setData({
@@ -36,8 +37,11 @@ Page({
         to: monthEnd.ts
       }
     })
-      .then((res) => {
-        this.prepareGrid(res.result.data)
+      .then(({ result: { data } }) => {
+        this.setData({
+          hasRecordInMonth: data.length > 0
+        })
+        this.prepareGrid(data)
       })
       .finally(() => {
         wx.hideLoading()

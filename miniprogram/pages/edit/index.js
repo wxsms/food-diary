@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { DIARY_OPTION_LIST } from '../../constants/index'
+import { DIARY_OPTION_LIST, DIARY_TYPES } from '../../constants/index'
 import { getCache, cacheInput, cacheDelete } from '../../store/recent-record.store'
 import { isReview } from '../../utils/version.utils'
 import { getByLevel, SCD_LEVEL } from '../../store/scd-foods.store'
@@ -9,6 +9,8 @@ const app = getApp()
 Page({
   data: {
     type: null,
+    showWeight: false,
+    showDefecation: false,
     date: null,
     dateStr: '',
     record: null,
@@ -27,6 +29,8 @@ Page({
     const type = DIARY_OPTION_LIST[Number(diaryOptionIndex)]
     this.setData({
       type,
+      showWeight: type === DIARY_TYPES.OTHERS,
+      showDefecation: type === DIARY_TYPES.OTHERS,
       date: DateTime.fromMillis(Number(ts)).startOf('day'),
       recent: getCache(type.key)
     }, async () => {

@@ -4,6 +4,7 @@
     "lodash.find": "^4.6.0",
     "lodash.reverse": "^4.0.1",
     "lodash.uniq": "^4.5.0",
-    "luxon": "^1.21.3"
+    "luxon": "^1.21.3",
+    "weui-miniprogram": "^1.0.4"
   }
 }

@@ -26,3 +26,8 @@ luxon@^1.21.3:
   version "1.21.3"
   resolved "https://registry.npm.taobao.org/luxon/download/luxon-1.21.3.tgz#f1d5c2a7e855d039836cf4954f883ecac8fc4727"
   integrity sha1-8dXCp+hV0DmDbPSVT4g+ysj8Ryc=
+
+weui-miniprogram@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.npm.taobao.org/weui-miniprogram/download/weui-miniprogram-1.0.4.tgz#379bb56970c8fd84a83042433e45fef329397733"
+  integrity sha1-N5u1aXDI/YSoMEJDPkX+8yk5dzM=

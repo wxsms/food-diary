@@ -128,7 +128,7 @@ Page({
     })
   },
   showAddSheet () {
-    const list = this.data.isReview ? DIARY_OPTION_LIST.filter(v => v.reviewOnly) : DIARY_OPTION_LIST
+    const list = this.data.isReview ? DIARY_OPTION_LIST.filter(v => v.inReviewMode) : DIARY_OPTION_LIST
     wx.showActionSheet({
       itemList: list.map(v => v.label),
       success: ({ cancel, tapIndex }) => {

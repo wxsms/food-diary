@@ -1,4 +1,4 @@
-@import 'style/weui.wxss';
+@import './miniprogram_npm/weui-miniprogram/weui-wxss/dist/style/weui.wxss';
 @import "style/font-awesome.wxss";
 @import "style/fa.wxss";
 

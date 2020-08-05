@@ -5,17 +5,32 @@
     <view class="page__desc">{{type.label}}</view>
   </view>
   <view class="page__bd">
-    <form bindsubmit="doSave">
-      <view class="weui-cells weui-cells_after-title" wx:if="{{loaded}}">
-        <view class="weui-cell">
-          <view class="weui-cell__bd">
-            <view wx:if="{{isReview}}" class="review-text">{{value ? value : '请选择...'}}</view>
-            <textarea wx:else value="{{value}}" auto-height class="weui-textarea"
-                      placeholder="多条记录请用换行分隔" name="record" bindinput="onChange"
-                      bindconfirm="doSave"/>
+    <mp-form>
+      <view wx:if="{{loaded}}">
+        <mp-cells title="状况" wx:if="{{showWeight || showDefecation}}">
+          <mp-cell title="体重 (kg)" wx:if="{{showWeight}}">
+            <input bindinput="formInputChange" class="weui-input" placeholder="请输入数字"/>
+          </mp-cell>
+          <mp-cell title="排便次数" wx:if="{{showDefecation}}">
+            <input bindinput="formInputChange" class="weui-input" placeholder="请输入数字"/>
+          </mp-cell>
+        </mp-cells>
+      </view>
+
+      <view wx:if="{{loaded}}">
+        <view class="weui-cells__title" wx:if="{{showWeight || showDefecation}}">其他</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">
+              <view wx:if="{{isReview}}" class="review-text">{{value ? value : '请选择...'}}</view>
+              <textarea wx:else value="{{value}}" auto-height class="weui-textarea"
+                        placeholder="多条记录请用换行分隔" name="record" bindinput="onChange"
+                        bindconfirm="doSave"/>
+            </view>
           </view>
         </view>
       </view>
+
       <view wx:if="{{recent.length > 0 && loaded}}">
         <view class="weui-cells__title">最近使用</view>
         <view class="recent-view">
@@ -36,6 +51,6 @@
         <button class="weui-btn" type="primary" form-type="submit">保存</button>
         <button wx:if="{{record && value}}" class="weui-btn" type="warn" bindtap="deleteRecord">删除</button>
       </view>
-    </form>
+    </mp-form>
   </view>
 </view>

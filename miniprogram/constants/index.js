@@ -1,10 +1,10 @@
 export const DIARY_TYPES = {
-  BREAKFAST: { label: '早餐', key: 'breakfast' },
-  LUNCH: { label: '午餐', key: 'lunch' },
-  DINNER: { label: '晚餐', key: 'dinner' },
-  SUPPLEMENT: { label: '补充', key: 'supplement' },
-  OTHERS: { label: '其它', key: 'others' },
-  ABNORMAL: { label: '异常', key: 'abnormal' }
+  BREAKFAST: { label: '早餐', key: 'breakfast', reviewOnly: true },
+  LUNCH: { label: '午餐', key: 'lunch', reviewOnly: true },
+  DINNER: { label: '晚餐', key: 'dinner', reviewOnly: true },
+  SUPPLEMENT: { label: '补充', key: 'supplement', reviewOnly: true },
+  OTHERS: { label: '其它', key: 'others', reviewOnly: false },
+  ABNORMAL: { label: '异常', key: 'abnormal', reviewOnly: false }
 }
 
 export const DIARY_OPTION_LIST = [

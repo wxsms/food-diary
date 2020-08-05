@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon'
 import { DIARY_OPTION_LIST, DIARY_TYPES } from '../../constants/index'
+import { isReview } from '../../utils/version.utils'
 
 const app = getApp()
 
@@ -12,16 +13,19 @@ Page({
     prevDateStr: '',
     nextDateStr: '',
     record: null,
-    yesterdayData: null
+    yesterdayData: null,
+    isReview: false
   },
-  onLoad () {
-    this.setData({
-      currentDate: DateTime.local().startOf('day')
-    }, this.prepareViewData)
+  async onLoad () {
     wx.showLoading({
       mask: true,
       title: '加载中...'
     })
+    const _isReview = await isReview()
+    this.setData({
+      currentDate: DateTime.local().startOf('day'),
+      isReview: _isReview
+    }, this.prepareViewData)
     this.login().then(this.fetchData)
   },
   onShow () {
@@ -124,8 +128,9 @@ Page({
     })
   },
   showAddSheet () {
+    const list = this.data.isReview ? DIARY_OPTION_LIST.filter(v => v.reviewOnly) : DIARY_OPTION_LIST
     wx.showActionSheet({
-      itemList: DIARY_OPTION_LIST.map(v => v.label),
+      itemList: list.map(v => v.label),
       success: ({ cancel, tapIndex }) => {
         if (!cancel) {
           wx.navigateTo({

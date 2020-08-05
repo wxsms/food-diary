@@ -9,7 +9,7 @@
       <view class="weui-cells weui-cells_after-title" wx:if="{{loaded}}">
         <view class="weui-cell">
           <view class="weui-cell__bd">
-            <view wx:if="{{isReview}}" class="review-text">{{value ? value : '（无内容）'}}</view>
+            <view wx:if="{{isReview}}" class="review-text">{{value ? value : '请选择...'}}</view>
             <textarea wx:else value="{{value}}" auto-height class="weui-textarea"
                       placeholder="多条记录请用换行分隔" name="record" bindinput="onChange"
                       bindconfirm="doSave"/>

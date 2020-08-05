@@ -58,7 +58,12 @@ Page({
     }
     for (let ts = monthStart.ts, day = 1; ts < monthEnd.ts; ts += 1000 * 60 * 60 * 24, day++) {
       const record = find(data, v => v.date === ts)
-      const _record = { _day: day, date: ts }
+      const _record = {
+        _day: day,
+        date: ts,
+        hasWeight: record && typeof record.weight === 'number',
+        hasDefecation: record && typeof record.defecation === 'number'
+      }
       records.push(Object.assign({}, record, _record))
     }
     this.setData({

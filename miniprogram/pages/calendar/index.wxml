@@ -24,10 +24,16 @@
           <view class="cell-col {{item.lunch ? 'cell-col-filled' : 'cell-col-empty'}}"/>
           <view class="cell-col {{item.dinner ? 'cell-col-filled' : 'cell-col-empty'}}"/>
         </view>
-        <view class="cell-row cell-row-sm {{item.supplement ? 'cell-row-filled' : 'cell-row-empty'}}"
-              style="margin-top: 7px"/>
-        <view class="cell-row cell-row-sm {{item.others ? 'cell-row-filled' : 'cell-row-empty'}}"/>
-        <view class="cell-row cell-row-sm {{item.abnormal ? 'cell-row-danger' : 'cell-row-empty'}}"/>
+        <view
+          class="cell-row cell-row-sm {{item.supplement ? 'cell-row-filled' : 'cell-row-empty'}}"
+          style="margin-top: 7px"
+        />
+        <view
+          class="cell-row cell-row-sm {{item.others || item.hasDefecation || item.hasWeight ? 'cell-row-filled' : 'cell-row-empty'}}"
+        />
+        <view
+          class="cell-row cell-row-sm {{item.abnormal ? 'cell-row-danger' : 'cell-row-empty'}}"
+        />
       </view>
       <view class="cell-placeholder" wx:else/>
     </view>

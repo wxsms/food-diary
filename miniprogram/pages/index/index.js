@@ -14,7 +14,9 @@ Page({
     nextDateStr: '',
     record: null,
     yesterdayData: null,
-    isReview: false
+    isReview: false,
+    hasDefecation: false,
+    hasWeight: false
   },
   async onLoad () {
     wx.showLoading({
@@ -79,6 +81,8 @@ Page({
         const yesterdayData = res[1].data[0] || null
         this.setData({
           record,
+          hasDefecation: record && typeof record.defecation === 'number',
+          hasWeight: record && typeof record.weight === 'number',
           yesterdayData
         })
       })

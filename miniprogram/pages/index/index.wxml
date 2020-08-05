@@ -32,8 +32,8 @@
         </view>
         <view class="card" wx:if="{{record && (record.others || record.weight || record.defecation)}}" bindtap="goEditOthers">
             <view class="card-badge">其它</view>
-            <text wx:if="{{record.weight}}">体重：{{record.weight}}kg\n</text>
-            <text wx:if="{{record.defecation}}">排便：{{record.defecation}}次\n</text>
+            <text wx:if="{{hasWeight}}">体重：{{record.weight}}kg\n</text>
+            <text wx:if="{{hasDefecation}}">排便：{{record.defecation}}次\n</text>
             <text>{{record.others}}</text>
         </view>
         <view class="card" wx:if="{{record && record.abnormal}}" bindtap="goEditAbnormal">

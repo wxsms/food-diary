@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon'
 import find from 'lodash.find'
 import chunk from 'lodash.chunk'
+import { promisify } from '../../../utils/promisify.util'
 
 const app = getApp()
 
@@ -16,8 +17,9 @@ Page({
     this.setData({
       currentDate: DateTime.fromMillis(Number(ts)).startOf('day')
     }, () => {
-      this.fetchData()
+      this.prepareGrid()
       this.prepareViewData()
+      this.fetchData()
     })
   },
   fetchData () {
@@ -25,7 +27,6 @@ Page({
       mask: true,
       title: '加载中...'
     })
-    const db = wx.cloud.database()
     const monthStart = this.data.currentDate.startOf('month')
     const monthEnd = this.data.currentDate.endOf('month')
     return wx.cloud.callFunction({
@@ -36,25 +37,29 @@ Page({
       }
     })
       .then((res) => {
-        const data = res.result.data
-        const records = []
-        const monthStartWeekday = monthStart.weekday
-        const placeholdersNum = monthStartWeekday === 7 ? 0 : monthStartWeekday
-        for (let i = 0; i < placeholdersNum; i++) {
-          records.push(null)
-        }
-        for (let ts = monthStart.ts, day = 1; ts < monthEnd.ts; ts += 1000 * 60 * 60 * 24, day++) {
-          const record = find(data, v => v.date === ts)
-          const _record = { _day: day, date: ts }
-          records.push(Object.assign({}, record, _record))
-        }
-        this.setData({
-          records: chunk(records, 7)
-        })
+        this.prepareGrid(res.result.data)
       })
       .finally(() => {
         wx.hideLoading()
       })
+  },
+  prepareGrid (data = []) {
+    const monthStart = this.data.currentDate.startOf('month')
+    const monthEnd = this.data.currentDate.endOf('month')
+    const records = []
+    const monthStartWeekday = monthStart.weekday
+    const placeholdersNum = monthStartWeekday === 7 ? 0 : monthStartWeekday
+    for (let i = 0; i < placeholdersNum; i++) {
+      records.push(null)
+    }
+    for (let ts = monthStart.ts, day = 1; ts < monthEnd.ts; ts += 1000 * 60 * 60 * 24, day++) {
+      const record = find(data, v => v.date === ts)
+      const _record = { _day: day, date: ts }
+      records.push(Object.assign({}, record, _record))
+    }
+    this.setData({
+      records: chunk(records, 7)
+    })
   },
   prepareViewData () {
     this.setData({
@@ -81,4 +86,36 @@ Page({
     app.globalData.needRelocate = value
     wx.navigateBack()
   },
+  async exportData () {
+    const monthStart = this.data.currentDate.startOf('month')
+    const monthEnd = this.data.currentDate.endOf('month')
+    try {
+      wx.showLoading({
+        mask: true,
+        title: '导出中...'
+      })
+      const { result } = await wx.cloud.callFunction({
+        name: 'export',
+        data: {
+          from: monthStart.ts,
+          to: monthEnd.ts
+        }
+      })
+      const { tempFilePath } = await promisify(wx.downloadFile, { url: result })
+      await promisify(wx.openDocument, {
+        filePath: tempFilePath,
+        fileType: 'xlsx',
+        showMenu: true
+      })
+    } catch (e) {
+      console.error(e)
+      wx.showToast({
+        title: '出错啦，请稍后重试',
+        icon: 'none',
+        duration: 2000
+      })
+    } finally {
+      wx.hideLoading()
+    }
+  }
 })

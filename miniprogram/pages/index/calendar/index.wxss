@@ -123,4 +123,8 @@
     background-color: #ffcc99;
 }
 
+.btns {
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
 

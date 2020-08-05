@@ -31,5 +31,7 @@
             <view class="cell-placeholder" wx:else/>
         </view>
     </view>
-
+    <view class="btns" wx:if="{{records}}">
+        <button bindtap="exportData" class="weui-btn" type="primary">导出</button>
+    </view>
 </view>

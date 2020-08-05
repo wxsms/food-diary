@@ -2,7 +2,7 @@ import uniq from 'lodash.uniq'
 import reverse from 'lodash.reverse'
 import chunk from 'lodash.chunk'
 
-const maxSize = 6
+const maxSize = 8
 
 export function cacheInput (key, str) {
   const oldCache = getCache(key)

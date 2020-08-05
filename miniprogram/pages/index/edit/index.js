@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon'
 import { DIARY_OPTION_LIST } from '../../../constants/index'
-import { getCache, cacheInput, cacheDelete } from '../../../utils/recentRecordStore'
+import { getCache, cacheInput, cacheDelete } from '../../../store/recent-record.store'
+import { isReview } from '../../../utils/version.utils'
 
 const app = getApp()
 
@@ -12,15 +13,18 @@ Page({
     record: null,
     value: '',
     recent: [],
-    othersRecent: ['体重', '排便', '异常']
+    othersRecent: ['体重', '排便', '异常'],
+    isReview: false
   },
-  onLoad ({ diaryOptionIndex, ts }) {
+  async onLoad ({ diaryOptionIndex, ts }) {
     wx.showLoading({
       mask: true,
       title: '加载中...'
     })
+    const _isReview = await isReview()
     const type = DIARY_OPTION_LIST[Number(diaryOptionIndex)]
     this.setData({
+      isReview: _isReview,
       type,
       recent: getCache(type.key),
       date: DateTime.fromMillis(Number(ts)).startOf('day')

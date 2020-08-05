@@ -3,7 +3,7 @@ const cloud = require('wx-server-sdk')
 cloud.init()
 const db = cloud.database()
 // 云函数入口函数
-exports.main = async ({ from, to }, context) => {
+exports.main = async ({ from, to }) => {
   try {
     const wxContext = cloud.getWXContext()
     const cmd = db.command
@@ -15,5 +15,6 @@ exports.main = async ({ from, to }, context) => {
       .get()
   } catch (e) {
     console.log(e)
+    return e
   }
 }

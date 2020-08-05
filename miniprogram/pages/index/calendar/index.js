@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 import find from 'lodash.find'
 import chunk from 'lodash.chunk'
-import { promisify } from '../../../utils/promisify.util'
+import { promisify } from '../../../utils/promisify.utils'
 
 const app = getApp()
 

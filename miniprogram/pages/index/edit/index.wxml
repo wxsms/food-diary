@@ -6,16 +6,17 @@
   </view>
   <view class="page__bd">
     <form bindsubmit="doSave">
-      <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cells weui-cells_after-title" wx:if="{{loaded}}">
         <view class="weui-cell">
           <view class="weui-cell__bd">
-            <textarea value="{{value}}" auto-height class="weui-textarea"
+            <view wx:if="{{isReview}}" class="review-text">{{value}}</view>
+            <textarea wx:else value="{{value}}" auto-height class="weui-textarea"
                       placeholder="多条记录请用换行分隔" name="record" bindinput="onChange"
                       bindconfirm="doSave"/>
           </view>
         </view>
       </view>
-      <view wx:if="{{recent.length > 0}}">
+      <view wx:if="{{recent.length > 0 && loaded}}">
         <view class="weui-cells__title">最近使用</view>
         <view class="recent-view">
           <button wx:for="{{recent}}" wx:key="item" hover-class="recent-item-hover"
@@ -27,6 +28,11 @@
         </view>
       </view>
       <view class="weui-btn-area">
+        <view class="weui-btn" wx:if="{{isReview}}">
+          <picker bindchange="onScdFoodChange" range="{{scdFoods}}">
+            <button class="weui-btn" type="primary">添加...</button>
+          </picker>
+        </view>
         <button class="weui-btn" type="primary" form-type="submit">保存</button>
         <button wx:if="{{record && value}}" class="weui-btn" type="warn" bindtap="deleteRecord">删除</button>
       </view>

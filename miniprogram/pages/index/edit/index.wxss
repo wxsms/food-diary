@@ -15,3 +15,7 @@
 .recent-item-hover {
     background-color: #ddd !important;
 }
+
+.review-text {
+  white-space: pre;
+}

@@ -2,6 +2,7 @@ import { DateTime } from 'luxon'
 import { DIARY_OPTION_LIST } from '../../../constants/index'
 import { getCache, cacheInput, cacheDelete } from '../../../store/recent-record.store'
 import { isReview } from '../../../utils/version.utils'
+import { getByLevel, SCD_LEVEL } from '../../../store/scd-foods.store'
 
 const app = getApp()
 
@@ -14,24 +15,52 @@ Page({
     value: '',
     recent: [],
     othersRecent: ['体重', '排便', '异常'],
-    isReview: false
+    scdFoods: [],
+    isReview: false,
+    loaded: false
   },
   async onLoad ({ diaryOptionIndex, ts }) {
     wx.showLoading({
       mask: true,
       title: '加载中...'
     })
-    const _isReview = await isReview()
     const type = DIARY_OPTION_LIST[Number(diaryOptionIndex)]
     this.setData({
-      isReview: _isReview,
       type,
-      recent: getCache(type.key),
-      date: DateTime.fromMillis(Number(ts)).startOf('day')
-    }, () => {
+      date: DateTime.fromMillis(Number(ts)).startOf('day'),
+      recent: getCache(type.key)
+    }, async () => {
       this.prepareViewData()
+      await this.fetchScdData()
       this.fetchData()
     })
+  },
+  async fetchScdData () {
+    try {
+      const _isReview = await isReview()
+      if (_isReview) {
+        let _scdFoods = []
+        const data = await Promise.all([
+          getByLevel(SCD_LEVEL.LV_0),
+          getByLevel(SCD_LEVEL.LV_1),
+          getByLevel(SCD_LEVEL.LV_2)
+        ])
+        data.forEach(v => {
+          _scdFoods = _scdFoods.concat(v.map(v => v.name))
+        })
+        this.setData({
+          loaded: true,
+          scdFoods: _scdFoods,
+          isReview: _isReview
+        })
+      } else {
+        this.setData({
+          loaded: true
+        })
+      }
+    } catch (e) {
+      console.error(e)
+    }
   },
   fetchData () {
     const db = wx.cloud.database()
@@ -174,6 +203,11 @@ Page({
           }
         }
       }
+    })
+  },
+  onScdFoodChange ({ detail: { value } }) {
+    this.setData({
+      value: (this.data.value + '\n' + this.data.scdFoods[value]).trim()
     })
   }
 })

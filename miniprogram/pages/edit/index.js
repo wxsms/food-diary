@@ -1,8 +1,8 @@
 import { DateTime } from 'luxon'
-import { DIARY_OPTION_LIST } from '../../../constants/index'
-import { getCache, cacheInput, cacheDelete } from '../../../store/recent-record.store'
-import { isReview } from '../../../utils/version.utils'
-import { getByLevel, SCD_LEVEL } from '../../../store/scd-foods.store'
+import { DIARY_OPTION_LIST } from '../../constants/index'
+import { getCache, cacheInput, cacheDelete } from '../../store/recent-record.store'
+import { isReview } from '../../utils/version.utils'
+import { getByLevel, SCD_LEVEL } from '../../store/scd-foods.store'
 
 const app = getApp()
 

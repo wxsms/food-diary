@@ -1,8 +1,8 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/index/edit/index",
-    "pages/index/calendar/index"
+    "pages/edit/index",
+    "pages/calendar/index"
   ],
   "window": {
     "backgroundColor": "#EDEDED",

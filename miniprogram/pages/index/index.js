@@ -134,7 +134,7 @@ Page({
       success: ({ cancel, tapIndex }) => {
         if (!cancel) {
           wx.navigateTo({
-            url: `/pages/index/edit/index?diaryOptionIndex=${tapIndex}&ts=${this.data.currentDate.ts}`
+            url: `/pages/edit/index?diaryOptionIndex=${tapIndex}&ts=${this.data.currentDate.ts}`
           })
         }
       }
@@ -142,37 +142,37 @@ Page({
   },
   goEditBreakfast () {
     wx.navigateTo({
-      url: `/pages/index/edit/index?diaryOptionIndex=${DIARY_OPTION_LIST.indexOf(DIARY_TYPES.BREAKFAST)}&ts=${this.data.currentDate.ts}`
+      url: `/pages/edit/index?diaryOptionIndex=${DIARY_OPTION_LIST.indexOf(DIARY_TYPES.BREAKFAST)}&ts=${this.data.currentDate.ts}`
     })
   },
   goEditLunch () {
     wx.navigateTo({
-      url: `/pages/index/edit/index?diaryOptionIndex=${DIARY_OPTION_LIST.indexOf(DIARY_TYPES.LUNCH)}&ts=${this.data.currentDate.ts}`
+      url: `/pages/edit/index?diaryOptionIndex=${DIARY_OPTION_LIST.indexOf(DIARY_TYPES.LUNCH)}&ts=${this.data.currentDate.ts}`
     })
   },
   goEditDinner () {
     wx.navigateTo({
-      url: `/pages/index/edit/index?diaryOptionIndex=${DIARY_OPTION_LIST.indexOf(DIARY_TYPES.DINNER)}&ts=${this.data.currentDate.ts}`
+      url: `/pages/edit/index?diaryOptionIndex=${DIARY_OPTION_LIST.indexOf(DIARY_TYPES.DINNER)}&ts=${this.data.currentDate.ts}`
     })
   },
   goEditSupplement () {
     wx.navigateTo({
-      url: `/pages/index/edit/index?diaryOptionIndex=${DIARY_OPTION_LIST.indexOf(DIARY_TYPES.SUPPLEMENT)}&ts=${this.data.currentDate.ts}`
+      url: `/pages/edit/index?diaryOptionIndex=${DIARY_OPTION_LIST.indexOf(DIARY_TYPES.SUPPLEMENT)}&ts=${this.data.currentDate.ts}`
     })
   },
   goEditOthers () {
     wx.navigateTo({
-      url: `/pages/index/edit/index?diaryOptionIndex=${DIARY_OPTION_LIST.indexOf(DIARY_TYPES.OTHERS)}&ts=${this.data.currentDate.ts}`
+      url: `/pages/edit/index?diaryOptionIndex=${DIARY_OPTION_LIST.indexOf(DIARY_TYPES.OTHERS)}&ts=${this.data.currentDate.ts}`
     })
   },
   goEditAbnormal () {
     wx.navigateTo({
-      url: `/pages/index/edit/index?diaryOptionIndex=${DIARY_OPTION_LIST.indexOf(DIARY_TYPES.ABNORMAL)}&ts=${this.data.currentDate.ts}`
+      url: `/pages/edit/index?diaryOptionIndex=${DIARY_OPTION_LIST.indexOf(DIARY_TYPES.ABNORMAL)}&ts=${this.data.currentDate.ts}`
     })
   },
   goCalendar () {
     wx.navigateTo({
-      url: `/pages/index/calendar/index?ts=${this.data.currentDate.ts}`
+      url: `/pages/calendar/index?ts=${this.data.currentDate.ts}`
     })
   }
 })

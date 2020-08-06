@@ -2,14 +2,13 @@
   <view class="date-view">
     <view class="date" bindtap="goPrevMonth">
       <text class="fa fa-angle-left"></text>
-      <text decode>&nbsp;{{prevDateStr}}</text>
+      <text decode>&nbsp;{{prevMonthStr}}</text>
     </view>
     <view class="date today">
-      <text>{{currentDateStr}}</text>
-      <text>{{currentDateWeekDay}}</text>
+      <text>{{currentMonthStr}}</text>
     </view>
     <view class="date" bindtap="goNextMonth">
-      <text decode>{{nextDateStr}}&nbsp;</text>
+      <text decode>{{nextMonthStr}}&nbsp;</text>
       <text class="fa fa-angle-right"></text>
     </view>
   </view>

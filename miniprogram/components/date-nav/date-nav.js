@@ -9,11 +9,11 @@ Component({
   storeBindings: {
     store,
     fields: {
-      currentDateStr: (store) => store.currentDateStr,
-      currentDateWeekDayStr: (store) => store.currentDateWeekDayStr,
-      prevDateStr: (store) => store.prevDateStr,
-      nextDateStr: (store) => store.nextDateStr,
-      currentDate: (store) => store.currentDate
+      currentDateStr: store => store.currentDateStr,
+      currentDateWeekDayStr: store => store.currentDateWeekDayStr,
+      prevDateStr: store => store.prevDateStr,
+      nextDateStr: store => store.nextDateStr,
+      currentDate: store => store.currentDate
     },
     actions: {
       setCurrentDate: 'setCurrentDate'

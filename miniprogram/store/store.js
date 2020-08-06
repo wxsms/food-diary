@@ -24,7 +24,7 @@ export const store = observable({
   // 计算属性
   // 日期相关
   get currentDateTs () {
-    return ts(this.currentDate)
+    return this.currentDate.ts
   },
   get currentDateStr () {
     return format(this.currentDate)

@@ -13,11 +13,6 @@ function _DateTime (ts) {
   return isDateTime ? ts : DateTime.fromMillis(ts)
 }
 
-export function ts (_ts) {
-  // debug('ts', _DateTime(_ts).ts)
-  return _DateTime(_ts).ts
-}
-
 export function format (ts, format = FORMATS.Y_M_D) {
   return _DateTime(ts).toFormat(format)
 }

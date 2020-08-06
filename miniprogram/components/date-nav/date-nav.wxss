@@ -1,3 +1,6 @@
+@import "../../style/font-awesome.wxss";
+@import "../../style/fa.wxss";
+
 .date-view {
   padding-top: 20px;
   padding-bottom: 20px;

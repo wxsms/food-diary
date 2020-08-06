@@ -1,4 +1,3 @@
-import { DateTime } from 'luxon'
 import { storeBindingsBehavior } from 'mobx-miniprogram-bindings'
 import { store } from '../../store/store'
 import { nextTick } from '../../utils/wx.utils'

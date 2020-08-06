@@ -1,40 +1,30 @@
 <view class="container">
-  <view class="date-view">
-    <view class="date" bindtap="goPrevMonth">
-      <text class="fa fa-angle-left"></text>
-      <text decode>&nbsp;{{prevMonthStr}}</text>
-    </view>
-    <view class="date today">
-      <text>{{currentMonthStr}}</text>
-    </view>
-    <view class="date" bindtap="goNextMonth">
-      <text decode>{{nextMonthStr}}&nbsp;</text>
-      <text class="fa fa-angle-right"></text>
-    </view>
-  </view>
-  <view wx:for="{{records}}" wx:key="index" class="row">
-    <view wx:for="{{item}}" wx:key="index" class="cell">
-      <view class="cell-box" wx:if="{{item !== null}}" data-value="{{item.date}}" bindtap="goDay">
-        <view class="cell-title">
-          <text>{{item._day}}</text>
+  <month-nav bind:change="fetchData"/>
+  <view class="calendar">
+    <view wx:for="{{records}}" wx:key="index" class="row">
+      <view wx:for="{{item}}" wx:key="index" class="cell">
+        <view class="cell-box" wx:if="{{item !== null}}" data-value="{{item.date}}" bindtap="goDay">
+          <view class="cell-title">
+            <text>{{item._day}}</text>
+          </view>
+          <view class="cell-row" style="margin-top: 9px">
+            <view class="cell-col {{item.breakfast ? 'cell-col-filled' : 'cell-col-empty'}}"/>
+            <view class="cell-col {{item.lunch ? 'cell-col-filled' : 'cell-col-empty'}}"/>
+            <view class="cell-col {{item.dinner ? 'cell-col-filled' : 'cell-col-empty'}}"/>
+          </view>
+          <view
+            class="cell-row cell-row-sm {{item.supplement ? 'cell-row-filled' : 'cell-row-empty'}}"
+            style="margin-top: 7px"
+          />
+          <view
+            class="cell-row cell-row-sm {{item.others || item.hasDefecation || item.hasWeight ? 'cell-row-filled' : 'cell-row-empty'}}"
+          />
+          <view
+            class="cell-row cell-row-sm {{item.abnormal ? 'cell-row-danger' : 'cell-row-empty'}}"
+          />
         </view>
-        <view class="cell-row" style="margin-top: 9px">
-          <view class="cell-col {{item.breakfast ? 'cell-col-filled' : 'cell-col-empty'}}"/>
-          <view class="cell-col {{item.lunch ? 'cell-col-filled' : 'cell-col-empty'}}"/>
-          <view class="cell-col {{item.dinner ? 'cell-col-filled' : 'cell-col-empty'}}"/>
-        </view>
-        <view
-          class="cell-row cell-row-sm {{item.supplement ? 'cell-row-filled' : 'cell-row-empty'}}"
-          style="margin-top: 7px"
-        />
-        <view
-          class="cell-row cell-row-sm {{item.others || item.hasDefecation || item.hasWeight ? 'cell-row-filled' : 'cell-row-empty'}}"
-        />
-        <view
-          class="cell-row cell-row-sm {{item.abnormal ? 'cell-row-danger' : 'cell-row-empty'}}"
-        />
+        <view class="cell-placeholder" wx:else/>
       </view>
-      <view class="cell-placeholder" wx:else/>
     </view>
   </view>
   <view class="btns" wx:if="{{hasRecordInMonth}}">

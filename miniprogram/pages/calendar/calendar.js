@@ -4,11 +4,9 @@ import { promisify } from '../../utils/promisify.utils'
 import { debug, error } from '../../utils/log.utils'
 import { storeBindingsBehavior } from 'mobx-miniprogram-bindings'
 import { store } from '../../store/store'
-import { addMonth, getWeekday, minusMonth } from '../../utils/date.utils'
+import { getWeekday } from '../../utils/date.utils'
 import { nextTick } from '../../utils/wx.utils'
 import { loading, toast } from '../../utils/toast.utils'
-
-const app = getApp()
 
 Component({
   behaviors: [storeBindingsBehavior],
@@ -19,15 +17,10 @@ Component({
   storeBindings: {
     store,
     fields: {
-      currentMonth: store => store.currentMonth,
-      currentMonthStr: store => store.currentMonthStr,
-      prevMonthStr: store => store.prevMonthStr,
-      nextMonthStr: store => store.nextMonthStr,
       monthStart: store => store.monthStart,
       monthEnd: store => store.monthEnd
     },
     actions: {
-      setCurrentMonth: 'setCurrentMonth',
       setCurrentDate: 'setCurrentDate'
     }
   },
@@ -82,16 +75,6 @@ Component({
       this.setData({
         records: chunk(records, 7)
       })
-    },
-    async goPrevMonth () {
-      this.setCurrentMonth(minusMonth(this.data.currentMonth))
-      await nextTick()
-      await this.fetchData()
-    },
-    async goNextMonth () {
-      this.setCurrentMonth(addMonth(this.data.currentMonth))
-      await nextTick()
-      await this.fetchData()
     },
     goDay ({ currentTarget: { dataset: { value } } }) {
       this.setCurrentDate(value)

@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <view class="container">
   <view class="page__hd">
-    <view class="page__title">{{dateStr}}</view>
+    <view class="page__title">{{currentDateStr}}</view>
     <view class="page__desc">{{type.label}}</view>
   </view>
   <view class="page__bd">

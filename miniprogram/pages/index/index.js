@@ -1,4 +1,3 @@
-import { DateTime } from 'luxon'
 import { DIARY_OPTION_LIST } from '../../constants/index'
 import { isReview } from '../../utils/version.utils'
 import { storeBindingsBehavior } from 'mobx-miniprogram-bindings'
@@ -42,6 +41,7 @@ Component({
       this.setData({
         isReview: _isReview
       })
+      await nextTick()
       await this.login()
       await this.fetchData()
     },
@@ -143,7 +143,7 @@ Component({
     _goEdit (index) {
       debug('goEdit', index, DIARY_OPTION_LIST[index])
       wx.navigateTo({
-        url: `/pages/edit/edit?diaryOptionIndex=${index}&ts=${this.data.currentDate}`
+        url: `/pages/edit/edit?diaryOptionIndex=${index}`
       })
     },
     async goCalendar () {

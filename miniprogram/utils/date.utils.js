@@ -1,4 +1,5 @@
 import { DateTime } from 'luxon'
+import { debug } from './log.utils'
 
 export const FORMATS = {
   Y_M_D: 'yyyy年L月d日',
@@ -7,7 +8,14 @@ export const FORMATS = {
 }
 
 function _DateTime (ts) {
-  return ts instanceof DateTime ? ts : DateTime.fromMillis(ts)
+  const isDateTime = ts instanceof DateTime
+  // debug('_DateTime', isDateTime)
+  return isDateTime ? ts : DateTime.fromMillis(ts)
+}
+
+export function ts (_ts) {
+  // debug('ts', _DateTime(_ts).ts)
+  return _DateTime(_ts).ts
 }
 
 export function format (ts, format = FORMATS.Y_M_D) {

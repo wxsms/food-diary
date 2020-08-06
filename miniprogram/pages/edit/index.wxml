@@ -43,11 +43,11 @@
         </view>
       </view>
       <view class="weui-btn-area">
-        <view class="weui-btn" wx:if="{{isReview}}">
+        <button class="weui-btn" type="primary" wx:if="{{isReview}}">
           <picker bindchange="onScdFoodChange" range="{{scdFoods}}">
-            <button class="weui-btn" type="primary">添加...</button>
+            添加...
           </picker>
-        </view>
+        </button>
         <button class="weui-btn" type="primary" bindtap="doSave">保存</button>
         <button wx:if="{{record && value}}" class="weui-btn" type="warn" bindtap="deleteRecord">删除</button>
       </view>

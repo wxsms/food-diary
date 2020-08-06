@@ -16,3 +16,4 @@ node_modules/
 .idea/
 *.iml
 miniprogram/node_modules
+miniprogram/miniprogram_npm

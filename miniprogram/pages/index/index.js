@@ -1,22 +1,34 @@
 import { DateTime } from 'luxon'
 import { DIARY_OPTION_LIST, DIARY_TYPES } from '../../constants/index'
 import { isReview } from '../../utils/version.utils'
+import computedBehavior from 'miniprogram-computed'
 
 const app = getApp()
 
 Page({
+  behaviors: [computedBehavior],
   data: {
     logged: false,
     currentDate: null,
-    currentDateStr: '',
-    currentDateWeekDay: '',
-    prevDateStr: '',
-    nextDateStr: '',
     record: null,
     yesterdayData: null,
     isReview: false,
     hasDefecation: false,
     hasWeight: false
+  },
+  computed: {
+    currentDateStr (data) {
+      return data.currentDate.toFormat('yyyy年L月d日')
+    },
+    currentDateWeekDay (data) {
+      return data.currentDate.weekdayLong
+    },
+    prevDateStr (data) {
+      return data.currentDate.minus({ days: 1 }).toFormat('L月d日')
+    },
+    nextDateStr (data) {
+      return data.currentDate.plus({ days: 1 }).toFormat('L月d日')
+    }
   },
   async onLoad () {
     wx.showLoading({
@@ -27,7 +39,7 @@ Page({
     this.setData({
       currentDate: DateTime.local().startOf('day'),
       isReview: _isReview
-    }, this.prepareViewData)
+    })
     this.login().then(this.fetchData)
   },
   onShow () {
@@ -39,7 +51,7 @@ Page({
         currentDate: DateTime.fromMillis(app.globalData.needRelocate)
       }, () => {
         app.globalData.needRelocate = null
-        this.fetchData().then(this.prepareViewData)
+        this.fetchData()
       })
     }
   },
@@ -107,20 +119,11 @@ Page({
         console.error('[云函数] [login] 调用失败', err)
       })
   },
-  prepareViewData () {
-    this.setData({
-      currentDateStr: this.data.currentDate.toFormat('yyyy年L月d日'),
-      currentDateWeekDay: this.data.currentDate.weekdayLong,
-      prevDateStr: this.data.currentDate.minus({ days: 1 }).toFormat('L月d日'),
-      nextDateStr: this.data.currentDate.plus({ days: 1 }).toFormat('L月d日')
-    })
-  },
   goPrevDay () {
     this.setData({
       currentDate: this.data.currentDate.minus({ days: 1 })
     }, () => {
       this.fetchData()
-        .then(this.prepareViewData)
     })
   },
   goNextDay () {
@@ -128,7 +131,6 @@ Page({
       currentDate: this.data.currentDate.plus({ days: 1 })
     }, () => {
       this.fetchData()
-        .then(this.prepareViewData)
     })
   },
   showAddSheet () {

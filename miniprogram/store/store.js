@@ -30,10 +30,10 @@ export const store = observable({
     return getWeekdayLong(this.currentDate)
   },
   get prevDateStr () {
-    return format(addDay(this.currentDate), FORMATS.M_D)
+    return format(minusDay(this.currentDate), FORMATS.M_D)
   },
   get nextDateStr () {
-    return format(minusDay(this.currentDate), FORMATS.M_D)
+    return format(addDay(this.currentDate), FORMATS.M_D)
   },
   // 日历相关
   get currentMonthStr () {
@@ -53,9 +53,9 @@ export const store = observable({
   },
   // actions
   setCurrentDate: action(function (data) {
-    this.currentDate = data
+    this.currentDate = typeof data === 'number' ? DateTime.fromMillis(data) : data
   }),
   setCurrentMonth: action(function (data) {
-    this.currentMonth = data
+    this.currentMonth = typeof data === 'number' ? DateTime.fromMillis(data) : data
   })
 })

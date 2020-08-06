@@ -1,11 +1,12 @@
 import { DateTime } from 'luxon'
-import { DIARY_OPTION_LIST, DIARY_TYPES } from '../../constants/index'
+import { DIARY_OPTION_LIST } from '../../constants/index'
 import { isReview } from '../../utils/version.utils'
 import { storeBindingsBehavior } from 'mobx-miniprogram-bindings'
 import { store } from '../../store/store'
 import { nextTick } from '../../utils/wx.utils'
 import { debug, error } from '../../utils/log.utils'
-import { minusDay } from '../../utils/date.utils'
+import { minusDay, startOfMonth } from '../../utils/date.utils'
+import { loading } from '../../utils/toast.utils'
 
 const app = getApp()
 
@@ -29,16 +30,14 @@ Component({
       currentDate: store => store.currentDate
     },
     actions: {
-      setCurrentDate: 'setCurrentDate'
+      setCurrentDate: 'setCurrentDate',
+      setCurrentMonth: 'setCurrentMonth'
     }
   },
   methods: {
     async onLoad () {
       debug('index:onLoad')
-      wx.showLoading({
-        mask: true,
-        title: '加载中...'
-      })
+      loading()
       const _isReview = await isReview()
       this.setData({
         isReview: _isReview
@@ -51,19 +50,16 @@ Component({
       if (app.globalData.needReload) {
         app.globalData.needReload = false
         await this.fetchData()
-      } else if (app.globalData.needRelocate) {
-        this.setCurrentDate(DateTime.fromMillis(app.globalData.needRelocate).ts)
-        app.globalData.needRelocate = null
-        await nextTick()
+      } else if (this.data.record && this.data.record.date !== this.data.currentDate.ts) {
+        wx.pageScrollTo({
+          scrollTop: 0
+        })
         await this.fetchData()
       }
     },
     async copyYesterday () {
       try {
-        wx.showLoading({
-          mask: true,
-          title: '请稍候...'
-        })
+        loading()
         const _data = this.data.yesterdayData
         delete _data._openid
         delete _data._id
@@ -82,10 +78,7 @@ Component({
     },
     async fetchData () {
       try {
-        wx.showLoading({
-          mask: true,
-          title: '加载中...'
-        })
+        loading()
         const db = wx.cloud.database()
         const res = await Promise.all([
           db.collection('records').where({
@@ -108,7 +101,7 @@ Component({
       } catch (e) {
         error(e)
       } finally {
-        wx.hideLoading()
+        loading(false)
       }
     },
     async login () {
@@ -153,7 +146,9 @@ Component({
         url: `/pages/edit/edit?diaryOptionIndex=${index}&ts=${this.data.currentDate}`
       })
     },
-    goCalendar () {
+    async goCalendar () {
+      this.setCurrentMonth(startOfMonth(this.data.currentDate))
+      await nextTick()
       wx.navigateTo({
         url: `/pages/calendar/calendar`
       })

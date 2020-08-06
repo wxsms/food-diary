@@ -6,7 +6,7 @@ import { storeBindingsBehavior } from 'mobx-miniprogram-bindings'
 import { store } from '../../store/store'
 import { addMonth, getWeekday, minusMonth } from '../../utils/date.utils'
 import { nextTick } from '../../utils/wx.utils'
-import { loading } from '../../utils/toast.utils'
+import { loading, toast } from '../../utils/toast.utils'
 
 const app = getApp()
 
@@ -27,7 +27,8 @@ Component({
       monthEnd: store => store.monthEnd
     },
     actions: {
-      setCurrentMonth: 'setCurrentMonth'
+      setCurrentMonth: 'setCurrentMonth',
+      setCurrentDate: 'setCurrentDate'
     }
   },
   methods: {
@@ -93,16 +94,13 @@ Component({
       await this.fetchData()
     },
     goDay ({ currentTarget: { dataset: { value } } }) {
-      app.globalData.needRelocate = value
+      this.setCurrentDate(value)
       wx.navigateBack()
     },
     async exportData () {
       const { monthStart, monthEnd } = this.data
       try {
-        wx.showLoading({
-          mask: true,
-          title: '导出中...'
-        })
+        loading(true, '导出中...')
         const { result } = await wx.cloud.callFunction({
           name: 'export',
           data: {
@@ -118,13 +116,9 @@ Component({
         })
       } catch (e) {
         error(e)
-        wx.showToast({
-          title: '出错啦，请稍后重试',
-          icon: 'none',
-          duration: 2000
-        })
+        toast('出错啦，请稍后重试')
       } finally {
-        wx.hideLoading()
+        loading(false)
       }
     }
   }

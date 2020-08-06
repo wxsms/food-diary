@@ -2,6 +2,7 @@ import { DateTime } from 'luxon'
 import { storeBindingsBehavior } from 'mobx-miniprogram-bindings'
 import { store } from '../../store/store'
 import { nextTick } from '../../utils/wx.utils'
+import { addDay, minusDay } from '../../utils/date.utils'
 
 Component({
   behaviors: [storeBindingsBehavior],
@@ -9,23 +10,23 @@ Component({
     store,
     fields: {
       currentDateStr: (store) => store.currentDateStr,
-      currentDateWeekDay: (store) => store.currentDateWeekDay,
+      currentDateWeekDayStr: (store) => store.currentDateWeekDayStr,
       prevDateStr: (store) => store.prevDateStr,
       nextDateStr: (store) => store.nextDateStr,
-      currentDateTs: (store) => store.currentDateTs
+      currentDate: (store) => store.currentDate
     },
     actions: {
-      setCurrentDateTs: 'setCurrentDateTs'
+      setCurrentDate: 'setCurrentDate'
     }
   },
   methods: {
     async goPrevDay () {
-      this.setCurrentDateTs(DateTime.fromMillis(this.data.currentDateTs).minus({ days: 1 }).ts)
+      this.setCurrentDate(minusDay(this.data.currentDate))
       await nextTick()
       this.triggerEvent('change')
     },
     async goNextDay () {
-      this.setCurrentDateTs(DateTime.fromMillis(this.data.currentDateTs).plus({ days: 1 }).ts)
+      this.setCurrentDate(addDay(this.data.currentDate))
       await nextTick()
       this.triggerEvent('change')
     }

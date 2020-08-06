@@ -4,6 +4,8 @@ import { isReview } from '../../utils/version.utils'
 import { storeBindingsBehavior } from 'mobx-miniprogram-bindings'
 import { store } from '../../store/store'
 import { nextTick } from '../../utils/wx.utils'
+import { debug, error } from '../../utils/log.utils'
+import { minusDay } from '../../utils/date.utils'
 
 const app = getApp()
 
@@ -21,17 +23,18 @@ Component({
     store,
     fields: {
       currentDateStr: (store) => store.currentDateStr,
-      currentDateWeekDay: (store) => store.currentDateWeekDay,
+      currentDateWeekDayStr: (store) => store.currentDateWeekDayStr,
       prevDateStr: (store) => store.prevDateStr,
       nextDateStr: (store) => store.nextDateStr,
-      currentDateTs: (store) => store.currentDateTs
+      currentDate: (store) => store.currentDate
     },
     actions: {
-      setCurrentDateTs: 'setCurrentDateTs'
+      setCurrentDate: 'setCurrentDate'
     }
   },
   methods: {
     async onLoad () {
+      debug('index:onLoad')
       wx.showLoading({
         mask: true,
         title: '加载中...'
@@ -44,11 +47,12 @@ Component({
       await this.fetchData()
     },
     async onShow () {
+      debug('index:onShow')
       if (app.globalData.needReload) {
         app.globalData.needReload = false
         await this.fetchData()
       } else if (app.globalData.needRelocate) {
-        this.setCurrentDateTs(DateTime.fromMillis(app.globalData.needRelocate).ts)
+        this.setCurrentDate(DateTime.fromMillis(app.globalData.needRelocate).ts)
         app.globalData.needRelocate = null
         await nextTick()
         await this.fetchData()
@@ -67,11 +71,11 @@ Component({
         await db.collection('records').add({
           data: {
             ..._data,
-            date: this.data.currentDateTs
+            date: this.data.currentDate
           }
         })
       } catch (e) {
-        console.error(e)
+        error(e)
       } finally {
         await this.fetchData()
       }
@@ -86,11 +90,11 @@ Component({
         const res = await Promise.all([
           db.collection('records').where({
             _openid: app.globalData.openid,
-            date: this.data.currentDateTs
+            date: this.data.currentDate.ts
           }).get(),
           db.collection('records').where({
             _openid: app.globalData.openid,
-            date: DateTime.fromMillis(this.data.currentDateTs).minus({ days: 1 }).ts
+            date: minusDay(this.data.currentDate).ts
           }).get()
         ])
         const record = res[0].data[0] || null
@@ -102,7 +106,7 @@ Component({
           yesterdayData
         })
       } catch (e) {
-        console.error(e)
+        error(e)
       } finally {
         wx.hideLoading()
       }
@@ -114,13 +118,13 @@ Component({
           name: 'login',
           data: {}
         })
-        console.log('[云函数] [login] user openid: ', res.result.openid)
+        debug('[云函数] [login] user openid: ', res.result.openid)
         app.globalData.openid = res.result.openid
         this.setData({
           logged: true
         })
       } catch (err) {
-        console.error('[云函数] [login] 调用失败', err)
+        error('[云函数] [login] 调用失败', err)
       }
     },
     async goPrevDay () {
@@ -135,46 +139,23 @@ Component({
         itemList: list.map(v => v.label),
         success: ({ cancel, tapIndex }) => {
           if (!cancel) {
-            wx.navigateTo({
-              url: `/pages/edit/edit?diaryOptionIndex=${tapIndex}&ts=${this.data.currentDateTs}`
-            })
+            this._goEdit(tapIndex)
           }
         }
       })
     },
-    goEditBreakfast () {
-      wx.navigateTo({
-        url: `/pages/edit/edit?diaryOptionIndex=${DIARY_OPTION_LIST.indexOf(DIARY_TYPES.BREAKFAST)}&ts=${this.data.currentDateTs}`
-      })
+    goEdit ({ currentTarget: { dataset: { index } } }) {
+      this._goEdit(index)
     },
-    goEditLunch () {
+    _goEdit (index) {
+      debug('goEdit', index, DIARY_OPTION_LIST[index])
       wx.navigateTo({
-        url: `/pages/edit/edit?diaryOptionIndex=${DIARY_OPTION_LIST.indexOf(DIARY_TYPES.LUNCH)}&ts=${this.data.currentDateTs}`
-      })
-    },
-    goEditDinner () {
-      wx.navigateTo({
-        url: `/pages/edit/edit?diaryOptionIndex=${DIARY_OPTION_LIST.indexOf(DIARY_TYPES.DINNER)}&ts=${this.data.currentDateTs}`
-      })
-    },
-    goEditSupplement () {
-      wx.navigateTo({
-        url: `/pages/edit/edit?diaryOptionIndex=${DIARY_OPTION_LIST.indexOf(DIARY_TYPES.SUPPLEMENT)}&ts=${this.data.currentDateTs}`
-      })
-    },
-    goEditOthers () {
-      wx.navigateTo({
-        url: `/pages/edit/edit?diaryOptionIndex=${DIARY_OPTION_LIST.indexOf(DIARY_TYPES.OTHERS)}&ts=${this.data.currentDateTs}`
-      })
-    },
-    goEditAbnormal () {
-      wx.navigateTo({
-        url: `/pages/edit/edit?diaryOptionIndex=${DIARY_OPTION_LIST.indexOf(DIARY_TYPES.ABNORMAL)}&ts=${this.data.currentDateTs}`
+        url: `/pages/edit/edit?diaryOptionIndex=${index}&ts=${this.data.currentDate}`
       })
     },
     goCalendar () {
       wx.navigateTo({
-        url: `/pages/calendar/calendar?ts=${this.data.currentDateTs}`
+        url: `/pages/calendar/calendar?ts=${this.data.currentDate}`
       })
     }
   }

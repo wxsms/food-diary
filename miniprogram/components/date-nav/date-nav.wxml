@@ -5,7 +5,7 @@
   </view>
   <view class="date today">
     <text>{{currentDateStr}}</text>
-    <text>{{currentDateWeekDay}}</text>
+    <text>{{currentDateWeekDayStr}}</text>
   </view>
   <view class="date" bindtap="goNextDay">
     <text decode>{{nextDateStr}}&nbsp;</text>

@@ -2,6 +2,7 @@ import { DateTime } from 'luxon'
 import find from 'lodash.find'
 import chunk from 'lodash.chunk'
 import { promisify } from '../../utils/promisify.utils'
+import { error } from '../../utils/log.utils'
 
 const app = getApp()
 
@@ -117,7 +118,7 @@ Page({
         showMenu: true
       })
     } catch (e) {
-      console.error(e)
+      error(e)
       wx.showToast({
         title: '出错啦，请稍后重试',
         icon: 'none',

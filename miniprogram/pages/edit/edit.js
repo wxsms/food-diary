@@ -3,6 +3,7 @@ import { DIARY_OPTION_LIST, DIARY_TYPES } from '../../constants/index'
 import { getCache, cacheInput, cacheDelete } from '../../store/recent-record.store'
 import { isReview } from '../../utils/version.utils'
 import { getByLevel, SCD_LEVEL } from '../../store/scd-foods.store'
+import { error } from '../../utils/log.utils'
 
 const app = getApp()
 
@@ -66,7 +67,7 @@ Page({
         })
       }
     } catch (e) {
-      console.error(e)
+      error(e)
     }
   },
   fetchData () {

@@ -29,10 +29,11 @@ Page({
       title: '加载中...'
     })
     const type = DIARY_OPTION_LIST[Number(diaryOptionIndex)]
+    const isOthers = type.key === DIARY_TYPES.OTHERS.key
     this.setData({
       type,
-      showWeight: type === DIARY_TYPES.OTHERS,
-      showDefecation: type === DIARY_TYPES.OTHERS,
+      showWeight: isOthers,
+      showDefecation: isOthers,
       date: DateTime.fromMillis(Number(ts)).startOf('day'),
       recent: getCache(type.key)
     }, async () => {

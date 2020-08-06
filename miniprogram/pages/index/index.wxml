@@ -1,49 +1,38 @@
 <view class="container">
-    <view class="date-view">
-        <view class="date" bindtap="goPrevDay">
-            <text class="fa fa-angle-left"></text>
-            <text decode>&nbsp;{{prevDateStr}}</text>
-        </view>
-        <view class="date today">
-            <text>{{currentDateStr}}</text>
-            <text>{{currentDateWeekDay}}</text>
-        </view>
-        <view class="date" bindtap="goNextDay">
-            <text decode>{{nextDateStr}}&nbsp;</text>
-            <text class="fa fa-angle-right"></text>
-        </view>
+  <date-nav bind:change="fetchData"/>
+  <view class="cards">
+    <view class="card" wx:if="{{record && record.breakfast}}" bindtap="goEditBreakfast">
+      <view class="card-badge">早餐</view>
+      <text>{{record.breakfast}}</text>
     </view>
-    <view class="cards">
-        <view class="card" wx:if="{{record && record.breakfast}}" bindtap="goEditBreakfast">
-            <view class="card-badge">早餐</view>
-            <text>{{record.breakfast}}</text>
-        </view>
-        <view class="card" wx:if="{{record && record.lunch}}" bindtap="goEditLunch">
-            <view class="card-badge">午餐</view>
-            <text>{{record.lunch}}</text>
-        </view>
-        <view class="card" wx:if="{{record && record.dinner}}" bindtap="goEditDinner">
-            <view class="card-badge">晚餐</view>
-            <text>{{record.dinner}}</text>
-        </view>
-        <view class="card" wx:if="{{record && record.supplement}}" bindtap="goEditSupplement">
-            <view class="card-badge">补充</view>
-            <text>{{record.supplement}}</text>
-        </view>
-        <view class="card" wx:if="{{record && (record.others || record.weight || record.defecation)}}" bindtap="goEditOthers">
-            <view class="card-badge">其它</view>
-            <text wx:if="{{hasWeight}}">体重：{{record.weight}}kg\n</text>
-            <text wx:if="{{hasDefecation}}">排便：{{record.defecation}}次\n</text>
-            <text>{{record.others}}</text>
-        </view>
-        <view class="card" wx:if="{{record && record.abnormal}}" bindtap="goEditAbnormal">
-            <view class="card-badge">异常</view>
-            <text>{{record.abnormal}}</text>
-        </view>
+    <view class="card" wx:if="{{record && record.lunch}}" bindtap="goEditLunch">
+      <view class="card-badge">午餐</view>
+      <text>{{record.lunch}}</text>
     </view>
-    <view class="btns">
-        <button bindtap="showAddSheet" class="weui-btn" type="primary">添加</button>
-        <button bindtap="copyYesterday" wx:if="{{yesterdayData !== null && !record}}" class="weui-btn" type="default">同前</button>
-        <button bindtap="goCalendar" class="weui-btn" type="default">日历</button>
+    <view class="card" wx:if="{{record && record.dinner}}" bindtap="goEditDinner">
+      <view class="card-badge">晚餐</view>
+      <text>{{record.dinner}}</text>
     </view>
+    <view class="card" wx:if="{{record && record.supplement}}" bindtap="goEditSupplement">
+      <view class="card-badge">补充</view>
+      <text>{{record.supplement}}</text>
+    </view>
+    <view class="card" wx:if="{{record && (record.others || record.weight || record.defecation)}}"
+          bindtap="goEditOthers">
+      <view class="card-badge">其它</view>
+      <text wx:if="{{hasWeight}}">体重：{{record.weight}}kg\n</text>
+      <text wx:if="{{hasDefecation}}">排便：{{record.defecation}}次\n</text>
+      <text>{{record.others}}</text>
+    </view>
+    <view class="card" wx:if="{{record && record.abnormal}}" bindtap="goEditAbnormal">
+      <view class="card-badge">异常</view>
+      <text>{{record.abnormal}}</text>
+    </view>
+  </view>
+  <view class="btns">
+    <button bindtap="showAddSheet" class="weui-btn" type="primary">添加</button>
+    <button bindtap="copyYesterday" wx:if="{{yesterdayData !== null && !record}}" class="weui-btn" type="default">同前
+    </button>
+    <button bindtap="goCalendar" class="weui-btn" type="default">日历</button>
+  </view>
 </view>

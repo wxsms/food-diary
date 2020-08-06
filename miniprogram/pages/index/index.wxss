@@ -1,44 +1,6 @@
 .container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-}
-
-.date-view {
-    padding-top: 20px;
-    padding-bottom: 20px;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
-
-.date-icon {
-    width: 10px;
-    height: 10px;
-}
-
-.date {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    flex: 1;
-    font-size: 0.8rem;
-}
-
-.date.today {
-    padding-left: 0;
-    padding-right: 0;
-    flex: 1;
-    text-align: center;
-    font-size: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 
 .btns {

@@ -2,11 +2,6 @@
 # yarn lockfile v1
 
 
-fast-deep-equal@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.npm.taobao.org/fast-deep-equal/download/fast-deep-equal-2.0.1.tgz#7b05218ddf9667bf7f370bf7fdb2cb15fdd0aa49"
-  integrity sha1-ewUhjd+WZ79/Nwv3/bLLFf3Qqkk=
-
 lodash.chunk@^4.2.0:
   version "4.2.0"
   resolved "https://registry.npm.taobao.org/lodash.chunk/download/lodash.chunk-4.2.0.tgz#66e5ce1f76ed27b4303d8c6512e8d1216e8106bc"
@@ -32,18 +27,15 @@ luxon@^1.21.3:
   resolved "https://registry.npm.taobao.org/luxon/download/luxon-1.21.3.tgz#f1d5c2a7e855d039836cf4954f883ecac8fc4727"
   integrity sha1-8dXCp+hV0DmDbPSVT4g+ysj8Ryc=
 
-miniprogram-computed@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.npm.taobao.org/miniprogram-computed/download/miniprogram-computed-2.1.1.tgz#c393e967a8f6e5ee26a4205f69ae3eb9a23b7b07"
-  integrity sha1-w5PpZ6j25e4mpCBfaa4+uaI7ewc=
-  dependencies:
-    fast-deep-equal "^2.0.1"
-    rfdc "^1.1.4"
+mobx-miniprogram-bindings@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.npm.taobao.org/mobx-miniprogram-bindings/download/mobx-miniprogram-bindings-1.2.1.tgz#996c0563ba742eb5835d972bd3ef45a99af84811"
+  integrity sha1-mWwFY7p0LrWDXZcr0+9FqZr4SBE=
 
-rfdc@^1.1.4:
-  version "1.1.4"
-  resolved "https://registry.npm.taobao.org/rfdc/download/rfdc-1.1.4.tgz#ba72cc1367a0ccd9cf81a870b3b58bd3ad07f8c2"
-  integrity sha1-unLME2egzNnPgahws7WL060H+MI=
+mobx-miniprogram@^4.13.2:
+  version "4.13.2"
+  resolved "https://registry.npm.taobao.org/mobx-miniprogram/download/mobx-miniprogram-4.13.2.tgz#b72c03fd5ad1f1b9022c422f9c88a47d1e5f8868"
+  integrity sha1-tywD/VrR8bkCLEIvnIikfR5fiGg=
 
 weui-miniprogram@^1.0.4:
   version "1.0.4"

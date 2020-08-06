@@ -1,94 +1,98 @@
 import { DateTime } from 'luxon'
 import { DIARY_OPTION_LIST, DIARY_TYPES } from '../../constants/index'
 import { isReview } from '../../utils/version.utils'
-import computedBehavior from 'miniprogram-computed'
+import { storeBindingsBehavior } from 'mobx-miniprogram-bindings'
+import { store } from '../../store/store'
+import { nextTick } from '../../utils/wx.utils'
 
 const app = getApp()
 
-Page({
-  behaviors: [computedBehavior],
+Component({
+  behaviors: [storeBindingsBehavior],
   data: {
     logged: false,
-    currentDate: null,
     record: null,
     yesterdayData: null,
     isReview: false,
     hasDefecation: false,
     hasWeight: false
   },
-  computed: {
-    currentDateStr (data) {
-      return data.currentDate.toFormat('yyyy年L月d日')
+  storeBindings: {
+    store,
+    fields: {
+      currentDateStr: (store) => store.currentDateStr,
+      currentDateWeekDay: (store) => store.currentDateWeekDay,
+      prevDateStr: (store) => store.prevDateStr,
+      nextDateStr: (store) => store.nextDateStr,
+      currentDateTs: (store) => store.currentDateTs
     },
-    currentDateWeekDay (data) {
-      return data.currentDate.weekdayLong
-    },
-    prevDateStr (data) {
-      return data.currentDate.minus({ days: 1 }).toFormat('L月d日')
-    },
-    nextDateStr (data) {
-      return data.currentDate.plus({ days: 1 }).toFormat('L月d日')
+    actions: {
+      setCurrentDateTs: 'setCurrentDateTs'
     }
   },
-  async onLoad () {
-    wx.showLoading({
-      mask: true,
-      title: '加载中...'
-    })
-    const _isReview = await isReview()
-    this.setData({
-      currentDate: DateTime.local().startOf('day'),
-      isReview: _isReview
-    })
-    this.login().then(this.fetchData)
-  },
-  onShow () {
-    if (app.globalData.needReload) {
-      app.globalData.needReload = false
-      this.fetchData()
-    } else if (app.globalData.needRelocate) {
-      this.setData({
-        currentDate: DateTime.fromMillis(app.globalData.needRelocate)
-      }, () => {
-        app.globalData.needRelocate = null
-        this.fetchData()
+  methods: {
+    async onLoad () {
+      wx.showLoading({
+        mask: true,
+        title: '加载中...'
       })
-    }
-  },
-  copyYesterday () {
-    wx.showLoading({
-      mask: true,
-      title: '请稍候...'
-    })
-    const _data = this.data.yesterdayData
-    delete _data._openid
-    delete _data._id
-    const db = wx.cloud.database()
-    db.collection('records').add({
-      data: {
-        ..._data,
-        date: this.data.currentDate.startOf('day').ts
+      const _isReview = await isReview()
+      this.setData({
+        isReview: _isReview
+      })
+      await this.login()
+      await this.fetchData()
+    },
+    async onShow () {
+      if (app.globalData.needReload) {
+        app.globalData.needReload = false
+        await this.fetchData()
+      } else if (app.globalData.needRelocate) {
+        this.setCurrentDateTs(DateTime.fromMillis(app.globalData.needRelocate).ts)
+        app.globalData.needRelocate = null
+        await nextTick()
+        await this.fetchData()
       }
-    })
-      .finally(this.fetchData)
-  },
-  fetchData () {
-    wx.showLoading({
-      mask: true,
-      title: '加载中...'
-    })
-    const db = wx.cloud.database()
-    return Promise.all([
-      db.collection('records').where({
-        _openid: app.globalData.openid,
-        date: this.data.currentDate.startOf('day').ts
-      }).get(),
-      db.collection('records').where({
-        _openid: app.globalData.openid,
-        date: this.data.currentDate.startOf('day').minus({ days: 1 }).ts
-      }).get()
-    ])
-      .then(res => {
+    },
+    async copyYesterday () {
+      try {
+        wx.showLoading({
+          mask: true,
+          title: '请稍候...'
+        })
+        const _data = this.data.yesterdayData
+        delete _data._openid
+        delete _data._id
+        const db = wx.cloud.database()
+        await db.collection('records').add({
+          data: {
+            ..._data,
+            date: this.data.currentDateTs
+          }
+        })
+      } catch (e) {
+        console.error(e)
+      } finally {
+        await this.fetchData()
+      }
+    },
+    async fetchData () {
+      try {
+        wx.showLoading({
+          mask: true,
+          title: '加载中...'
+        })
+        const db = wx.cloud.database()
+        const res = await Promise.all([
+          db.collection('records').where({
+            _openid: app.globalData.openid,
+            date: this.data.currentDateTs
+          }).get(),
+          db.collection('records').where({
+            _openid: app.globalData.openid,
+            date: DateTime.fromMillis(this.data.currentDateTs).minus({ days: 1 }).ts
+          }).get()
+        ])
         const record = res[0].data[0] || null
         const yesterdayData = res[1].data[0] || null
         this.setData({
@@ -97,88 +101,81 @@ Page({
           hasWeight: record && typeof record.weight === 'number',
           yesterdayData
         })
-      })
-      .finally(() => {
+      } catch (e) {
+        console.error(e)
+      } finally {
         wx.hideLoading()
-      })
-  },
-  login () {
-    // 调用云函数
-    return wx.cloud.callFunction({
-      name: 'login',
-      data: {}
-    })
-      .then(res => {
+      }
+    },
+    async login () {
+      // 调用云函数
+      try {
+        const res = await wx.cloud.callFunction({
+          name: 'login',
+          data: {}
+        })
         console.log('[云函数] [login] user openid: ', res.result.openid)
         app.globalData.openid = res.result.openid
         this.setData({
           logged: true
         })
-      })
-      .catch(err => {
+      } catch (err) {
         console.error('[云函数] [login] 调用失败', err)
-      })
-  },
-  goPrevDay () {
-    this.setData({
-      currentDate: this.data.currentDate.minus({ days: 1 })
-    }, () => {
-      this.fetchData()
-    })
-  },
-  goNextDay () {
-    this.setData({
-      currentDate: this.data.currentDate.plus({ days: 1 })
-    }, () => {
-      this.fetchData()
-    })
-  },
-  showAddSheet () {
-    const list = this.data.isReview ? DIARY_OPTION_LIST.filter(v => v.inReviewMode) : DIARY_OPTION_LIST
-    wx.showActionSheet({
-      itemList: list.map(v => v.label),
-      success: ({ cancel, tapIndex }) => {
-        if (!cancel) {
-          wx.navigateTo({
-            url: `/pages/edit/index?diaryOptionIndex=${tapIndex}&ts=${this.data.currentDate.ts}`
-          })
-        }
       }
-    })
-  },
-  goEditBreakfast () {
-    wx.navigateTo({
-      url: `/pages/edit/index?diaryOptionIndex=${DIARY_OPTION_LIST.indexOf(DIARY_TYPES.BREAKFAST)}&ts=${this.data.currentDate.ts}`
-    })
-  },
-  goEditLunch () {
-    wx.navigateTo({
-      url: `/pages/edit/index?diaryOptionIndex=${DIARY_OPTION_LIST.indexOf(DIARY_TYPES.LUNCH)}&ts=${this.data.currentDate.ts}`
-    })
-  },
-  goEditDinner () {
-    wx.navigateTo({
-      url: `/pages/edit/index?diaryOptionIndex=${DIARY_OPTION_LIST.indexOf(DIARY_TYPES.DINNER)}&ts=${this.data.currentDate.ts}`
-    })
-  },
-  goEditSupplement () {
-    wx.navigateTo({
-      url: `/pages/edit/index?diaryOptionIndex=${DIARY_OPTION_LIST.indexOf(DIARY_TYPES.SUPPLEMENT)}&ts=${this.data.currentDate.ts}`
-    })
-  },
-  goEditOthers () {
-    wx.navigateTo({
-      url: `/pages/edit/index?diaryOptionIndex=${DIARY_OPTION_LIST.indexOf(DIARY_TYPES.OTHERS)}&ts=${this.data.currentDate.ts}`
-    })
-  },
-  goEditAbnormal () {
-    wx.navigateTo({
-      url: `/pages/edit/index?diaryOptionIndex=${DIARY_OPTION_LIST.indexOf(DIARY_TYPES.ABNORMAL)}&ts=${this.data.currentDate.ts}`
-    })
-  },
-  goCalendar () {
-    wx.navigateTo({
-      url: `/pages/calendar/index?ts=${this.data.currentDate.ts}`
-    })
+    },
+    async goPrevDay () {
+      await this.fetchData()
+    },
+    async goNextDay () {
+      await this.fetchData()
+    },
+    showAddSheet () {
+      const list = this.data.isReview ? DIARY_OPTION_LIST.filter(v => v.inReviewMode) : DIARY_OPTION_LIST
+      wx.showActionSheet({
+        itemList: list.map(v => v.label),
+        success: ({ cancel, tapIndex }) => {
+          if (!cancel) {
+            wx.navigateTo({
+              url: `/pages/edit/edit?diaryOptionIndex=${tapIndex}&ts=${this.data.currentDateTs}`
+            })
+          }
+        }
+      })
+    },
+    goEditBreakfast () {
+      wx.navigateTo({
+        url: `/pages/edit/edit?diaryOptionIndex=${DIARY_OPTION_LIST.indexOf(DIARY_TYPES.BREAKFAST)}&ts=${this.data.currentDateTs}`
+      })
+    },
+    goEditLunch () {
+      wx.navigateTo({
+        url: `/pages/edit/edit?diaryOptionIndex=${DIARY_OPTION_LIST.indexOf(DIARY_TYPES.LUNCH)}&ts=${this.data.currentDateTs}`
+      })
+    },
+    goEditDinner () {
+      wx.navigateTo({
+        url: `/pages/edit/edit?diaryOptionIndex=${DIARY_OPTION_LIST.indexOf(DIARY_TYPES.DINNER)}&ts=${this.data.currentDateTs}`
+      })
+    },
+    goEditSupplement () {
+      wx.navigateTo({
+        url: `/pages/edit/edit?diaryOptionIndex=${DIARY_OPTION_LIST.indexOf(DIARY_TYPES.SUPPLEMENT)}&ts=${this.data.currentDateTs}`
+      })
+    },
+    goEditOthers () {
+      wx.navigateTo({
+        url: `/pages/edit/edit?diaryOptionIndex=${DIARY_OPTION_LIST.indexOf(DIARY_TYPES.OTHERS)}&ts=${this.data.currentDateTs}`
+      })
+    },
+    goEditAbnormal () {
+      wx.navigateTo({
+        url: `/pages/edit/edit?diaryOptionIndex=${DIARY_OPTION_LIST.indexOf(DIARY_TYPES.ABNORMAL)}&ts=${this.data.currentDateTs}`
+      })
+    },
+    goCalendar () {
+      wx.navigateTo({
+        url: `/pages/calendar/calendar?ts=${this.data.currentDateTs}`
+      })
+    }
   }
 })

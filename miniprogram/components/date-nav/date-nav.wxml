@@ -1,0 +1,14 @@
+<view class="date-view">
+  <view class="date" bindtap="goPrevDay">
+    <text class="fa fa-angle-left"></text>
+    <text decode>&nbsp;{{prevDateStr}}</text>
+  </view>
+  <view class="date today">
+    <text>{{currentDateStr}}</text>
+    <text>{{currentDateWeekDay}}</text>
+  </view>
+  <view class="date" bindtap="goNextDay">
+    <text decode>{{nextDateStr}}&nbsp;</text>
+    <text class="fa fa-angle-right"></text>
+  </view>
+</view>

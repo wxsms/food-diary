@@ -1,1 +1,5 @@
-{}
+{
+  "usingComponents": {
+    "date-nav": "/components/date-nav/date-nav"
+  }
+}

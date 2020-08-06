@@ -11,7 +11,9 @@ const TYPES = {
   DINNER: { label: '晚餐', key: 'dinner' },
   SUPPLEMENT: { label: '补充', key: 'supplement' },
   OTHERS: { label: '其它', key: 'others' },
-  ABNORMAL: { label: '异常', key: 'abnormal' }
+  ABNORMAL: { label: '异常', key: 'abnormal' },
+  WEIGHT: { label: '体重 (kg)', key: 'weight' },
+  DEFECATION: { label: '排便次数', key: 'defecation' }
 }
 
 // 云函数入口函数
@@ -24,14 +26,16 @@ exports.main = async ({ from, to }, context) => {
         _openid: wxContext.OPENID,
         date: cmd.gte(from).and(cmd.lt(to))
       })
+      .orderBy('date', 'asc')
       .get()
-    data.sort((a, b) => a.date - b.date)
     const keys = [
       TYPES.DATE,
       TYPES.BREAKFAST,
       TYPES.LUNCH,
       TYPES.DINNER,
       TYPES.SUPPLEMENT,
+      TYPES.WEIGHT,
+      TYPES.DEFECATION,
       TYPES.OTHERS,
       TYPES.ABNORMAL
     ]
@@ -45,7 +49,8 @@ exports.main = async ({ from, to }, context) => {
           const date = new Date(row[v] + dateOffset)
           arr.push(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`)
         } else {
-          arr.push(row[v] || '')
+          const isExist = typeof row[v] !== 'undefined' && row[v] !== null
+          arr.push(isExist ? row[v] : '')
         }
       })
       sheet.push(arr)

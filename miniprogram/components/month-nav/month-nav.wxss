@@ -3,7 +3,7 @@
 
 .date-view {
   padding-top: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -23,6 +23,7 @@
   justify-content: center;
   flex: 1;
   font-size: 0.8rem;
+  min-height: 50px;
 }
 
 .date.today {

@@ -23,6 +23,7 @@
   justify-content: center;
   flex: 1;
   font-size: 0.8rem;
+  min-height: 50px;
 }
 
 .date.today {

@@ -9,19 +9,25 @@ module.exports = Behavior({
       const sysInfo = await wx.getSystemInfo()
       debug('theme init:', sysInfo.theme)
       this.themeChanged(sysInfo)
-      wx.onThemeChange(this.themeChanged.bind(this))
+      if (typeof wx.onThemeChange === 'function') {
+        wx.onThemeChange(this.themeChanged.bind(this))
+      }
     },
     detached () {
-      wx.offThemeChange(this.themeChanged.bind(this))
+      if (typeof wx.offThemeChange === 'function') {
+        wx.offThemeChange(this.themeChanged.bind(this))
+      }
     },
   },
   methods: {
     themeChanged ({ theme }) {
       // debug(this)
       debug('theme changed:', theme)
-      this.setData({
-        theme
-      })
+      if (typeof theme === 'string') {
+        this.setData({
+          theme
+        })
+      }
     }
   }
 })

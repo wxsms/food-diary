@@ -5,12 +5,13 @@
     "pages/edit/edit",
     "pages/calendar/calendar"
   ],
+  "themeLocation": "theme.json",
   "window": {
-    "backgroundColor": "#EDEDED",
-    "backgroundTextStyle": "dark",
-    "navigationBarBackgroundColor": "#F6F6F6",
+    "backgroundColor": "@backgroundColor",
+    "backgroundTextStyle": "@backgroundTextStyle",
+    "navigationBarBackgroundColor": "@navigationBarBackgroundColor",
     "navigationBarTitleText": "IBD日记",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "@navigationBarTextStyle"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

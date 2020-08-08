@@ -2,6 +2,7 @@
 @import "../../style/fa.wxss";
 
 .date-view {
+  color: var(--weui-FG-0);
   padding-top: 20px;
   padding-bottom: 20px;
   width: 100%;

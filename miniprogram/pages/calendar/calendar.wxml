@@ -1,4 +1,4 @@
-<view class="container">
+<view class="container" data-weui-theme="{{theme}}">
   <month-nav bind:change="fetchData"/>
   <view class="calendar">
     <view wx:for="{{records}}" wx:key="index" class="row">

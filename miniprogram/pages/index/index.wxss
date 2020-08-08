@@ -1,36 +1,37 @@
 .container {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .btns {
-    margin-top: 20px;
-    margin-bottom: 50px;
+  margin-top: 20px;
+  margin-bottom: 50px;
 }
 
 .cards {
-    width: 100%;
+  width: 100%;
 }
 
 .card {
-    margin: 5px 20px 0;
-    padding: 35px 35px 15px;
-    background-color: #fff;
-    position: relative;
+  margin: 5px 20px 0;
+  padding: 35px 35px 15px;
+  background-color: var(--weui-BG-2);
+  position: relative;
+  color: var(--weui-FG-0);
 }
 
 .card-badge {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: rgba(136, 136, 136, 0.5);
-    color: #fff;
-    font-size: 0.8rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 80px;
-    height: 25px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(136, 136, 136, 0.5);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 25px;
 }
 

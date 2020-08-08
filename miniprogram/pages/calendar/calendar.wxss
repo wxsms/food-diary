@@ -1,9 +1,17 @@
 [data-weui-theme=light], page {
   --CALENDAR-COL-EMPTY: #eeeeee;
+  --CALENDAR-TITLE-COLOR: #ffffff;
+  --CALENDAR-TITLE-BG: rgba(136, 136, 136, 0.5);
+  --CALENDAR-CELL-ROW-FILL: rgba(204, 204, 255, 1);
+  --CALENDAR-CELL-COL-FILL: rgba(255, 204, 153, 1);
 }
 
 [data-weui-theme=dark] {
   --CALENDAR-COL-EMPTY: #2f2f2f;
+  --CALENDAR-TITLE-COLOR: var(--weui-FG-1);
+  --CALENDAR-TITLE-BG: rgba(136, 136, 136, 0.3);
+  --CALENDAR-CELL-ROW-FILL: rgba(204, 204, 255, 0.9);
+  --CALENDAR-CELL-COL-FILL: rgba(255, 204, 153, 0.9);
 }
 
 .container {
@@ -54,8 +62,8 @@
   line-height: 1.1rem;
   text-align: center;
   font-size: 0.8rem;
-  color: #fff;
-  background-color: rgba(136, 136, 136, 0.5);
+  color: var(--CALENDAR-TITLE-COLOR);
+  background-color: var(--CALENDAR-TITLE-BG);
   width: 100%;
 }
 
@@ -80,11 +88,11 @@
 }
 
 .cell-row-filled {
-  background-color: #ccccff;
+  background-color: var(--CALENDAR-CELL-ROW-FILL);
 }
 
 .cell-row-danger {
-  background-color: #ff6666;
+  background-color: var(--weui-RED);
 }
 
 .cell-col {
@@ -98,7 +106,7 @@
 }
 
 .cell-col-filled {
-  background-color: #ffcc99;
+  background-color: var(--CALENDAR-CELL-COL-FILL);
 }
 
 .btns {

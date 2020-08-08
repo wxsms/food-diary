@@ -40,6 +40,12 @@ Component({
     }
   },
   methods: {
+    onShareAppMessage () {
+      return {
+        title: 'IBD日记',
+        path: '/pages/index/index'
+      }
+    },
     async onLoad ({ diaryOptionIndex }) {
       loading()
       const type = DIARY_OPTION_LIST[Number(diaryOptionIndex)]

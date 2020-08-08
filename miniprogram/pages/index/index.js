@@ -37,6 +37,12 @@ Component({
     }
   },
   methods: {
+    onShareAppMessage () {
+      return {
+        title: 'IBD日记',
+        path: '/pages/index/index'
+      }
+    },
     async onLoad () {
       debug('index:onLoad')
       loading()

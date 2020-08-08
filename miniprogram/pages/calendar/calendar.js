@@ -7,9 +7,10 @@ import { store } from '../../store/store'
 import { getWeekday } from '../../utils/date.utils'
 import { nextTick } from '../../utils/wx.utils'
 import { loading, toast } from '../../utils/toast.utils'
+import theme from '../../mixins/theme.mixin'
 
 Component({
-  behaviors: [storeBindingsBehavior],
+  behaviors: [storeBindingsBehavior, theme],
   data: {
     records: [],
     hasRecordInMonth: false

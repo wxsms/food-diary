@@ -7,11 +7,12 @@ import { storeBindingsBehavior } from 'mobx-miniprogram-bindings'
 import { store } from '../../store/store'
 import { loading, toast } from '../../utils/toast.utils'
 import { nextTick } from '../../utils/wx.utils'
+import theme from '../../mixins/theme.mixin'
 
 const app = getApp()
 
 Component({
-  behaviors: [storeBindingsBehavior],
+  behaviors: [storeBindingsBehavior, theme],
   data: {
     type: null,
     showWeight: false,

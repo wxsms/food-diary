@@ -6,18 +6,21 @@ import { nextTick } from '../../utils/wx.utils'
 import { debug, error } from '../../utils/log.utils'
 import { minusDay, startOfMonth } from '../../utils/date.utils'
 import { loading } from '../../utils/toast.utils'
+import theme from '../../mixins/theme.mixin'
 
 const app = getApp()
 
 Component({
-  behaviors: [storeBindingsBehavior],
+  behaviors: [storeBindingsBehavior, theme],
   data: {
     logged: false,
     record: null,
     yesterdayData: null,
     isReview: false,
     hasDefecation: false,
-    hasWeight: false
+    hasWeight: false,
+    showActionSheet: false,
+    options: []
   },
   storeBindings: {
     store,
@@ -38,8 +41,13 @@ Component({
       debug('index:onLoad')
       loading()
       const _isReview = await isReview()
+      const _options = (_isReview ? DIARY_OPTION_LIST.filter(v => v.inReviewMode) : DIARY_OPTION_LIST).map((v, i) => ({
+        text: v.label,
+        value: i
+      }))
       this.setData({
-        isReview: _isReview
+        isReview: _isReview,
+        options: _options
       })
       await nextTick()
       await this.login()
@@ -127,18 +135,18 @@ Component({
       await this.fetchData()
     },
     showAddSheet () {
-      const list = this.data.isReview ? DIARY_OPTION_LIST.filter(v => v.inReviewMode) : DIARY_OPTION_LIST
-      wx.showActionSheet({
-        itemList: list.map(v => v.label),
-        success: ({ cancel, tapIndex }) => {
-          if (!cancel) {
-            this._goEdit(tapIndex)
-          }
-        }
+      this.setData({
+        showActionSheet: true
       })
     },
-    goEdit ({ currentTarget: { dataset: { index } } }) {
-      this._goEdit(index)
+    goEdit ({ currentTarget: { dataset: { index } }, detail: { value } }) {
+      const isFromActionSheet = typeof value === 'number'
+      if (isFromActionSheet) {
+        this.setData({
+          showActionSheet: false
+        })
+      }
+      this._goEdit(isFromActionSheet ? value : index)
     },
     _goEdit (index) {
       debug('goEdit', index, DIARY_OPTION_LIST[index])

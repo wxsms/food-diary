@@ -1,4 +1,4 @@
-<view class="container">
+<view class="container" data-weui-theme="{{theme}}">
   <date-nav bind:change="fetchData"/>
   <view class="cards">
     <view class="card" wx:if="{{record && record.breakfast}}" bindtap="goEdit" data-index="{{0}}">
@@ -35,4 +35,9 @@
     </button>
     <button bindtap="goCalendar" class="weui-btn" type="default">日历</button>
   </view>
+  <mp-actionSheet
+    bindactiontap="goEdit"
+    show="{{showActionSheet}}"
+    actions="{{options}}"
+  />
 </view>

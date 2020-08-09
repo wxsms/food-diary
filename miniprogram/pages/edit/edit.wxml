@@ -6,46 +6,48 @@
   </view>
   <view class="page__bd">
     <mp-form>
-      <view wx:if="{{loaded}}">
-        <mp-cells title="状况" wx:if="{{showWeight || showDefecation}}">
-          <mp-cell title="体重 (kg)" wx:if="{{showWeight}}">
-            <input type="number" value="{{weight}}" class="weui-input" placeholder="请输入数字" bindinput="onWeightChange"/>
-          </mp-cell>
-          <mp-cell title="排便次数" wx:if="{{showDefecation}}">
-            <input type="number" value="{{defecation}}" class="weui-input" placeholder="请输入数字"
-                   bindinput="onDefecationChange"/>
-          </mp-cell>
-        </mp-cells>
-      </view>
-
-      <view wx:if="{{loaded}}">
-        <view class="weui-cells__title" wx:if="{{showWeight || showDefecation}}">其他</view>
-        <view class="weui-cells weui-cells_after-title">
-          <view class="weui-cell">
-            <view class="weui-cell__bd">
-              <view wx:if="{{isReview}}" class="review-text">{{value ? value : '请选择...'}}</view>
-              <textarea wx:else value="{{value}}" auto-height class="weui-textarea"
-                        placeholder="多条记录请用换行分隔" name="record" bindinput="onChange"
-                        bindconfirm="doSave"/>
+      <block wx:if="{{loaded}}">
+        <block wx:if="{{isStatus}}">
+          <mp-cells>
+            <mp-cell title="体重 (kg)" wx:if="{{showWeight}}">
+              <input type="number" value="{{weight}}" class="weui-input" placeholder="请输入数字"
+                     bindinput="onWeightChange"/>
+            </mp-cell>
+            <mp-cell title="排便次数" wx:if="{{showDefecation}}">
+              <input type="number" value="{{defecation}}" class="weui-input" placeholder="请输入数字"
+                     bindinput="onDefecationChange"/>
+            </mp-cell>
+          </mp-cells>
+        </block>
+        <block wx:else>
+          <view>
+            <view class="weui-cells weui-cells_after-title">
+              <view class="weui-cell">
+                <view class="weui-cell__bd">
+                  <view wx:if="{{isReview}}" class="review-text">{{value ? value : '请选择...'}}</view>
+                  <textarea wx:else value="{{value}}" auto-height class="weui-textarea"
+                            placeholder="多条记录请用换行分隔" name="record" bindinput="onChange"
+                            bindconfirm="doSave"/>
+                </view>
+              </view>
             </view>
           </view>
-        </view>
-      </view>
-
-      <view wx:if="{{recent.length > 0 && loaded}}">
-        <view class="weui-cells__title flex-row">
-          <text decode>最近使用&nbsp;</text>
-          <mp-icon icon="help" color="var(--weui-FG-1)" size="{{16}}" bind:tap="onRecentHelp"/>
-        </view>
-        <view class="recent-view">
-          <button wx:for="{{recent}}" wx:key="item" hover-class="recent-item-hover"
-                  class="weui-btn mini-btn recent-item"
-                  type="default" size="mini" data-value="{{item}}" bindtap="onRecentClick"
-                  bindlongpress="onRecentDelete">
-            <text>{{item}}</text>
-          </button>
-        </view>
-      </view>
+          <view wx:if="{{recent.length > 0 && loaded}}">
+            <view class="weui-cells__title flex-row">
+              <text decode>最近使用&nbsp;</text>
+              <mp-icon icon="help" color="var(--weui-FG-1)" size="{{16}}" bind:tap="onRecentHelp"/>
+            </view>
+            <view class="recent-view">
+              <button wx:for="{{recent}}" wx:key="item" hover-class="recent-item-hover"
+                      class="weui-btn mini-btn recent-item"
+                      type="default" size="mini" data-value="{{item}}" bindtap="onRecentClick"
+                      bindlongpress="onRecentDelete">
+                <text>{{item}}</text>
+              </button>
+            </view>
+          </view>
+        </block>
+      </block>
       <view class="weui-btn-area">
         <button class="weui-btn" type="primary" wx:if="{{isReview}}">
           <picker bindchange="onScdFoodChange" range="{{scdFoods}}">
@@ -53,7 +55,7 @@
           </picker>
         </button>
         <button class="weui-btn" type="primary" bindtap="doSave">保存</button>
-        <button wx:if="{{todayRecord && value}}" class="weui-btn" type="warn" bindtap="deleteRecord">删除</button>
+        <button wx:if="{{showDelete}}" class="weui-btn" type="warn" bindtap="deleteRecord">删除</button>
       </view>
     </mp-form>
   </view>

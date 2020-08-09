@@ -5,9 +5,9 @@
   bind:tap="goEdit"
 >
   <view class="card-badge">{{type.label}}</view>
-  <block wx:if="{{isOthers}}">
+  <block wx:if="{{isStatus}}">
     <text wx:if="{{todayHasWeight}}">体重：{{todayRecord.weight}}kg\n</text>
     <text wx:if="{{todayHasDefecation}}">排便：{{todayRecord.defecation}}次\n</text>
   </block>
-  <text>{{todayRecord[type.key]}}</text>
+  <text wx:else>{{todayRecord[type.key]}}</text>
 </view>

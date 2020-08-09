@@ -23,7 +23,9 @@ Component({
     recent: [],
     othersRecent: ['体重', '排便', '异常'],
     scdFoods: [],
-    loaded: false
+    loaded: false,
+    isStatus: false,
+    showDelete: false
   },
   storeBindings: {
     store,
@@ -47,18 +49,31 @@ Component({
     },
     async onLoad ({ diaryOptionIndex }) {
       const type = DIARY_OPTION_LIST[Number(diaryOptionIndex)]
-      const isOthers = type.key === DIARY_TYPES.OTHERS.key
+      const isStatus = type.key === DIARY_TYPES.STATUS.key
       await nextTick()
       const todayRecord = this.data.todayRecord
+      const value = get(todayRecord, type.key, '')
+      const weight = get(todayRecord, DIARY_TYPES.WEIGHT.key, '')
+      const defecation = get(todayRecord, DIARY_TYPES.DEFECATION.key, '')
+      let showDelete = false
+      if (todayRecord) {
+        if (isStatus) {
+          showDelete = typeof weight === 'number' || weight === '' || typeof defecation === 'number' || defecation === ''
+        } else {
+          showDelete = !!value
+        }
+      }
       debug(todayRecord)
       this.setData({
         type,
-        showWeight: isOthers,
-        showDefecation: isOthers,
-        recent: getCache(type.key),
-        value: get(todayRecord, type.key, ''),
-        weight: get(todayRecord, DIARY_TYPES.WEIGHT.key, ''),
-        defecation: get(todayRecord, DIARY_TYPES.DEFECATION.key, '')
+        isStatus,
+        value,
+        weight,
+        defecation,
+        showDelete,
+        showWeight: isStatus,
+        showDefecation: isStatus,
+        recent: getCache(type.key)
       })
       await nextTick()
       await this.fetchScdData()
@@ -122,9 +137,10 @@ Component({
       })
     },
     async doSave () {
-      const hasValue = !!this.data.value
-      const hasWeight = this.data.showWeight ? !!this.data.weight : false
-      const hasDefecation = this.data.showDefecation ? !!this.data.defecation : false
+      const { value, weight, defecation, showWeight, showDefecation } = this.data
+      const hasValue = !!value
+      const hasWeight = showWeight ? !!weight : false
+      const hasDefecation = showDefecation ? !!defecation : false
       const hasContent = hasValue || hasWeight || hasDefecation
 
       if (!hasContent) {
@@ -132,12 +148,12 @@ Component({
         return
       }
 
-      const weightInvalid = this.data.showWeight ? Number.isNaN(Number(this.data.weight)) : false
+      const weightInvalid = showWeight ? Number.isNaN(Number(weight)) : false
       if (weightInvalid) {
         toast('体重需输入数字')
         return
       }
-      const defecationInvalid = this.data.showDefecation ? Number.isNaN(Number(this.data.defecation)) : false
+      const defecationInvalid = showDefecation ? Number.isNaN(Number(defecation)) : false
       if (defecationInvalid) {
         toast('排便次数需输入数字')
         return
@@ -145,14 +161,13 @@ Component({
 
       loading(true, '正在保存...')
       const db = wx.cloud.database()
-      const toSave = {
-        [this.data.type.key]: this.data.value
+      const toSave = this.data.type.key === DIARY_TYPES.STATUS.key ? {} : { [this.data.type.key]: this.data.value }
+
+      if (showWeight) {
+        toSave[DIARY_TYPES.WEIGHT.key] = weight === '' ? '' : Number(weight)
       }
-      if (this.data.showWeight && this.data.weight !== '') {
-        toSave[DIARY_TYPES.WEIGHT.key] = Number(this.data.weight)
-      }
-      if (this.data.showDefecation && this.data.defecation !== '') {
-        toSave[DIARY_TYPES.DEFECATION.key] = Number(this.data.defecation)
+      if (showDefecation) {
+        toSave[DIARY_TYPES.DEFECATION.key] = defecation === '' ? '' : Number(defecation)
       }
       try {
         if (this.data.todayRecord) {
@@ -207,27 +222,41 @@ Component({
         success: async ({ confirm }) => {
           if (confirm) {
             loading(true, '正在删除...')
-            let keyCount = 0
-            DIARY_OPTION_LIST.forEach(v => {
-              if (v.key !== this.data.type.key && this.data.todayRecord[v.key]) {
-                keyCount++
+            const keys = this.data.type.keys ? this.data.type.keys : [this.data.type.key]
+            const ignoreKeys = [].concat(['_id', '_openid', 'date'], keys)
+            const allKeys = Object.keys(this.data.todayRecord).filter(key => ignoreKeys.indexOf(key) < 0)
+            let keysRemainOtherThanThis = allKeys.length
+            allKeys.forEach(key => {
+              const value = this.data.todayRecord[key]
+              const isExistString = typeof value === 'string' && value.length > 0
+              const isNumber = typeof value === 'number'
+              const isExist = isExistString || isNumber
+              debug(key, isExist, value)
+              if (!isExist) {
+                --keysRemainOtherThanThis
               }
             })
+            debug(keysRemainOtherThanThis)
             const db = wx.cloud.database()
             try {
-              if (keyCount > 0) {
+              if (keysRemainOtherThanThis > 0) {
+                const params = {}
+                if (this.data.isStatus) {
+                  params.weight = ''
+                  params.defecation = ''
+                } else {
+                  params[this.data.type.key] = ''
+                }
                 const { stats: { updated } } = await db
                   .collection('records')
                   .doc(this.data.todayRecord._id)
                   .update({
-                    data: {
-                      [this.data.type.key]: ''
-                    }
+                    data: params
                   })
                 if (updated) {
                   this.setTodayRecord({
                     ...this.data.todayRecord,
-                    [this.data.type.key]: ''
+                    ...params
                   })
                   wx.navigateBack()
                 } else {

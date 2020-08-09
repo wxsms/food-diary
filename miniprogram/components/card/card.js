@@ -18,23 +18,23 @@ Component({
   },
   data: {
     show: false,
-    isOthers: false
+    isStatus: false
   },
   observers: {
     'todayRecord, type' (todayRecord, type) {
       // debug('card observers', todayRecord, type)
       let show = false
-      let isOthers = false
+      let isStatus = false
       if (type && todayRecord) {
         const { key } = type
-        isOthers = key === DIARY_TYPES.OTHERS.key
-        if (isOthers) {
+        isStatus = key === DIARY_TYPES.STATUS.key
+        if (isStatus) {
           show = !!(this.data.todayHasWeight || this.data.todayHasDefecation || todayRecord[key])
         } else {
           show = !!(todayRecord[key])
         }
       }
-      this.setData({ show, isOthers })
+      this.setData({ show, isStatus })
     }
   },
   methods: {

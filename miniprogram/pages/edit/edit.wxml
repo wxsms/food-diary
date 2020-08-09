@@ -53,7 +53,7 @@
           </picker>
         </button>
         <button class="weui-btn" type="primary" bindtap="doSave">保存</button>
-        <button wx:if="{{record && value}}" class="weui-btn" type="warn" bindtap="deleteRecord">删除</button>
+        <button wx:if="{{todayRecord && value}}" class="weui-btn" type="warn" bindtap="deleteRecord">删除</button>
       </view>
     </mp-form>
   </view>

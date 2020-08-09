@@ -58,10 +58,7 @@ Component({
     },
     async onShow () {
       debug('index:onShow')
-      if (app.globalData.needReload) {
-        app.globalData.needReload = false
-        await this.fetchData()
-      } else if (this.data.todayRecord && this.data.todayRecord.date !== this.data.currentDate.ts) {
+      if (this.data.todayRecord && this.data.todayRecord.date !== this.data.currentDate.ts) {
         wx.pageScrollTo({
           scrollTop: 0
         })
@@ -78,7 +75,7 @@ Component({
         await db.collection('records').add({
           data: {
             ..._data,
-            date: this.data.currentDate
+            date: this.data.currentDate.ts
           }
         })
       } catch (e) {

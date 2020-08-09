@@ -5,7 +5,7 @@ import { getByLevel, SCD_LEVEL } from '../../store/scd-foods.store'
 import { debug, error } from '../../utils/log.utils'
 import { storeBindingsBehavior } from 'mobx-miniprogram-bindings'
 import { store } from '../../store/store'
-import { loading, toast } from '../../utils/toast.utils'
+import { loading, toast, TOAST_ERRORS } from '../../utils/toast.utils'
 import { nextTick } from '../../utils/wx.utils'
 import themeMixin from '../../mixins/theme.mixin'
 import shareMixin from '../../mixins/share.mixin'
@@ -18,7 +18,6 @@ Component({
     type: null,
     showWeight: false,
     showDefecation: false,
-    record: null,
     value: '',
     weight: '',
     defecation: '',
@@ -33,11 +32,11 @@ Component({
     fields: {
       currentDateStr: store => store.currentDateStr,
       currentDate: store => store.currentDate,
-      currentDateTs: store => store.currentDateTs
+      currentDateTs: store => store.currentDateTs,
+      todayRecord: store => store.todayRecord
     },
     actions: {
-      setCurrentDate: 'setCurrentDate',
-      setCurrentMonth: 'setCurrentMonth'
+      setTodayRecord: 'setTodayRecord'
     }
   },
   methods: {
@@ -52,15 +51,20 @@ Component({
       loading()
       const type = DIARY_OPTION_LIST[Number(diaryOptionIndex)]
       const isOthers = type.key === DIARY_TYPES.OTHERS.key
+      await nextTick()
+      const todayRecord = this.data.todayRecord
       this.setData({
         type,
         showWeight: isOthers,
         showDefecation: isOthers,
-        recent: getCache(type.key)
+        recent: getCache(type.key),
+        value: todayRecord ? todayRecord[type.key] : '',
+        weight: todayRecord ? todayRecord[DIARY_TYPES.WEIGHT.key] : '',
+        defecation: todayRecord ? todayRecord[DIARY_TYPES.DEFECATION.key] : ''
       })
       await nextTick()
       await this.fetchScdData()
-      await this.fetchData()
+      loading(false)
     },
     async fetchScdData () {
       try {
@@ -87,31 +91,7 @@ Component({
         }
       } catch (e) {
         error(e)
-      }
-    },
-    async fetchData () {
-      const db = wx.cloud.database()
-      try {
-        loading()
-        // debug('currentDateTs', this.data.currentDateTs)
-        const { data } = await db.collection('records').where({
-          _openid: app.globalData.openid,
-          date: this.data.currentDateTs
-        }).get()
-        const record = data[0]
-        if (record) {
-          this.setData({
-            record,
-            value: record[this.data.type.key] || '',
-            weight: typeof record[DIARY_TYPES.WEIGHT.key] === 'number' ? record[DIARY_TYPES.WEIGHT.key] : '',
-            defecation: typeof record[DIARY_TYPES.DEFECATION.key] === 'number' ? record[DIARY_TYPES.DEFECATION.key] : ''
-          })
-        }
-      } catch (e) {
-        error(e)
-        toast('获取数据失败')
-      } finally {
-        loading(false)
+        toast(TOAST_ERRORS.NETWORK_ERR)
       }
     },
     onChange ({ detail: { value } }) {
@@ -176,30 +156,46 @@ Component({
         toSave[DIARY_TYPES.DEFECATION.key] = Number(this.data.defecation)
       }
       try {
-        if (this.data.record) {
-          await db.collection('records').doc(this.data.record._id).update({
+        if (this.data.todayRecord) {
+          const { stats: { updated } } = await db.collection('records').doc(this.data.todayRecord._id).update({
             data: toSave
           })
-        } else {
-          await db.collection('records').add({
-            data: {
-              date: this.data.currentDateTs,
+          if (updated) {
+            this.setTodayRecord({
+              ...this.data.todayRecord,
               ...toSave
-            }
+            })
+            cacheInput(this.data.type.key, this.data.value)
+            wx.navigateBack()
+          } else {
+            toast(TOAST_ERRORS.NETWORK_ERR)
+          }
+        } else {
+          toSave.date = this.data.currentDateTs
+          const { _id } = await db.collection('records').add({
+            data: toSave
           })
+          debug(_id)
+          if (_id) {
+            this.setTodayRecord({
+              _id,
+              ...toSave
+            })
+            cacheInput(this.data.type.key, this.data.value)
+            wx.navigateBack()
+          } else {
+            toast(TOAST_ERRORS.NETWORK_ERR)
+          }
         }
-        cacheInput(this.data.type.key, this.data.value)
-        app.globalData.needReload = true
-        wx.navigateBack()
       } catch (e) {
         error(e)
-        toast('出错啦，请稍后重试')
+        toast(TOAST_ERRORS.NETWORK_ERR)
       } finally {
         loading(false)
       }
     },
     deleteRecord () {
-      if (!this.data.record) {
+      if (!this.data.todayRecord) {
         return
       }
       wx.showModal({
@@ -208,38 +204,53 @@ Component({
         confirmText: '删除',
         confirmColor: '#fa5151',
         cancelText: '取消',
-        success: ({ confirm }) => {
+        success: async ({ confirm }) => {
           if (confirm) {
             loading(true, '正在删除...')
             let keyCount = 0
             DIARY_OPTION_LIST.forEach(v => {
-              if (v.key !== this.data.type.key && this.data.record[v.key]) {
+              if (v.key !== this.data.type.key && this.data.todayRecord[v.key]) {
                 keyCount++
               }
             })
             const db = wx.cloud.database()
-            if (keyCount > 0) {
-              db.collection('records').doc(this.data.record._id).update({
-                data: {
-                  [this.data.type.key]: ''
+            try {
+              let success = 0
+              if (keyCount > 0) {
+                const { stats: { updated } } = await db
+                  .collection('records')
+                  .doc(this.data.todayRecord._id)
+                  .update({
+                    data: {
+                      [this.data.type.key]: ''
+                    }
+                  })
+                if (updated) {
+                  this.setTodayRecord({
+                    ...this.data.todayRecord,
+                    [this.data.type.key]: ''
+                  })
+                  wx.navigateBack()
+                } else {
+                  toast(TOAST_ERRORS.NETWORK_ERR)
                 }
-              })
-                .then(res => {
-                  app.globalData.needReload = true
+              } else {
+                const { stats: { removed } } = await db
+                  .collection('records')
+                  .doc(this.data.todayRecord._id)
+                  .remove()
+                if (removed) {
+                  this.setTodayRecord(null)
                   wx.navigateBack()
-                })
-                .finally(() => {
-                  loading(false)
-                })
-            } else {
-              db.collection('records').doc(this.data.record._id).remove()
-                .then(res => {
-                  app.globalData.needReload = true
-                  wx.navigateBack()
-                })
-                .finally(() => {
-                  loading(false)
-                })
+                } else {
+                  toast(TOAST_ERRORS.NETWORK_ERR)
+                }
+              }
+            } catch (e) {
+              error(e)
+              toast(TOAST_ERRORS.NETWORK_ERR)
+            } finally {
+              loading(false)
             }
           }
         }

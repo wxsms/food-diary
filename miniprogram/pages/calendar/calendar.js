@@ -6,7 +6,7 @@ import { storeBindingsBehavior } from 'mobx-miniprogram-bindings'
 import { store } from '../../store/store'
 import { getWeekday } from '../../utils/date.utils'
 import { nextTick } from '../../utils/wx.utils'
-import { loading, toast } from '../../utils/toast.utils'
+import { loading, toast, TOAST_ERRORS } from '../../utils/toast.utils'
 import themeMixin from '../../mixins/theme.mixin'
 import shareMixin from '../../mixins/share.mixin'
 
@@ -51,6 +51,7 @@ Component({
         this.prepareGrid(data)
       } catch (e) {
         error(e)
+        toast(TOAST_ERRORS.NETWORK_ERR)
       } finally {
         loading(false)
       }
@@ -101,7 +102,7 @@ Component({
         })
       } catch (e) {
         error(e)
-        toast('出错啦，请稍后重试')
+        toast(TOAST_ERRORS.NETWORK_ERR)
       } finally {
         loading(false)
       }

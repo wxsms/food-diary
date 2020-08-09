@@ -9,8 +9,7 @@ import { loading, toast, TOAST_ERRORS } from '../../utils/toast.utils'
 import { nextTick } from '../../utils/wx.utils'
 import themeMixin from '../../mixins/theme.mixin'
 import shareMixin from '../../mixins/share.mixin'
-
-const app = getApp()
+import get from 'lodash.get'
 
 Component({
   behaviors: [storeBindingsBehavior, themeMixin, shareMixin],
@@ -24,7 +23,6 @@ Component({
     recent: [],
     othersRecent: ['体重', '排便', '异常'],
     scdFoods: [],
-    isReview: false,
     loaded: false
   },
   storeBindings: {
@@ -48,28 +46,28 @@ Component({
       })
     },
     async onLoad ({ diaryOptionIndex }) {
-      loading()
       const type = DIARY_OPTION_LIST[Number(diaryOptionIndex)]
       const isOthers = type.key === DIARY_TYPES.OTHERS.key
       await nextTick()
       const todayRecord = this.data.todayRecord
+      debug(todayRecord)
       this.setData({
         type,
         showWeight: isOthers,
         showDefecation: isOthers,
         recent: getCache(type.key),
-        value: todayRecord ? todayRecord[type.key] : '',
-        weight: todayRecord ? todayRecord[DIARY_TYPES.WEIGHT.key] : '',
-        defecation: todayRecord ? todayRecord[DIARY_TYPES.DEFECATION.key] : ''
+        value: get(todayRecord, type.key, ''),
+        weight: get(todayRecord, DIARY_TYPES.WEIGHT.key, ''),
+        defecation: get(todayRecord, DIARY_TYPES.DEFECATION.key, '')
       })
       await nextTick()
       await this.fetchScdData()
-      loading(false)
     },
     async fetchScdData () {
       try {
         const _isReview = await isReview()
         if (_isReview) {
+          loading()
           let _scdFoods = []
           const data = await Promise.all([
             getByLevel(SCD_LEVEL.LV_0),
@@ -81,8 +79,7 @@ Component({
           })
           this.setData({
             loaded: true,
-            scdFoods: _scdFoods,
-            isReview: _isReview
+            scdFoods: _scdFoods
           })
         } else {
           this.setData({
@@ -92,6 +89,8 @@ Component({
       } catch (e) {
         error(e)
         toast(TOAST_ERRORS.NETWORK_ERR)
+      } finally {
+        loading(false)
       }
     },
     onChange ({ detail: { value } }) {
@@ -160,7 +159,8 @@ Component({
           const { stats: { updated } } = await db.collection('records').doc(this.data.todayRecord._id).update({
             data: toSave
           })
-          if (updated) {
+          // 当无变化时为0
+          if (updated === 0 || updated === 1) {
             this.setTodayRecord({
               ...this.data.todayRecord,
               ...toSave
@@ -215,7 +215,6 @@ Component({
             })
             const db = wx.cloud.database()
             try {
-              let success = 0
               if (keyCount > 0) {
                 const { stats: { updated } } = await db
                   .collection('records')

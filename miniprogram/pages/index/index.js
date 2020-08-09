@@ -16,7 +16,6 @@ Component({
   data: {
     logged: false,
     yesterdayData: null,
-    isReview: false,
     showActionSheet: false,
     options: []
   },
@@ -28,6 +27,7 @@ Component({
       prevDateStr: store => store.prevDateStr,
       nextDateStr: store => store.nextDateStr,
       currentDate: store => store.currentDate,
+      currentDateTs: store => store.currentDateTs,
       todayRecord: store => store.todayRecord
     },
     actions: {
@@ -49,7 +49,6 @@ Component({
       }))
       debug('options:', _options)
       this.setData({
-        isReview: _isReview,
         options: _options
       })
       await nextTick()
@@ -58,7 +57,7 @@ Component({
     },
     async onShow () {
       debug('index:onShow')
-      if (this.data.todayRecord && this.data.todayRecord.date !== this.data.currentDate.ts) {
+      if (this.data.todayRecord && this.data.todayRecord.date !== this.data.currentDateTs) {
         wx.pageScrollTo({
           scrollTop: 0
         })
@@ -68,21 +67,29 @@ Component({
     async copyYesterday () {
       try {
         loading()
-        const _data = this.data.yesterdayData
-        delete _data._openid
-        delete _data._id
         const db = wx.cloud.database()
-        await db.collection('records').add({
-          data: {
-            ..._data,
-            date: this.data.currentDate.ts
-          }
+        const params = {
+          ...this.data.yesterdayData,
+          date: this.data.currentDateTs
+        }
+        delete params._openid
+        delete params._id
+        const { _id } = await db.collection('records').add({
+          data: params
         })
+        if (_id) {
+          this.setTodayRecord({
+            ...params,
+            _id,
+          })
+        } else {
+          toast(TOAST_ERRORS.NETWORK_ERR)
+        }
       } catch (e) {
         error(e)
         toast(TOAST_ERRORS.NETWORK_ERR)
       } finally {
-        await this.fetchData()
+        loading(false)
       }
     },
     async fetchData () {
@@ -90,7 +97,7 @@ Component({
         loading()
         const db = wx.cloud.database()
         const _ = db.command
-        const currentDateTs = this.data.currentDate.ts
+        const currentDateTs = this.data.currentDateTs
         const yesterdayTs = minusDay(this.data.currentDate).ts
         const { data } = await db
           .collection('records')

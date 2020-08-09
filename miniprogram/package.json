@@ -2,6 +2,7 @@
   "dependencies": {
     "lodash.chunk": "^4.2.0",
     "lodash.find": "^4.6.0",
+    "lodash.get": "^4.4.2",
     "lodash.reverse": "^4.0.1",
     "lodash.uniq": "^4.5.0",
     "luxon": "^1.21.3",

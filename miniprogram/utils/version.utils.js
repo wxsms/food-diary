@@ -2,7 +2,7 @@ export const version = '1.4.0'
 
 let _isReview = null
 
-export const isReview = async () => {
+export async function isReview () {
   if (typeof _isReview === 'boolean') {
     return _isReview
   }

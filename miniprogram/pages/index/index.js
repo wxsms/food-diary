@@ -5,7 +5,7 @@ import { store } from '../../store/store'
 import { nextTick } from '../../utils/wx.utils'
 import { debug, error } from '../../utils/log.utils'
 import { minusDay, startOfMonth } from '../../utils/date.utils'
-import { loading } from '../../utils/toast.utils'
+import { loading, toast, TOAST_ERRORS } from '../../utils/toast.utils'
 import themeMixin from '../../mixins/theme.mixin'
 import shareMixin from '../../mixins/share.mixin'
 
@@ -83,6 +83,7 @@ Component({
         })
       } catch (e) {
         error(e)
+        toast(TOAST_ERRORS.NETWORK_ERR)
       } finally {
         await this.fetchData()
       }
@@ -91,22 +92,25 @@ Component({
       try {
         loading()
         const db = wx.cloud.database()
-        const res = await Promise.all([
-          db.collection('records').where({
+        const _ = db.command
+        const currentDateTs = this.data.currentDate.ts
+        const yesterdayTs = minusDay(this.data.currentDate).ts
+        const { data } = await db
+          .collection('records')
+          .where({
             _openid: app.globalData.openid,
-            date: this.data.currentDate.ts
-          }).get(),
-          db.collection('records').where({
-            _openid: app.globalData.openid,
-            date: minusDay(this.data.currentDate).ts
-          }).get()
-        ])
-        const record = res[0].data[0] || null
-        const yesterdayData = res[1].data[0] || null
+            date: _.eq(yesterdayTs).or(_.eq(currentDateTs))
+          })
+          .orderBy('date', 'asc')
+          .get()
+        // debug(data)
+        const yesterdayData = data[0] || null
+        const record = data[1] || null
         this.setTodayRecord(record)
         this.setData({ yesterdayData })
       } catch (e) {
         error(e)
+        toast(TOAST_ERRORS.NETWORK_ERR)
       } finally {
         loading(false)
       }
@@ -124,14 +128,9 @@ Component({
           logged: true
         })
       } catch (err) {
+        toast(TOAST_ERRORS.NETWORK_ERR)
         error('[云函数] [login] 调用失败', err)
       }
-    },
-    async goPrevDay () {
-      await this.fetchData()
-    },
-    async goNextDay () {
-      await this.fetchData()
     },
     showAddSheet () {
       this.setData({

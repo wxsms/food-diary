@@ -15,11 +15,8 @@ Component({
   behaviors: [storeBindingsBehavior, themeMixin, shareMixin],
   data: {
     logged: false,
-    record: null,
     yesterdayData: null,
     isReview: false,
-    hasDefecation: false,
-    hasWeight: false,
     showActionSheet: false,
     options: []
   },
@@ -30,11 +27,13 @@ Component({
       currentDateWeekDayStr: store => store.currentDateWeekDayStr,
       prevDateStr: store => store.prevDateStr,
       nextDateStr: store => store.nextDateStr,
-      currentDate: store => store.currentDate
+      currentDate: store => store.currentDate,
+      todayRecord: store => store.todayRecord
     },
     actions: {
       setCurrentDate: 'setCurrentDate',
-      setCurrentMonth: 'setCurrentMonth'
+      setCurrentMonth: 'setCurrentMonth',
+      setTodayRecord: 'setTodayRecord'
     }
   },
   methods: {
@@ -43,9 +42,11 @@ Component({
       loading()
       const _isReview = await isReview()
       const _options = (_isReview ? DIARY_OPTION_LIST.filter(v => v.inReviewMode) : DIARY_OPTION_LIST).map((v, i) => ({
+        ...v,
         text: v.label,
         value: i
       }))
+      debug('options:', _options)
       this.setData({
         isReview: _isReview,
         options: _options
@@ -59,7 +60,7 @@ Component({
       if (app.globalData.needReload) {
         app.globalData.needReload = false
         await this.fetchData()
-      } else if (this.data.record && this.data.record.date !== this.data.currentDate.ts) {
+      } else if (this.data.todayRecord && this.data.todayRecord.date !== this.data.currentDate.ts) {
         wx.pageScrollTo({
           scrollTop: 0
         })
@@ -101,12 +102,8 @@ Component({
         ])
         const record = res[0].data[0] || null
         const yesterdayData = res[1].data[0] || null
-        this.setData({
-          record,
-          hasDefecation: record && typeof record.defecation === 'number',
-          hasWeight: record && typeof record.weight === 'number',
-          yesterdayData
-        })
+        this.setTodayRecord(record)
+        this.setData({ yesterdayData })
       } catch (e) {
         error(e)
       } finally {

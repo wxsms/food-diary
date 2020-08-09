@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "date-nav": "/components/date-nav/date-nav",
+    "card": "/components/card/card",
     "mp-actionSheet": "/miniprogram_npm/weui-miniprogram/actionsheet/actionsheet"
   }
 }

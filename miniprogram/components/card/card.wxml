@@ -1,0 +1,13 @@
+<view
+  wx:if="{{show}}"
+  class="card"
+  hover-class="card-hover"
+  bind:tap="goEdit"
+>
+  <view class="card-badge">{{type.label}}</view>
+  <block wx:if="{{isOthers}}">
+    <text wx:if="{{todayHasWeight}}">体重：{{todayRecord.weight}}kg\n</text>
+    <text wx:if="{{todayHasDefecation}}">排便：{{todayRecord.defecation}}次\n</text>
+  </block>
+  <text>{{todayRecord[type.key]}}</text>
+</view>

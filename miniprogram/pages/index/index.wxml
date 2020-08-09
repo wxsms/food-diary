@@ -1,37 +1,22 @@
 <view class="container" data-weui-theme="{{theme}}">
   <date-nav bind:change="fetchData"/>
   <view class="cards">
-    <view class="card" wx:if="{{record && record.breakfast}}" bindtap="goEdit" data-index="{{0}}">
-      <view class="card-badge">早餐</view>
-      <text>{{record.breakfast}}</text>
-    </view>
-    <view class="card" wx:if="{{record && record.lunch}}" bindtap="goEdit" data-index="{{1}}">
-      <view class="card-badge">午餐</view>
-      <text>{{record.lunch}}</text>
-    </view>
-    <view class="card" wx:if="{{record && record.dinner}}" bindtap="goEdit" data-index="{{2}}">
-      <view class="card-badge">晚餐</view>
-      <text>{{record.dinner}}</text>
-    </view>
-    <view class="card" wx:if="{{record && record.supplement}}" bindtap="goEdit" data-index="{{3}}">
-      <view class="card-badge">补充</view>
-      <text>{{record.supplement}}</text>
-    </view>
-    <view class="card" wx:if="{{record && (record.others || record.weight || record.defecation)}}"
-          bindtap="goEdit" data-index="{{4}}">
-      <view class="card-badge">其它</view>
-      <text wx:if="{{hasWeight}}">体重：{{record.weight}}kg\n</text>
-      <text wx:if="{{hasDefecation}}">排便：{{record.defecation}}次\n</text>
-      <text>{{record.others}}</text>
-    </view>
-    <view class="card" wx:if="{{record && record.abnormal}}" bindtap="goEdit" data-index="{{5}}">
-      <view class="card-badge">异常</view>
-      <text>{{record.abnormal}}</text>
-    </view>
+    <card
+      wx:for="{{options}}"
+      wx:key="key"
+      type="{{item}}"
+      bind:card-tap="goEdit"
+    />
   </view>
   <view class="btns">
     <button bindtap="showAddSheet" class="weui-btn" type="primary">添加...</button>
-    <button bindtap="copyYesterday" wx:if="{{yesterdayData !== null && !record}}" class="weui-btn" type="default">同前
+    <button
+      bindtap="copyYesterday"
+      wx:if="{{yesterdayData !== null && !todayRecord}}"
+      class="weui-btn"
+      type="default"
+    >
+      同前
     </button>
     <button bindtap="goCalendar" class="weui-btn" type="default">日历</button>
   </view>

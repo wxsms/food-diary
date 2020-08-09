@@ -18,10 +18,27 @@ export const store = observable({
   // 数据字段
   // 当前选择的日期
   currentDate: DateTime.local().startOf('day'),
+  // 当前选择日期的数据
+  todayRecord: null,
   // 在日历界面展示的当前月份
   currentMonth: DateTime.local().startOf('month'),
 
   // 计算属性
+  // 当前日期数据相关
+  get todayHasWeight () {
+    if (this.todayRecord) {
+      return typeof this.todayRecord.weight === 'number'
+    } else {
+      return false
+    }
+  },
+  get todayHasDefecation () {
+    if (this.todayRecord) {
+      return typeof this.todayRecord.defecation === 'number'
+    } else {
+      return false
+    }
+  },
   // 日期相关
   get currentDateTs () {
     return this.currentDate.ts
@@ -60,5 +77,8 @@ export const store = observable({
   }),
   setCurrentMonth: action(function (data) {
     this.currentMonth = typeof data === 'number' ? DateTime.fromMillis(data) : data
+  }),
+  setTodayRecord: action(function (data) {
+    this.todayRecord = data
   })
 })

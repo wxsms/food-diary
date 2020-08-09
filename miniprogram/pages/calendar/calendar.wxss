@@ -10,8 +10,8 @@
   --CALENDAR-COL-EMPTY: #2f2f2f;
   --CALENDAR-TITLE-COLOR: var(--weui-FG-1);
   --CALENDAR-TITLE-BG: rgba(136, 136, 136, 0.3);
-  --CALENDAR-CELL-ROW-FILL: rgba(204, 204, 255, 0.9);
-  --CALENDAR-CELL-COL-FILL: rgba(255, 204, 153, 0.9);
+  --CALENDAR-CELL-ROW-FILL: rgba(204, 204, 255, 0.8);
+  --CALENDAR-CELL-COL-FILL: rgba(255, 204, 153, 0.8);
 }
 
 .container {

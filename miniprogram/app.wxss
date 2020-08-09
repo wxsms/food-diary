@@ -55,3 +55,13 @@ page {
 .weui-textarea, .weui-input, .weui-label {
   color: var(--weui-FG-0)
 }
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.weui-icon {
+  display: block !important;
+}

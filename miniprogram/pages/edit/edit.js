@@ -40,6 +40,13 @@ Component({
     }
   },
   methods: {
+    onRecentHelp () {
+      wx.showModal({
+        content: '最多保存 8 条记录，长按以删除',
+        confirmText: '知道了',
+        showCancel: false
+      })
+    },
     onShareAppMessage () {
       return {
         title: 'IBD日记',

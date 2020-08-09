@@ -6,7 +6,7 @@ const maxSize = 8
 
 export function cacheInput (key, str) {
   const oldCache = getCache(key)
-  const newCache = str.trim().split('\n').filter(v => !!v).map(v => v.trim())
+  const newCache = str.trim().split(/[\n,，+]/g).filter(v => !!v).map(v => v.trim())
   const cache = chunk(uniq([].concat(reverse(newCache), oldCache)), maxSize)[0]
   wx.setStorage({
     key: `cache_${key}`,

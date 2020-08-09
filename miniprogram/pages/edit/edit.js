@@ -222,11 +222,13 @@ Component({
         success: async ({ confirm }) => {
           if (confirm) {
             loading(true, '正在删除...')
+            // 找出除了当前编辑模式的 key 以及其他默认忽略的 key
+            // 进行剩余存在有效值的 key 计数
             const keys = this.data.type.keys ? this.data.type.keys : [this.data.type.key]
             const ignoreKeys = [].concat(['_id', '_openid', 'date'], keys)
-            const allKeys = Object.keys(this.data.todayRecord).filter(key => ignoreKeys.indexOf(key) < 0)
-            let keysRemainOtherThanThis = allKeys.length
-            allKeys.forEach(key => {
+            const allKeysOtherThanThis = Object.keys(this.data.todayRecord).filter(key => ignoreKeys.indexOf(key) < 0)
+            let keysRemainOtherThanThis = allKeysOtherThanThis.length
+            allKeysOtherThanThis.forEach(key => {
               const value = this.data.todayRecord[key]
               const isExistString = typeof value === 'string' && value.length > 0
               const isNumber = typeof value === 'number'
@@ -240,6 +242,7 @@ Component({
             const db = wx.cloud.database()
             try {
               if (keysRemainOtherThanThis > 0) {
+                // 尚有其他 key 存在有效值，做更新操作
                 const params = {}
                 if (this.data.isStatus) {
                   params.weight = ''
@@ -263,6 +266,7 @@ Component({
                   toast(TOAST_ERRORS.NETWORK_ERR)
                 }
               } else {
+                // 已无有效 key，直接删除
                 const { stats: { removed } } = await db
                   .collection('records')
                   .doc(this.data.todayRecord._id)

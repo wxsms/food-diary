@@ -7,18 +7,26 @@
   <view class="page__bd">
     <mp-form>
       <block wx:if="{{loaded}}">
-        <block wx:if="{{isStatus}}">
-          <mp-cells>
-            <mp-cell title="体重 (kg)" wx:if="{{showWeight}}">
-              <input type="number" value="{{weight}}" class="weui-input" placeholder="请输入数字"
-                     bindinput="onWeightChange"/>
-            </mp-cell>
-            <mp-cell title="排便次数" wx:if="{{showDefecation}}">
-              <input type="number" value="{{defecation}}" class="weui-input" placeholder="请输入数字"
-                     bindinput="onDefecationChange"/>
-            </mp-cell>
-          </mp-cells>
-        </block>
+        <mp-cells wx:if="{{isStatus}}">
+          <mp-cell title="体重 (kg)" wx:if="{{showWeight}}">
+            <input
+              type="number"
+              value="{{weight}}"
+              class="weui-input"
+              placeholder="请输入数字"
+              bindinput="onWeightChange"
+            />
+          </mp-cell>
+          <mp-cell title="排便次数" wx:if="{{showDefecation}}">
+            <input
+              type="number"
+              value="{{defecation}}"
+              class="weui-input"
+              placeholder="请输入数字"
+              bindinput="onDefecationChange"
+            />
+          </mp-cell>
+        </mp-cells>
         <block wx:else>
           <view>
             <view class="weui-cells weui-cells_after-title">

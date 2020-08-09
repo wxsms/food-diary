@@ -29,7 +29,7 @@ Component({
         const { key } = type
         isStatus = key === DIARY_TYPES.STATUS.key
         if (isStatus) {
-          show = !!(this.data.todayHasWeight || this.data.todayHasDefecation || todayRecord[key])
+          show = !!(this.data.todayHasWeight || this.data.todayHasDefecation)
         } else {
           show = !!(todayRecord[key])
         }

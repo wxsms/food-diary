@@ -1,5 +1,5 @@
 import { DIARY_OPTION_LIST } from '../../constants/index'
-import { isReview } from '../../utils/version.utils'
+import { isReview, version } from '../../utils/version.utils'
 import { storeBindingsBehavior } from 'mobx-miniprogram-bindings'
 import { store } from '../../store/store'
 import { nextTick } from '../../utils/wx.utils'
@@ -38,6 +38,7 @@ Component({
   },
   methods: {
     async onLoad () {
+      debug('version:', version)
       debug('index:onLoad')
       loading()
       const _isReview = await isReview()

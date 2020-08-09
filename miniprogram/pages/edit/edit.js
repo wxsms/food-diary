@@ -169,10 +169,10 @@ Component({
       const toSave = {
         [this.data.type.key]: this.data.value
       }
-      if (this.data.showWeight) {
+      if (this.data.showWeight && this.data.weight !== '') {
         toSave[DIARY_TYPES.WEIGHT.key] = Number(this.data.weight)
       }
-      if (this.data.showDefecation) {
+      if (this.data.showDefecation && this.data.defecation !== '') {
         toSave[DIARY_TYPES.DEFECATION.key] = Number(this.data.defecation)
       }
       try {

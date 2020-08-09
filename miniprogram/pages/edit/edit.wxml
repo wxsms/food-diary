@@ -35,7 +35,7 @@
       <view wx:if="{{recent.length > 0 && loaded}}">
         <view class="weui-cells__title flex-row">
           <text decode>最近使用&nbsp;</text>
-          <mp-icon icon="help" color="var(--weui-FG-1)" size="{{17}}" bind:tap="onRecentHelp"/>
+          <mp-icon icon="help" color="var(--weui-FG-1)" size="{{16}}" bind:tap="onRecentHelp"/>
         </view>
         <view class="recent-view">
           <button wx:for="{{recent}}" wx:key="item" hover-class="recent-item-hover"

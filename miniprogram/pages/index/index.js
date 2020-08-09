@@ -6,12 +6,13 @@ import { nextTick } from '../../utils/wx.utils'
 import { debug, error } from '../../utils/log.utils'
 import { minusDay, startOfMonth } from '../../utils/date.utils'
 import { loading } from '../../utils/toast.utils'
-import theme from '../../mixins/theme.mixin'
+import themeMixin from '../../mixins/theme.mixin'
+import shareMixin from '../../mixins/share.mixin'
 
 const app = getApp()
 
 Component({
-  behaviors: [storeBindingsBehavior, theme],
+  behaviors: [storeBindingsBehavior, themeMixin, shareMixin],
   data: {
     logged: false,
     record: null,
@@ -37,12 +38,6 @@ Component({
     }
   },
   methods: {
-    onShareAppMessage () {
-      return {
-        title: 'IBD日记',
-        path: '/pages/index/index'
-      }
-    },
     async onLoad () {
       debug('index:onLoad')
       loading()

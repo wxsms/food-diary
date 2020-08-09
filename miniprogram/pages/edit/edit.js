@@ -7,12 +7,13 @@ import { storeBindingsBehavior } from 'mobx-miniprogram-bindings'
 import { store } from '../../store/store'
 import { loading, toast } from '../../utils/toast.utils'
 import { nextTick } from '../../utils/wx.utils'
-import theme from '../../mixins/theme.mixin'
+import themeMixin from '../../mixins/theme.mixin'
+import shareMixin from '../../mixins/share.mixin'
 
 const app = getApp()
 
 Component({
-  behaviors: [storeBindingsBehavior, theme],
+  behaviors: [storeBindingsBehavior, themeMixin, shareMixin],
   data: {
     type: null,
     showWeight: false,
@@ -46,12 +47,6 @@ Component({
         confirmText: '知道了',
         showCancel: false
       })
-    },
-    onShareAppMessage () {
-      return {
-        title: 'IBD日记',
-        path: '/pages/index/index'
-      }
     },
     async onLoad ({ diaryOptionIndex }) {
       loading()

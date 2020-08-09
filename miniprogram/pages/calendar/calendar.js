@@ -7,10 +7,11 @@ import { store } from '../../store/store'
 import { getWeekday } from '../../utils/date.utils'
 import { nextTick } from '../../utils/wx.utils'
 import { loading, toast } from '../../utils/toast.utils'
-import theme from '../../mixins/theme.mixin'
+import themeMixin from '../../mixins/theme.mixin'
+import shareMixin from '../../mixins/share.mixin'
 
 Component({
-  behaviors: [storeBindingsBehavior, theme],
+  behaviors: [storeBindingsBehavior, themeMixin, shareMixin],
   data: {
     records: [],
     hasRecordInMonth: false
@@ -26,12 +27,6 @@ Component({
     }
   },
   methods: {
-    onShareAppMessage () {
-      return {
-        title: 'IBD日记',
-        path: '/pages/index/index'
-      }
-    },
     async onLoad () {
       debug('calendar:onLoad')
       loading()

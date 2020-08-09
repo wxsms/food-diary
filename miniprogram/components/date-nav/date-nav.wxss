@@ -1,6 +1,3 @@
-@import "../../style/font-awesome.wxss";
-@import "../../style/fa.wxss";
-
 .date-view {
   color: var(--weui-FG-0);
   padding-top: 20px;
@@ -10,11 +7,6 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-}
-
-.date-icon {
-  width: 10px;
-  height: 10px;
 }
 
 .date {

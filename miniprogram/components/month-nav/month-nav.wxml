@@ -1,6 +1,6 @@
 <view class="date-view">
   <view class="date" bindtap="goPrevMonth">
-    <text class="fa fa-angle-left"></text>
+    <mp-icon icon="back" color="var(--weui-FG-0)" size="{{7}}"/>
     <text decode>&nbsp;{{prevMonthStr}}</text>
   </view>
   <view class="date today">
@@ -8,6 +8,6 @@
   </view>
   <view class="date" bindtap="goNextMonth">
     <text decode>{{nextMonthStr}}&nbsp;</text>
-    <text class="fa fa-angle-right"></text>
+    <mp-icon icon="arrow" color="var(--weui-FG-0)" size="{{7}}"/>
   </view>
 </view>

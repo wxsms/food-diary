@@ -1,3 +1,10 @@
+<mp-navigation-bar
+  loading="{{loading}}"
+  color="{{themeColors.navigationBarTextStyle}}"
+  background="{{themeColors.navigationBarBackgroundColor}}"
+  title="日历"
+  back="{{true}}"
+/>
 <view class="container" data-weui-theme="{{theme}}">
   <month-nav bind:change="fetchData"/>
   <view class="calendar">

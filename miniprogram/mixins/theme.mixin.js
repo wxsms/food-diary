@@ -1,8 +1,22 @@
 import { debug } from '../utils/log.utils'
 
+const themeColors = {
+  'light': {
+    'navigationBarBackgroundColor': '#ebebeb',
+    'navigationBarTextStyle': 'rgba(0, 0, 0, .9)'
+  },
+  'dark': {
+    'navigationBarBackgroundColor': '#191919',
+    'navigationBarTextStyle': 'hsla(0, 0%, 100%, .8)'
+  }
+}
+
 module.exports = Behavior({
   data: {
-    theme: 'light'
+    theme: 'light',
+    themeColors: {
+      ...themeColors.light
+    }
   },
   lifetimes: {
     async attached () {
@@ -23,9 +37,12 @@ module.exports = Behavior({
     themeChanged ({ theme }) {
       // debug(this)
       debug('theme changed:', theme)
-      if (typeof theme === 'string') {
+      if (typeof theme === 'string' && themeColors[theme]) {
         this.setData({
-          theme
+          theme,
+          themeColors: {
+            ...themeColors[theme]
+          }
         })
       }
     }

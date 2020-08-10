@@ -1,4 +1,10 @@
-<!--index.wxml-->
+<mp-navigation-bar
+  loading="{{loading}}"
+  color="{{themeColors.navigationBarTextStyle}}"
+  background="{{themeColors.navigationBarBackgroundColor}}"
+  title="IBD日记"
+  back="{{true}}"
+/>
 <view class="container" data-weui-theme="{{theme}}">
   <view class="page__hd">
     <view class="page__title">{{currentDateStr}}</view>

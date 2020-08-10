@@ -109,8 +109,9 @@ Component({
           .orderBy('date', 'asc')
           .get()
         // debug(data)
-        const yesterdayData = find(data, v => v.date === yesterdayTs, null)
-        const record = find(data, v => v.date === currentDateTs, null)
+        const yesterdayData = find(data, v => v.date === yesterdayTs) || null
+        const record = find(data, v => v.date === currentDateTs) || null
+        // debug(yesterdayData, record)
         this.setTodayRecord(record)
         this.setData({ yesterdayData })
       } catch (e) {

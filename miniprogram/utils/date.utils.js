@@ -7,6 +7,16 @@ export const FORMATS = {
   M_D: 'L月d日'
 }
 
+const WEEK_DAYS = {
+  '1': '星期一',
+  '2': '星期二',
+  '3': '星期三',
+  '4': '星期四',
+  '5': '星期五',
+  '6': '星期六',
+  '7': '星期日'
+}
+
 function _DateTime (ts) {
   const isDateTime = ts instanceof DateTime
   // debug('_DateTime', isDateTime)
@@ -42,7 +52,7 @@ export function endOfMonth (ts) {
 }
 
 export function getWeekdayLong (ts) {
-  return _DateTime(ts).weekdayLong
+  return WEEK_DAYS[_DateTime(ts).weekday.toString()]
 }
 
 export function getWeekday (ts) {

@@ -12,7 +12,7 @@
     <button bindtap="showAddSheet" class="weui-btn" type="primary">添加...</button>
     <button
       bindtap="copyYesterday"
-      wx:if="{{yesterdayData !== null && !todayRecord}}"
+      wx:if="{{yesterdayData && !todayRecord}}"
       class="weui-btn"
       type="default"
     >

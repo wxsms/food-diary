@@ -25,7 +25,8 @@ Component({
     scdFoods: [],
     loaded: false,
     isStatus: false,
-    showDelete: false
+    showDelete: false,
+    isReview: false
   },
   storeBindings: {
     store,
@@ -94,7 +95,8 @@ Component({
           })
           this.setData({
             loaded: true,
-            scdFoods: _scdFoods
+            scdFoods: _scdFoods,
+            isReview: _isReview
           })
         } else {
           this.setData({

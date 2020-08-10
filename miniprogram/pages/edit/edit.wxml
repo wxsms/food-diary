@@ -60,7 +60,7 @@
         </block>
       </block>
       <view class="weui-btn-area">
-        <button class="weui-btn" type="primary" wx:if="{{isReview}}">
+        <button class="weui-btn" type="primary" wx:if="{{isReview && !isStatus}}">
           <picker bindchange="onScdFoodChange" range="{{scdFoods}}">
             添加...
           </picker>

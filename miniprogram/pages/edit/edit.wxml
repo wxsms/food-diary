@@ -1,8 +1,17 @@
-<!--index.wxml-->
+<mp-navigation-bar
+  loading="{{loading}}"
+  color="{{themeColors.navigationBarTextStyle}}"
+  background="{{themeColors.navigationBarBackgroundColor}}"
+  title="IBD日记"
+  back="{{true}}"
+/>
 <view class="container" data-weui-theme="{{theme}}">
   <view class="page__hd">
     <view class="page__title">{{currentDateStr}}</view>
-    <view class="page__desc">{{type.label}}</view>
+    <view class="page__desc">
+      <text>{{type.label}}</text>
+      <text wx:if="{{type.desc}}">（{{type.desc}}）</text>
+    </view>
   </view>
   <view class="page__bd">
     <mp-form>
@@ -57,7 +66,7 @@
         </block>
       </block>
       <view class="weui-btn-area">
-        <button class="weui-btn" type="primary" wx:if="{{isReview}}">
+        <button class="weui-btn" type="primary" wx:if="{{isReview && !isStatus}}">
           <picker bindchange="onScdFoodChange" range="{{scdFoods}}">
             添加...
           </picker>

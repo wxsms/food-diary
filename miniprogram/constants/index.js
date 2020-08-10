@@ -1,16 +1,52 @@
 const _DIARY_TYPES = {
-  BREAKFAST: { label: '早餐', key: 'breakfast', inReviewMode: true },
-  LUNCH: { label: '午餐', key: 'lunch', inReviewMode: true },
-  DINNER: { label: '晚餐', key: 'dinner', inReviewMode: true },
-  SUPPLEMENT: { label: '补充', key: 'supplement', inReviewMode: true },
-  OTHERS: { label: '其它', key: 'others', inReviewMode: false },
-  ABNORMAL: { label: '异常', key: 'abnormal', inReviewMode: false },
-  WEIGHT: { label: '体重', key: 'weight', inReviewMode: false },
-  DEFECATION: { label: '排便次数', key: 'defecation', inReviewMode: false }
+  BREAKFAST: {
+    label: '早餐',
+    key: 'breakfast',
+    inReviewMode: true
+  },
+  LUNCH: {
+    label: '午餐',
+    key: 'lunch',
+    inReviewMode: true
+  },
+  DINNER: {
+    label: '晚餐',
+    key: 'dinner',
+    inReviewMode: true
+  },
+  SUPPLEMENT: {
+    label: '补充',
+    desc: '正餐以外的其它进食',
+    key: 'supplement',
+    inReviewMode: true
+  },
+  OTHERS: {
+    label: '其它',
+    desc: '用药，或者任意想写的',
+    key: 'others',
+    inReviewMode: false
+  },
+  ABNORMAL: {
+    label: '异常',
+    desc: '感到不舒服？',
+    key: 'abnormal',
+    inReviewMode: false
+  },
+  WEIGHT: {
+    label: '体重',
+    key: 'weight',
+    inReviewMode: false
+  },
+  DEFECATION: {
+    label: '排便次数',
+    key: 'defecation',
+    inReviewMode: false
+  }
 }
 _DIARY_TYPES.STATUS = {
   label: '状况',
   key: 'status',
+  desc: '体重、排便次数',
   keys: [_DIARY_TYPES.WEIGHT.key, _DIARY_TYPES.DEFECATION.key],
   inReviewMode: true
 }

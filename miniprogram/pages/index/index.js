@@ -57,12 +57,14 @@ Component({
     },
     async onShow () {
       debug('index:onShow')
-      if (this.data.todayRecord && this.data.todayRecord.date !== this.data.currentDateTs) {
+      if (this.tsBeforeLeave && this.tsBeforeLeave !== this.data.currentDateTs) {
+        debug('ts changed, fetch today data...')
         wx.pageScrollTo({
           scrollTop: 0
         })
         await this.fetchData()
       }
+      this.tsBeforeLeave = null
     },
     async copyYesterday () {
       try {
@@ -157,6 +159,7 @@ Component({
       })
     },
     async goCalendar () {
+      this.tsBeforeLeave = this.data.currentDateTs
       this.setCurrentMonth(startOfMonth(this.data.currentDate))
       await nextTick()
       wx.navigateTo({

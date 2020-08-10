@@ -1,4 +1,4 @@
-import { DIARY_OPTION_LIST } from '../../constants/index'
+import { DIARY_OPTION_LIST, DIARY_TYPES } from '../../constants/index'
 import { isReview, version } from '../../utils/version.utils'
 import { storeBindingsBehavior } from 'mobx-miniprogram-bindings'
 import { store } from '../../store/store'
@@ -42,11 +42,17 @@ Component({
       debug('index:onLoad')
       loading()
       const _isReview = await isReview()
-      const _options = (_isReview ? DIARY_OPTION_LIST.filter(v => v.inReviewMode) : DIARY_OPTION_LIST).map((v, i) => ({
-        ...v,
-        text: v.label,
-        value: i
-      }))
+      const _options = (_isReview ? DIARY_OPTION_LIST.filter(v => v.inReviewMode) : DIARY_OPTION_LIST).map((v, i) => {
+        // const text = v.desc ? `${v.label}（${v.desc}）` : v.label
+        const text = v.label
+        const isAbnormal = v.key === DIARY_TYPES.ABNORMAL.key
+        return {
+          ...v,
+          text: text,
+          value: i,
+          type: isAbnormal ? 'warn' : undefined
+        }
+      })
       debug('options:', _options)
       this.setData({
         options: _options

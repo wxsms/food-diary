@@ -2,7 +2,10 @@
 <view class="container" data-weui-theme="{{theme}}">
   <view class="page__hd">
     <view class="page__title">{{currentDateStr}}</view>
-    <view class="page__desc">{{type.label}}</view>
+    <view class="page__desc">
+      <text>{{type.label}}</text>
+      <text wx:if="{{type.desc}}">（{{type.desc}}）</text>
+    </view>
   </view>
   <view class="page__bd">
     <mp-form>

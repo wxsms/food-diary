@@ -8,6 +8,7 @@ import { minusDay, startOfMonth } from '../../utils/date.utils'
 import { loading, toast, TOAST_ERRORS } from '../../utils/toast.utils'
 import themeMixin from '../../mixins/theme.mixin'
 import shareMixin from '../../mixins/share.mixin'
+import find from 'lodash.find'
 
 const app = getApp()
 
@@ -108,8 +109,8 @@ Component({
           .orderBy('date', 'asc')
           .get()
         // debug(data)
-        const yesterdayData = data[0] || null
-        const record = data[1] || null
+        const yesterdayData = find(data, v => v.date === yesterdayTs, null)
+        const record = find(data, v => v.date === currentDateTs, null)
         this.setTodayRecord(record)
         this.setData({ yesterdayData })
       } catch (e) {

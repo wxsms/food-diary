@@ -5,13 +5,13 @@
   title="IBD日记"
   back="{{false}}"
 >
-  <view slot="left">
-    <mp-icon
-      icon="pencil"
-      color="{{themeColors.navigationBarTextStyle}}"
-      size="{{20}}"
-    />
-  </view>
+<!--  <view slot="left">-->
+<!--    <mp-icon-->
+<!--      icon="pencil"-->
+<!--      color="{{themeColors.navigationBarTextStyle}}"-->
+<!--      size="{{20}}"-->
+<!--    />-->
+<!--  </view>-->
 </mp-navigation-bar>
 <view class="container" data-weui-theme="{{theme}}">
   <date-nav bind:change="fetchData"/>

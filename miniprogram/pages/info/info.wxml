@@ -1,0 +1,24 @@
+<mp-navigation-bar
+  loading="{{loading}}"
+  color="{{themeColors.navigationBarTextStyle}}"
+  background="{{themeColors.navigationBarBackgroundColor}}"
+  title="IBD日记"
+/>
+<view class="container" data-weui-theme="{{theme}}">
+  <view class='user'>
+    <view class='user-avatar'>
+      <open-data type='userAvatarUrl'/>
+    </view>
+    <view class='user-name'>
+      <open-data type='userNickName'/>
+    </view>
+  </view>
+  <mp-cells>
+    <mp-cell link hover ext-class="cell-flat">
+      <button open-type="feedback" class="cell-button">反馈</button>
+    </mp-cell>
+  </mp-cells>
+  <mp-cells>
+    <mp-cell link hover title="关于IBD日记" url="/pages/about/about"/>
+  </mp-cells>
+</view>

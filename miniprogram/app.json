@@ -3,7 +3,9 @@
   "pages": [
     "pages/index/index",
     "pages/edit/edit",
-    "pages/calendar/calendar"
+    "pages/calendar/calendar",
+    "pages/info/info",
+    "pages/about/about"
   ],
   "themeLocation": "theme.json",
   "window": {

@@ -1,0 +1,20 @@
+<mp-navigation-bar
+  loading="{{loading}}"
+  color="{{themeColors.navigationBarTextStyle}}"
+  background="{{themeColors.navigationBarBackgroundColor}}"
+  title="关于"
+/>
+<view class="container" data-weui-theme="{{theme}}">
+  <view class='header'>
+    <view class='logo'>
+      <image src="../../assets/images/logo.png" class='logo'/>
+    </view>
+    <view class='name'>
+      <text decode>IBD&nbsp;日记</text>
+    </view>
+  </view>
+  <mp-cells>
+    <mp-cell title="版本" footer="{{version}}"/>
+    <mp-cell title="开发者" footer="github/wxsms"/>
+  </mp-cells>
+</view>

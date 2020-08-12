@@ -6,7 +6,7 @@
     "pages/calendar/calendar",
     "pages/user/user",
     "pages/about/about",
-    "pages/weight-chart/weight-chart"
+    "pages/status-chart/status-chart"
   ],
   "tabBar": {
     "color": "@tabBarColor",

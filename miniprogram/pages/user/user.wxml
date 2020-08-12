@@ -9,7 +9,7 @@
   </view>
 
   <mp-cells>
-    <mp-cell url="/pages/weight-chart/weight-chart" link hover title="体重曲线"/>
+    <mp-cell url="/pages/status-chart/status-chart" link hover title="状况曲线"/>
   </mp-cells>
 
   <mp-cells>

@@ -49,7 +49,7 @@ Component({
   },
   methods: {
     async onLoad () {
-      this.ecComponent = this.selectComponent('#weight-chart')
+      this.ecComponent = this.selectComponent('#status-chart')
       await this.fetchData()
     },
     showAction () {
@@ -69,7 +69,7 @@ Component({
       try {
         loading()
         const { result: { data } } = await wx.cloud.callFunction({
-          name: 'weight-chart',
+          name: 'status-chart',
           data: {
             limit: this.data.limit
           }
@@ -93,7 +93,11 @@ Component({
       for (let ts = before.ts; ts <= today.ts; ts += 1000 * 60 * 60 * 24) {
         const record = find(data, v => v.date === ts)
         // debug(ts, record)
-        records.push(Object.assign({ date: ts, weight: null }, record))
+        records.push(Object.assign({
+          date: ts,
+          weight: null,
+          defecation: null
+        }, record))
       }
       // debug(records)
       return records
@@ -113,19 +117,34 @@ Component({
           height: height,
           devicePixelRatio: dpr // new
         })
+        // 体重 y 轴
         const weights = data.map(v => v.weight)
         const weightsWithoutNull = weights.filter(v => typeof v === 'number')
+
+        // 排便次数 y 轴
+        const defecation = data.map(v => v.defecation)
+        const defecationWithoutNull = defecation.filter(v => typeof v === 'number')
+
         chart.setOption({
-          color: [this.data.themeColors.chartLineColor],
+          color: this.data.themeColors.chartLineColors,
           tooltip: {
             show: true,
             trigger: 'axis',
             formatter (data) {
               // debug(data)
+              let tip = `${data[0].axisValue}\n`
               if (data[0] && typeof data[0].data === 'number') {
-                return `${data[0].axisValue}：${data[0].data}kg`
+                tip += `体重：${data[0].data}kg`
+              } else {
+                tip += `体重：未记录`
               }
-              return `${data[0].axisValue}：未记录`
+              tip += '\n'
+              if (data[1] && typeof data[1].data === 'number') {
+                tip += `排便：${data[1].data}次`
+              } else {
+                tip += `排便：未记录`
+              }
+              return tip
             }
           },
           xAxis: {
@@ -148,7 +167,7 @@ Component({
               }
             }
           },
-          yAxis: {
+          yAxis: [{
             type: 'value',
             name: '体重 (kg)',
             min: () => Math.floor(Math.min.apply(null, weightsWithoutNull)) - 1,
@@ -167,13 +186,39 @@ Component({
                 color: this.data.themeColors.chartGridColor
               }
             }
-          },
+          }, {
+            type: 'value',
+            name: '排便次数',
+            min: () => 0,
+            max: () => Math.floor(Math.max.apply(null, defecationWithoutNull)) + 1,
+            axisLabel: {
+              color: this.data.themeColors.chartTextColor
+            },
+            axisLine: {
+              lineStyle: {
+                color: this.data.themeColors.chartTextColor
+              }
+            },
+            splitLine: {
+              show: true,
+              lineStyle: {
+                color: this.data.themeColors.chartGridColor
+              }
+            }
+          }],
           series: [{
             name: 'weight',
             type: 'line',
             symbol: 'circle',
             smooth: false,
             data: weights
+          }, {
+            name: 'defecation',
+            yAxisIndex: 1,
+            type: 'line',
+            symbol: 'circle',
+            smooth: false,
+            data: defecation
           }]
         })
         this.chart = chart

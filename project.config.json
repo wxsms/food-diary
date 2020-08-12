@@ -72,8 +72,8 @@
 				},
 				{
 					"id": 2,
-					"name": "pages/weight-chart/weight-chart",
-					"pathName": "pages/weight-chart/weight-chart",
+					"name": "pages/status-chart/status-chart",
+					"pathName": "pages/status-chart/status-chart",
 					"query": "",
 					"scene": null
 				}

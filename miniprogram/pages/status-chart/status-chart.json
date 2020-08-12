@@ -4,7 +4,7 @@
     "mp-icon": "/miniprogram_npm/weui-miniprogram/icon/icon",
     "mp-actionSheet": "/miniprogram_npm/weui-miniprogram/actionsheet/actionsheet"
   },
-  "navigationBarTitleText": "体重曲线",
+  "navigationBarTitleText": "状况曲线",
   "pageOrientation": "landscape",
   "disableScroll": true
 }

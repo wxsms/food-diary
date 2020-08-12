@@ -4,16 +4,16 @@ const themeColors = {
   light: {
     navigationBarBackgroundColor: '#ebebeb',
     navigationBarTextStyle: 'rgba(0, 0, 0, .9)',
-    chartLineColor: '#07c160',
+    chartLineColors: ['#07c160', '#fa9d3b'],
     chartTextColor: '#333333',
-    chartGridColor: 'rgba(0, 0, 0, 0.2)'
+    chartGridColor: '#dddddd'
   },
   dark: {
     navigationBarBackgroundColor: '#191919',
     navigationBarTextStyle: 'hsla(0, 0%, 100%, .8)',
-    chartLineColor: '#06ad56',
+    chartLineColors: ['#06ad56', '#c87d2f'],
     chartTextColor: '#888888',
-    chartGridColor: '#444444'
+    chartGridColor: '#333333'
   }
 }
 

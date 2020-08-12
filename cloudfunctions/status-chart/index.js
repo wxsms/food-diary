@@ -14,6 +14,7 @@ exports.main = async ({ limit = 100 }) => {
       .field({
         _id: false,
         weight: true,
+        defecation: true,
         date: true
       })
       .where({

@@ -4,7 +4,7 @@
     "pages/index/index",
     "pages/edit/edit",
     "pages/calendar/calendar",
-    "pages/info/info",
+    "pages/user/user",
     "pages/about/about"
   ],
   "tabBar": {
@@ -12,17 +12,20 @@
     "backgroundColor": "@tabBarBackgroundColor",
     "borderStyle": "@tabBarBorderStyle",
     "selectedColor": "@tabBarSelectedColor",
-    "list": [{
-      "pagePath": "pages/index/index",
-      "text": "日记",
-      "iconPath": "@editIconPath",
-      "selectedIconPath": "@editSelectedIconPath"
-    }, {
-      "pagePath": "pages/info/info",
-      "text": "我的",
-      "iconPath": "@userIconPath",
-      "selectedIconPath": "@userSelectedIconPath"
-    }]
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "日记",
+        "iconPath": "@editIconPath",
+        "selectedIconPath": "@editSelectedIconPath"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "我的",
+        "iconPath": "@userIconPath",
+        "selectedIconPath": "@userSelectedIconPath"
+      }
+    ]
   },
   "themeLocation": "theme.json",
   "window": {

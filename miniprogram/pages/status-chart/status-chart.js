@@ -17,19 +17,14 @@ Component({
     ec: {
       lazyLoad: true
     },
-    showActionSheet: false,
     options: [{
       text: '近一个月',
       limit: 30,
       value: 0
     }, {
-      text: '近二个月',
-      limit: 60,
-      value: 1
-    }, {
       text: '近三个月',
       limit: 90,
-      value: 2
+      value: 1
     }]
   },
   lifetimes: {
@@ -53,17 +48,18 @@ Component({
       await this.fetchData()
     },
     showAction () {
-      this.setData({ showActionSheet: true })
-    },
-    async onActionSelect ({ detail: { value } }) {
-      const opt = this.data.options[value]
-      this.setData({
-        limit: opt.limit,
-        limitText: opt.text,
-        showActionSheet: false
+      wx.showActionSheet({
+        itemList: this.data.options.map(v => v.text),
+        success : async ({ tapIndex }) => {
+          const opt = this.data.options[tapIndex]
+          this.setData({
+            limit: opt.limit,
+            limitText: opt.text
+          })
+          await nextTick()
+          await this.fetchData()
+        }
       })
-      await nextTick()
-      await this.fetchData()
     },
     async fetchData () {
       try {

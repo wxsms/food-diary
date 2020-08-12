@@ -3,11 +3,11 @@ const cloud = require('wx-server-sdk')
 cloud.init()
 const db = cloud.database()
 // 云函数入口函数
-exports.main = async ({ limit }) => {
+exports.main = async ({ limit = 100 }) => {
   try {
     const _ = db.command
-    const before100Days = new Date()
-    before100Days.setDate(before100Days.getDate() - 100)
+    const before = new Date()
+    before.setDate(before.getDate() - limit)
     // console.log(before100Days)
     const wxContext = cloud.getWXContext()
     return await db.collection('records')
@@ -18,10 +18,10 @@ exports.main = async ({ limit }) => {
       })
       .where({
         _openid: wxContext.OPENID,
-        date: _.gte(before100Days.getTime())
+        date: _.gte(before.getTime())
       })
       .orderBy('date', 'desc')
-      .limit(limit || 100)
+      .limit(limit)
       .get()
   } catch (e) {
     console.log(e)

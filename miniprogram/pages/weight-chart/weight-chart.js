@@ -74,9 +74,10 @@ Component({
         this.chart.dispose()
       }
     },
-    initChart (data = this.data.dataSet) {
+    initChart (_data = this.data.dataSet) {
       // debug(data)
       this.dispose()
+      const data = this.prepareData(_data)
       this.ecComponent.init((canvas, width, height, dpr) => {
         const chart = echarts.init(canvas, null, {
           width: width,
@@ -141,7 +142,7 @@ Component({
           series: [{
             name: 'weight',
             type: 'line',
-            symbol: 'none',
+            symbol: 'circle',
             smooth: false,
             data: weights
           }]

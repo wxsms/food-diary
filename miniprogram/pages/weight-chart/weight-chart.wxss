@@ -1,0 +1,12 @@
+.chart-title {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  text-align: center;
+}
+
+.chart-title-subtext {
+  color: var(--weui-FG-2);
+  font-size: 0.8em;
+}

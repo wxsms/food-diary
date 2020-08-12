@@ -1,4 +1,7 @@
 <view class="container" data-weui-theme="{{theme}}">
+  <view class="chart-title">
+    <text class="chart-title-subtext">近 {{limit}} 天</text>
+  </view>
   <view class="chart-container">
     <ec-canvas ec="{{ ec }}" id="weight-chart"/>
   </view>

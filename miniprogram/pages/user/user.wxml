@@ -12,7 +12,7 @@
       <button open-type="feedback" class="cell-button">问题反馈</button>
     </mp-cell>
     <mp-cell link hover ext-class="cell-flat">
-      <button open-type="contact" class="cell-button">联系客服</button>
+      <button open-type="contact" class="cell-button">联系作者</button>
     </mp-cell>
   </mp-cells>
   <mp-cells>

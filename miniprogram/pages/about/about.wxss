@@ -27,6 +27,10 @@
   right: 0;
 }
 
+.footer-fixed .weui-footer__text {
+  margin-top: 5px;
+}
+
 .cells-center {
   max-width: 300px;
   width: 70%;

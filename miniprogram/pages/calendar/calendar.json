@@ -1,8 +1,6 @@
 {
   "usingComponents": {
-    "month-nav": "/components/month-nav/month-nav",
-    "mp-navigation-bar": "/miniprogram_npm/weui-miniprogram/navigation-bar/navigation-bar"
+    "month-nav": "/components/month-nav/month-nav"
   },
-  "navigationStyle": "custom",
-  "navigationBarTitleText": "IBD日记"
+  "navigationBarTitleText": "日历"
 }

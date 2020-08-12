@@ -7,6 +7,23 @@
     "pages/info/info",
     "pages/about/about"
   ],
+  "tabBar": {
+    "color": "@tabBarColor",
+    "backgroundColor": "@tabBarBackgroundColor",
+    "borderStyle": "@tabBarBorderStyle",
+    "selectedColor": "@tabBarSelectedColor",
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "日记",
+      "iconPath": "@editIconPath",
+      "selectedIconPath": "@editSelectedIconPath"
+    }, {
+      "pagePath": "pages/info/info",
+      "text": "我的",
+      "iconPath": "@userIconPath",
+      "selectedIconPath": "@userSelectedIconPath"
+    }]
+  },
   "themeLocation": "theme.json",
   "window": {
     "backgroundColor": "@backgroundColor",

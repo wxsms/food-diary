@@ -3,12 +3,28 @@
     "backgroundColor": "#ebebeb",
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#ebebeb",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "black",
+    "tabBarColor": "#333333",
+    "tabBarSelectedColor": "#07c160",
+    "tabBarBackgroundColor": "#f7f7f7",
+    "tabBarBorderStyle": "black",
+    "editIconPath": "assets/images/tabBar/edit-light.png",
+    "editSelectedIconPath": "assets/images/tabBar/edit-light-active.png",
+    "userIconPath": "assets/images/tabBar/user-light.png",
+    "userSelectedIconPath": "assets/images/tabBar/user-light-active.png"
   },
   "dark": {
     "backgroundColor": "#191919",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#191919",
-    "navigationBarTextStyle": "white"
+    "navigationBarTextStyle": "white",
+    "tabBarColor": "#dddddd",
+    "tabBarSelectedColor": "#06ad56",
+    "tabBarBackgroundColor": "#1f1f1f",
+    "tabBarBorderStyle": "white",
+    "editIconPath": "assets/images/tabBar/edit-dark.png",
+    "editSelectedIconPath": "assets/images/tabBar/edit-dark-active.png",
+    "userIconPath": "assets/images/tabBar/user-dark.png",
+    "userSelectedIconPath": "assets/images/tabBar/user-dark-active.png"
   }
 }

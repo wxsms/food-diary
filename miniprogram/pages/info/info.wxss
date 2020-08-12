@@ -1,7 +1,3 @@
-.container {
-  color: var(--weui-FG-1)
-}
-
 .user {
   padding-top: 20px;
   padding-bottom: 20px;

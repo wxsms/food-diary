@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "ec-canvas": "/libs/ec-canvas/ec-canvas"
+  },
+  "navigationBarTitleText": "图表",
+  "pageOrientation": "landscape",
+  "disableScroll": true
+}

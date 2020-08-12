@@ -1,0 +1,5 @@
+<view class="container" data-weui-theme="{{theme}}">
+  <view class="chart-container">
+    <ec-canvas ec="{{ ec }}" id="weight-chart"/>
+  </view>
+</view>

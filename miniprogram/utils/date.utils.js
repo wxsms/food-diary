@@ -43,6 +43,10 @@ export function minusMonth (ts, number = 1) {
   return _DateTime(ts).minus({ months: number })
 }
 
+export function startOfDay (ts) {
+  return _DateTime(ts).startOf('day')
+}
+
 export function startOfMonth (ts) {
   return _DateTime(ts).startOf('month')
 }

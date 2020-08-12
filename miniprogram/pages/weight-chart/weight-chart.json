@@ -1,6 +1,8 @@
 {
   "usingComponents": {
-    "ec-canvas": "/libs/ec-canvas/ec-canvas"
+    "ec-canvas": "/libs/ec-canvas/ec-canvas",
+    "mp-icon": "/miniprogram_npm/weui-miniprogram/icon/icon",
+    "mp-actionSheet": "/miniprogram_npm/weui-miniprogram/actionsheet/actionsheet"
   },
   "navigationBarTitleText": "体重曲线",
   "pageOrientation": "landscape",

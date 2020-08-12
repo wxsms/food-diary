@@ -6,15 +6,31 @@ import { debug, error } from '../../utils/log.utils'
 import { loading, toast, TOAST_ERRORS } from '../../utils/toast.utils'
 import { format, startOfDay } from '../../utils/date.utils'
 import find from 'lodash.find'
+import { nextTick } from '../../utils/wx.utils'
 
 Component({
   behaviors: [storeBindingsBehavior, themeMixin, shareMixin],
   data: {
     limit: 30,
+    limitText: '近一个月',
     dataSet: [],
     ec: {
       lazyLoad: true
-    }
+    },
+    showActionSheet: false,
+    options: [{
+      text: '近一个月',
+      limit: 30,
+      value: 0
+    }, {
+      text: '近二个月',
+      limit: 60,
+      value: 1
+    }, {
+      text: '近三个月',
+      limit: 90,
+      value: 2
+    }]
   },
   lifetimes: {
     attached () {
@@ -34,6 +50,19 @@ Component({
   methods: {
     async onLoad () {
       this.ecComponent = this.selectComponent('#weight-chart')
+      await this.fetchData()
+    },
+    showAction () {
+      this.setData({ showActionSheet: true })
+    },
+    async onActionSelect ({ detail: { value } }) {
+      const opt = this.data.options[value]
+      this.setData({
+        limit: opt.limit,
+        limitText: opt.text,
+        showActionSheet: false
+      })
+      await nextTick()
       await this.fetchData()
     },
     async fetchData () {

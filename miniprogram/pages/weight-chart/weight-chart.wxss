@@ -4,9 +4,13 @@
   right: 0;
   left: 0;
   text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 .chart-title-subtext {
   color: var(--weui-FG-2);
-  font-size: 0.8em;
+  font-size: 0.9em;
 }

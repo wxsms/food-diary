@@ -1,8 +1,14 @@
 <view class="container" data-weui-theme="{{theme}}">
   <view class="chart-title">
-    <text class="chart-title-subtext">近 {{limit}} 天</text>
+    <text class="chart-title-subtext" decode>{{limitText}}&nbsp;</text>
+    <mp-icon icon="pencil" color="var(--weui-FG-2)" size="{{15}}"/>
   </view>
-  <view class="chart-container">
+  <view class="chart-container" bind:tap="showAction">
     <ec-canvas ec="{{ ec }}" id="weight-chart"/>
   </view>
+  <mp-actionSheet
+    bindactiontap="onActionSelect"
+    show="{{showActionSheet}}"
+    actions="{{options}}"
+  />
 </view>

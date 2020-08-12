@@ -12,7 +12,7 @@
 		"coverView": true,
 		"nodeModules": true,
 		"autoAudits": false,
-		"showShadowRootInWxmlPanel": true,
+		"showShadowRootInWxmlPanel": false,
 		"scopeDataCheck": false,
 		"checkInvalidKey": true,
 		"checkSiteMap": false,
@@ -57,9 +57,9 @@
 			"current": -1,
 			"list": [
 				{
-					"id": -1,
-					"name": "pages/info/info",
-					"pathName": "pages/info/info",
+					"id": 0,
+					"name": "pages/user/user",
+					"pathName": "pages/user/user",
 					"query": "",
 					"scene": null
 				},
@@ -67,6 +67,7 @@
 					"id": -1,
 					"name": "pages/about/about",
 					"pathName": "pages/about/about",
+					"query": "",
 					"scene": null
 				}
 			]

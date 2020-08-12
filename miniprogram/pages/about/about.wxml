@@ -7,8 +7,13 @@
       <text decode>IBD&nbsp;日记</text>
     </view>
   </view>
-  <mp-cells>
-    <mp-cell title="版本" footer="{{version}}"/>
-    <mp-cell title="开发者" footer="github/wxsms"/>
-  </mp-cells>
+  <view class="cells-center">
+    <mp-cells>
+      <mp-cell title="版本" footer="{{version}}"/>
+      <mp-cell title="开发者" footer="github/wxsms"/>
+    </mp-cells>
+  </view>
+  <view class="weui-footer footer-fixed">
+    <view class="weui-footer__text">Copyright © 2019-{{year}} Kairui Guo</view>
+  </view>
 </view>

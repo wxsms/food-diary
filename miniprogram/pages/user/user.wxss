@@ -5,6 +5,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 110px;
 }
 
 .user-avatar {
@@ -17,28 +18,4 @@
 .user-name {
   margin-top: 5px;
   overflow: hidden;
-}
-
-/* 无样式按钮 */
-.cell-button {
-  width: 100% !important;
-  height: 56px;
-  line-height: 56px;
-  background: transparent !important;
-  border: none !important;
-  text-align: left;
-  padding: 0 !important;
-  margin: 0 !important;
-  font-weight: normal;
-  color: inherit !important;
-}
-
-.cell-button:after {
-  border: none;
-  border-radius: 0;
-}
-
-.cell-flat {
-  padding: 0 16px;
-  height: 56px;
 }

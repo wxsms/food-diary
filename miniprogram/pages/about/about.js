@@ -6,6 +6,7 @@ import shareMixin from '../../mixins/share.mixin'
 Component({
   behaviors: [storeBindingsBehavior, themeMixin, shareMixin],
   data: {
-    version: version
+    version: version,
+    year: new Date().getFullYear()
   }
 })

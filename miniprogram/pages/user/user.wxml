@@ -9,7 +9,10 @@
   </view>
   <mp-cells>
     <mp-cell link hover ext-class="cell-flat">
-      <button open-type="feedback" class="cell-button">反馈</button>
+      <button open-type="feedback" class="cell-button">问题反馈</button>
+    </mp-cell>
+    <mp-cell link hover ext-class="cell-flat">
+      <button open-type="contact" class="cell-button">联系客服</button>
     </mp-cell>
   </mp-cells>
   <mp-cells>

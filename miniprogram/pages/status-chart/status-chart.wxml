@@ -6,7 +6,9 @@
     </view>
   </view>
   <view class="chart-container">
-    <ec-canvas ec="{{ ec }}" id="status-chart"/>
+    <!-- 新版 Canvas Android 机显示不了数字 -->
+    <!-- https://github.com/ecomfe/echarts-for-weixin/issues/677 -->
+    <ec-canvas ec="{{ ec }}" id="status-chart" force-use-old-canvas="true"/>
   </view>
   <mp-actionSheet
     bindactiontap="onActionSelect"

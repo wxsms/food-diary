@@ -1,7 +1,9 @@
 <view class="container" data-weui-theme="{{theme}}">
-  <view class="chart-title" bind:tap="showAction">
-    <text class="chart-title-subtext" decode>{{limitText}}&nbsp;</text>
-    <mp-icon icon="pencil" color="var(--weui-FG-2)" size="{{15}}"/>
+  <view class="chart-title">
+    <view class="chart-title-btn" bind:tap="showAction">
+      <text class="chart-title-subtext" decode>{{limitText}}&nbsp;</text>
+      <mp-icon icon="pencil" color="var(--weui-FG-2)" size="{{15}}"/>
+    </view>
   </view>
   <view class="chart-container">
     <ec-canvas ec="{{ ec }}" id="status-chart"/>

@@ -127,6 +127,13 @@ Component({
 
         chart.setOption({
           color: this.data.themeColors.chartLineColors,
+          legend: {
+            type: 'plain',
+            left: '40',
+            textStyle: {
+              color: this.data.themeColors.chartTextColor
+            }
+          },
           tooltip: {
             show: true,
             trigger: 'axis',
@@ -207,13 +214,13 @@ Component({
             }
           }],
           series: [{
-            name: 'weight',
+            name: '体重',
             type: 'line',
             symbol: 'circle',
             smooth: false,
             data: weights
           }, {
-            name: 'defecation',
+            name: '排便',
             yAxisIndex: 1,
             type: 'line',
             symbol: 'circle',

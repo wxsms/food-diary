@@ -1,7 +1,7 @@
 import { DIARY_OPTION_LIST, DIARY_TYPES } from '../../constants/index'
 import { getCache, cacheInput, cacheDelete } from '../../store/recent-record.store'
 import { isReview } from '../../utils/version.utils'
-import { getByLevel, SCD_LEVEL } from '../../store/scd-foods.store'
+import { getFoods } from '../../store/scd-foods.store'
 import { debug, error } from '../../utils/log.utils'
 import { storeBindingsBehavior } from 'mobx-miniprogram-bindings'
 import { store } from '../../store/store'
@@ -84,18 +84,10 @@ Component({
         const _isReview = await isReview()
         if (_isReview) {
           loading()
-          let _scdFoods = []
-          const data = await Promise.all([
-            getByLevel(SCD_LEVEL.LV_0),
-            getByLevel(SCD_LEVEL.LV_1),
-            getByLevel(SCD_LEVEL.LV_2)
-          ])
-          data.forEach(v => {
-            _scdFoods = _scdFoods.concat(v.map(v => v.name))
-          })
+          const data = await getFoods()
           this.setData({
             loaded: true,
-            scdFoods: _scdFoods,
+            scdFoods: data.map(v => v.name),
             isReview: _isReview
           })
         } else {

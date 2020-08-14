@@ -1,48 +1,71 @@
+import find from 'lodash.find'
+import { debug, error } from '../utils/log.utils'
+
 export const SCD_LEVEL = {
+  ALL: {
+    name: '全部',
+    list: []
+  },
   LV_0: {
-    name: '基础',
+    name: '基础阶段',
     list: []
   },
   LV_1: {
-    name: '第一',
+    name: '第一阶段',
     list: []
   },
   LV_2: {
-    name: '第二',
+    name: '第二阶段',
     list: []
   },
   LV_3: {
-    name: '第三',
+    name: '第三阶段',
     list: []
   },
   LV_4: {
-    name: '第四',
+    name: '第四阶段',
     list: []
   },
   LV_5: {
-    name: '第五',
+    name: '第五阶段',
     list: []
   }
 }
 
-async function getFoodsByName (name) {
-  try {
-    const { result: { data } } = await wx.cloud.callFunction({
-      name: 'scd-foods',
-      data: { name }
-    })
-    return data || []
-  } catch (e) {
-    return false
-  }
+function removeLevelInName (v) {
+  v.name = v.name.replace(/[（|(]?[第|基].+[)|）]?$/, '')
+  return v
 }
 
-export async function getByLevel (level = SCD_LEVEL.LV_0) {
-  if (level.list.length) {
-    return level.list
-  } else {
-    const data = await getFoodsByName(level.name)
-    level.list = data || []
-    return data
+export async function getFoods () {
+  if (SCD_LEVEL.ALL.list.length) {
+    return SCD_LEVEL.ALL.list
+  }
+  try {
+    const { result: { data } } = await wx.cloud.callFunction({ name: 'scd-foods' })
+    SCD_LEVEL.ALL.list = data || []
+    const { list } = SCD_LEVEL.ALL
+    SCD_LEVEL.LV_0.list = list
+      .filter(v => v.name.indexOf(SCD_LEVEL.LV_0.name) >= 0)
+      .map(removeLevelInName)
+    SCD_LEVEL.LV_1.list = list
+      .filter(v => v.name.indexOf(SCD_LEVEL.LV_1.name) >= 0 && !find(SCD_LEVEL.LV_0.list, _v => _v.id === v.id))
+      .map(removeLevelInName)
+    SCD_LEVEL.LV_2.list = list
+      .filter(v => v.name.indexOf(SCD_LEVEL.LV_2.name) >= 0 && !find(SCD_LEVEL.LV_1.list, _v => _v.id === v.id))
+      .map(removeLevelInName)
+    SCD_LEVEL.LV_3.list = list
+      .filter(v => v.name.indexOf(SCD_LEVEL.LV_3.name) >= 0 && !find(SCD_LEVEL.LV_2.list, _v => _v.id === v.id))
+      .map(removeLevelInName)
+    SCD_LEVEL.LV_4.list = list
+      .filter(v => v.name.indexOf(SCD_LEVEL.LV_4.name) >= 0 && !find(SCD_LEVEL.LV_3.list, _v => _v.id === v.id))
+      .map(removeLevelInName)
+    SCD_LEVEL.LV_5.list = list
+      .filter(v => v.name.indexOf(SCD_LEVEL.LV_5.name) >= 0 && !find(SCD_LEVEL.LV_4.list, _v => _v.id === v.id))
+      .map(removeLevelInName)
+    return list
+  } catch (e) {
+    error(e)
+    return []
   }
 }

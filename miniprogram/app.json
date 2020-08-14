@@ -6,7 +6,8 @@
     "pages/calendar/calendar",
     "pages/user/user",
     "pages/about/about",
-    "pages/status-chart/status-chart"
+    "pages/status-chart/status-chart",
+    "pages/scd/scd"
   ],
   "tabBar": {
     "color": "@tabBarColor",
@@ -17,6 +18,12 @@
       {
         "pagePath": "pages/index/index",
         "text": "日记",
+        "iconPath": "@editIconPath",
+        "selectedIconPath": "@editSelectedIconPath"
+      },
+      {
+        "pagePath": "pages/scd/scd",
+        "text": "SCD",
         "iconPath": "@editIconPath",
         "selectedIconPath": "@editSelectedIconPath"
       },

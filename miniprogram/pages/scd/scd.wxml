@@ -1,0 +1,22 @@
+<view class="container" data-weui-theme="{{theme}}">
+  <mp-vtabs
+    vtabs="{{foods}}"
+    activeTab="{{activeTab}}"
+    bindtabclick="onTabCLick"
+    bindchange="onChange"
+    class="test"
+  >
+    <block wx:for="{{foods}}" wx:key="title">
+      <mp-vtabs-content tabIndex="{{index}}">
+        <block
+          wx:for="{{item.list}}"
+          wx:key="_id"
+          wx:for-item="_item"
+          wx:for-index='_index'
+        >
+          <view>{{_item.name}}</view>
+        </block>
+      </mp-vtabs-content>
+    </block>
+  </mp-vtabs>
+</view>

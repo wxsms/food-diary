@@ -76,6 +76,13 @@
 					"pathName": "pages/status-chart/status-chart",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/scd/scd",
+					"pathName": "pages/scd/scd",
+					"query": "",
+					"scene": null
 				}
 			]
 		}

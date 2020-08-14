@@ -4,6 +4,13 @@ page, .container {
 
 .container {
   background-color: var(--weui-BG) !important;
+  display: flex;
+  flex-direction: column;
+}
+
+.vtabs {
+  flex: 1;
+  overflow: hidden;
 }
 
 .weui-vtabs-bar__content {

@@ -6,27 +6,60 @@ page, .container {
   background-color: var(--weui-BG) !important;
 }
 
-.weui-vtabs-content {
-  padding: 17px 0;
-}
-
-.weui-vtabs-content__item {
-  padding: 0 20px 20px;
-}
-
-.row-title {
-  margin: 0 0 5px 0;
-}
-
-.row {
-  padding: 5px 0;
-  font-size: 0.9rem;
-}
-
 .weui-vtabs-bar__content {
   background-color: #ebebeb;
 }
 
 .container[data-weui-theme=dark] .weui-vtabs-bar__content {
   background-color: #191919;
+}
+
+.weui-vtabs-content {
+  padding: 17px 0;
+}
+
+.weui-vtabs-content__item {
+  padding: 0 0 20px;
+}
+
+.row-title {
+  padding: 0 20px;
+  margin: 0 0 5px 0;
+}
+
+.row {
+  padding: 5px 20px;
+  font-size: 0.9rem;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--weui-BG-1);
+}
+
+.row-first {
+  border-top: 1px solid var(--weui-BG-1);
+}
+
+.row-hover {
+  background-color: var(--weui-BG-1);
+}
+
+.food-name {
+  flex: 1
+}
+
+.food-status {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.food-status-ok {
+  background-color: var(--weui-BRAND);
+}
+
+.food-status-not-ok {
+  background-color: var(--weui-RED);
 }

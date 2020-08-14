@@ -1,7 +1,9 @@
 {
   "usingComponents": {
     "mp-vtabs": "/components/vtabs/vtabs",
-    "mp-vtabs-content": "/components/vtabs-content/vtabs-content"
+    "mp-vtabs-content": "/components/vtabs-content/vtabs-content",
+    "mp-actionSheet": "/miniprogram_npm/weui-miniprogram/actionsheet/actionsheet",
+    "mp-icon": "/miniprogram_npm/weui-miniprogram/icon/icon"
   },
   "navigationBarTitleText": "SCD 食物",
   "disableScroll": true

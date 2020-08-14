@@ -24,8 +24,8 @@
       {
         "pagePath": "pages/scd/scd",
         "text": "SCD",
-        "iconPath": "@editIconPath",
-        "selectedIconPath": "@editSelectedIconPath"
+        "iconPath": "@menuIconPath",
+        "selectedIconPath": "@menuSelectedIconPath"
       },
       {
         "pagePath": "pages/user/user",

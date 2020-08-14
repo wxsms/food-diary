@@ -5,17 +5,35 @@
   >
     <block wx:for="{{foods}}" wx:key="title">
       <mp-vtabs-content tabIndex="{{index}}">
+        <block wx:if="{{index === 0}}">
+          <view class="page__desc row-title">数据来源：「包子SCD」公众号</view>
+          <view class="page__desc row-title">提示：点击某项可以记录耐受情况</view>
+        </block>
+
         <view class="page__desc row-title">{{item.name}}</view>
         <view
-          class="row"
+          class="{{_index === 0 ? 'row row-first' : 'row'}}"
+          hover-class="row-hover"
           wx:for="{{item.list}}"
           wx:key="_id"
           wx:for-item="_item"
           wx:for-index='_index'
+          bind:tap="showAction"
+          data-id="{{_item._id}}"
         >
-          <text>{{_item.name}}</text>
+          <text class="food-name">{{_item.name}}</text>
+          <block wx:if="{{record && record[_item._id]}}">
+            <view wx:if="{{record[_item._id] === 1}}" class="food-status food-status-ok"/>
+            <view wx:elif="{{record[_item._id] === 2}}" class="food-status food-status-not-ok"/>
+          </block>
         </view>
       </mp-vtabs-content>
     </block>
   </mp-vtabs>
+  <mp-actionSheet
+    title="{{selectedFood ? selectedFood.name : undefined}}"
+    bindactiontap="onActionPress"
+    show="{{showActionSheet}}"
+    actions="{{options}}"
+  />
 </view>

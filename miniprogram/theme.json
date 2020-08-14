@@ -11,7 +11,9 @@
     "editIconPath": "assets/images/tabBar/edit-light.png",
     "editSelectedIconPath": "assets/images/tabBar/edit-light-active.png",
     "userIconPath": "assets/images/tabBar/user-light.png",
-    "userSelectedIconPath": "assets/images/tabBar/user-light-active.png"
+    "userSelectedIconPath": "assets/images/tabBar/user-light-active.png",
+    "menuIconPath": "assets/images/tabBar/menu-light.png",
+    "menuSelectedIconPath": "assets/images/tabBar/menu-light-active.png"
   },
   "dark": {
     "backgroundColor": "#191919",
@@ -25,6 +27,8 @@
     "editIconPath": "assets/images/tabBar/edit-dark.png",
     "editSelectedIconPath": "assets/images/tabBar/edit-dark-active.png",
     "userIconPath": "assets/images/tabBar/user-dark.png",
-    "userSelectedIconPath": "assets/images/tabBar/user-dark-active.png"
+    "userSelectedIconPath": "assets/images/tabBar/user-dark-active.png",
+    "menuIconPath": "assets/images/tabBar/menu-dark.png",
+    "menuSelectedIconPath": "assets/images/tabBar/menu-dark-active.png"
   }
 }

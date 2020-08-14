@@ -10,7 +10,8 @@ import find from 'lodash.find'
 Component({
   behaviors: [storeBindingsBehavior, themeMixin, shareMixin],
   data: {
-    foods: [],
+    filteredFoods: [],
+    filtered: false,
     record: null,
     activeTab: 0,
     loaded: false,
@@ -37,6 +38,7 @@ Component({
           this.fetchMyRecord()
         ])
         this.setData({
+          onSearch: this.onSearch.bind(this),
           loaded: true,
           foods: [
             SCD_LEVEL.LV_0,
@@ -148,6 +150,42 @@ Component({
       } finally {
         loading(false)
       }
+    },
+    async onSearch (value) {
+      debug('search', value)
+      await this.filterDisplay(value ? value.trim() : '')
+      return Promise.resolve([])
+    },
+    async onSearchClear () {
+      debug('search clear')
+      await this.filterDisplay()
+    },
+    async filterDisplay (query) {
+      const foods = await getFoods()
+      let _foods
+      if (query) {
+        _foods = [{
+          title: '搜索结果',
+          list: foods.filter(v => v.name.indexOf(query) >= 0)
+        }]
+      } else {
+        _foods = [
+          SCD_LEVEL.LV_0,
+          SCD_LEVEL.LV_1,
+          SCD_LEVEL.LV_2,
+          SCD_LEVEL.LV_3,
+          SCD_LEVEL.LV_4,
+          SCD_LEVEL.LV_5
+        ].map(v => ({
+          ...v,
+          title: v.name
+        }))
+      }
+      // debug(_foods)
+      this.setData({
+        filtered: !!query,
+        foods: _foods
+      })
     }
   }
 })

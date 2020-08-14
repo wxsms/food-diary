@@ -33,8 +33,10 @@ export const SCD_LEVEL = {
 }
 
 function removeLevelInName (v) {
-  v.name = v.name.replace(/[（|(]?[第|基].+[)|）]?$/, '')
-  return v
+  return {
+    ...v,
+    name: v.name.replace(/[（|(]?[第|基].+[)|）]?$/, '')
+  }
 }
 
 export async function getFoods () {
@@ -43,8 +45,7 @@ export async function getFoods () {
   }
   try {
     const { result: { data } } = await wx.cloud.callFunction({ name: 'scd-foods' })
-    SCD_LEVEL.ALL.list = data || []
-    const { list } = SCD_LEVEL.ALL
+    const list = data || []
     SCD_LEVEL.LV_0.list = list
       .filter(v => v.name.indexOf(SCD_LEVEL.LV_0.name) >= 0)
       .map(removeLevelInName)
@@ -63,6 +64,8 @@ export async function getFoods () {
     SCD_LEVEL.LV_5.list = list
       .filter(v => v.name.indexOf(SCD_LEVEL.LV_5.name) >= 0 && !find(SCD_LEVEL.LV_4.list, _v => _v.id === v.id))
       .map(removeLevelInName)
+    SCD_LEVEL.ALL.list = list
+    // debug(list)
     return list
   } catch (e) {
     error(e)

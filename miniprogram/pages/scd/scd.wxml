@@ -1,4 +1,9 @@
 <view class="container" data-weui-theme="{{theme}}">
+  <mp-searchbar
+    search="{{onSearch}}"
+    bind:clear="onSearchClear"
+    cancel="{{false}}"
+  />
   <mp-vtabs
     vtabs="{{foods}}"
     activeTab="{{activeTab}}"
@@ -9,24 +14,28 @@
           <view class="page__desc row-title">数据来源：「包子SCD」公众号</view>
           <view class="page__desc row-title">提示：点击某项可以记录耐受情况</view>
         </block>
-
-        <view class="page__desc row-title">{{item.name}}</view>
-        <view
-          class="{{_index === 0 ? 'row row-first' : 'row'}}"
-          hover-class="row-hover"
-          wx:for="{{item.list}}"
-          wx:key="_id"
-          wx:for-item="_item"
-          wx:for-index='_index'
-          bind:tap="showAction"
-          data-id="{{_item._id}}"
-        >
-          <text class="food-name">{{_item.name}}</text>
-          <block wx:if="{{record && record[_item._id]}}">
-            <view wx:if="{{record[_item._id] === 1}}" class="food-status food-status-ok"/>
-            <view wx:elif="{{record[_item._id] === 2}}" class="food-status food-status-not-ok"/>
-          </block>
-        </view>
+        <block wx:if="{{item.list.length > 0}}">
+          <view class="page__desc row-title">{{item.name}}</view>
+          <view
+            class="{{_index === 0 ? 'row row-first' : 'row'}}"
+            hover-class="row-hover"
+            wx:for="{{item.list}}"
+            wx:key="_id"
+            wx:for-item="_item"
+            wx:for-index='_index'
+            bind:tap="showAction"
+            data-id="{{_item._id}}"
+          >
+            <text class="food-name">{{_item.name}}</text>
+            <block wx:if="{{record && record[_item._id]}}">
+              <view wx:if="{{record[_item._id] === 1}}" class="food-status food-status-ok"/>
+              <view wx:elif="{{record[_item._id] === 2}}" class="food-status food-status-not-ok"/>
+            </block>
+          </view>
+        </block>
+        <block wx:elif="{{filtered}}">
+          <view class="page__desc row-title">无搜索结果</view>
+        </block>
       </mp-vtabs-content>
     </block>
   </mp-vtabs>

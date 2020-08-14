@@ -64,3 +64,7 @@ page, .container {
 .food-status-not-ok {
   background-color: var(--weui-RED);
 }
+
+.row-bottom-placeholder {
+  height: 100px;
+}

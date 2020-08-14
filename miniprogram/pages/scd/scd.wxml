@@ -35,6 +35,7 @@
               <view class="food-status"/>
             </block>
           </view>
+          <view wx:if="{{index === foods.length - 1}}" class="row-bottom-placeholder"/>
         </block>
         <block wx:elif="{{filtered}}">
           <view class="page__desc row-title">无搜索结果</view>

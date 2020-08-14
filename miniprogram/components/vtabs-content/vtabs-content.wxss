@@ -1,0 +1,7 @@
+.weui-vtabs-content__item {
+  overflow: hidden;
+}
+
+.weui-vtabs-content {
+  background-color: var(--weui-BG);
+}

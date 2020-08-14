@@ -31,14 +31,6 @@ Component({
           title: v.name
         }))
       })
-    },
-    onTabCLick (e) {
-      const index = e.detail.index
-      console.log('tabClick', index)
-    },
-    onChange (e) {
-      const index = e.detail.index
-      console.log('change', index)
     }
   }
 })

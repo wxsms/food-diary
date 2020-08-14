@@ -1,7 +1,8 @@
 {
   "usingComponents": {
-    "mp-vtabs": "/components/vtabs/index",
-    "mp-vtabs-content": "/components/vtabs-content/index"
+    "mp-vtabs": "/components/vtabs/vtabs",
+    "mp-vtabs-content": "/components/vtabs-content/vtabs-content"
   },
-  "navigationBarTitleText": "SCD 食物"
+  "navigationBarTitleText": "SCD 食物",
+  "disableScroll": true
 }

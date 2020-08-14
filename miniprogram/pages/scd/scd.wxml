@@ -2,20 +2,19 @@
   <mp-vtabs
     vtabs="{{foods}}"
     activeTab="{{activeTab}}"
-    bindtabclick="onTabCLick"
-    bindchange="onChange"
-    class="test"
   >
     <block wx:for="{{foods}}" wx:key="title">
       <mp-vtabs-content tabIndex="{{index}}">
-        <block
+        <view class="page__desc row-title">{{item.name}}</view>
+        <view
+          class="row"
           wx:for="{{item.list}}"
           wx:key="_id"
           wx:for-item="_item"
           wx:for-index='_index'
         >
-          <view>{{_item.name}}</view>
-        </block>
+          <text>{{_item.name}}</text>
+        </view>
       </mp-vtabs-content>
     </block>
   </mp-vtabs>

@@ -10,7 +10,7 @@ Component({
     }
   },
   relations: {
-    '../vtabs/index': {
+    '../vtabs/vtabs': {
       type: 'parent'
     }
   },

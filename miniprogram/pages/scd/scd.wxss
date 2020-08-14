@@ -1,11 +1,32 @@
-.vtabs-content-item {
-  width: 100%;
-  height: 300px;
-  box-sizing: border-box;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 20px;
-}
-
 page, .container {
   height: 100%;
+}
+
+.container {
+  background-color: var(--weui-BG) !important;
+}
+
+.weui-vtabs-content {
+  padding: 17px 0;
+}
+
+.weui-vtabs-content__item {
+  padding: 0 20px 20px;
+}
+
+.row-title {
+  margin: 0 0 5px 0;
+}
+
+.row {
+  padding: 5px 0;
+  font-size: 0.9rem;
+}
+
+.weui-vtabs-bar__content {
+  background-color: #ebebeb;
+}
+
+.container[data-weui-theme=dark] .weui-vtabs-bar__content {
+  background-color: #191919;
 }

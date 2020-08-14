@@ -8,11 +8,11 @@ Component({
     vtabs: { type: Array, value: [] },
     tabBarClass: { type: String, value: '' },
     activeClass: { type: String, value: '' },
-    tabBarLineColor: { type: String, value: '#ff0000' },
-    tabBarInactiveTextColor: { type: String, value: '#000000' },
-    tabBarActiveTextColor: { type: String, value: '#ff0000' },
-    tabBarInactiveBgColor: { type: String, value: '#eeeeee' },
-    tabBarActiveBgColor: { type: String, value: '#ffffff' },
+    tabBarLineColor: { type: String, value: 'var(--weui-BRAND)' },
+    tabBarInactiveTextColor: { type: String, value: 'var(--weui-FG-0)' },
+    tabBarActiveTextColor: { type: String, value: 'var(--weui-TEXTGREEN)' },
+    tabBarInactiveBgColor: { type: String, value: 'var(--weui-BG-0)' },
+    tabBarActiveBgColor: { type: String, value: 'var(--weui-BG)' },
     activeTab: { type: Number, value: 0 },
     animation: { type: Boolean, value: true }
   },
@@ -28,11 +28,10 @@ Component({
     }
   },
   relations: {
-    '../vtabs-content/index': {
+    '../vtabs-content/vtabs-content': {
       type: 'child',
       linked: function linked (target) {
         var _this = this
-
         target.calcHeight(function (rect) {
           _this.data._contentHeight[target.data.tabIndex] = rect.height
           if (_this._calcHeightTimer) {
@@ -73,12 +72,19 @@ Component({
     handleTabClick: function handleTabClick (e) {
       var _heightRecords = this.data._heightRecords
       var index = e.currentTarget.dataset.index
+      if (index === this.data.activeTab || this._scrolling) {
+        return
+      }
+      this._scrolling = true
       var contentScrollTop = _heightRecords[index - 1] || 0
       this.triggerEvent('tabclick', { index: index })
       this.setData({
         activeTab: index,
         contentScrollTop: contentScrollTop
       })
+      setTimeout(() => {
+        this._scrolling = false
+      }, 500)
     },
     handleContentScroll: function handleContentScroll (e) {
       var _heightRecords = this.data._heightRecords

@@ -24,7 +24,7 @@ Component({
       value: 2,
       type: 'warn'
     }, {
-      text: '取消记录',
+      text: '没吃过',
       value: 0
     }]
   },
@@ -84,6 +84,10 @@ Component({
       })
     },
     async onActionPress ({ detail: { value } }) {
+      // 0 为取消记录选项，如记录本身不存在，可以忽略
+      if (value === 0 && (!this.data.record || typeof this.data.record[this.data.selectedFood._id] !== 'number')) {
+        return
+      }
       try {
         loading(true, '记录中...')
         const db = wx.cloud.database()

@@ -1,16 +1,11 @@
 <view class="container" data-weui-theme="{{theme}}">
-  <view class="chart-title">
-    <view class="chart-title-btn" bind:tap="showAction">
-      <text class="chart-title-subtext" decode>{{limitText}}&nbsp;</text>
-      <mp-icon icon="pencil" color="var(--weui-FG-2)" size="{{15}}"/>
-    </view>
-  </view>
+  <!-- view 会被旧版 canvas 覆盖 -->
+  <cover-view class="chart-title">
+    <cover-view class="chart-title-btn" bind:tap="showAction">{{limitText}} [点击切换]</cover-view>
+  </cover-view>
   <view class="chart-container">
-    <ec-canvas ec="{{ ec }}" id="status-chart"/>
+    <!-- 新版 Canvas Android 机显示不了数字 -->
+    <!-- https://github.com/ecomfe/echarts-for-weixin/issues/677 -->
+    <ec-canvas ec="{{ ec }}" id="status-chart" force-use-old-canvas="true"/>
   </view>
-  <mp-actionSheet
-    bindactiontap="onActionSelect"
-    show="{{showActionSheet}}"
-    actions="{{options}}"
-  />
 </view>

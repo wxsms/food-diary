@@ -19,9 +19,6 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-}
-
-.chart-title-subtext {
   color: var(--weui-FG-2);
   font-size: 0.9em;
 }

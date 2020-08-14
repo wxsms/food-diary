@@ -53,6 +53,7 @@ page, .container {
 .food-status {
   width: 10px;
   height: 10px;
+  margin-left: 10px;
   border-radius: 50%;
 }
 

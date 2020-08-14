@@ -31,6 +31,9 @@
               <view wx:if="{{record[_item._id] === 1}}" class="food-status food-status-ok"/>
               <view wx:elif="{{record[_item._id] === 2}}" class="food-status food-status-not-ok"/>
             </block>
+            <block wx:else>
+              <view class="food-status"/>
+            </block>
           </view>
         </block>
         <block wx:elif="{{filtered}}">

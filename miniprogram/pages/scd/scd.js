@@ -86,17 +86,18 @@ Component({
     async onActionPress ({ detail: { value } }) {
       // 0 为取消记录选项，如记录本身不存在，可以忽略
       if (value === 0 && (!this.data.record || typeof this.data.record[this.data.selectedFood._id] !== 'number')) {
+        this.hideAction()
         return
       }
+      // 记录存在且与选项一致，可以忽略
+      if (this.data.record && this.data.record[this.data.selectedFood._id] === value) {
+        this.hideAction()
+        return
+      }
+      loading(true, '记录中...')
       try {
-        loading(true, '记录中...')
         const db = wx.cloud.database()
         if (this.data.record) {
-          // 记录无变更，不执行任何操作
-          if (this.data.record[this.data.selectedFood._id] === value) {
-            this.hideAction()
-            return
-          }
           const newRecord = {
             ...this.data.record,
             [this.data.selectedFood._id]: value

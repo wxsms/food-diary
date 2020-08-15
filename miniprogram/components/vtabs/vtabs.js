@@ -1,3 +1,6 @@
+import { debug } from '../../utils/log.utils'
+import { isIos } from '../../utils/system.utils'
+
 Component({
   options: {
     addGlobalClass: true,
@@ -80,7 +83,7 @@ Component({
       this.triggerEvent('tabclick', { index: index })
       this.setData({
         activeTab: index,
-        contentScrollTop: contentScrollTop
+        contentScrollTop: contentScrollTop + (isIos() ? 0 : 1) // Android + 1 才能正常 highlight
       })
       setTimeout(() => {
         this._scrolling = false

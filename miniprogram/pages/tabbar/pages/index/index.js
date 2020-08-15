@@ -1,13 +1,13 @@
-import { DIARY_OPTION_LIST, DIARY_TYPES } from '../../constants/index'
-import { isReview, version } from '../../utils/version.utils'
+import { DIARY_OPTION_LIST, DIARY_TYPES } from '../../../../constants/index'
+import { isReview, version } from '../../../../utils/version.utils'
 import { storeBindingsBehavior } from 'mobx-miniprogram-bindings'
-import { store } from '../../store/store'
-import { nextTick } from '../../utils/wx.utils'
-import { debug, error } from '../../utils/log.utils'
-import { minusDay, startOfMonth } from '../../utils/date.utils'
-import { loading, toast, TOAST_ERRORS } from '../../utils/toast.utils'
-import themeMixin from '../../mixins/theme.mixin'
-import shareMixin from '../../mixins/share.mixin'
+import { store } from '../../../../store/store'
+import { nextTick } from '../../../../utils/wx.utils'
+import { debug, error } from '../../../../utils/log.utils'
+import { minusDay, startOfMonth } from '../../../../utils/date.utils'
+import { loading, toast, TOAST_ERRORS } from '../../../../utils/toast.utils'
+import themeMixin from '../../../../mixins/theme.mixin'
+import shareMixin from '../../../../mixins/share.mixin'
 import find from 'lodash.find'
 
 const app = getApp()
@@ -163,7 +163,7 @@ Component({
     _goEdit (index) {
       debug('goEdit', index, DIARY_OPTION_LIST[index])
       wx.navigateTo({
-        url: `/pages/edit/edit?diaryOptionIndex=${index}`
+        url: `/pages/modules/diary/pages/edit/edit?diaryOptionIndex=${index}`
       })
     },
     async goCalendar () {
@@ -171,7 +171,7 @@ Component({
       this.setCurrentMonth(startOfMonth(this.data.currentDate))
       await nextTick()
       wx.navigateTo({
-        url: `/pages/calendar/calendar`
+        url: `/pages/modules/diary/pages/calendar/calendar`
       })
     }
   }

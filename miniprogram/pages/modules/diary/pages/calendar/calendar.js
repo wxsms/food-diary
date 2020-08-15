@@ -1,14 +1,14 @@
 import find from 'lodash.find'
 import chunk from 'lodash.chunk'
-import { promisify } from '../../utils/promisify.utils'
-import { debug, error } from '../../utils/log.utils'
+import { promisify } from '../../../../../utils/promisify.utils'
+import { debug, error } from '../../../../../utils/log.utils'
 import { storeBindingsBehavior } from 'mobx-miniprogram-bindings'
-import { store } from '../../store/store'
-import { getWeekday } from '../../utils/date.utils'
-import { nextTick } from '../../utils/wx.utils'
-import { loading, toast, TOAST_ERRORS } from '../../utils/toast.utils'
-import themeMixin from '../../mixins/theme.mixin'
-import shareMixin from '../../mixins/share.mixin'
+import { store } from '../../../../../store/store'
+import { getWeekday } from '../../../../../utils/date.utils'
+import { nextTick } from '../../../../../utils/wx.utils'
+import { loading, toast, TOAST_ERRORS } from '../../../../../utils/toast.utils'
+import themeMixin from '../../../../../mixins/theme.mixin'
+import shareMixin from '../../../../../mixins/share.mixin'
 
 Component({
   behaviors: [storeBindingsBehavior, themeMixin, shareMixin],

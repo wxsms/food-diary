@@ -6,7 +6,7 @@ module.exports = Behavior({
       debug('onShareAppMessage')
       return {
         title: 'IBD日记',
-        path: '/pages/index/index'
+        path: 'pages/tabbar/pages/index/index'
       }
     }
   }

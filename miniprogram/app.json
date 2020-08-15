@@ -1,14 +1,49 @@
 {
   "darkmode": true,
   "pages": [
-    "pages/index/index",
-    "pages/edit/edit",
-    "pages/calendar/calendar",
-    "pages/user/user",
-    "pages/about/about",
-    "pages/status-chart/status-chart",
-    "pages/scd/scd"
+    "pages/tabbar/pages/index/index",
+    "pages/tabbar/pages/scd/scd",
+    "pages/tabbar/pages/user/user"
   ],
+  "subpackages": [
+    {
+      "root": "pages/modules/diary",
+      "name": "diary",
+      "pages": [
+        "pages/edit/edit",
+        "pages/calendar/calendar"
+      ]
+    },
+    {
+      "root": "pages/modules/user",
+      "name": "user",
+      "pages": [
+        "pages/about/about"
+      ]
+    },
+    {
+      "root": "pages/modules/charts",
+      "name": "charts",
+      "pages": [
+        "pages/status-chart/status-chart"
+      ]
+    }
+  ],
+  "preloadRule": {
+    "pages/tabbar/pages/user/user": {
+      "network": "all",
+      "packages": [
+        "charts",
+        "user"
+      ]
+    },
+    "pages/tabbar/pages/index/index": {
+      "network": "all",
+      "packages": [
+        "diary"
+      ]
+    }
+  },
   "tabBar": {
     "color": "@tabBarColor",
     "backgroundColor": "@tabBarBackgroundColor",
@@ -16,19 +51,19 @@
     "selectedColor": "@tabBarSelectedColor",
     "list": [
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/tabbar/pages/index/index",
         "text": "首页",
         "iconPath": "@editIconPath",
         "selectedIconPath": "@editSelectedIconPath"
       },
       {
-        "pagePath": "pages/scd/scd",
+        "pagePath": "pages/tabbar/pages/scd/scd",
         "text": "SCD",
         "iconPath": "@menuIconPath",
         "selectedIconPath": "@menuSelectedIconPath"
       },
       {
-        "pagePath": "pages/user/user",
+        "pagePath": "pages/tabbar/pages/user/user",
         "text": "我的",
         "iconPath": "@userIconPath",
         "selectedIconPath": "@userSelectedIconPath"

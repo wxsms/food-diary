@@ -1,7 +1,7 @@
 <view class="container" data-weui-theme="{{theme}}">
   <view class='header'>
     <view class='logo'>
-      <image src="../../assets/images/logo.png" class='logo'/>
+      <image src="../../../../../assets/images/logo.png" class='logo'/>
     </view>
     <view class='name'>
       <text decode>IBD&nbsp;日记</text>

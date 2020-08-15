@@ -58,29 +58,29 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/user/user",
-					"pathName": "pages/user/user",
+					"name": "pages/tabbar/pages/user/user",
+					"pathName": "pages/tabbar/pages/user/user",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "pages/about/about",
-					"pathName": "pages/about/about",
+					"name": "pages/modules/user/pages/about/about",
+					"pathName": "pages/modules/user/pages/about/about",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": 2,
-					"name": "pages/status-chart/status-chart",
-					"pathName": "pages/status-chart/status-chart",
+					"name": "pages/modules/charts/pages/status-chart/status-chart",
+					"pathName": "pages/modules/charts/pages/status-chart/status-chart",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "pages/scd/scd",
-					"pathName": "pages/scd/scd",
+					"name": "pages/tabbar/pages/scd/scd",
+					"pathName": "pages/tabbar/pages/scd/scd",
 					"query": "",
 					"scene": null
 				}

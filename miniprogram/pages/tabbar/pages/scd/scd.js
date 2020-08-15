@@ -1,10 +1,10 @@
 import { storeBindingsBehavior } from 'mobx-miniprogram-bindings'
-import { nextTick } from '../../utils/wx.utils'
-import { loading, toast, TOAST_ERRORS } from '../../utils/toast.utils'
-import themeMixin from '../../mixins/theme.mixin'
-import shareMixin from '../../mixins/share.mixin'
-import { getFoods, SCD_LEVEL } from '../../store/scd-foods.store'
-import { debug, error } from '../../utils/log.utils'
+import { nextTick } from '../../../../utils/wx.utils'
+import { loading, toast, TOAST_ERRORS } from '../../../../utils/toast.utils'
+import themeMixin from '../../../../mixins/theme.mixin'
+import shareMixin from '../../../../mixins/share.mixin'
+import { getFoods, SCD_LEVEL } from '../../../../store/scd-foods.store'
+import { debug, error } from '../../../../utils/log.utils'
 import find from 'lodash.find'
 
 Component({

@@ -1,6 +1,6 @@
 {
   "usingComponents": {
-    "ec-canvas": "/libs/ec-canvas/ec-canvas"
+    "ec-canvas": "../../libs/ec-canvas/ec-canvas"
   },
   "navigationBarTitleText": "状况曲线",
   "pageOrientation": "landscape",

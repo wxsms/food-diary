@@ -1,13 +1,13 @@
 import { storeBindingsBehavior } from 'mobx-miniprogram-bindings'
-import themeMixin from '../../mixins/theme.mixin'
-import shareMixin from '../../mixins/share.mixin'
-import platformMixin from '../../mixins/platform.mixin'
+import themeMixin from '../../../../../mixins/theme.mixin'
+import shareMixin from '../../../../../mixins/share.mixin'
+import platformMixin from '../../../../../mixins/platform.mixin'
 import * as echarts from '../../libs/ec-canvas/echarts'
-import { debug, error } from '../../utils/log.utils'
-import { loading, toast, TOAST_ERRORS } from '../../utils/toast.utils'
-import { format, startOfDay } from '../../utils/date.utils'
+import { debug, error } from '../../../../../utils/log.utils'
+import { loading, toast, TOAST_ERRORS } from '../../../../../utils/toast.utils'
+import { format, startOfDay } from '../../../../../utils/date.utils'
 import find from 'lodash.find'
-import { nextTick } from '../../utils/wx.utils'
+import { nextTick } from '../../../../../utils/wx.utils'
 
 Component({
   behaviors: [storeBindingsBehavior, themeMixin, shareMixin, platformMixin],

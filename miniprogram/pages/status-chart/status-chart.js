@@ -1,6 +1,7 @@
 import { storeBindingsBehavior } from 'mobx-miniprogram-bindings'
 import themeMixin from '../../mixins/theme.mixin'
 import shareMixin from '../../mixins/share.mixin'
+import platformMixin from '../../mixins/platform.mixin'
 import * as echarts from '../../libs/ec-canvas/echarts'
 import { debug, error } from '../../utils/log.utils'
 import { loading, toast, TOAST_ERRORS } from '../../utils/toast.utils'
@@ -9,7 +10,7 @@ import find from 'lodash.find'
 import { nextTick } from '../../utils/wx.utils'
 
 Component({
-  behaviors: [storeBindingsBehavior, themeMixin, shareMixin],
+  behaviors: [storeBindingsBehavior, themeMixin, shareMixin, platformMixin],
   data: {
     limit: 30,
     limitText: '近一个月',
@@ -50,7 +51,7 @@ Component({
     showAction () {
       wx.showActionSheet({
         itemList: this.data.options.map(v => v.text),
-        success : async ({ tapIndex }) => {
+        success: async ({ tapIndex }) => {
           const opt = this.data.options[tapIndex]
           this.setData({
             limit: opt.limit,

@@ -127,6 +127,7 @@ Component({
           legend: {
             type: 'plain',
             left: '40',
+            top: '2',
             textStyle: {
               color: this.data.themeColors.chartTextColor
             }

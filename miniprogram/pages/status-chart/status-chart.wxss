@@ -12,6 +12,8 @@
 }
 
 .chart-title-btn {
+  height: 25px;
+  line-height: 25px;
   padding: 0 20px;
   width: auto;
   text-align: center;

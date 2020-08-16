@@ -39,33 +39,40 @@ function removeLevelInName (v) {
   }
 }
 
+export function setFoods (list) {
+  debug('setFoods', list.length)
+  SCD_LEVEL.LV_0.list = list
+    .filter(v => v.name.indexOf(SCD_LEVEL.LV_0.name) >= 0)
+    .map(removeLevelInName)
+  SCD_LEVEL.LV_1.list = list
+    .filter(v => v.name.indexOf(SCD_LEVEL.LV_1.name) >= 0 && !find(SCD_LEVEL.LV_0.list, _v => _v.id === v.id))
+    .map(removeLevelInName)
+  SCD_LEVEL.LV_2.list = list
+    .filter(v => v.name.indexOf(SCD_LEVEL.LV_2.name) >= 0 && !find(SCD_LEVEL.LV_1.list, _v => _v.id === v.id))
+    .map(removeLevelInName)
+  SCD_LEVEL.LV_3.list = list
+    .filter(v => v.name.indexOf(SCD_LEVEL.LV_3.name) >= 0 && !find(SCD_LEVEL.LV_2.list, _v => _v.id === v.id))
+    .map(removeLevelInName)
+  SCD_LEVEL.LV_4.list = list
+    .filter(v => v.name.indexOf(SCD_LEVEL.LV_4.name) >= 0 && !find(SCD_LEVEL.LV_3.list, _v => _v.id === v.id))
+    .map(removeLevelInName)
+  SCD_LEVEL.LV_5.list = list
+    .filter(v => v.name.indexOf(SCD_LEVEL.LV_5.name) >= 0 && !find(SCD_LEVEL.LV_4.list, _v => _v.id === v.id))
+    .map(removeLevelInName)
+  SCD_LEVEL.ALL.list = list
+}
+
 export async function getFoods () {
+  debug('getFoods')
   if (SCD_LEVEL.ALL.list.length) {
+    debug('foods existed')
     return SCD_LEVEL.ALL.list
   }
+  debug('fetching foods')
   try {
     const { result: { data } } = await wx.cloud.callFunction({ name: 'scd-foods' })
     const list = data || []
-    SCD_LEVEL.LV_0.list = list
-      .filter(v => v.name.indexOf(SCD_LEVEL.LV_0.name) >= 0)
-      .map(removeLevelInName)
-    SCD_LEVEL.LV_1.list = list
-      .filter(v => v.name.indexOf(SCD_LEVEL.LV_1.name) >= 0 && !find(SCD_LEVEL.LV_0.list, _v => _v.id === v.id))
-      .map(removeLevelInName)
-    SCD_LEVEL.LV_2.list = list
-      .filter(v => v.name.indexOf(SCD_LEVEL.LV_2.name) >= 0 && !find(SCD_LEVEL.LV_1.list, _v => _v.id === v.id))
-      .map(removeLevelInName)
-    SCD_LEVEL.LV_3.list = list
-      .filter(v => v.name.indexOf(SCD_LEVEL.LV_3.name) >= 0 && !find(SCD_LEVEL.LV_2.list, _v => _v.id === v.id))
-      .map(removeLevelInName)
-    SCD_LEVEL.LV_4.list = list
-      .filter(v => v.name.indexOf(SCD_LEVEL.LV_4.name) >= 0 && !find(SCD_LEVEL.LV_3.list, _v => _v.id === v.id))
-      .map(removeLevelInName)
-    SCD_LEVEL.LV_5.list = list
-      .filter(v => v.name.indexOf(SCD_LEVEL.LV_5.name) >= 0 && !find(SCD_LEVEL.LV_4.list, _v => _v.id === v.id))
-      .map(removeLevelInName)
-    SCD_LEVEL.ALL.list = list
-    // debug(list)
+    setFoods(list)
     return list
   } catch (e) {
     error(e)

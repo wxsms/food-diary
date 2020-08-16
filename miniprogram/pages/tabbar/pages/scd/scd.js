@@ -1,20 +1,34 @@
 import { storeBindingsBehavior } from 'mobx-miniprogram-bindings'
-import { nextTick } from '../../../../utils/wx.utils'
 import { loading, toast, TOAST_ERRORS } from '../../../../utils/toast.utils'
 import themeMixin from '../../../../mixins/theme.mixin'
 import shareMixin from '../../../../mixins/share.mixin'
-import { getFoods, SCD_LEVEL } from '../../../../store/scd-foods.store'
+import { getFoods, SCD_LEVEL, setFoods } from '../../../../store/scd-foods.store'
 import { debug, error } from '../../../../utils/log.utils'
 import find from 'lodash.find'
+import { promisify } from '../../../../utils/promisify.utils'
+
+function initFoods () {
+  debug('initFoods')
+  return [
+    SCD_LEVEL.LV_0,
+    SCD_LEVEL.LV_1,
+    SCD_LEVEL.LV_2,
+    SCD_LEVEL.LV_3,
+    SCD_LEVEL.LV_4,
+    SCD_LEVEL.LV_5
+  ].map(v => ({
+    ...v,
+    title: v.name
+  }))
+}
 
 Component({
   behaviors: [storeBindingsBehavior, themeMixin, shareMixin],
   data: {
-    filteredFoods: [],
+    foods: [],
     filtered: false,
     record: null,
     activeTab: 0,
-    loaded: false,
     selectedFood: null,
     showActionSheet: false,
     options: [{
@@ -30,29 +44,37 @@ Component({
     }]
   },
   methods: {
+    async getPrefetchedData () {
+      try {
+        const { fetchedData } = await promisify(wx.getBackgroundFetchData, { fetchType: 'pre' })
+        debug('prefetch done')
+        const list = JSON.parse(fetchedData).data
+        if (Array.isArray(list) && list.length) {
+          setFoods(list)
+          this.setData({
+            foods: initFoods()
+          })
+        }
+      } catch (e) {
+        error(e)
+      }
+    },
     async onLoad () {
       try {
         loading()
+        await this.getPrefetchedData()
+        const foodsPrefetched = SCD_LEVEL.ALL.list.length > 0
         await Promise.all([
-          getFoods(),
+          foodsPrefetched > 0 ? Promise.resolve() : getFoods(),
           this.fetchMyRecord()
         ])
-        this.setData({
-          onSearch: this.onSearch.bind(this),
-          loaded: true,
-          foods: [
-            SCD_LEVEL.LV_0,
-            SCD_LEVEL.LV_1,
-            SCD_LEVEL.LV_2,
-            SCD_LEVEL.LV_3,
-            SCD_LEVEL.LV_4,
-            SCD_LEVEL.LV_5
-          ].map(v => ({
-            ...v,
-            title: v.name
-          }))
-        })
-        await nextTick()
+        const dataToSet = {
+          onSearch: this.onSearch.bind(this)
+        }
+        if (!foodsPrefetched) {
+          dataToSet.foods = initFoods()
+        }
+        this.setData(dataToSet)
       } catch (e) {
         error(e)
         toast(TOAST_ERRORS.NETWORK_ERR)

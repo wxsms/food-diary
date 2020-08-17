@@ -12,7 +12,7 @@
         <mp-cells wx:if="{{isStatus}}">
           <mp-cell title="体重 (kg)" wx:if="{{showWeight}}">
             <input
-              type="number"
+              type="digit"
               value="{{weight}}"
               class="weui-input"
               placeholder="请输入数字"
@@ -21,7 +21,7 @@
           </mp-cell>
           <mp-cell title="排便次数" wx:if="{{showDefecation}}">
             <input
-              type="number"
+              type="digit"
               value="{{defecation}}"
               class="weui-input"
               placeholder="请输入数字"

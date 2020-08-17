@@ -46,9 +46,16 @@
             <view class="weui-cells weui-cells_after-title">
               <view class="weui-cell">
                 <view class="weui-cell__bd">
-                  <textarea value="{{value}}" auto-height class="weui-textarea"
-                            placeholder="多条记录请用换行分隔" name="record" bindinput="onChange"
-                            bindconfirm="doSave"/>
+                  <textarea
+                    value="{{value}}"
+                    auto-height
+                    class="weui-textarea"
+                    placeholder="多条记录请用换行分隔"
+                    name="record"
+                    bindinput="onChange"
+                    bindconfirm="doSave"
+                    maxlength="{{1000}}"
+                  />
                 </view>
               </view>
             </view>

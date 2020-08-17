@@ -11,11 +11,10 @@
     <mp-cells>
       <mp-cell title="版本" footer="{{version}}"/>
       <mp-cell title="开发者" footer="github/wxsms"/>
+      <mp-cell title="更新日志" link url="/pages/modules/user/pages/changelog/changelog"/>
     </mp-cells>
   </view>
   <view class="weui-footer footer-fixed">
-    <view class="weui-footer__text">承接 IBD 相关公益项目开发</view>
-    <view class="weui-footer__text">如有需要，请联系我</view>
     <view class="weui-footer__text">Copyright © 2019-{{year}} Kairui Guo</view>
   </view>
 </view>

@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "wemark": "../../libs/wemark/wemark"
+  },
+  "navigationBarTitleText": "更新日志"
+}

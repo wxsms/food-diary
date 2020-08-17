@@ -83,6 +83,12 @@
 					"pathName": "pages/tabbar/pages/scd/scd",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/modules/user/pages/changelog/changelog",
+					"pathName": "pages/modules/user/pages/changelog/changelog",
+					"scene": null
 				}
 			]
 		}

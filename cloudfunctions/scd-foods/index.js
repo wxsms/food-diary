@@ -17,7 +17,17 @@ exports.main = async ({ name }) => {
     // 承载所有读操作的 promise 的数组
     const tasks = []
     for (let i = 0; i < batchTimes; i++) {
-      const promise = db.collection('scd-foods').skip(i * MAX_LIMIT).limit(MAX_LIMIT).get()
+      const promise = db
+        .collection('scd-foods')
+        .field({
+          _id: true,
+          id: true,
+          name: true,
+          type: true
+        })
+        .skip(i * MAX_LIMIT)
+        .limit(MAX_LIMIT)
+        .get()
       tasks.push(promise)
     }
     // 等待所有

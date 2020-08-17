@@ -44,7 +44,7 @@ function removeLevelInName (v) {
 function trimPyName (v) {
   return {
     ...v,
-    pyName: (v.py_name || '').replace(/ /g, '')
+    py_name: (v.py_name || '').replace(/ /g, '').toLowerCase()
   }
 }
 

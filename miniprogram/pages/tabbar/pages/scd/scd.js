@@ -165,10 +165,10 @@ Component({
     async filterDisplay (query) {
       const foods = await getFoods()
       let _foods
-      if (query) {
+      if (typeof query === 'string' && query.length) {
         _foods = [{
           title: '搜索结果',
-          list: foods.filter(v => v.name.indexOf(query) >= 0 || v.pyName.indexOf(query) >= 0)
+          list: foods.filter(v => v.name.indexOf(query) >= 0 || v.py_name.indexOf(query.toLowerCase()) >= 0)
         }]
       } else {
         _foods = initFoods()

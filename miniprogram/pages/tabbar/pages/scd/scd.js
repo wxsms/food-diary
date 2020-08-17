@@ -38,6 +38,9 @@ Component({
       value: 2,
       type: 'warn'
     }, {
+      text: '待定',
+      value: -1
+    }, {
       text: '没吃过',
       value: 0
     }]

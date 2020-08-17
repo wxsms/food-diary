@@ -6,6 +6,13 @@ page, .container {
   background-color: var(--weui-BG) !important;
   display: flex;
   flex-direction: column;
+  --SCD-FOODS-GREY: #ebebeb;
+  --SCD-FOODS-GREY-2: #cccccc;
+}
+
+.container[data-weui-theme=dark] {
+  --SCD-FOODS-GREY: #191919;
+  --SCD-FOODS-GREY-2: #555555;
 }
 
 .vtabs {
@@ -14,11 +21,7 @@ page, .container {
 }
 
 .weui-vtabs-bar__content {
-  background-color: #ebebeb;
-}
-
-.container[data-weui-theme=dark] .weui-vtabs-bar__content {
-  background-color: #191919;
+  background-color: var(--SCD-FOODS-GREY);
 }
 
 .weui-vtabs-content {
@@ -70,6 +73,10 @@ page, .container {
 
 .food-status-not-ok {
   background-color: var(--weui-RED);
+}
+
+.food-status-pending {
+  background-color: var(--SCD-FOODS-GREY-2);
 }
 
 .row-bottom-placeholder {

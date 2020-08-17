@@ -98,7 +98,19 @@ exports.main = async ({ from, to, groupBy = 'month' }, context) => {
         data: sheet
       })
     })
-    const buffer = await xlsx.build(sheets)
+    const buffer = await xlsx.build(sheets, {
+      '!cols': [
+        { wch: 10 },
+        { wch: 20 },
+        { wch: 20 },
+        { wch: 20 },
+        { wch: 20 },
+        { wch: 10 },
+        { wch: 10 },
+        { wch: 20 },
+        { wch: 20 }
+      ]
+    })
     const { fileID } = await cloud.uploadFile({
       cloudPath: `records-export-${wxContext.OPENID}.xlsx`,
       fileContent: buffer,

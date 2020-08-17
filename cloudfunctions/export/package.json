@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "lodash": "^4.17.20",
     "node-xlsx": "^0.15.0",
     "wx-server-sdk": "latest"
   }

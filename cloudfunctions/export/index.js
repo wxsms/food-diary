@@ -1,10 +1,13 @@
 const cloud = require('wx-server-sdk')
 const xlsx = require('node-xlsx')
+const _ = require('lodash')
 
 cloud.init({
   env: cloud.DYNAMIC_CURRENT_ENV
 })
 const db = cloud.database()
+const cmd = db.command
+const MAX_LIMIT = 100
 
 const TYPES = {
   DATE: { label: '日期', key: 'date' },
@@ -19,17 +22,38 @@ const TYPES = {
 }
 
 // 云函数入口函数
-exports.main = async ({ from, to }, context) => {
+exports.main = async ({ from, to, groupBy = 'month' }, context) => {
   try {
     const wxContext = cloud.getWXContext()
-    const cmd = db.command
-    const { data } = await db.collection('records')
-      .where({
-        _openid: wxContext.OPENID,
-        date: cmd.gte(from).and(cmd.lt(to))
-      })
-      .orderBy('date', 'asc')
-      .get()
+    const where = {
+      _openid: wxContext.OPENID
+    }
+    if (typeof from === 'number' && typeof to === 'number') {
+      where.date = cmd.gte(from).and(cmd.lt(to))
+    }
+    const countResult = await db
+      .collection('records')
+      .where(where)
+      .count()
+    const total = countResult.total
+    const batchTimes = Math.ceil(total / MAX_LIMIT)
+    const tasks = []
+    for (let i = 0; i < batchTimes; i++) {
+      const promise = db
+        .collection('records')
+        .where(where)
+        .orderBy('date', 'asc')
+        .skip(i * MAX_LIMIT)
+        .limit(MAX_LIMIT)
+        .get()
+      tasks.push(promise)
+    }
+    const { data } = (await Promise.all(tasks)).reduce((acc, cur) => {
+      return {
+        data: acc.data.concat(cur.data),
+        errMsg: acc.errMsg,
+      }
+    })
     const keys = [
       TYPES.DATE,
       TYPES.BREAKFAST,
@@ -41,30 +65,42 @@ exports.main = async ({ from, to }, context) => {
       TYPES.OTHERS,
       TYPES.ABNORMAL
     ]
-    const sheet = []
-    const dateOffset = 8 * 60 * 60 * 1000
-    sheet.push(keys.map(v => v.label))
-    data.forEach(row => {
-      const arr = []
-      keys.map(v => v.key).forEach(v => {
-        if (v === 'date') {
-          const date = new Date(row[v] + dateOffset)
-          arr.push(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`)
-        } else {
-          const isExist = typeof row[v] !== 'undefined' && row[v] !== null
-          arr.push(isExist ? row[v] : '')
-        }
-      })
-      sheet.push(arr)
+    const groupedData = _.groupBy(data, v => {
+      const date = new Date(v.date)
+      if (groupBy === 'year') {
+        return `${date.getFullYear()}`
+      } else {
+        return `${date.getFullYear()}-${date.getMonth() + 1}`
+      }
     })
-    const date = new Date(from + dateOffset)
-    const sheetName = `${date.getFullYear()}年${date.getMonth() + 1}月`
-    const buffer = await xlsx.build([{
-      name: sheetName,
-      data: sheet
-    }])
+    // console.log(groupedData)
+    const sheets = []
+    Object.keys(groupedData).forEach(key => {
+      const data = groupedData[key]
+      const sheet = []
+      const dateOffset = 8 * 60 * 60 * 1000
+      sheet.push(keys.map(v => v.label))
+      data.forEach(row => {
+        const arr = []
+        keys.map(v => v.key).forEach(v => {
+          if (v === 'date') {
+            const date = new Date(row[v] + dateOffset)
+            arr.push(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`)
+          } else {
+            const isExist = typeof row[v] !== 'undefined' && row[v] !== null
+            arr.push(isExist ? row[v] : '')
+          }
+        })
+        sheet.push(arr)
+      })
+      sheets.push({
+        name: key,
+        data: sheet
+      })
+    })
+    const buffer = await xlsx.build(sheets)
     const { fileID } = await cloud.uploadFile({
-      cloudPath: `${wxContext.OPENID}-${sheetName}.xlsx`,
+      cloudPath: `records-export-${wxContext.OPENID}.xlsx`,
       fileContent: buffer,
     })
     const res = await cloud.getTempFileURL({

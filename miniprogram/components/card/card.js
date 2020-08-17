@@ -1,7 +1,7 @@
 import { storeBindingsBehavior } from 'mobx-miniprogram-bindings'
 import { store } from '../../store/store'
 import { debug } from '../../utils/log.utils'
-import { DIARY_TYPES } from '../../constants/index'
+import { DIARY_TYPES } from '../../constants/constants'
 
 Component({
   behaviors: [storeBindingsBehavior],

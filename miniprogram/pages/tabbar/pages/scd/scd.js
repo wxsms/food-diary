@@ -44,37 +44,17 @@ Component({
     }]
   },
   methods: {
-    async getPrefetchedData () {
-      try {
-        const { fetchedData } = await promisify(wx.getBackgroundFetchData, { fetchType: 'pre' })
-        debug('prefetch done')
-        const list = JSON.parse(fetchedData).data
-        if (Array.isArray(list) && list.length) {
-          setFoods(list)
-          this.setData({
-            foods: initFoods()
-          })
-        }
-      } catch (e) {
-        error(e)
-      }
-    },
     async onLoad () {
       try {
         loading()
-        await this.getPrefetchedData()
-        const foodsPrefetched = SCD_LEVEL.ALL.list.length > 0
         await Promise.all([
-          foodsPrefetched > 0 ? Promise.resolve() : getFoods(),
+          getFoods(),
           this.fetchMyRecord()
         ])
-        const dataToSet = {
-          onSearch: this.onSearch.bind(this)
-        }
-        if (!foodsPrefetched) {
-          dataToSet.foods = initFoods()
-        }
-        this.setData(dataToSet)
+        this.setData({
+          onSearch: this.onSearch.bind(this),
+          foods: initFoods()
+        })
       } catch (e) {
         error(e)
         toast(TOAST_ERRORS.NETWORK_ERR)
@@ -191,17 +171,7 @@ Component({
           list: foods.filter(v => v.name.indexOf(query) >= 0)
         }]
       } else {
-        _foods = [
-          SCD_LEVEL.LV_0,
-          SCD_LEVEL.LV_1,
-          SCD_LEVEL.LV_2,
-          SCD_LEVEL.LV_3,
-          SCD_LEVEL.LV_4,
-          SCD_LEVEL.LV_5
-        ].map(v => ({
-          ...v,
-          title: v.name
-        }))
+        _foods = initFoods()
       }
       // debug(_foods)
       this.setData({

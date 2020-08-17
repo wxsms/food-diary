@@ -7,7 +7,7 @@ App({
         reason => P.resolve(callback()).then(() => {throw reason })
       )
     }
-    wx.setBackgroundFetchToken({ token: 'scd-foods' })
+    // wx.setBackgroundFetchToken({ token: 'scd-foods' })
     wx.cloud.init({
       env: 'dev-prpyj',
       traceUser: true

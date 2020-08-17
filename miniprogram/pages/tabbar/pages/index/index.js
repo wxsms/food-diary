@@ -1,4 +1,4 @@
-import { DIARY_OPTION_LIST, DIARY_TYPES } from '../../../../constants/index'
+import { DIARY_OPTION_LIST, DIARY_TYPES } from '../../../../constants/constants'
 import { isReview, version } from '../../../../utils/version.utils'
 import { storeBindingsBehavior } from 'mobx-miniprogram-bindings'
 import { store } from '../../../../store/store'

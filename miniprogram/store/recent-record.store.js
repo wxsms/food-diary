@@ -1,6 +1,7 @@
 import uniq from 'lodash.uniq'
 import reverse from 'lodash.reverse'
 import chunk from 'lodash.chunk'
+import { error } from '../utils/log.utils'
 
 const maxSize = 8
 
@@ -28,6 +29,11 @@ export function cacheDelete (key, str) {
 }
 
 export function getCache (key) {
-  const cache = wx.getStorageSync(`cache_${key}`)
-  return cache ? cache : []
+  try {
+    const cache = wx.getStorageSync(`cache_${key}`)
+    return cache ? cache : []
+  } catch (e) {
+    error(e)
+    return []
+  }
 }

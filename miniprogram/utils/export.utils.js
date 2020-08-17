@@ -16,6 +16,11 @@ export async function exportAndDownloadRecords ({ from, to, kind = EXPORT_KINDS.
       name: 'export',
       data: { from, to }
     })
+    if (!result) {
+      loading(false)
+      toast('当前时间段没有可导出的记录')
+      return
+    }
     debug('wx.env.USER_DATA_PATH:', wx.env.USER_DATA_PATH)
     const { filePath } = await promisify(wx.downloadFile, {
       url: result,
@@ -27,10 +32,10 @@ export async function exportAndDownloadRecords ({ from, to, kind = EXPORT_KINDS.
       fileType: 'xlsx',
       showMenu: true
     })
+    loading(false)
   } catch (e) {
     error(e)
-    toast(TOAST_ERRORS.NETWORK_ERR)
-  } finally {
     loading(false)
+    toast(TOAST_ERRORS.NETWORK_ERR)
   }
 }

@@ -35,6 +35,9 @@ exports.main = async ({ from, to, groupBy = 'month' }, context) => {
       .collection('records')
       .where(where)
       .count()
+    if (countResult.total === 0) {
+      return ''
+    }
     const total = countResult.total
     const batchTimes = Math.ceil(total / MAX_LIMIT)
     const tasks = []

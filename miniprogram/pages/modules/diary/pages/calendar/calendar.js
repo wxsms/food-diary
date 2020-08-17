@@ -4,7 +4,7 @@ import { promisify } from '../../../../../utils/promisify.utils'
 import { debug, error } from '../../../../../utils/log.utils'
 import { storeBindingsBehavior } from 'mobx-miniprogram-bindings'
 import { store } from '../../../../../store/store'
-import { getWeekday } from '../../../../../utils/date.utils'
+import { format, FORMATS, getWeekday } from '../../../../../utils/date.utils'
 import { nextTick } from '../../../../../utils/wx.utils'
 import { loading, toast, TOAST_ERRORS } from '../../../../../utils/toast.utils'
 import themeMixin from '../../../../../mixins/theme.mixin'
@@ -94,9 +94,14 @@ Component({
             to: monthEnd.ts
           }
         })
-        const { tempFilePath } = await promisify(wx.downloadFile, { url: result })
+        debug('wx.env.USER_DATA_PATH:', wx.env.USER_DATA_PATH)
+        const { filePath } = await promisify(wx.downloadFile, {
+          url: result,
+          filePath: `${wx.env.USER_DATA_PATH}/IBD-Diary-${format(monthStart.ts, FORMATS.Y_M_SIMPLE)}.xlsx`
+        })
+        debug('exported path:', filePath)
         await promisify(wx.openDocument, {
-          filePath: tempFilePath,
+          filePath: filePath,
           fileType: 'xlsx',
           showMenu: true
         })

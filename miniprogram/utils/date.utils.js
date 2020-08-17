@@ -2,6 +2,8 @@ import { DateTime } from 'luxon'
 import { debug } from './log.utils'
 
 export const FORMATS = {
+  Y_M_D_SIMPLE: 'yyyy-L-d',
+  Y_M_SIMPLE: 'yyyy-L',
   Y_M_D: 'yyyy年L月d日',
   Y_M: 'yyyy年L月',
   M_D: 'L月d日'

@@ -88,6 +88,14 @@
 					"id": -1,
 					"name": "pages/modules/user/pages/changelog/changelog",
 					"pathName": "pages/modules/user/pages/changelog/changelog",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 5,
+					"name": "pages/modules/diary/pages/calendar/calendar",
+					"pathName": "pages/modules/diary/pages/calendar/calendar",
+					"query": "",
 					"scene": null
 				}
 			]

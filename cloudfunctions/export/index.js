@@ -65,8 +65,9 @@ exports.main = async ({ from, to, groupBy = 'month' }, context) => {
       TYPES.OTHERS,
       TYPES.ABNORMAL
     ]
+    const dateOffset = 8 * 60 * 60 * 1000
     const groupedData = _.groupBy(data, v => {
-      const date = new Date(v.date)
+      const date = new Date(v.date + dateOffset)
       if (groupBy === 'year') {
         return `${date.getFullYear()}`
       } else {
@@ -78,7 +79,6 @@ exports.main = async ({ from, to, groupBy = 'month' }, context) => {
     Object.keys(groupedData).forEach(key => {
       const data = groupedData[key]
       const sheet = []
-      const dateOffset = 8 * 60 * 60 * 1000
       sheet.push(keys.map(v => v.label))
       data.forEach(row => {
         const arr = []

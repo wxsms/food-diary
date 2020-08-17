@@ -31,15 +31,15 @@ Component({
     selectedFood: null,
     showActionSheet: false,
     options: [{
+      text: '待定',
+      value: -1
+    }, {
       text: '耐受',
       value: 1
     }, {
       text: '不耐受',
       value: 2,
       type: 'warn'
-    }, {
-      text: '待定',
-      value: -1
     }, {
       text: '没吃过',
       value: 0
@@ -168,7 +168,7 @@ Component({
       if (query) {
         _foods = [{
           title: '搜索结果',
-          list: foods.filter(v => v.name.indexOf(query) >= 0)
+          list: foods.filter(v => v.name.indexOf(query) >= 0 || v.pyName.indexOf(query) >= 0)
         }]
       } else {
         _foods = initFoods()

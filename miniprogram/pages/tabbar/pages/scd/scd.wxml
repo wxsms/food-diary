@@ -3,6 +3,7 @@
     search="{{onSearch}}"
     bind:clear="onSearchClear"
     cancel="{{false}}"
+    placeholder="搜索食物名称或阶段"
   />
   <view class="vtabs">
     <mp-vtabs

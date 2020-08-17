@@ -41,6 +41,13 @@ function removeLevelInName (v) {
   }
 }
 
+function trimPyName (v) {
+  return {
+    ...v,
+    pyName: (v.py_name || '').replace(/ /g, '')
+  }
+}
+
 export function setFoods (list) {
   debug('setFoods', list.length)
   SCD_LEVEL.LV_0.list = list
@@ -61,7 +68,7 @@ export function setFoods (list) {
   SCD_LEVEL.LV_5.list = list
     .filter(v => v.name.indexOf(SCD_LEVEL.LV_5.name) >= 0 && !find(SCD_LEVEL.LV_4.list, _v => _v._id === v._id))
     .map(removeLevelInName)
-  SCD_LEVEL.ALL.list = list
+  SCD_LEVEL.ALL.list = list.map(trimPyName)
 }
 
 export async function getFoods () {

@@ -23,6 +23,7 @@ exports.main = async ({ name }) => {
           _id: true,
           id: true,
           name: true,
+          py_name: true,
           type: true
         })
         .skip(i * MAX_LIMIT)

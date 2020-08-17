@@ -2,10 +2,9 @@ import { storeBindingsBehavior } from 'mobx-miniprogram-bindings'
 import { loading, toast, TOAST_ERRORS } from '../../../../utils/toast.utils'
 import themeMixin from '../../../../mixins/theme.mixin'
 import shareMixin from '../../../../mixins/share.mixin'
-import { getFoods, SCD_LEVEL, setFoods } from '../../../../store/scd-foods.store'
+import { getFoods, SCD_LEVEL } from '../../../../store/scd-foods.store'
 import { debug, error } from '../../../../utils/log.utils'
 import find from 'lodash.find'
-import { promisify } from '../../../../utils/promisify.utils'
 
 function initFoods () {
   debug('initFoods')
@@ -47,14 +46,12 @@ Component({
     async onLoad () {
       try {
         loading()
-        await Promise.all([
-          getFoods(),
-          this.fetchMyRecord()
-        ])
+        await getFoods()
         this.setData({
           onSearch: this.onSearch.bind(this),
           foods: initFoods()
         })
+        await this.fetchMyRecord()
       } catch (e) {
         error(e)
         toast(TOAST_ERRORS.NETWORK_ERR)

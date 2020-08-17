@@ -9,13 +9,11 @@ import { loading, toast, TOAST_ERRORS } from '../../../../utils/toast.utils'
 import themeMixin from '../../../../mixins/theme.mixin'
 import shareMixin from '../../../../mixins/share.mixin'
 import find from 'lodash.find'
-
-const app = getApp()
+import { getOpenId } from '../../../../utils/auth.utils'
 
 Component({
   behaviors: [storeBindingsBehavior, themeMixin, shareMixin],
   data: {
-    logged: false,
     yesterdayData: null,
     showActionSheet: false,
     options: []
@@ -59,7 +57,6 @@ Component({
         options: _options
       })
       await nextTick()
-      await this.login()
       await this.fetchData()
     },
     async onShow () {
@@ -108,10 +105,11 @@ Component({
         const _ = db.command
         const currentDateTs = this.data.currentDateTs
         const yesterdayTs = minusDay(this.data.currentDate).ts
+        const openid = await getOpenId()
         const { data } = await db
           .collection('records')
           .where({
-            _openid: app.globalData.openid,
+            _openid: openid,
             date: _.eq(yesterdayTs).or(_.eq(currentDateTs))
           })
           .orderBy('date', 'asc')
@@ -127,23 +125,6 @@ Component({
         toast(TOAST_ERRORS.NETWORK_ERR)
       } finally {
         loading(false)
-      }
-    },
-    async login () {
-      // 调用云函数
-      try {
-        const res = await wx.cloud.callFunction({
-          name: 'login',
-          data: {}
-        })
-        debug('[云函数] [login] user openid: ', res.result.openid)
-        app.globalData.openid = res.result.openid
-        this.setData({
-          logged: true
-        })
-      } catch (err) {
-        toast(TOAST_ERRORS.NETWORK_ERR)
-        error('[云函数] [login] 调用失败', err)
       }
     },
     showAddSheet () {

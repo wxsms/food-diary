@@ -10,6 +10,7 @@
 
   <mp-cells>
     <mp-cell url="/pages/modules/charts/pages/status-chart/status-chart" link hover title="状况曲线"/>
+    <mp-cell url="/pages/modules/user/pages/export/export" link hover title="导出数据"/>
   </mp-cells>
 
   <mp-cells>

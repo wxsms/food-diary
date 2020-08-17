@@ -58,43 +58,50 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/tabbar/pages/user/user",
+					"name": "我的",
 					"pathName": "pages/tabbar/pages/user/user",
 					"query": "",
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "pages/modules/user/pages/about/about",
+					"id": 1,
+					"name": "关于",
 					"pathName": "pages/modules/user/pages/about/about",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": 2,
-					"name": "pages/modules/charts/pages/status-chart/status-chart",
+					"name": "状态曲线",
 					"pathName": "pages/modules/charts/pages/status-chart/status-chart",
 					"query": "",
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "pages/tabbar/pages/scd/scd",
+					"id": 3,
+					"name": "scd",
 					"pathName": "pages/tabbar/pages/scd/scd",
 					"query": "",
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "pages/modules/user/pages/changelog/changelog",
+					"id": 4,
+					"name": "更新日志",
 					"pathName": "pages/modules/user/pages/changelog/changelog",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": 5,
-					"name": "pages/modules/diary/pages/calendar/calendar",
+					"name": "日历",
 					"pathName": "pages/modules/diary/pages/calendar/calendar",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "导出数据",
+					"pathName": "pages/modules/user/pages/export/export",
 					"query": "",
 					"scene": null
 				}

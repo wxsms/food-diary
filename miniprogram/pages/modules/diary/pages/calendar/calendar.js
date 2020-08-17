@@ -1,14 +1,14 @@
 import find from 'lodash.find'
 import chunk from 'lodash.chunk'
-import { promisify } from '../../../../../utils/promisify.utils'
 import { debug, error } from '../../../../../utils/log.utils'
 import { storeBindingsBehavior } from 'mobx-miniprogram-bindings'
 import { store } from '../../../../../store/store'
-import { format, FORMATS, getWeekday } from '../../../../../utils/date.utils'
+import { getWeekday } from '../../../../../utils/date.utils'
 import { nextTick } from '../../../../../utils/wx.utils'
 import { loading, toast, TOAST_ERRORS } from '../../../../../utils/toast.utils'
 import themeMixin from '../../../../../mixins/theme.mixin'
 import shareMixin from '../../../../../mixins/share.mixin'
+import { exportAndDownloadRecords } from '../../../../../utils/export.utils'
 
 Component({
   behaviors: [storeBindingsBehavior, themeMixin, shareMixin],
@@ -85,32 +85,7 @@ Component({
     },
     async exportData () {
       const { monthStart, monthEnd } = this.data
-      try {
-        loading(true, '导出中...')
-        const { result } = await wx.cloud.callFunction({
-          name: 'export',
-          data: {
-            from: monthStart.ts,
-            to: monthEnd.ts
-          }
-        })
-        debug('wx.env.USER_DATA_PATH:', wx.env.USER_DATA_PATH)
-        const { filePath } = await promisify(wx.downloadFile, {
-          url: result,
-          filePath: `${wx.env.USER_DATA_PATH}/IBD-Diary-${format(monthStart.ts, FORMATS.Y_M_SIMPLE)}.xlsx`
-        })
-        debug('exported path:', filePath)
-        await promisify(wx.openDocument, {
-          filePath: filePath,
-          fileType: 'xlsx',
-          showMenu: true
-        })
-      } catch (e) {
-        error(e)
-        toast(TOAST_ERRORS.NETWORK_ERR)
-      } finally {
-        loading(false)
-      }
+      await exportAndDownloadRecords({ from: monthStart.ts, to: monthEnd.ts })
     }
   }
 })

@@ -1,0 +1,29 @@
+<view class="container" data-weui-theme="{{theme}}">
+  <mp-cells title="时间粒度">
+    <mp-cell hover ext-class="cell-flat">
+      <button class="cell-button">
+        <picker
+          mode="date"
+          fields="month"
+          bindchange="onMonthChange"
+        >
+          按月导出...
+        </picker>
+      </button>
+    </mp-cell>
+    <mp-cell hover ext-class="cell-flat">
+      <button class="cell-button">
+        <picker
+          mode="date"
+          fields="year"
+          bindchange="onYearChange"
+        >
+          按年导出...
+        </picker>
+      </button>
+    </mp-cell>
+    <mp-cell hover ext-class="cell-flat" bind:tap="exportAll">
+      <button class="cell-button">导出全部</button>
+    </mp-cell>
+  </mp-cells>
+</view>

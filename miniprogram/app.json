@@ -19,7 +19,8 @@
       "name": "user",
       "pages": [
         "pages/about/about",
-        "pages/changelog/changelog"
+        "pages/changelog/changelog",
+        "pages/export/export"
       ]
     },
     {

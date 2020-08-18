@@ -82,3 +82,7 @@ page, .container {
 .row-bottom-placeholder {
   height: 100px;
 }
+
+.desc-options-scroll-view {
+  height: 200px;
+}

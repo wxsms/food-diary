@@ -6,6 +6,7 @@ import { getFoods, SCD_LEVEL } from '../../../../store/scd-foods.store'
 import { debug, error } from '../../../../utils/log.utils'
 import find from 'lodash.find'
 import get from 'lodash.get'
+import isEqual from 'lodash.isequal'
 import { nextTick } from '../../../../utils/wx.utils'
 
 function initFoods () {
@@ -23,6 +24,35 @@ function initFoods () {
   }))
 }
 
+const options = [{
+  text: '待定',
+  value: -1,
+  desc: []
+}, {
+  text: '耐受',
+  value: 1,
+  desc: [
+    '需要煮熟',
+    '需要打糊',
+    '仅调味'
+  ]
+}, {
+  text: '不耐受',
+  value: 2,
+  type: 'warn',
+  desc: [
+    '腹泻',
+    '腹痛',
+    '便血',
+    '肠鸣',
+    '其它过敏反应'
+  ]
+}, {
+  text: '没吃过',
+  value: 0,
+  desc: []
+}]
+
 Component({
   behaviors: [storeBindingsBehavior, themeMixin, shareMixin],
   data: {
@@ -33,33 +63,8 @@ Component({
     selectedFood: null,
     showActionSheet: false,
     showDesc: false,
-    descOption: null,
-    options: [{
-      text: '待定',
-      value: -1
-    }, {
-      text: '耐受',
-      value: 1,
-      desc: [
-        '需要煮熟',
-        '需要打糊',
-        '仅调味'
-      ]
-    }, {
-      text: '不耐受',
-      value: 2,
-      type: 'warn',
-      desc: [
-        '腹泻',
-        '腹痛',
-        '便血',
-        '肠鸣',
-        '其它过敏反应'
-      ]
-    }, {
-      text: '没吃过',
-      value: 0
-    }]
+    descOption: options[0],
+    options: options
   },
   methods: {
     async onLoad () {
@@ -112,6 +117,8 @@ Component({
       // 记录存在且与选项一致，可以忽略
       if (this.data.record && this.data.record[this.data.selectedFood._id] === value) {
         this.hideAction()
+        await nextTick()
+        this.showDescIfNeeded(value)
         return
       }
       loading(true, '记录中...')
@@ -183,9 +190,10 @@ Component({
           descOption: {
             ...valueOption,
             desc: valueOption.desc.map(v => {
+              const desc = get(this.data.record, `desc.${this.data.selectedFood._id}`) || []
               return {
                 text: v,
-                checked: get(this.data.record, `${this.data.selectedFood._id}.desc`, []).indexOf(v) >= 0
+                checked: desc.indexOf(v) >= 0
               }
             })
           }
@@ -196,15 +204,24 @@ Component({
       this._descArr = value
     },
     hideDesc () {
-      this._descArr = null
+      this._descArr = []
       this.setData({ showDesc: false })
     },
     async saveDesc () {
+      if (!Array.isArray(this._descArr)) {
+        this._descArr = []
+      }
       debug(this._descArr)
+      const descRecord = get(this.data, `record.desc.${this.data.selectedFood._id}`)
+      const noChange = isEqual(this._descArr, descRecord)
+      if (noChange) {
+        this.hideDesc()
+        return
+      }
       try {
         loading(true, '记录中...')
         const db = wx.cloud.database()
-        const { stats: { updated } } = await db
+        await db
           .collection('records-scd')
           .doc(this.data.record._id)
           .update({
@@ -212,21 +229,17 @@ Component({
               [`desc.${this.data.selectedFood._id}`]: this._descArr
             }
           })
-        if (updated === 1) {
-          loading(false)
-          this.setData({
-            record: {
-              ...this.data.record,
-              desc: {
-                ...this.data.record.desc,
-                [this.data.selectedFood._id]: this._descArr
-              }
-            },
-            showDesc: false
-          })
-        } else {
-          toast(TOAST_ERRORS.NETWORK_ERR)
-        }
+        loading(false)
+        this.setData({
+          record: {
+            ...this.data.record,
+            desc: {
+              ...this.data.record.desc,
+              [this.data.selectedFood._id]: this._descArr
+            }
+          },
+          showDesc: false
+        })
       } catch (e) {
         error(e)
         loading(false)

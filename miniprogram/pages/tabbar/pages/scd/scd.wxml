@@ -47,21 +47,20 @@
       </block>
     </mp-vtabs>
   </view>
-  <mp-halfScreenDialog
-    show="{{showDesc}}"
-    wx:if="{{descOption && selectedFood}}"
-  >
+  <mp-halfScreenDialog show="{{showDesc}}">
     <view slot="title">{{descOption.text + '描述（选填）'}}</view>
     <view slot="desc">
-      <mp-cells title="{{selectedFood.name}}：">
+      <mp-cells title="{{selectedFood ? selectedFood.name : undefined}}：">
         <mp-checkbox-group multi="{{true}}" bindchange="onDescChange">
-          <mp-checkbox
-            wx:for="{{descOption.desc}}"
-            wx:key="text"
-            label="{{item.text}}"
-            value="{{item.text}}"
-            checked="{{item.checked}}"
-          />
+          <scroll-view scroll-y class="desc-options-scroll-view">
+            <mp-checkbox
+              wx:for="{{descOption.desc}}"
+              wx:key="text"
+              label="{{item.text}}"
+              value="{{item.text}}"
+              checked="{{item.checked}}"
+            />
+          </scroll-view>
         </mp-checkbox-group>
       </mp-cells>
     </view>

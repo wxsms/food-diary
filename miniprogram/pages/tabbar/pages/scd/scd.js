@@ -185,17 +185,16 @@ Component({
       const valueOption = find(this.data.options, v => v.value === value)
       const descArr = get(valueOption, 'desc')
       if (Array.isArray(descArr) && descArr.length) {
+        const desc = get(this.data.record, `desc.${this.data.selectedFood._id}`) || []
+        this._descArr = desc
         this.setData({
           showDesc: true,
           descOption: {
             ...valueOption,
-            desc: valueOption.desc.map(v => {
-              const desc = get(this.data.record, `desc.${this.data.selectedFood._id}`) || []
-              return {
-                text: v,
-                checked: desc.indexOf(v) >= 0
-              }
-            })
+            desc: valueOption.desc.map(v => ({
+              text: v,
+              checked: desc.indexOf(v) >= 0
+            }))
           }
         })
       }

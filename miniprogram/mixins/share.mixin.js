@@ -8,7 +8,7 @@ module.exports = Behavior({
         path = getCurrentPages()[0].route
       } catch (e) {
         debug(e)
-        path = 'pages/tabbar/pages/index/index'
+        path = 'pages/index/index'
       }
       debug('onShareAppMessage', path)
       return {

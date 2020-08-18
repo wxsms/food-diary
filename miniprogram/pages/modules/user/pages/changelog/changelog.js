@@ -2,6 +2,15 @@ import themeMixin from '../../../../../mixins/theme.mixin'
 import shareMixin from '../../../../../mixins/share.mixin'
 
 const changelog = `
+## 1.7.1
+### 修复
+* 原生键盘体重输入无小数点的问题
+* 某些 Android 机型打不开导出表格的问题
+### 优化
+* 小程序加载速度优化，载入更快
+* SCD 食物列表支持拼音搜索
+
+
 ## 1.7.0
 ### 新增
 * 增加 「SCD 食物」模块，可以记录自己的食物耐受情况。

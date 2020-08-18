@@ -1,7 +1,7 @@
 {
   "darkmode": true,
   "pages": [
-    "pages/tabbar/pages/index/index",
+    "pages/index/index",
     "pages/tabbar/pages/scd/scd",
     "pages/tabbar/pages/user/user"
   ],
@@ -38,7 +38,7 @@
         "user"
       ]
     },
-    "pages/tabbar/pages/index/index": {
+    "pages/index/index": {
       "network": "all",
       "packages": [
         "diary"
@@ -52,7 +52,7 @@
     "selectedColor": "@tabBarSelectedColor",
     "list": [
       {
-        "pagePath": "pages/tabbar/pages/index/index",
+        "pagePath": "pages/index/index",
         "text": "首页",
         "iconPath": "@editIconPath",
         "selectedIconPath": "@editSelectedIconPath"

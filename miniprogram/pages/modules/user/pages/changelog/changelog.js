@@ -2,6 +2,10 @@ import themeMixin from '../../../../../mixins/theme.mixin'
 import shareMixin from '../../../../../mixins/share.mixin'
 
 const changelog = `
+## 1.7.2
+### 修复
+* 公众号跳转小程序显示该页面不存在的问题
+
 ## 1.7.1
 ### 修复
 * 原生键盘体重输入无小数点的问题

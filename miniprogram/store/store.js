@@ -22,8 +22,11 @@ export const store = observable({
   todayRecord: null,
   // 在日历界面展示的当前月份
   currentMonth: DateTime.local().startOf('month'),
-  // scd 记录
+  // scd 记录相关
   scdRecord: null,
+  // scd 记录更新相关
+  selectedScdFood: null,
+  showUpdateActionSheet: false,
 
   // 计算属性
   // 当前日期数据相关
@@ -85,5 +88,11 @@ export const store = observable({
   }),
   setScdRecord: action(function (data) {
     this.scdRecord = data
+  }),
+  setSelectedScdFood: action(function (data) {
+    this.selectedScdFood = data
+  }),
+  setShowUpdateActionSheet: action(function (data) {
+    this.showUpdateActionSheet = data
   })
 })

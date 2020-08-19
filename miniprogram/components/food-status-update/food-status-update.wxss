@@ -1,0 +1,22 @@
+.desc-options-scroll-view {
+  height: 200px;
+}
+
+.modal-btns {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.modal-btns .weui-btn {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 8px;
+  width: 120px
+}
+
+.weui-cell-noborder:before {
+  border-color: transparent !important;
+}

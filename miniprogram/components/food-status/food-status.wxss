@@ -31,3 +31,7 @@
 .food-status-text {
   margin-left: 10px;
 }
+
+.food-status-text-no-margin {
+  margin-left: 0;
+}

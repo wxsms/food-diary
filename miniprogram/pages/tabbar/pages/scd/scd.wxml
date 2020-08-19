@@ -46,37 +46,5 @@
       </block>
     </mp-vtabs>
   </view>
-
-  <mp-halfScreenDialog show="{{showDesc}}">
-    <view slot="title">{{descOption.text + '描述（选填）'}}</view>
-    <view slot="desc">
-      <mp-cells title="{{selectedFood ? selectedFood.name : undefined}}：">
-        <mp-checkbox-group multi="{{true}}" bindchange="onDescChange">
-          <scroll-view scroll-y class="desc-options-scroll-view" scroll-top="{{descOptionsScrollTop}}">
-            <mp-checkbox
-              extClass="{{index === 0 ? 'weui-cell-noborder' : ''}}"
-              wx:for="{{descOption.desc}}"
-              wx:key="text"
-              label="{{item.text}}"
-              value="{{item.text}}"
-              checked="{{item.checked}}"
-            />
-          </scroll-view>
-        </mp-checkbox-group>
-      </mp-cells>
-    </view>
-    <view slot="footer">
-      <view class="modal-btns">
-        <button type="default" class="weui-btn" bind:tap="hideDesc">取消</button>
-        <button type="primary" class="weui-btn" bind:tap="saveDesc">确定</button>
-      </view>
-    </view>
-  </mp-halfScreenDialog>
-
-  <mp-actionSheet
-    title="{{selectedFood ? selectedFood.name : undefined}}"
-    bindactiontap="onActionPress"
-    show="{{showActionSheet}}"
-    actions="{{options}}"
-  />
+  <food-status-update/>
 </view>

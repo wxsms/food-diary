@@ -5,21 +5,18 @@
       <rich-text nodes="{{foodData.content}}"/>
     </view>
   </block>
-  <view
-    class="weui-panel weui-panel_access"
-    wx:if="{{foodData && record[foodData._id]}}"
-  >
+  <view class="weui-panel weui-panel_access">
     <view class="weui-panel__hd">我的记录</view>
     <view class="weui-panel__bd">
       <view class="weui-media-box weui-media-box_text">
         <view class="weui-media-box__title weui-media-box__title_in-text">耐受情况</view>
         <view class="weui-media-box__desc">
-          <food-status record="{{record[foodData._id]}}" showText="{{true}}"/>
+          <food-status record="{{record ? record[foodData._id] : null}}" showText="{{true}}"/>
         </view>
       </view>
       <view
         class="weui-media-box weui-media-box_text"
-        wx:if="{{record[foodData._id].desc.length > 0}}"
+        wx:if="{{record && record[foodData._id] && record[foodData._id].desc && record[foodData._id].desc.length > 0}}"
       >
         <view class="weui-media-box__title weui-media-box__title_in-text">描述</view>
         <view class="weui-media-box__desc">
@@ -30,11 +27,12 @@
         </view>
       </view>
     </view>
-    <!--    <view class="weui-panel__ft">-->
-    <!--      <view class="weui-cell weui-cell_access weui-cell_link">-->
-    <!--        <view class="weui-cell__bd">更改...</view>-->
-    <!--        <view class="weui-cell__ft weui-cell__ft_in-access"></view>-->
-    <!--      </view>-->
-    <!--    </view>-->
+    <view class="weui-panel__ft" bind:tap="showAction">
+      <view class="weui-cell weui-cell_access weui-cell_link">
+        <view class="weui-cell__bd">记录...</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      </view>
+    </view>
   </view>
+  <food-status-update/>
 </view>

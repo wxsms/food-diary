@@ -3,8 +3,9 @@ import themeMixin from '../../../../../mixins/theme.mixin'
 import shareMixin from '../../../../../mixins/share.mixin'
 import { debug } from '../../../../../utils/log.utils'
 import { loading, toast, TOAST_ERRORS } from '../../../../../utils/toast.utils'
-import { removeLevelInName } from '../../../../../store/scd-foods.store'
+import { getFoods, removeLevelInName } from '../../../../../store/scd-foods.store'
 import { store } from '../../../../../store/store'
+import find from 'lodash.find'
 
 Component({
   behaviors: [storeBindingsBehavior, themeMixin, shareMixin],
@@ -17,7 +18,9 @@ Component({
       record: store => store.scdRecord
     },
     actions: {
-      setScdRecord: 'setScdRecord'
+      setScdRecord: 'setScdRecord',
+      setShowUpdateActionSheet: 'setShowUpdateActionSheet',
+      setSelectedScdFood: 'setSelectedScdFood'
     }
   },
   methods: {
@@ -46,6 +49,15 @@ Component({
         loading(false)
         toast(TOAST_ERRORS.NETWORK_ERR)
       }
+    },
+    async showAction () {
+      const foods = await getFoods()
+      const item = find(foods, v => v._id === this.data.foodData._id)
+      if (!item) {
+        return
+      }
+      this.setSelectedScdFood(item)
+      this.setShowUpdateActionSheet(true)
     }
   }
 })

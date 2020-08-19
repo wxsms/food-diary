@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "food-status": "/components/food-status/food-status"
+    "food-status": "/components/food-status/food-status",
+    "food-status-update": "/components/food-status-update/food-status-update"
   },
   "navigationBarTitleText": "加载中..."
 }

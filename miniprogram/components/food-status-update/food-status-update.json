@@ -1,0 +1,11 @@
+{
+  "component": true,
+  "usingComponents": {
+    "mp-actionSheet": "/miniprogram_npm/weui-miniprogram/actionsheet/actionsheet",
+    "mp-halfScreenDialog": "/miniprogram_npm/weui-miniprogram/half-screen-dialog/half-screen-dialog",
+    "mp-cells": "/miniprogram_npm/weui-miniprogram/cells/cells",
+    "mp-cell": "/miniprogram_npm/weui-miniprogram/cell/cell",
+    "mp-checkbox": "/miniprogram_npm/weui-miniprogram/checkbox/checkbox",
+    "mp-checkbox-group": "/miniprogram_npm/weui-miniprogram/checkbox-group/checkbox-group"
+  }
+}

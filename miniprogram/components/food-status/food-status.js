@@ -20,7 +20,7 @@ Component({
   computed: {
     recordStatus ({ record }) {
       if (isNil(record)) {
-        return ''
+        return SCD_STATUS.NOT_EAT.value
       }
       let status = record
       if (!isNumber(status)) {
@@ -30,7 +30,7 @@ Component({
     },
     recordStatusText ({ record }) {
       if (isNil(record)) {
-        return ''
+        return SCD_STATUS.NOT_EAT.text
       }
       let status = record
       if (!isNumber(status)) {

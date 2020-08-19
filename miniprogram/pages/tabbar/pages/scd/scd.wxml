@@ -30,9 +30,7 @@
             >
               <text class="food-name">{{_item.name}}</text>
               <block wx:if="{{record && record[_item._id]}}">
-                <view wx:if="{{record[_item._id] === 1 || record[_item._id].status === 1}}" class="food-status food-status-ok"/>
-                <view wx:elif="{{record[_item._id] === 2 || record[_item._id].status === 2}}" class="food-status food-status-not-ok"/>
-                <view wx:elif="{{record[_item._id] === -1 || record[_item._id].status === -1}}" class="food-status food-status-pending"/>
+                <food-status record="{{record[_item._id]}}"/>
               </block>
               <block wx:else>
                 <view class="food-status"/>

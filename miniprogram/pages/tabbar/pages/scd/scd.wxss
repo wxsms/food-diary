@@ -58,25 +58,6 @@ page, .container {
   flex: 1
 }
 
-.food-status {
-  width: 10px;
-  height: 10px;
-  margin-left: 10px;
-  border-radius: 50%;
-}
-
-.food-status-ok {
-  background-color: var(--weui-BRAND);
-}
-
-.food-status-not-ok {
-  background-color: var(--weui-RED);
-}
-
-.food-status-pending {
-  background-color: var(--SCD-FOODS-GREY-2);
-}
-
 .row-bottom-placeholder {
   height: 100px;
 }

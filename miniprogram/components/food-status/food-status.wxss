@@ -1,0 +1,30 @@
+.view {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.food-status {
+  width: 10px;
+  height: 10px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+.food-status-ok {
+  background-color: var(--weui-BRAND);
+}
+
+.food-status-not-ok {
+  background-color: var(--weui-RED);
+}
+
+.food-status-pending {
+  background-color: #cccccc;
+}
+
+@media (prefers-color-scheme: dark) {
+  .food-status-pending {
+    background-color: #555555;
+  }
+}

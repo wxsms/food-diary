@@ -14,13 +14,7 @@
       <view class="weui-media-box weui-media-box_text">
         <view class="weui-media-box__title weui-media-box__title_in-text">耐受情况</view>
         <view class="weui-media-box__desc">
-          <view class="my-status">
-            <view wx:if="{{recordStatus === 1 || recordStatus.status === 1}}" class="food-status food-status-ok"/>
-            <view wx:elif="{{recordStatus === 2 || recordStatus.status === 2}}" class="food-status food-status-not-ok"/>
-            <view wx:elif="{{recordStatus === -1 || recordStatus.status === -1}}"
-                  class="food-status food-status-pending"/>
-            <text>{{recordStatusText}}</text>
-          </view>
+          <food-status record="{{record[foodData._id]}}" showText="{{true}}"/>
         </view>
       </view>
       <view

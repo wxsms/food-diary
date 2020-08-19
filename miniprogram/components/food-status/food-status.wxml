@@ -1,0 +1,15 @@
+<view class="view">
+  <view
+    wx:if="{{recordStatus === SCD_STATUS.OK.value}}"
+    class="food-status food-status-ok"
+  />
+  <view
+    wx:elif="{{recordStatus === SCD_STATUS.NOT_OK.value}}"
+    class="food-status food-status-not-ok"
+  />
+  <view
+    wx:elif="{{recordStatus === SCD_STATUS.PENDING.value}}"
+    class="food-status food-status-pending"
+  />
+  <text wx:if="{{showText}}">{{recordStatusText}}</text>
+</view>

@@ -3,5 +3,5 @@
     "mp-cells": "/miniprogram_npm/weui-miniprogram/cells/cells",
     "mp-cell": "/miniprogram_npm/weui-miniprogram/cell/cell"
   },
-  "navigationBarTitleText": "导出数据"
+  "navigationBarTitleText": "记录导出"
 }

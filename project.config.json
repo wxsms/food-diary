@@ -100,7 +100,7 @@
 				},
 				{
 					"id": -1,
-					"name": "导出数据",
+					"name": "导出",
 					"pathName": "pages/modules/user/pages/export/export",
 					"query": "",
 					"scene": null

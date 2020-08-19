@@ -2,6 +2,7 @@ import find from 'lodash.find'
 import { debug, error } from '../utils/log.utils'
 import { STORAGE_KEYS } from '../constants/constants'
 import { getScdVersion, isScdUpdated } from '../utils/version.utils'
+import get from 'lodash.get'
 
 export const SCD_LEVEL = {
   ALL: {
@@ -34,10 +35,15 @@ export const SCD_LEVEL = {
   }
 }
 
-function removeLevelInName (v) {
+const levelRegex = new RegExp('[（|(]?([第|基][\u4e00-\u9fa5]+)[)|）]?$')
+
+export function removeLevelInName (v) {
+  const level = v.name.match(levelRegex)
+  // debug(level)
   return {
     ...v,
-    name: v.name.replace(/[（|(]?[第|基].+[)|）]?$/, '')
+    name: v.name.replace(levelRegex, ''),
+    levelString: get(level, '1', '')
   }
 }
 

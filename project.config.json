@@ -104,6 +104,13 @@
 					"pathName": "pages/modules/user/pages/export/export",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": 7,
+					"name": "scd食物详情",
+					"pathName": "pages/modules/scd/pages/detail/detail",
+					"query": "id=8c85b56b5f2a42db000b238e6642d5c3",
+					"scene": null
 				}
 			]
 		}

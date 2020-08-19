@@ -26,6 +26,8 @@ function initFoods () {
   }))
 }
 
+
+const VALUE_DETAIL = -10
 const options = [{
   text: '待定',
   value: -1,
@@ -59,6 +61,10 @@ const options = [{
 }, {
   text: '没吃过',
   value: 0,
+  desc: []
+}, {
+  text: '查看详情',
+  value: VALUE_DETAIL,
   desc: []
 }]
 
@@ -119,9 +125,15 @@ Component({
       })
     },
     async onActionPress ({ detail: { value } }) {
-      // 0 为取消记录选项，如记录本身不存在，可以忽略
       const selectedFoodId = get(this.data.selectedFood, '_id')
       const record = this.data.record
+      if (value === VALUE_DETAIL) {
+        this.hideAction()
+        wx.navigateTo({
+          url: `/pages/modules/scd/pages/detail/detail?id=${selectedFoodId}`
+        })
+        return
+      }
       let recordOfSelected = get(record, selectedFoodId)
       if (isNumber(recordOfSelected)) {
         recordOfSelected = {
@@ -129,6 +141,7 @@ Component({
         }
       }
       if (value === 0 && isNil(recordOfSelected)) {
+        // 0 为取消记录选项，如记录本身不存在，可以忽略
         this.hideAction()
         return
       }

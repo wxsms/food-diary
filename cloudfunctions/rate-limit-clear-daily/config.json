@@ -7,7 +7,7 @@
     {
       "name": "rate-limit-clear-daily",
       "type": "timer",
-      "config": "0 * * * * * *"
+      "config": "0 0 0 * * * *"
     }
   ]
 }

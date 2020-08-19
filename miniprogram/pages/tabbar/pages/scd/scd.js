@@ -260,7 +260,12 @@ Component({
       debug(this._descArr)
       const selectedFoodId = get(this.data.selectedFood, '_id')
       const record = this.data.record
-      const recordOfFood = get(record, selectedFoodId)
+      let recordOfFood = get(record, selectedFoodId)
+      if (isNumber(recordOfFood)) {
+        recordOfFood = {
+          status: recordOfFood
+        }
+      }
       if (isEqual(this._descArr, get(recordOfFood, `desc`))) {
         this.hideDesc()
         return

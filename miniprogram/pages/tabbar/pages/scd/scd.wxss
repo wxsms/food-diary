@@ -86,3 +86,14 @@ page, .container {
 .desc-options-scroll-view {
   height: 200px;
 }
+
+.modal-btns {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.weui-cell-noborder:before {
+  border-color: transparent !important;
+}

@@ -7,6 +7,8 @@ import { debug, error } from '../../../../utils/log.utils'
 import find from 'lodash.find'
 import get from 'lodash.get'
 import isEqual from 'lodash.isequal'
+import isNumber from 'lodash.isnumber'
+import isNil from 'lodash.isnil'
 import { nextTick } from '../../../../utils/wx.utils'
 
 function initFoods () {
@@ -33,8 +35,13 @@ const options = [{
   value: 1,
   desc: [
     '需要煮熟',
+    '需要放置成熟',
     '需要打糊',
-    '仅调味'
+    '需要去皮去籽',
+    '需要充分发酵',
+    '需要充分浸泡',
+    '少量食用',
+    '仅调味，不直接食用'
   ]
 }, {
   text: '不耐受',
@@ -45,7 +52,9 @@ const options = [{
     '腹痛',
     '便血',
     '肠鸣',
-    '其它过敏反应'
+    '肠梗阻',
+    '发热',
+    '其它反应'
   ]
 }, {
   text: '没吃过',
@@ -64,6 +73,7 @@ Component({
     showActionSheet: false,
     showDesc: false,
     descOption: options[0],
+    descOptionsScrollTop: 0,
     options: options
   },
   methods: {
@@ -110,12 +120,20 @@ Component({
     },
     async onActionPress ({ detail: { value } }) {
       // 0 为取消记录选项，如记录本身不存在，可以忽略
-      if (value === 0 && (!this.data.record || typeof this.data.record[this.data.selectedFood._id] !== 'number')) {
+      const selectedFoodId = get(this.data.selectedFood, '_id')
+      const record = this.data.record
+      let recordOfSelected = get(record, selectedFoodId)
+      if (isNumber(recordOfSelected)) {
+        recordOfSelected = {
+          status: recordOfSelected
+        }
+      }
+      if (value === 0 && isNil(recordOfSelected)) {
         this.hideAction()
         return
       }
       // 记录存在且与选项一致，可以忽略
-      if (this.data.record && this.data.record[this.data.selectedFood._id] === value) {
+      if (get(recordOfSelected, 'status') === value) {
         this.hideAction()
         await nextTick()
         this.showDescIfNeeded(value)
@@ -124,24 +142,25 @@ Component({
       loading(true, '记录中...')
       try {
         const db = wx.cloud.database()
-        if (this.data.record) {
-          const newRecord = {
-            ...this.data.record,
-            [this.data.selectedFood._id]: value
-          }
-          delete newRecord._openid
-          delete newRecord._id
+        const _ = db.command
+        if (record) {
           const { stats: { updated } } = await db
             .collection('records-scd')
-            .doc(this.data.record._id)
+            .doc(record._id)
             .update({
-              data: newRecord
+              data: {
+                [selectedFoodId]: _.set({
+                  status: value
+                })
+              }
             })
           if (updated === 1) {
             this.setData({
               record: {
-                ...this.data.record,
-                ...newRecord
+                ...record,
+                [selectedFoodId]: {
+                  status: value
+                }
               },
               showActionSheet: false
             })
@@ -151,20 +170,23 @@ Component({
             toast(TOAST_ERRORS.NETWORK_ERR)
           }
         } else {
-          const newRecord = {
-            [this.data.selectedFood._id]: value
-          }
           const { _id } = await db
             .collection('records-scd')
             .add({
-              data: newRecord
+              data: {
+                [selectedFoodId]: {
+                  status: value
+                }
+              }
             })
           debug(_id)
           if (_id) {
             this.setData({
               record: {
                 _id,
-                ...newRecord
+                [selectedFoodId]: {
+                  status: value
+                }
               },
               showActionSheet: false
             })
@@ -185,10 +207,13 @@ Component({
       const valueOption = find(this.data.options, v => v.value === value)
       const descArr = get(valueOption, 'desc')
       if (Array.isArray(descArr) && descArr.length) {
-        const desc = get(this.data.record, `desc.${this.data.selectedFood._id}`) || []
+        const selectedFoodId = get(this.data.selectedFood, '_id')
+        const record = this.data.record
+        const desc = get(record, `${selectedFoodId}.desc`) || []
         this._descArr = desc
         this.setData({
           showDesc: true,
+          descOptionsScrollTop: 0,
           descOption: {
             ...valueOption,
             desc: valueOption.desc.map(v => ({
@@ -211,31 +236,34 @@ Component({
         this._descArr = []
       }
       debug(this._descArr)
-      const descRecord = get(this.data, `record.desc.${this.data.selectedFood._id}`)
-      const noChange = isEqual(this._descArr, descRecord)
-      if (noChange) {
+      const selectedFoodId = get(this.data.selectedFood, '_id')
+      const record = this.data.record
+      const recordOfFood = get(record, selectedFoodId)
+      if (isEqual(this._descArr, get(recordOfFood, `desc`))) {
         this.hideDesc()
         return
+      }
+      const recordOfFoodNew = {
+        ...recordOfFood,
+        desc: this._descArr
       }
       try {
         loading(true, '记录中...')
         const db = wx.cloud.database()
+        const _ = db.command
         await db
           .collection('records-scd')
-          .doc(this.data.record._id)
+          .doc(record._id)
           .update({
             data: {
-              [`desc.${this.data.selectedFood._id}`]: this._descArr
+              [selectedFoodId]: _.set(recordOfFoodNew)
             }
           })
         loading(false)
         this.setData({
           record: {
-            ...this.data.record,
-            desc: {
-              ...this.data.record.desc,
-              [this.data.selectedFood._id]: this._descArr
-            }
+            ...record,
+            [selectedFoodId]: recordOfFoodNew
           },
           showDesc: false
         })

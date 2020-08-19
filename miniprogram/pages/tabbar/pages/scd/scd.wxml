@@ -30,9 +30,9 @@
             >
               <text class="food-name">{{_item.name}}</text>
               <block wx:if="{{record && record[_item._id]}}">
-                <view wx:if="{{record[_item._id] === 1}}" class="food-status food-status-ok"/>
-                <view wx:elif="{{record[_item._id] === 2}}" class="food-status food-status-not-ok"/>
-                <view wx:elif="{{record[_item._id] === -1}}" class="food-status food-status-pending"/>
+                <view wx:if="{{record[_item._id] === 1 || record[_item._id].status === 1}}" class="food-status food-status-ok"/>
+                <view wx:elif="{{record[_item._id] === 2 || record[_item._id].status === 2}}" class="food-status food-status-not-ok"/>
+                <view wx:elif="{{record[_item._id] === -1 || record[_item._id].status === -1}}" class="food-status food-status-pending"/>
               </block>
               <block wx:else>
                 <view class="food-status"/>
@@ -47,13 +47,15 @@
       </block>
     </mp-vtabs>
   </view>
+
   <mp-halfScreenDialog show="{{showDesc}}">
     <view slot="title">{{descOption.text + '描述（选填）'}}</view>
     <view slot="desc">
       <mp-cells title="{{selectedFood ? selectedFood.name : undefined}}：">
         <mp-checkbox-group multi="{{true}}" bindchange="onDescChange">
-          <scroll-view scroll-y class="desc-options-scroll-view">
+          <scroll-view scroll-y class="desc-options-scroll-view" scroll-top="{{descOptionsScrollTop}}">
             <mp-checkbox
+              extClass="{{index === 0 ? 'weui-cell-noborder' : ''}}"
               wx:for="{{descOption.desc}}"
               wx:key="text"
               label="{{item.text}}"

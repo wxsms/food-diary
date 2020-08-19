@@ -8,7 +8,9 @@ cloud.init({
 const db = cloud.database()
 const cmd = db.command
 const MAX_LIMIT = 100
-const dateOffset = 8 * 60 * 60 * 1000
+// const dateOffset = 8 * 60 * 60 * 1000
+// TZ=Asia/Shanghai 设置后为 +8 时区，无需偏移
+const dateOffset = 0
 const ERROR_CODES = {
   RATE: -10001
 }

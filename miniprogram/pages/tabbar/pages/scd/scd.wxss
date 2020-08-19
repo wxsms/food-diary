@@ -55,7 +55,8 @@ page, .container {
 }
 
 .food-name {
-  flex: 1
+  flex: 1;
+  margin-right: 10px;
 }
 
 .row-bottom-placeholder {

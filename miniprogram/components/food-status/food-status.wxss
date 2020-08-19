@@ -7,7 +7,6 @@
 .food-status {
   width: 10px;
   height: 10px;
-  margin-right: 10px;
   border-radius: 50%;
 }
 
@@ -27,4 +26,8 @@
   .food-status-pending {
     background-color: #555555;
   }
+}
+
+.food-status-text {
+  margin-left: 10px;
 }

@@ -11,5 +11,5 @@
     wx:elif="{{recordStatus === SCD_STATUS.PENDING.value}}"
     class="food-status food-status-pending"
   />
-  <text wx:if="{{showText}}">{{recordStatusText}}</text>
+  <text wx:if="{{showText}}" class="food-status-text">{{recordStatusText}}</text>
 </view>

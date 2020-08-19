@@ -10,6 +10,7 @@ import isEqual from 'lodash.isequal'
 import isNumber from 'lodash.isnumber'
 import isNil from 'lodash.isnil'
 import { nextTick } from '../../../../utils/wx.utils'
+import { store } from '../../../../store/store'
 
 function initFoods () {
   debug('initFoods')
@@ -25,7 +26,6 @@ function initFoods () {
     title: v.name
   }))
 }
-
 
 const VALUE_DETAIL = -10
 const options = [{
@@ -73,7 +73,6 @@ Component({
   data: {
     foods: [],
     filtered: false,
-    record: null,
     activeTab: 0,
     selectedFood: null,
     showActionSheet: false,
@@ -81,6 +80,15 @@ Component({
     descOption: options[0],
     descOptionsScrollTop: 0,
     options: options
+  },
+  storeBindings: {
+    store,
+    fields: {
+      record: store => store.scdRecord
+    },
+    actions: {
+      setScdRecord: 'setScdRecord'
+    }
   },
   methods: {
     async onLoad () {
@@ -104,7 +112,7 @@ Component({
       const { data } = await db.collection('records-scd').get()
       debug('my scd:', data)
       if (data && data.length) {
-        this.setData({ record: data[0] })
+        this.setScdRecord(data[0])
       }
     },
     async showAction ({ currentTarget: { dataset: { id } } }) {
@@ -169,13 +177,13 @@ Component({
             })
           if (updated === 1) {
             this.setData({
-              record: {
-                ...record,
-                [selectedFoodId]: {
-                  status: value
-                }
-              },
               showActionSheet: false
+            })
+            this.setScdRecord({
+              ...record,
+              [selectedFoodId]: {
+                status: value
+              }
             })
             await nextTick()
             this.showDescIfNeeded(value)
@@ -195,13 +203,13 @@ Component({
           debug(_id)
           if (_id) {
             this.setData({
-              record: {
-                _id,
-                [selectedFoodId]: {
-                  status: value
-                }
-              },
               showActionSheet: false
+            })
+            this.setScdRecord({
+              _id,
+              [selectedFoodId]: {
+                status: value
+              }
             })
             await nextTick()
             this.showDescIfNeeded(value)
@@ -274,11 +282,11 @@ Component({
           })
         loading(false)
         this.setData({
-          record: {
-            ...record,
-            [selectedFoodId]: recordOfFoodNew
-          },
           showDesc: false
+        })
+        this.setScdRecord({
+          ...record,
+          [selectedFoodId]: recordOfFoodNew
         })
       } catch (e) {
         error(e)

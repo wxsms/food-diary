@@ -11,10 +11,10 @@ export const EXPORT_KINDS = {
 
 export async function exportAndDownloadRecords ({ from, to, kind = EXPORT_KINDS.MONTH }) {
   try {
-    const rangeTip = from === 0 ? '全部' : `${format(from)}至${format(to)}的`
+    const rangeTip = from === 0 ? '全部' : `${format(from, FORMATS.Y_M)}至${format(to, FORMATS.Y_M)}`
     const { confirm } = await wx.showModal({
       title: '导出确认',
-      content: `将要导出${rangeTip}记录\r\n为保证服务稳定，每天只允许导出一次`
+      content: `导出以下时间段的记录：\r\n${rangeTip}\r\n每天可以导出一次`
     })
     if (!confirm) {
       return

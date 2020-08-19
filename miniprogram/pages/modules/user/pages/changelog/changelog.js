@@ -2,6 +2,12 @@ import themeMixin from '../../../../../mixins/theme.mixin'
 import shareMixin from '../../../../../mixins/share.mixin'
 
 const changelog = `
+## 1.8.0
+### 新增
+* SCD 食物现在可以查看详情了
+* SCD 食物耐受记录现在可以添加备注了
+* 增加记录导出菜单，可以自由选择按月或按年导出
+
 ## 1.7.2
 ### 修复
 * 公众号跳转小程序显示该页面不存在的问题

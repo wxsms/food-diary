@@ -21,6 +21,10 @@
   box-shadow: 0 0 5px 1px var(--IMG-BOX-SHADOW-COLOR);
 }
 
+.container[data-weui-theme=dark] .rich-text-view rich-text .rich-text-img {
+  filter: brightness(70%);
+}
+
 .level {
   font-size: 16px;
   display: block;

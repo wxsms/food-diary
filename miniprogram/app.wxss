@@ -17,10 +17,12 @@ page {
   background-color: #ebebeb;
   color: var(--weui-FG-0);
   overflow: hidden;
+  --SCD-FOODS-GREY-2: #cccccc;
 }
 
 .container[data-weui-theme=dark] {
   background-color: #191919;
+  --SCD-FOODS-GREY-2: #555555;
 }
 
 .page__hd {

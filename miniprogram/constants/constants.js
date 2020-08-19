@@ -70,7 +70,7 @@ export const STORAGE_KEYS = {
 
 export const SCD_STATUS = {
   PENDING: {
-    value: 0,
+    value: -1,
     text: '待定'
   },
   OK: {

@@ -5,14 +5,42 @@
       <rich-text nodes="{{foodData.content}}"/>
     </view>
   </block>
-  <view wx:if="{{foodData && record[foodData._id]}}" class="my-status">
-    <view>我的记录：{{recordStatus}}</view>
-    <view wx:if="{{record[foodData._id].desc.length > 0}}">
-      <text>描述：</text>
-      <block wx:for="{{record[foodData._id].desc}}" wx:key="index">
-        <text>{{item}}</text>
-        <text wx:if="{{index !== record[foodData._id].desc.length-1}}">，</text>
-      </block>
+  <view
+    class="weui-panel weui-panel_access"
+    wx:if="{{foodData && record[foodData._id]}}"
+  >
+    <view class="weui-panel__hd">我的记录</view>
+    <view class="weui-panel__bd">
+      <view class="weui-media-box weui-media-box_text">
+        <view class="weui-media-box__title weui-media-box__title_in-text">耐受情况</view>
+        <view class="weui-media-box__desc">
+          <view class="my-status">
+            <view wx:if="{{recordStatus === 1 || recordStatus.status === 1}}" class="food-status food-status-ok"/>
+            <view wx:elif="{{recordStatus === 2 || recordStatus.status === 2}}" class="food-status food-status-not-ok"/>
+            <view wx:elif="{{recordStatus === -1 || recordStatus.status === -1}}"
+                  class="food-status food-status-pending"/>
+            <text>{{recordStatusText}}</text>
+          </view>
+        </view>
+      </view>
+      <view
+        class="weui-media-box weui-media-box_text"
+        wx:if="{{record[foodData._id].desc.length > 0}}"
+      >
+        <view class="weui-media-box__title weui-media-box__title_in-text">描述</view>
+        <view class="weui-media-box__desc">
+          <block wx:for="{{record[foodData._id].desc}}" wx:key="index">
+            <text>{{item}}</text>
+            <text wx:if="{{index !== record[foodData._id].desc.length-1}}">，</text>
+          </block>
+        </view>
+      </view>
     </view>
+    <!--    <view class="weui-panel__ft">-->
+    <!--      <view class="weui-cell weui-cell_access weui-cell_link">-->
+    <!--        <view class="weui-cell__bd">更改...</view>-->
+    <!--        <view class="weui-cell__ft weui-cell__ft_in-access"></view>-->
+    <!--      </view>-->
+    <!--    </view>-->
   </view>
 </view>

@@ -29,6 +29,26 @@
 }
 
 .my-status {
-  padding: 0 16px;
-  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.food-status {
+  width: 10px;
+  height: 10px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+.food-status-ok {
+  background-color: var(--weui-BRAND);
+}
+
+.food-status-not-ok {
+  background-color: var(--weui-RED);
+}
+
+.food-status-pending {
+  background-color: var(--SCD-FOODS-GREY-2);
 }

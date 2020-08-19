@@ -35,6 +35,16 @@ Component({
       if (!isNumber(status)) {
         status = get(status, 'status')
       }
+      return status
+    },
+    recordStatusText ({ record, foodData }) {
+      if (isNil(record) || isNil(foodData)) {
+        return ''
+      }
+      let status = get(record, foodData._id)
+      if (!isNumber(status)) {
+        status = get(status, 'status')
+      }
       return get(find(SCD_STATUS, v => v.value === status), 'text', SCD_STATUS.NOT_EAT.text)
     }
   },

@@ -11,6 +11,7 @@ import isNumber from 'lodash.isnumber'
 import isNil from 'lodash.isnil'
 import { nextTick } from '../../../../utils/wx.utils'
 import { store } from '../../../../store/store'
+import { SCD_STATUS } from '../../../../constants/constants'
 
 function initFoods () {
   debug('initFoods')
@@ -29,12 +30,12 @@ function initFoods () {
 
 const VALUE_DETAIL = -10
 const options = [{
-  text: '待定',
-  value: -1,
+  text: SCD_STATUS.PENDING.text,
+  value: SCD_STATUS.PENDING.value,
   desc: []
 }, {
-  text: '耐受',
-  value: 1,
+  text: SCD_STATUS.OK.text,
+  value: SCD_STATUS.OK.value,
   desc: [
     '需要煮熟',
     '需要放置成熟',
@@ -46,8 +47,8 @@ const options = [{
     '仅调味，不直接食用'
   ]
 }, {
-  text: '不耐受',
-  value: 2,
+  text: SCD_STATUS.NOT_OK.text,
+  value: SCD_STATUS.NOT_OK.value,
   type: 'warn',
   desc: [
     '腹泻',
@@ -59,8 +60,8 @@ const options = [{
     '其它反应'
   ]
 }, {
-  text: '没吃过',
-  value: 0,
+  text: SCD_STATUS.NOT_EAT.text,
+  value: SCD_STATUS.NOT_EAT.value,
   desc: []
 }, {
   text: '查看详情',

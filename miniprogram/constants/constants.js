@@ -67,3 +67,22 @@ export const STORAGE_KEYS = {
   SCD_FOODS: 'SCD_FOODS',
   USER_OPEN_ID: 'USER_OPEN_ID'
 }
+
+export const SCD_STATUS = {
+  PENDING: {
+    value: 0,
+    text: '待定'
+  },
+  OK: {
+    value: 1,
+    text: '耐受'
+  },
+  NOT_OK: {
+    value: 2,
+    text: '不耐受'
+  },
+  NOT_EAT: {
+    value: 0,
+    text: '没吃过'
+  }
+}

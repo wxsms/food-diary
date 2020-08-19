@@ -5,4 +5,14 @@
       <rich-text nodes="{{foodData.content}}"/>
     </view>
   </block>
+  <view wx:if="{{foodData && record[foodData._id]}}" class="my-status">
+    <view>我的记录：{{recordStatus}}</view>
+    <view wx:if="{{record[foodData._id].desc.length > 0}}">
+      <text>描述：</text>
+      <block wx:for="{{record[foodData._id].desc}}" wx:key="index">
+        <text>{{item}}</text>
+        <text wx:if="{{index !== record[foodData._id].desc.length-1}}">，</text>
+      </block>
+    </view>
+  </view>
 </view>

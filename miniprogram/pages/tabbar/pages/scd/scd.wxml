@@ -14,7 +14,7 @@
         <mp-vtabs-content tabIndex="{{index}}">
           <block wx:if="{{index === 0}}">
             <view class="page__desc row-title">数据来源：「包子SCD」公众号</view>
-            <view class="page__desc row-title">提示：点击某项可以记录耐受情况</view>
+            <view class="page__desc row-title">长按某项可以快速记录耐受情况</view>
           </block>
           <block wx:if="{{item.list.length > 0}}">
             <view class="page__desc row-title">{{item.name}}</view>
@@ -25,7 +25,8 @@
               wx:key="_id"
               wx:for-item="_item"
               wx:for-index='_index'
-              bind:tap="showAction"
+              bind:tap="goDetail"
+              bind:longpress="showAction"
               data-id="{{_item._id}}"
             >
               <text class="food-name">{{_item.name}}</text>

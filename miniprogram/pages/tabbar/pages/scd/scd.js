@@ -116,6 +116,11 @@ Component({
         this.setScdRecord(data[0])
       }
     },
+    goDetail ({ currentTarget: { dataset: { id } } }) {
+      wx.navigateTo({
+        url: `/pages/modules/scd/pages/detail/detail?id=${id}`
+      })
+    },
     async showAction ({ currentTarget: { dataset: { id } } }) {
       const foods = await getFoods()
       const item = find(foods, v => v._id === id)

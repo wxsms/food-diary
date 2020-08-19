@@ -10,7 +10,7 @@ const cmd = db.command
 const MAX_LIMIT = 100
 // const dateOffset = 8 * 60 * 60 * 1000
 // TZ=Asia/Shanghai 设置后为 +8 时区，无需偏移
-const dateOffset = 0
+// const dateOffset = 0
 const ERROR_CODES = {
   RATE: -10001
 }
@@ -94,7 +94,7 @@ exports.main = async ({ from, to, groupBy = 'month' }, context) => {
       TYPES.ABNORMAL
     ]
     const groupedData = _.groupBy(data, v => {
-      const date = new Date(v.date + dateOffset)
+      const date = new Date(v.date)
       if (groupBy === 'year') {
         return `${date.getFullYear()}`
       } else {
@@ -111,7 +111,7 @@ exports.main = async ({ from, to, groupBy = 'month' }, context) => {
         const arr = []
         keys.map(v => v.key).forEach(v => {
           if (v === 'date') {
-            const date = new Date(row[v] + dateOffset)
+            const date = new Date(row[v])
             arr.push(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`)
           } else {
             const isExist = typeof row[v] !== 'undefined' && row[v] !== null

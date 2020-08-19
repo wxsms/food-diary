@@ -12,7 +12,8 @@ const MAX_LIMIT = 100
 // TZ=Asia/Shanghai 设置后为 +8 时区，无需偏移
 // const dateOffset = 0
 const ERROR_CODES = {
-  RATE: -10001
+  RATE: -10001,
+  NO_RECORD: -10002
 }
 
 const TYPES = {
@@ -42,6 +43,7 @@ exports.main = async ({ from, to, groupBy = 'month' }, context) => {
       .where(rateWhere)
       .get()
     if (rateRes.data && rateRes.data.length) {
+      // 超限调用，拒绝
       console.log('rate limit exceed.')
       return ERROR_CODES.RATE
     }
@@ -49,38 +51,45 @@ exports.main = async ({ from, to, groupBy = 'month' }, context) => {
     const where = {
       _openid: wxContext.OPENID
     }
-    // 设置了查询日期范围
     if (typeof from === 'number' && typeof to === 'number') {
+      // 设置查询日期范围
       where.date = cmd.gte(from).and(cmd.lt(to))
     }
     // 获取总数
-    const countResult = await db
+    const { total } = await db
       .collection('records')
       .where(where)
       .count()
-    if (countResult.total === 0) {
-      return ''
+    if (total === 0) {
+      // 查询无记录
+      return ERROR_CODES.NO_RECORD
     }
-    const total = countResult.total
     const batchTimes = Math.ceil(total / MAX_LIMIT)
     const tasks = []
     for (let i = 0; i < batchTimes; i++) {
-      const promise = db
+      tasks.push(db
         .collection('records')
         .where(where)
         .orderBy('date', 'asc')
         .skip(i * MAX_LIMIT)
         .limit(MAX_LIMIT)
-        .get()
-      tasks.push(promise)
+        .get())
     }
+    tasks.push(db
+      .collection('rate-limit')
+      .add({
+        data: {
+          ts: Date.now(),
+          ...rateWhere
+        }
+      }))
     // 分批次获取所有范围内的数据
-    const { data } = (await Promise.all(tasks)).reduce((acc, cur) => {
-      return {
-        data: acc.data.concat(cur.data),
-        errMsg: acc.errMsg,
-      }
-    })
+    const recordsRes = await Promise.all(tasks)
+    recordsRes.pop()
+    const { data } = recordsRes.reduce((acc, cur) => ({
+      data: acc.data.concat(cur.data),
+      errMsg: acc.errMsg
+    }))
     // 生成 excel
     const keys = [
       TYPES.DATE,
@@ -93,6 +102,7 @@ exports.main = async ({ from, to, groupBy = 'month' }, context) => {
       TYPES.OTHERS,
       TYPES.ABNORMAL
     ]
+    // 按年或月分组
     const groupedData = _.groupBy(data, v => {
       const date = new Date(v.date)
       if (groupBy === 'year') {
@@ -147,14 +157,6 @@ exports.main = async ({ from, to, groupBy = 'month' }, context) => {
     const res = await cloud.getTempFileURL({
       fileList: [fileID]
     })
-    await db
-      .collection('rate-limit')
-      .add({
-        data: {
-          ts: Date.now(),
-          ...rateWhere
-        }
-      })
     return res.fileList[0].tempFileURL
   } catch (e) {
     console.log(e)

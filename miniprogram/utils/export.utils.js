@@ -24,14 +24,13 @@ export async function exportAndDownloadRecords ({ from, to, kind = EXPORT_KINDS.
       name: 'export',
       data: { from, to }
     })
-    if (!result) {
+    if (typeof result !== 'string') {
       loading(false)
-      toast('当前时间段没有可导出的记录')
-      return
-    }
-    if (result === -10001) {
-      loading(false)
-      toast('限额已用完，请明日再试')
+      if (result === -10001) {
+        toast('限额已用完，请明日再试')
+      } else if (result === -10002) {
+        toast('该时间段无任何记录')
+      }
       return
     }
     debug('wx.env.USER_DATA_PATH:', wx.env.USER_DATA_PATH)

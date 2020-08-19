@@ -22,8 +22,8 @@
         </picker>
       </button>
     </mp-cell>
-    <mp-cell hover ext-class="cell-flat" bind:tap="exportAll">
-      <button class="cell-button">导出全部</button>
-    </mp-cell>
+    <!--    <mp-cell hover ext-class="cell-flat" bind:tap="exportAll">-->
+    <!--      <button class="cell-button">导出全部</button>-->
+    <!--    </mp-cell>-->
   </mp-cells>
 </view>

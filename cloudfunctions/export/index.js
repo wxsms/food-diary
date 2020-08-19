@@ -8,6 +8,10 @@ cloud.init({
 const db = cloud.database()
 const cmd = db.command
 const MAX_LIMIT = 100
+const dateOffset = 8 * 60 * 60 * 1000
+const ERROR_CODES = {
+  RATE: -10001
+}
 
 const TYPES = {
   DATE: { label: '日期', key: 'date' },
@@ -25,12 +29,29 @@ const TYPES = {
 exports.main = async ({ from, to, groupBy = 'month' }, context) => {
   try {
     const wxContext = cloud.getWXContext()
+    // 检测是否允许调用
+    const rateWhere = {
+      _openid: wxContext.OPENID,
+      module: 'export',
+      type: 'daily'
+    }
+    const rateRes = await db
+      .collection('rate-limit')
+      .where(rateWhere)
+      .get()
+    if (rateRes.data && rateRes.data.length) {
+      console.log('rate limit exceed.')
+      return ERROR_CODES.RATE
+    }
+    // 查询条件
     const where = {
       _openid: wxContext.OPENID
     }
+    // 设置了查询日期范围
     if (typeof from === 'number' && typeof to === 'number') {
       where.date = cmd.gte(from).and(cmd.lt(to))
     }
+    // 获取总数
     const countResult = await db
       .collection('records')
       .where(where)
@@ -51,12 +72,14 @@ exports.main = async ({ from, to, groupBy = 'month' }, context) => {
         .get()
       tasks.push(promise)
     }
+    // 分批次获取所有范围内的数据
     const { data } = (await Promise.all(tasks)).reduce((acc, cur) => {
       return {
         data: acc.data.concat(cur.data),
         errMsg: acc.errMsg,
       }
     })
+    // 生成 excel
     const keys = [
       TYPES.DATE,
       TYPES.BREAKFAST,
@@ -68,7 +91,6 @@ exports.main = async ({ from, to, groupBy = 'month' }, context) => {
       TYPES.OTHERS,
       TYPES.ABNORMAL
     ]
-    const dateOffset = 8 * 60 * 60 * 1000
     const groupedData = _.groupBy(data, v => {
       const date = new Date(v.date + dateOffset)
       if (groupBy === 'year') {
@@ -114,13 +136,23 @@ exports.main = async ({ from, to, groupBy = 'month' }, context) => {
         { wch: 20 }
       ]
     })
+    // 上传至云储存
     const { fileID } = await cloud.uploadFile({
       cloudPath: `records-export-${wxContext.OPENID}.xlsx`,
       fileContent: buffer,
     })
+    // 获取临时下载链接
     const res = await cloud.getTempFileURL({
       fileList: [fileID]
     })
+    await db
+      .collection('rate-limit')
+      .add({
+        data: {
+          ts: Date.now(),
+          ...rateWhere
+        }
+      })
     return res.fileList[0].tempFileURL
   } catch (e) {
     console.log(e)

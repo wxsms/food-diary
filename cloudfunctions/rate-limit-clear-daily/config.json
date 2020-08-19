@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "openapi": [
+    ]
+  },
+  "triggers": [
+    {
+      "name": "rate-limit-clear-daily",
+      "type": "timer",
+      "config": "0 * * * * * *"
+    }
+  ]
+}

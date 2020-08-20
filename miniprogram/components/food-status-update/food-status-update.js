@@ -9,6 +9,7 @@ import isNil from 'lodash.isnil'
 import { nextTick } from '../../utils/wx.utils'
 import { store } from '../../store/store'
 import { SCD_STATUS } from '../../constants/constants'
+import values from 'lodash.values'
 
 const options = [{
   text: SCD_STATUS.PENDING.text,
@@ -158,7 +159,7 @@ Component({
       if (Array.isArray(descArr) && descArr.length) {
         const selectedFoodId = get(this.data.selectedScdFood, '_id')
         const record = this.data.record
-        const desc = get(record, `${selectedFoodId}.desc`) || []
+        const desc = get(record, `${selectedFoodId}.desc.$mobx.values`) || get(record, `${selectedFoodId}.desc`) || []
         this._descArr = desc
         this.setData({
           showDesc: true,

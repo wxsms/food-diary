@@ -9,7 +9,6 @@ import isNil from 'lodash.isnil'
 import { nextTick } from '../../utils/wx.utils'
 import { store } from '../../store/store'
 import { SCD_STATUS } from '../../constants/constants'
-import values from 'lodash.values'
 
 const options = [{
   text: SCD_STATUS.PENDING.text,

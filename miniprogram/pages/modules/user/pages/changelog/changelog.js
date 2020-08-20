@@ -2,6 +2,10 @@ import themeMixin from '../../../../../mixins/theme.mixin'
 import shareMixin from '../../../../../mixins/share.mixin'
 
 const changelog = `
+## 1.8.1
+### 修复
+* SCD 食物二次记录不做任何更改时备注被清空的问题
+
 ## 1.8.0
 ### 新增
 * SCD 食物现在可以查看详情了

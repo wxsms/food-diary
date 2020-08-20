@@ -158,7 +158,8 @@ Component({
       if (Array.isArray(descArr) && descArr.length) {
         const selectedFoodId = get(this.data.selectedScdFood, '_id')
         const record = this.data.record
-        const desc = get(record, `${selectedFoodId}.desc.$mobx.values`) || get(record, `${selectedFoodId}.desc`) || []
+        const desc = (get(record, `${selectedFoodId}.desc`) || []).slice()
+        debug('desc from mobx', desc)
         this._descArr = desc
         this.setData({
           showDesc: true,

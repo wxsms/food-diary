@@ -9,7 +9,7 @@ import {
   getWeekdayLong,
   minusDay,
   minusMonth,
-  startOfMonth, ts
+  startOfMonth
 } from '../utils/date.utils'
 
 debug('init store')

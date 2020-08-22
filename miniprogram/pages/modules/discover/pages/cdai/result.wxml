@@ -1,0 +1,26 @@
+<view class="container" data-weui-theme="{{theme}}">
+  <mp-msg type="{{type}}" title="{{'评价总分：' + score}}">
+    <view slot="desc">
+      <text>{{msg}}</text>
+    </view>
+
+    <view slot="extend">
+      <view wx:if="{{type === 'success'}}">注：需要使用类固醇（激素）以保持无症状的患者不被视作缓解</view>
+    </view>
+
+    <view slot="handle">
+      <button class="weui-btn" type="default" bind:tap="back">
+        重新填写
+      </button>
+      <button class="weui-btn" type="primary" bind:tap="exit">
+        退出
+      </button>
+    </view>
+
+    <view slot="tips">
+      <view class="weui-footer__text">
+        评价结果仅供参考，这些信息不应被用于任何健康问题或疾病的诊断或治疗，不能以任何方式取代临床判断或指导个体患者的治疗。软件作者不对其承担任何法律责任。
+      </view>
+    </view>
+  </mp-msg>
+</view>

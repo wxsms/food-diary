@@ -1,0 +1,3 @@
+.weui-msg {
+  height: 100vh;
+}

@@ -1,0 +1,133 @@
+<view class="container" data-weui-theme="{{theme}}">
+  <mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
+
+  <mp-form-page
+    title="克罗恩病活动指数 (CDAI)"
+    subtitle="该指数可以从临床上评估疾病活动性的严重程度并进行疗效评价"
+  >
+    <mp-form id="form" rules="{{rules}}" models="{{formData}}">
+
+      <mp-cells title="性别">
+        <mp-checkbox-group
+          data-field="sex"
+          multi="{{false}}"
+          bindchange="formInputChange"
+        >
+          <mp-checkbox label="男" value="male"/>
+          <mp-checkbox label="女" value="female"/>
+        </mp-checkbox-group>
+      </mp-cells>
+
+      <mp-cells title="最近一周平均每日稀便或水样便">
+        <mp-cell prop="defecation" title="次数">
+          <input
+            bind:input="formInputChange"
+            data-field="defecation"
+            type="digit"
+            class="weui-input"
+            placeholder="请输入数字"
+          />
+        </mp-cell>
+      </mp-cells>
+
+      <mp-cells title="使用了治疗腹泻的药物？">
+        <mp-checkbox-group
+          data-field="defecationMedication"
+          multi="{{true}}"
+          bindchange="formInputChange"
+        >
+          <mp-checkbox label="苯乙哌啶/阿片类止泻药" value="{{30}}"/>
+        </mp-checkbox-group>
+      </mp-cells>
+
+      <mp-cells title="最近一周的平均腹痛评分">
+        <mp-checkbox-group
+          data-field="stomachache"
+          multi="{{false}}"
+          bindchange="formInputChange"
+        >
+          <mp-checkbox label="无" value="{{0}}"/>
+          <mp-checkbox label="轻度疼痛" value="{{35}}"/>
+          <mp-checkbox label="中度疼痛" value="{{70}}"/>
+          <mp-checkbox label="重度疼痛" value="{{105}}"/>
+        </mp-checkbox-group>
+      </mp-cells>
+
+      <mp-cells title="最近一周的平均健康状况">
+        <mp-checkbox-group
+          data-field="healthStatus"
+          multi="{{false}}"
+          bindchange="formInputChange"
+        >
+          <mp-checkbox label="好" value="{{0}}"/>
+          <mp-checkbox label="略低于平均水平" value="{{49}}"/>
+          <mp-checkbox label="差" value="{{98}}"/>
+          <mp-checkbox label="非常差" value="{{147}}"/>
+          <mp-checkbox label="糟糕" value="{{196}}"/>
+        </mp-checkbox-group>
+      </mp-cells>
+
+      <mp-cells title="并发症">
+        <mp-checkbox-group
+          data-field="complication"
+          multi="{{true}}"
+          bindchange="formInputChange"
+        >
+          <mp-checkbox label="关节炎或关节痛" value="{{20}}"/>
+          <mp-checkbox label="虹膜炎或葡萄膜炎" value="{{20}}"/>
+          <mp-checkbox label="结节性红斑、坏疽性脓皮病或阿弗他性口腔黏膜炎" value="{{20}}"/>
+          <mp-checkbox label="肛裂、瘘管或脓肿" value="{{20}}"/>
+          <mp-checkbox label="其他瘘管" value="{{20}}"/>
+          <mp-checkbox label="上周体温超过 37.8 摄氏度" value="{{20}}"/>
+        </mp-checkbox-group>
+      </mp-cells>
+
+      <mp-cells title="腹部肿块">
+        <mp-checkbox-group
+          data-field="lump"
+          multi="{{false}}"
+          bindchange="formInputChange"
+        >
+          <mp-checkbox label="无肿块" value="{{0}}"/>
+          <mp-checkbox label="可能的肿块" value="{{20}}"/>
+          <mp-checkbox label="确定的肿块" value="{{50}}"/>
+        </mp-checkbox-group>
+      </mp-cells>
+
+      <mp-cells title="贫血与体重">
+        <mp-cell prop="hct" title="红细胞比容 (HCT)">
+          <input
+            bind:input="formInputChange"
+            data-field="hct"
+            type="digit"
+            class="weui-input"
+            placeholder="请输入百分比"
+          />
+        </mp-cell>
+        <mp-cell prop="weight" title="体重 (kg)">
+          <input
+            bind:input="formInputChange"
+            data-field="weight"
+            type="weight"
+            class="weui-input"
+            placeholder="请输入体重"
+          />
+        </mp-cell>
+        <mp-cell prop="height" title="身高 (cm)">
+          <input
+            bind:input="formInputChange"
+            data-field="height"
+            type="digit"
+            class="weui-input"
+            placeholder="请输身高"
+          />
+        </mp-cell>
+      </mp-cells>
+
+    </mp-form>
+
+    <view slot="button">
+      <button class="weui-btn" type="primary" bindtap="submitForm">确定</button>
+    </view>
+  </mp-form-page>
+</view>

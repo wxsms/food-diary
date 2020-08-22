@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "mp-msg": "/miniprogram_npm/weui-miniprogram/msg/msg"
+  },
+  "disableScroll": true,
+  "navigationBarTitleText": "CDAI 评分结果"
+}

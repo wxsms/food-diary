@@ -36,6 +36,14 @@
       "pages": [
         "pages/status-chart/status-chart"
       ]
+    },
+    {
+      "root": "pages/modules/discover",
+      "name": "discover",
+      "pages": [
+        "pages/cdai/cdai",
+        "pages/cdai/result"
+      ]
     }
   ],
   "preloadRule": {

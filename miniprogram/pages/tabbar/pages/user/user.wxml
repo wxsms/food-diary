@@ -23,7 +23,6 @@
   </mp-cells>
 
   <mp-cells>
-    <mp-cell link hover title="CDAI" url="/pages/modules/discover/pages/cdai/cdai"/>
     <mp-cell link hover title="关于 IBD 日记" url="/pages/modules/user/pages/about/about"/>
   </mp-cells>
 </view>

@@ -108,7 +108,7 @@
           <input
             bind:input="formInputChange"
             data-field="weight"
-            type="weight"
+            type="digit"
             class="weui-input"
             placeholder="请输入体重"
           />

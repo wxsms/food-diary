@@ -3,7 +3,8 @@
   "pages": [
     "pages/index/index",
     "pages/tabbar/pages/scd/scd",
-    "pages/tabbar/pages/user/user"
+    "pages/tabbar/pages/user/user",
+    "pages/tabbar/pages/discover/discover"
   ],
   "subpackages": [
     {
@@ -65,6 +66,12 @@
       "packages": [
         "scd"
       ]
+    },
+    "pages/tabbar/pages/discover/discover": {
+      "network": "all",
+      "packages": [
+        "discover"
+      ]
     }
   },
   "tabBar": {
@@ -84,6 +91,12 @@
         "text": "SCD",
         "iconPath": "@menuIconPath",
         "selectedIconPath": "@menuSelectedIconPath"
+      },
+      {
+        "pagePath": "pages/tabbar/pages/discover/discover",
+        "text": "发现",
+        "iconPath": "@discoverIconPath",
+        "selectedIconPath": "@discoverSelectedIconPath"
       },
       {
         "pagePath": "pages/tabbar/pages/user/user",

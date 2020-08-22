@@ -125,6 +125,13 @@
 					"pathName": "pages/modules/discover/pages/cdai/result",
 					"query": "score=111",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "发现",
+					"pathName": "pages/tabbar/pages/discover/discover",
+					"query": "",
+					"scene": null
 				}
 			]
 		}

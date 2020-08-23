@@ -2,8 +2,8 @@
   <mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
 
   <mp-form-page
-    title="克罗恩病活动指数 (CDAI)"
-    subtitle="该指数可以从临床上评估疾病活动性的严重程度并进行疗效评价"
+    title="克罗恩病活动指数"
+    subtitle="(CDAI) 评分表"
   >
     <mp-form id="form" rules="{{rules}}" models="{{formData}}">
 

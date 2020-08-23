@@ -151,6 +151,7 @@ Component({
           const weightOffset = (1 - weight / weightBase) * 100
           debug(weightBase, weightOffset)
           score += weightOffset > 0 ? weightOffset : 0
+          score = Math.round(score)
           debug('cdai', score)
           const db = wx.cloud.database()
           if (this._id) {
@@ -160,6 +161,7 @@ Component({
               .update({
                 data: {
                   ..._formData,
+                  score: score,
                   updateTime: db.serverDate()
                 }
               })
@@ -173,6 +175,7 @@ Component({
               .add({
                 data: {
                   ..._formData,
+                  score: score,
                   createTime: db.serverDate(),
                   updateTime: db.serverDate()
                 }

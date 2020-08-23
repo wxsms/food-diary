@@ -24,7 +24,7 @@ Component({
         _msg = '重度活动性至爆发性克罗恩病'
       }
       this.setData({
-        score: _score.toFixed(0),
+        score: _score,
         msg: _msg,
         type: _score >= 150 ? 'warn' : 'success',
         loaded: true

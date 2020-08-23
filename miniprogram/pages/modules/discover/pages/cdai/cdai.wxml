@@ -13,8 +13,14 @@
           multi="{{false}}"
           bindchange="formInputChange"
         >
-          <mp-checkbox label="男" value="male"/>
-          <mp-checkbox label="女" value="female"/>
+          <mp-checkbox
+            label="男"
+            value="{{CDAI.SEX_MALE.value}}"
+          />
+          <mp-checkbox
+            label="女"
+            value="{{CDAI.SEX_FEMALE.value}}"
+          />
         </mp-checkbox-group>
       </mp-cells>
 
@@ -36,7 +42,10 @@
           multi="{{true}}"
           bindchange="formInputChange"
         >
-          <mp-checkbox label="苯乙哌啶/阿片类止泻药" value="{{30}}"/>
+          <mp-checkbox
+            label="苯乙哌啶/阿片类止泻药"
+            value="{{CDAI.DEFECATION_MEDICINES.value}}"
+          />
         </mp-checkbox-group>
       </mp-cells>
 
@@ -46,10 +55,22 @@
           multi="{{false}}"
           bindchange="formInputChange"
         >
-          <mp-checkbox label="无" value="{{0}}"/>
-          <mp-checkbox label="轻度疼痛" value="{{35}}"/>
-          <mp-checkbox label="中度疼痛" value="{{70}}"/>
-          <mp-checkbox label="重度疼痛" value="{{105}}"/>
+          <mp-checkbox
+            label="无"
+            value="{{CDAI.STOMACHACHE_0.value}}"
+          />
+          <mp-checkbox
+            label="轻度疼痛"
+            value="{{CDAI.STOMACHACHE_1.value}}"
+          />
+          <mp-checkbox
+            label="中度疼痛"
+            value="{{CDAI.STOMACHACHE_2.value}}"
+          />
+          <mp-checkbox
+            label="重度疼痛"
+            value="{{CDAI.STOMACHACHE_3.value}}"
+          />
         </mp-checkbox-group>
       </mp-cells>
 
@@ -59,11 +80,26 @@
           multi="{{false}}"
           bindchange="formInputChange"
         >
-          <mp-checkbox label="好" value="{{0}}"/>
-          <mp-checkbox label="略低于平均水平" value="{{49}}"/>
-          <mp-checkbox label="差" value="{{98}}"/>
-          <mp-checkbox label="非常差" value="{{147}}"/>
-          <mp-checkbox label="糟糕" value="{{196}}"/>
+          <mp-checkbox
+            label="好"
+            value="{{CDAI.HEALTH_STATUS_0.value}}"
+          />
+          <mp-checkbox
+            label="略低于平均水平"
+            value="{{CDAI.HEALTH_STATUS_1.value}}"
+          />
+          <mp-checkbox
+            label="差"
+            value="{{CDAI.HEALTH_STATUS_2.value}}"
+          />
+          <mp-checkbox
+            label="非常差"
+            value="{{CDAI.HEALTH_STATUS_3.value}}"
+          />
+          <mp-checkbox
+            label="糟糕"
+            value="{{CDAI.HEALTH_STATUS_4.value}}"
+          />
         </mp-checkbox-group>
       </mp-cells>
 
@@ -73,12 +109,30 @@
           multi="{{true}}"
           bindchange="formInputChange"
         >
-          <mp-checkbox label="关节炎或关节痛" value="{{20}}"/>
-          <mp-checkbox label="虹膜炎或葡萄膜炎" value="{{20}}"/>
-          <mp-checkbox label="结节性红斑、坏疽性脓皮病或阿弗他性口腔黏膜炎" value="{{20}}"/>
-          <mp-checkbox label="肛裂、瘘管或脓肿" value="{{20}}"/>
-          <mp-checkbox label="其他瘘管" value="{{20}}"/>
-          <mp-checkbox label="上周体温超过 37.8 摄氏度" value="{{20}}"/>
+          <mp-checkbox
+            label="关节炎或关节痛"
+            value="{{CDAI.COMPLICATION_0.value}}"
+          />
+          <mp-checkbox
+            label="虹膜炎或葡萄膜炎"
+            value="{{CDAI.COMPLICATION_1.value}}"
+          />
+          <mp-checkbox
+            label="结节性红斑、坏疽性脓皮病或阿弗他性口腔黏膜炎"
+            value="{{CDAI.COMPLICATION_2.value}}"
+          />
+          <mp-checkbox
+            label="肛裂、瘘管或脓肿"
+            value="{{CDAI.COMPLICATION_3.value}}"
+          />
+          <mp-checkbox
+            label="其他瘘管"
+            value="{{CDAI.COMPLICATION_4.value}}"
+          />
+          <mp-checkbox
+            label="上周体温超过 37.8 摄氏度"
+            value="{{CDAI.COMPLICATION_5.value}}"
+          />
         </mp-checkbox-group>
       </mp-cells>
 
@@ -88,9 +142,18 @@
           multi="{{false}}"
           bindchange="formInputChange"
         >
-          <mp-checkbox label="无肿块" value="{{0}}"/>
-          <mp-checkbox label="可能的肿块" value="{{20}}"/>
-          <mp-checkbox label="确定的肿块" value="{{50}}"/>
+          <mp-checkbox
+            label="无肿块"
+            value="{{CDAI.LUMP_0.value}}"
+          />
+          <mp-checkbox
+            label="可能的肿块"
+            value="{{CDAI.LUMP_1.value}}"
+          />
+          <mp-checkbox
+            label="确定的肿块"
+            value="{{CDAI.LUMP_2.value}}"
+          />
         </mp-checkbox-group>
       </mp-cells>
 

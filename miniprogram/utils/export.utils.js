@@ -1,4 +1,4 @@
-import { loading, toast, TOAST_ERRORS } from './toast.utils'
+import { loading, LOADING_TEXTS, toast, TOAST_ERRORS } from './toast.utils'
 import { debug, error } from './log.utils'
 import { promisify } from './promisify.utils'
 import { format, FORMATS } from './date.utils'
@@ -19,7 +19,7 @@ export async function exportAndDownloadRecords ({ from, to, kind = EXPORT_KINDS.
     if (!confirm) {
       return
     }
-    loading(true, '导出中...')
+    loading(true, LOADING_TEXTS.EXPORTING)
     const { result } = await wx.cloud.callFunction({
       name: 'export',
       data: { from, to }

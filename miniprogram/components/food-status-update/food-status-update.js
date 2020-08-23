@@ -1,5 +1,5 @@
 import { storeBindingsBehavior } from 'mobx-miniprogram-bindings'
-import { loading, toast, TOAST_ERRORS } from '../../utils/toast.utils'
+import { loading, LOADING_TEXTS, toast, TOAST_ERRORS } from '../../utils/toast.utils'
 import { debug, error } from '../../utils/log.utils'
 import find from 'lodash.find'
 import get from 'lodash.get'
@@ -92,7 +92,7 @@ Component({
         this.showDescIfNeeded(value)
         return
       }
-      loading(true, '记录中...')
+      loading(true, LOADING_TEXTS.RECORDING)
       try {
         const db = wx.cloud.database()
         const _ = db.command
@@ -203,7 +203,7 @@ Component({
         desc: this._descArr
       }
       try {
-        loading(true, '记录中...')
+        loading(true, LOADING_TEXTS.RECORDING)
         const db = wx.cloud.database()
         const _ = db.command
         await db

@@ -5,7 +5,7 @@ import { getFoods } from '../../../../../store/scd-foods.store'
 import { debug, error } from '../../../../../utils/log.utils'
 import { storeBindingsBehavior } from 'mobx-miniprogram-bindings'
 import { store } from '../../../../../store/store'
-import { loading, toast, TOAST_ERRORS } from '../../../../../utils/toast.utils'
+import { loading, LOADING_TEXTS, toast, TOAST_ERRORS } from '../../../../../utils/toast.utils'
 import { nextTick } from '../../../../../utils/wx.utils'
 import themeMixin from '../../../../../mixins/theme.mixin'
 import shareMixin from '../../../../../mixins/share.mixin'
@@ -153,7 +153,7 @@ Component({
         return
       }
 
-      loading(true, '正在保存...')
+      loading(true, LOADING_TEXTS.SAVING)
       const db = wx.cloud.database()
       const toSave = this.data.type.key === DIARY_TYPES.STATUS.key ? {} : { [this.data.type.key]: this.data.value }
 
@@ -215,7 +215,7 @@ Component({
         cancelText: '取消',
         success: async ({ confirm }) => {
           if (confirm) {
-            loading(true, '正在删除...')
+            loading(true, LOADING_TEXTS.DELETING)
             // 找出除了当前编辑模式的 key 以及其他默认忽略的 key
             // 进行剩余存在有效值的 key 计数
             const keys = this.data.type.keys ? this.data.type.keys : [this.data.type.key]

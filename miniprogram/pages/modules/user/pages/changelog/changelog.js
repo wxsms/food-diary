@@ -2,6 +2,12 @@ import themeMixin from '../../../../../mixins/theme.mixin'
 import shareMixin from '../../../../../mixins/share.mixin'
 
 const changelog = `
+## 1.9.0
+### 新增
+* 「发现」模块
+* 「CDAI 评分」功能
+* 新版本更新提示
+
 ## 1.8.1
 ### 修复
 * SCD 食物二次记录不做任何更改时备注被清空的问题

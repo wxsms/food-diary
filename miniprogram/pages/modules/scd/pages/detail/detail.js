@@ -34,7 +34,8 @@ Component({
           .get()
         const _data = removeLevelInName(data)
         // debug(_data.content)
-        _data.content = _data.content.replace(/<img([^>]+src=".+".+?>)/ig, `<img class="rich-text-img" $1`)
+        // '<p><img class="rich-text-img"  src="http://qny.scdhealth.com/4d6fbbd858f9be74732d0f7ccfed6727" alt="" /></p><p><img src="http://qny.scdhealth.com/3d9bc62c9a91bd3131e0906947d318ef" alt="" /></p>'
+        _data.content = _data.content.replace(/<img(.+?)>/ig, `<img class="rich-text-img" $1>`)
         // debug(content)
         debug(_data)
         wx.setNavigationBarTitle({

@@ -2,6 +2,10 @@ import themeMixin from '../../../../../mixins/theme.mixin'
 import shareMixin from '../../../../../mixins/share.mixin'
 
 const changelog = `
+## 1.9.1
+### 修复
+* SCD 食物详情，部分食物图片显示不正确问题
+
 ## 1.9.0
 ### 新增
 * 「发现」模块

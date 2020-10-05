@@ -41,13 +41,18 @@ const _DIARY_TYPES = {
     label: '排便次数',
     key: 'defecation',
     inReviewMode: false
+  },
+  DEFECATION_REMARK: {
+    label: '排便情况',
+    key: 'defecationRemark',
+    inReviewMode: false
   }
 }
 _DIARY_TYPES.STATUS = {
   label: '状况',
   key: 'status',
   desc: '体重、排便次数',
-  keys: [_DIARY_TYPES.WEIGHT.key, _DIARY_TYPES.DEFECATION.key],
+  keys: [_DIARY_TYPES.WEIGHT.key, _DIARY_TYPES.DEFECATION.key, _DIARY_TYPES.DEFECATION_REMARK.key],
   inReviewMode: true
 }
 

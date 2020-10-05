@@ -10,7 +10,8 @@ Component({
     fields: {
       todayRecord: store => store.todayRecord,
       todayHasDefecation: store => store.todayHasDefecation,
-      todayHasWeight: store => store.todayHasWeight
+      todayHasWeight: store => store.todayHasWeight,
+      todayHasDefecationRemark: store => store.todayHasDefecationRemark
     }
   },
   properties: {
@@ -29,7 +30,7 @@ Component({
         const { key } = type
         isStatus = key === DIARY_TYPES.STATUS.key
         if (isStatus) {
-          show = !!(this.data.todayHasWeight || this.data.todayHasDefecation)
+          show = !!(this.data.todayHasWeight || this.data.todayHasDefecation || this.data.todayHasDefecationRemark)
         } else {
           show = !!(todayRecord[key])
         }

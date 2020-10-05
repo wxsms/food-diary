@@ -11,6 +11,7 @@ import {
   minusMonth,
   startOfMonth
 } from '../utils/date.utils'
+import get from 'lodash.get'
 
 debug('init store')
 
@@ -43,6 +44,9 @@ export const store = observable({
     } else {
       return false
     }
+  },
+  get todayHasDefecationRemark () {
+    return get(this.todayRecord, 'defecationRemark') || ''
   },
   // 日期相关
   get currentDateTs () {

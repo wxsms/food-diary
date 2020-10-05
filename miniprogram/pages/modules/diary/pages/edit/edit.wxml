@@ -28,6 +28,15 @@
               bindinput="onDefecationChange"
             />
           </mp-cell>
+          <mp-cell title="排便情况" wx:if="{{showDefecation && !isReview}}">
+            <input
+              type="text"
+              value="{{defecationRemark}}"
+              class="weui-input"
+              placeholder="选填"
+              bindinput="onDefecationRemarkChange"
+            />
+          </mp-cell>
         </mp-cells>
         <block wx:else>
           <block wx:if="{{isReview}}">

@@ -20,6 +20,7 @@ Component({
     value: '',
     weight: '',
     defecation: '',
+    defecationRemark: '',
     recent: [],
     othersRecent: ['体重', '排便', '异常'],
     scdFoods: [],
@@ -56,10 +57,11 @@ Component({
       const value = get(todayRecord, type.key, '')
       const weight = get(todayRecord, DIARY_TYPES.WEIGHT.key, '')
       const defecation = get(todayRecord, DIARY_TYPES.DEFECATION.key, '')
+      const defecationRemark = get(todayRecord, DIARY_TYPES.DEFECATION_REMARK.key, '')
       let showDelete = false
       if (todayRecord) {
         if (isStatus) {
-          showDelete = typeof weight === 'number' || weight === '' || typeof defecation === 'number' || defecation === ''
+          showDelete = typeof weight === 'number' || weight === '' || typeof defecation === 'number' || defecation === '' || !!defecationRemark
         } else {
           showDelete = !!value
         }
@@ -71,6 +73,7 @@ Component({
         value,
         weight,
         defecation,
+        defecationRemark,
         showDelete,
         showWeight: isStatus,
         showDefecation: isStatus,
@@ -111,6 +114,9 @@ Component({
     onDefecationChange ({ detail: { value } }) {
       this.setData({ defecation: value })
     },
+    onDefecationRemarkChange ({ detail: { value } }) {
+      this.setData({ defecationRemark: value })
+    },
     onRecentClick ({ currentTarget: { dataset: { value } } }) {
       this.setData({
         value: (this.data.value + '\n' + value).trim()
@@ -131,11 +137,12 @@ Component({
       })
     },
     async doSave () {
-      const { value, weight, defecation, showWeight, showDefecation } = this.data
+      const { value, weight, defecation, defecationRemark, showWeight, showDefecation } = this.data
       const hasValue = !!value
       const hasWeight = showWeight ? !!weight : false
       const hasDefecation = showDefecation ? !!defecation : false
-      const hasContent = hasValue || hasWeight || hasDefecation
+      const hasDefecationRemark = !!defecationRemark
+      const hasContent = hasValue || hasWeight || hasDefecation || hasDefecationRemark
 
       if (!hasContent) {
         toast('写点东西吧')
@@ -162,6 +169,7 @@ Component({
       }
       if (showDefecation) {
         toSave[DIARY_TYPES.DEFECATION.key] = defecation === '' ? '' : Number(defecation)
+        toSave[DIARY_TYPES.DEFECATION_REMARK.key] = defecationRemark
       }
       try {
         if (this.data.todayRecord) {
@@ -241,6 +249,7 @@ Component({
                 if (this.data.isStatus) {
                   params.weight = ''
                   params.defecation = ''
+                  params.defecationRemark = ''
                 } else {
                   params[this.data.type.key] = ''
                 }

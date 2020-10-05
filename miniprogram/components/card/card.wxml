@@ -8,6 +8,7 @@
   <block wx:if="{{isStatus}}">
     <text wx:if="{{todayHasWeight}}">体重：{{todayRecord.weight}}kg\n</text>
     <text wx:if="{{todayHasDefecation}}">排便：{{todayRecord.defecation}}次\n</text>
+    <text wx:if="{{todayHasDefecationRemark}}">排便情况：{{todayRecord.defecationRemark}}</text>
   </block>
   <text wx:else>{{todayRecord[type.key]}}</text>
 </view>

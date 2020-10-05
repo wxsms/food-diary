@@ -1,6 +1,6 @@
 <view class="container" data-weui-theme="{{theme}}">
   <view class="btns">
-    <button bindtap="goAdd" class="weui-btn" type="primary">添加...</button>
+    <button bindtap="goAdd" class="weui-btn" type="primary">添加</button>
   </view>
   <view class="next" wx:if="{{remicadeRecords && remicadeRecords.length}}">
     <text>{{nextDate}}注射第{{nextTime}}次类克（间隔{{nextSplit}}周）</text>
@@ -18,8 +18,8 @@
       <text>注射时间：{{item.date}}\n</text>
       <text>注射剂量：{{item.dosage}}mg\n</text>
       <block wx:if="{{item.concentration || item.antibody}}">
-        <text wx:if="{{item.concentration}}">类克浓度：{{item.concentration}}\n</text>
-        <text wx:if="{{item.antibody}}">类克抗体：{{item.antibody}}\n</text>
+        <text wx:if="{{item.concentration}}">类克浓度：{{item.concentration}}ug/mL\n</text>
+        <text wx:if="{{item.antibody}}">类克抗体：{{item.antibody}}AU/mL\n</text>
       </block>
     </block>
   </view>

@@ -5,3 +5,14 @@
 .weui-form {
   background: transparent;
 }
+
+.btns {
+  margin-top: 50px;
+}
+
+.title {
+  font-size: 17px;
+  margin-top: 16px;
+  margin-bottom: 48px;
+  text-align: center;
+}

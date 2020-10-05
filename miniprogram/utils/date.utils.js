@@ -2,6 +2,7 @@ import { DateTime } from 'luxon'
 import { debug } from './log.utils'
 
 export const FORMATS = {
+  Y_MM_DD_SIMPLE: 'yyyy-LL-dd',
   Y_M_D_SIMPLE: 'yyyy-L-d',
   Y_M_SIMPLE: 'yyyy-L',
   Y_SIMPLE: 'yyyy',
@@ -36,6 +37,10 @@ export function addDay (ts, number = 1) {
 
 export function minusDay (ts, number = 1) {
   return _DateTime(ts).minus({ days: number })
+}
+
+export function addWeek (ts, number = 1) {
+  return _DateTime(ts).plus({ weeks: number })
 }
 
 export function addMonth (ts, number = 1) {

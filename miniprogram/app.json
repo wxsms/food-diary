@@ -43,7 +43,9 @@
       "name": "discover",
       "pages": [
         "pages/cdai/cdai",
-        "pages/cdai/result"
+        "pages/cdai/result",
+        "pages/remicade/remicade",
+        "pages/remicade/remicade-edit"
       ]
     }
   ],

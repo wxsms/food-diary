@@ -1,0 +1,7 @@
+.weui-toptips {
+  white-space: pre-line;
+}
+
+.weui-form {
+  background: transparent;
+}

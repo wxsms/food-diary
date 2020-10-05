@@ -132,6 +132,20 @@
 					"pathName": "pages/tabbar/pages/discover/discover",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": 11,
+					"name": "类克",
+					"pathName": "pages/modules/discover/pages/remicade/remicade",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "类克新增",
+					"pathName": "pages/modules/discover/pages/remicade/remicade-edit",
+					"query": "",
+					"scene": null
 				}
 			]
 		}

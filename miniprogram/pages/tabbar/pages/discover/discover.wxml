@@ -1,5 +1,6 @@
 <view class="container" data-weui-theme="{{theme}}">
   <mp-cells title="实用工具">
     <mp-cell link hover title="CDAI 评分" url="/pages/modules/discover/pages/cdai/cdai"/>
+    <mp-cell link hover title="类克用药记录" url="/pages/modules/discover/pages/remicade/remicade"/>
   </mp-cells>
 </view>

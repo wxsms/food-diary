@@ -28,6 +28,8 @@ export const store = observable({
   // scd 记录更新相关
   selectedScdFood: null,
   showUpdateActionSheet: false,
+  // 类克相关
+  remicadeRecords: [],
 
   // 计算属性
   // 当前日期数据相关
@@ -98,5 +100,8 @@ export const store = observable({
   }),
   setShowUpdateActionSheet: action(function (data) {
     this.showUpdateActionSheet = data
+  }),
+  setRemicadeRecords: action(function (data) {
+    this.remicadeRecords = data
   })
 })

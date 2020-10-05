@@ -2,6 +2,11 @@ import themeMixin from '../../../../../mixins/theme.mixin'
 import shareMixin from '../../../../../mixins/share.mixin'
 
 const changelog = `
+## 1.10.0
+### 新增
+* 排便支持记录具体情况了
+* 「发现」新增「类克用药记录」
+
 ## 1.9.1
 ### 修复
 * SCD 食物详情，部分食物图片显示不正确问题

@@ -12,22 +12,22 @@
     lodash.set "4.3.2"
     lodash.unset "4.5.2"
 
-"@cloudbase/database@1.0.2":
-  version "1.0.2"
-  resolved "https://registry.npm.taobao.org/@cloudbase/database/download/@cloudbase/database-1.0.2.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40cloudbase%2Fdatabase%2Fdownload%2F%40cloudbase%2Fdatabase-1.0.2.tgz#ac044bdcc3c057bfd479cfca11840f09f1cdbe6a"
-  integrity sha1-rARL3MPAV7/Uec/KEYQPCfHNvmo=
+"@cloudbase/database@1.2.1":
+  version "1.2.1"
+  resolved "https://registry.npm.taobao.org/@cloudbase/database/download/@cloudbase/database-1.2.1.tgz#1c0ae23eafc0e37066614990929437c69d90c744"
+  integrity sha1-HAriPq/A43BmYUmQkpQ3xp2Qx0Q=
   dependencies:
     bson "^4.0.3"
     lodash.clonedeep "4.5.0"
     lodash.set "4.3.2"
     lodash.unset "4.5.2"
 
-"@cloudbase/node-sdk@2.1.1":
-  version "2.1.1"
-  resolved "https://registry.npm.taobao.org/@cloudbase/node-sdk/download/@cloudbase/node-sdk-2.1.1.tgz?cache=0&sync_timestamp=1597801825345&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40cloudbase%2Fnode-sdk%2Fdownload%2F%40cloudbase%2Fnode-sdk-2.1.1.tgz#65e2ed1883845d96a65bff05b8bc9602f89d7dac"
-  integrity sha1-ZeLtGIOEXZamW/8FuLyWAvidfaw=
+"@cloudbase/node-sdk@2.3.3":
+  version "2.3.3"
+  resolved "https://registry.npm.taobao.org/@cloudbase/node-sdk/download/@cloudbase/node-sdk-2.3.3.tgz#7f010da12ad348830743fe118fa9f661acbdb318"
+  integrity sha1-fwENoSrTSIMHQ/4Rj6n2Yay9sxg=
   dependencies:
-    "@cloudbase/database" "1.0.2"
+    "@cloudbase/database" "1.2.1"
     "@cloudbase/signature-nodejs" "1.0.0-beta.0"
     "@types/retry" "^0.12.0"
     is-regex "^1.0.4"
@@ -744,12 +744,12 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-wx-server-sdk@~2.2.0:
-  version "2.2.0"
-  resolved "https://registry.npm.taobao.org/wx-server-sdk/download/wx-server-sdk-2.2.0.tgz#e489da32112d867ecf42c1c51e37474581f6fa86"
-  integrity sha1-5InaMhEthn7PQsHFHjdHRYH2+oY=
+wx-server-sdk@~2.3.0:
+  version "2.3.0"
+  resolved "https://registry.npm.taobao.org/wx-server-sdk/download/wx-server-sdk-2.3.0.tgz#ea29bf39cfdad70b2758057b22f4d7775f0f7267"
+  integrity sha1-6im/Oc/a1wsnWAV7IvTXd18Pcmc=
   dependencies:
-    "@cloudbase/node-sdk" "2.1.1"
+    "@cloudbase/node-sdk" "2.3.3"
     protobufjs "6.8.8"
     tcb-admin-node latest
     tslib "^1.9.3"

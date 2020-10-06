@@ -1,20 +1,20 @@
 {
   "dependencies": {
-    "lodash.chunk": "^4.2.0",
-    "lodash.find": "^4.6.0",
-    "lodash.findindex": "^4.6.0",
-    "lodash.get": "^4.4.2",
-    "lodash.isequal": "^4.5.0",
-    "lodash.isnil": "^4.0.0",
-    "lodash.isnumber": "^3.0.3",
-    "lodash.isstring": "^4.0.1",
-    "lodash.reverse": "^4.0.1",
-    "lodash.uniq": "^4.5.0",
-    "luxon": "^1.21.3",
-    "miniprogram-api-typings": "^3.0.1",
-    "miniprogram-computed": "^2.1.1",
-    "mobx-miniprogram": "^4.13.2",
-    "mobx-miniprogram-bindings": "^1.2.1",
-    "weui-miniprogram": "^1.0.4"
+    "lodash.chunk": "4.2.0",
+    "lodash.find": "4.6.0",
+    "lodash.findindex": "4.6.0",
+    "lodash.get": "4.4.2",
+    "lodash.isequal": "4.5.0",
+    "lodash.isnil": "4.0.0",
+    "lodash.isnumber": "3.0.3",
+    "lodash.isstring": "4.0.1",
+    "lodash.reverse": "4.0.1",
+    "lodash.uniq": "4.5.0",
+    "luxon": "1.21.3",
+    "miniprogram-api-typings": "3.0.1",
+    "miniprogram-computed": "2.1.1",
+    "mobx-miniprogram": "4.13.2",
+    "mobx-miniprogram-bindings": "1.2.1",
+    "weui-miniprogram": "1.0.4"
   }
 }

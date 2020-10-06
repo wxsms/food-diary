@@ -7,67 +7,67 @@ fast-deep-equal@^2.0.1:
   resolved "https://registry.npm.taobao.org/fast-deep-equal/download/fast-deep-equal-2.0.1.tgz#7b05218ddf9667bf7f370bf7fdb2cb15fdd0aa49"
   integrity sha1-ewUhjd+WZ79/Nwv3/bLLFf3Qqkk=
 
-lodash.chunk@^4.2.0:
+lodash.chunk@4.2.0:
   version "4.2.0"
   resolved "https://registry.npm.taobao.org/lodash.chunk/download/lodash.chunk-4.2.0.tgz#66e5ce1f76ed27b4303d8c6512e8d1216e8106bc"
   integrity sha1-ZuXOH3btJ7QwPYxlEujRIW6BBrw=
 
-lodash.find@^4.6.0:
+lodash.find@4.6.0:
   version "4.6.0"
   resolved "https://registry.npm.taobao.org/lodash.find/download/lodash.find-4.6.0.tgz#cb0704d47ab71789ffa0de8b97dd926fb88b13b1"
   integrity sha1-ywcE1Hq3F4n/oN6Ll92Sb7iLE7E=
 
-lodash.findindex@^4.6.0:
+lodash.findindex@4.6.0:
   version "4.6.0"
   resolved "https://registry.npm.taobao.org/lodash.findindex/download/lodash.findindex-4.6.0.tgz#a3245dee61fb9b6e0624b535125624bb69c11106"
   integrity sha1-oyRd7mH7m24GJLU1ElYku2nBEQY=
 
-lodash.get@^4.4.2:
+lodash.get@4.4.2:
   version "4.4.2"
   resolved "https://registry.npm.taobao.org/lodash.get/download/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
   integrity sha1-LRd/ZS+jHpObRDjVNBSZ36OCXpk=
 
-lodash.isequal@^4.5.0:
+lodash.isequal@4.5.0:
   version "4.5.0"
   resolved "https://registry.npm.taobao.org/lodash.isequal/download/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
   integrity sha1-QVxEePK8wwEgwizhDtMib30+GOA=
 
-lodash.isnil@^4.0.0:
+lodash.isnil@4.0.0:
   version "4.0.0"
   resolved "https://registry.npm.taobao.org/lodash.isnil/download/lodash.isnil-4.0.0.tgz#49e28cd559013458c814c5479d3c663a21bfaa6c"
   integrity sha1-SeKM1VkBNFjIFMVHnTxmOiG/qmw=
 
-lodash.isnumber@^3.0.3:
+lodash.isnumber@3.0.3:
   version "3.0.3"
   resolved "https://registry.npm.taobao.org/lodash.isnumber/download/lodash.isnumber-3.0.3.tgz#3ce76810c5928d03352301ac287317f11c0b1ffc"
   integrity sha1-POdoEMWSjQM1IwGsKHMX8RwLH/w=
 
-lodash.isstring@^4.0.1:
+lodash.isstring@4.0.1:
   version "4.0.1"
   resolved "https://registry.npm.taobao.org/lodash.isstring/download/lodash.isstring-4.0.1.tgz#d527dfb5456eca7cc9bb95d5daeaf88ba54a5451"
   integrity sha1-1SfftUVuynzJu5XV2ur4i6VKVFE=
 
-lodash.reverse@^4.0.1:
+lodash.reverse@4.0.1:
   version "4.0.1"
   resolved "https://registry.npm.taobao.org/lodash.reverse/download/lodash.reverse-4.0.1.tgz#1f2afedace2e16e660f3aa7c59d3300a6f25d13c"
   integrity sha1-Hyr+2s4uFuZg86p8WdMwCm8l0Tw=
 
-lodash.uniq@^4.5.0:
+lodash.uniq@4.5.0:
   version "4.5.0"
   resolved "https://registry.npm.taobao.org/lodash.uniq/download/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-luxon@^1.21.3:
+luxon@1.21.3:
   version "1.21.3"
   resolved "https://registry.npm.taobao.org/luxon/download/luxon-1.21.3.tgz#f1d5c2a7e855d039836cf4954f883ecac8fc4727"
   integrity sha1-8dXCp+hV0DmDbPSVT4g+ysj8Ryc=
 
-miniprogram-api-typings@^3.0.1:
+miniprogram-api-typings@3.0.1:
   version "3.0.1"
-  resolved "https://registry.npm.taobao.org/miniprogram-api-typings/download/miniprogram-api-typings-3.0.1.tgz?cache=0&sync_timestamp=1596456688522&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fminiprogram-api-typings%2Fdownload%2Fminiprogram-api-typings-3.0.1.tgz#457ef8792bc5dfae31e69f48bf84925df6560c2c"
+  resolved "https://registry.npm.taobao.org/miniprogram-api-typings/download/miniprogram-api-typings-3.0.1.tgz#457ef8792bc5dfae31e69f48bf84925df6560c2c"
   integrity sha1-RX74eSvF364x5p9Iv4SSXfZWDCw=
 
-miniprogram-computed@^2.1.1:
+miniprogram-computed@2.1.1:
   version "2.1.1"
   resolved "https://registry.npm.taobao.org/miniprogram-computed/download/miniprogram-computed-2.1.1.tgz#c393e967a8f6e5ee26a4205f69ae3eb9a23b7b07"
   integrity sha1-w5PpZ6j25e4mpCBfaa4+uaI7ewc=
@@ -75,12 +75,12 @@ miniprogram-computed@^2.1.1:
     fast-deep-equal "^2.0.1"
     rfdc "^1.1.4"
 
-mobx-miniprogram-bindings@^1.2.1:
+mobx-miniprogram-bindings@1.2.1:
   version "1.2.1"
   resolved "https://registry.npm.taobao.org/mobx-miniprogram-bindings/download/mobx-miniprogram-bindings-1.2.1.tgz#996c0563ba742eb5835d972bd3ef45a99af84811"
   integrity sha1-mWwFY7p0LrWDXZcr0+9FqZr4SBE=
 
-mobx-miniprogram@^4.13.2:
+mobx-miniprogram@4.13.2:
   version "4.13.2"
   resolved "https://registry.npm.taobao.org/mobx-miniprogram/download/mobx-miniprogram-4.13.2.tgz#b72c03fd5ad1f1b9022c422f9c88a47d1e5f8868"
   integrity sha1-tywD/VrR8bkCLEIvnIikfR5fiGg=
@@ -90,7 +90,7 @@ rfdc@^1.1.4:
   resolved "https://registry.npm.taobao.org/rfdc/download/rfdc-1.1.4.tgz#ba72cc1367a0ccd9cf81a870b3b58bd3ad07f8c2"
   integrity sha1-unLME2egzNnPgahws7WL060H+MI=
 
-weui-miniprogram@^1.0.4:
+weui-miniprogram@1.0.4:
   version "1.0.4"
   resolved "https://registry.npm.taobao.org/weui-miniprogram/download/weui-miniprogram-1.0.4.tgz#379bb56970c8fd84a83042433e45fef329397733"
   integrity sha1-N5u1aXDI/YSoMEJDPkX+8yk5dzM=

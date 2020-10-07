@@ -15,6 +15,6 @@
     "miniprogram-computed": "2.1.1",
     "mobx-miniprogram": "4.13.2",
     "mobx-miniprogram-bindings": "1.2.1",
-    "weui-miniprogram": "1.0.4"
+    "weui-miniprogram": "1.0.5"
   }
 }

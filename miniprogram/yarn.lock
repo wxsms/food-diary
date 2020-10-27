@@ -90,7 +90,7 @@ rfdc@^1.1.4:
   resolved "https://registry.npm.taobao.org/rfdc/download/rfdc-1.1.4.tgz#ba72cc1367a0ccd9cf81a870b3b58bd3ad07f8c2"
   integrity sha1-unLME2egzNnPgahws7WL060H+MI=
 
-weui-miniprogram@1.0.5:
-  version "1.0.5"
-  resolved "https://registry.npm.taobao.org/weui-miniprogram/download/weui-miniprogram-1.0.5.tgz#8223958db3b4abf2496ef597733fe6cc478b300d"
-  integrity sha1-giOVjbO0q/JJbvWXcz/mzEeLMA0=
+weui-miniprogram@1.0.6:
+  version "1.0.6"
+  resolved "https://registry.npm.taobao.org/weui-miniprogram/download/weui-miniprogram-1.0.6.tgz#26743824e0f79b92e4417a3db3d17f7631d880dc"
+  integrity sha1-JnQ4JOD3m5LkQXo9s9F/djHYgNw=

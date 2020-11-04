@@ -62,10 +62,10 @@ luxon@1.25.0:
   resolved "https://registry.npm.taobao.org/luxon/download/luxon-1.25.0.tgz#d86219e90bc0102c0eb299d65b2f5e95efe1fe72"
   integrity sha1-2GIZ6QvAECwOspnWWy9ele/h/nI=
 
-miniprogram-api-typings@3.1.5:
-  version "3.1.5"
-  resolved "https://registry.npm.taobao.org/miniprogram-api-typings/download/miniprogram-api-typings-3.1.5.tgz#6da4bb7707e8684c21addc898aa59ce82d8ecb61"
-  integrity sha1-baS7dwfoaEwhrdyJiqWc6C2Oy2E=
+miniprogram-api-typings@3.1.6:
+  version "3.1.6"
+  resolved "https://registry.npm.taobao.org/miniprogram-api-typings/download/miniprogram-api-typings-3.1.6.tgz#d4fcb47d6dddc041205adbab9161010f459b9f33"
+  integrity sha1-1Py0fW3dwEEgWturkWEBD0WbnzM=
 
 miniprogram-computed@2.1.1:
   version "2.1.1"

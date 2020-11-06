@@ -12,7 +12,7 @@
     "lodash.uniq": "4.5.0",
     "luxon": "1.25.0",
     "miniprogram-api-typings": "3.1.6",
-    "miniprogram-computed": "2.1.1",
+    "miniprogram-computed": "3.1.1",
     "mobx-miniprogram": "4.13.2",
     "mobx-miniprogram-bindings": "1.2.1",
     "weui-miniprogram": "1.0.6"

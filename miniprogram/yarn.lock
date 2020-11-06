@@ -67,10 +67,10 @@ miniprogram-api-typings@3.1.6:
   resolved "https://registry.npm.taobao.org/miniprogram-api-typings/download/miniprogram-api-typings-3.1.6.tgz#d4fcb47d6dddc041205adbab9161010f459b9f33"
   integrity sha1-1Py0fW3dwEEgWturkWEBD0WbnzM=
 
-miniprogram-computed@2.1.1:
-  version "2.1.1"
-  resolved "https://registry.npm.taobao.org/miniprogram-computed/download/miniprogram-computed-2.1.1.tgz#c393e967a8f6e5ee26a4205f69ae3eb9a23b7b07"
-  integrity sha1-w5PpZ6j25e4mpCBfaa4+uaI7ewc=
+miniprogram-computed@3.1.1:
+  version "3.1.1"
+  resolved "https://registry.npm.taobao.org/miniprogram-computed/download/miniprogram-computed-3.1.1.tgz#606692bd48bab49ebbd2e953789869bafaa6fbcf"
+  integrity sha1-YGaSvUi6tJ670ulTeJhpuvqm+88=
   dependencies:
     fast-deep-equal "^2.0.1"
     rfdc "^1.1.4"

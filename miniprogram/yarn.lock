@@ -75,10 +75,10 @@ miniprogram-computed@2.2.0:
     fast-deep-equal "^2.0.1"
     rfdc "^1.1.4"
 
-mobx-miniprogram-bindings@1.2.1:
-  version "1.2.1"
-  resolved "https://registry.npm.taobao.org/mobx-miniprogram-bindings/download/mobx-miniprogram-bindings-1.2.1.tgz#996c0563ba742eb5835d972bd3ef45a99af84811"
-  integrity sha1-mWwFY7p0LrWDXZcr0+9FqZr4SBE=
+mobx-miniprogram-bindings@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.npm.taobao.org/mobx-miniprogram-bindings/download/mobx-miniprogram-bindings-2.0.0.tgz#e261d6d996727f7d61b9e5c79d8f3353c3b2847e"
+  integrity sha1-4mHW2ZZyf31hueXHnY8zU8OyhH4=
 
 mobx-miniprogram@4.13.2:
   version "4.13.2"

@@ -2,11 +2,6 @@
 # yarn lockfile v1
 
 
-"@types/wechat-miniprogram@^3.0.0":
-  version "3.2.0"
-  resolved "https://registry.npm.taobao.org/@types/wechat-miniprogram/download/@types/wechat-miniprogram-3.2.0.tgz?cache=0&sync_timestamp=1611239745603&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fwechat-miniprogram%2Fdownload%2F%40types%2Fwechat-miniprogram-3.2.0.tgz#6b4034155856d31cd9f342efd217dbc27ea80fb9"
-  integrity sha1-a0A0FVhW0xzZ80Lv0hfbwn6oD7k=
-
 fast-deep-equal@^2.0.1:
   version "2.0.1"
   resolved "https://registry.npm.taobao.org/fast-deep-equal/download/fast-deep-equal-2.0.1.tgz#7b05218ddf9667bf7f370bf7fdb2cb15fdd0aa49"
@@ -72,12 +67,11 @@ miniprogram-api-typings@3.2.2:
   resolved "https://registry.npm.taobao.org/miniprogram-api-typings/download/miniprogram-api-typings-3.2.2.tgz#c928c32cffcb948200273c214e3dee3957eafd14"
   integrity sha1-ySjDLP/LlIIAJzwhTj3uOVfq/RQ=
 
-miniprogram-computed@4.0.1:
-  version "4.0.1"
-  resolved "https://registry.npm.taobao.org/miniprogram-computed/download/miniprogram-computed-4.0.1.tgz#ddb6f197afc6820b9127e81f6388e141fb24bb2f"
-  integrity sha1-3bbxl6/GgguRJ+gfY4jhQfskuy8=
+miniprogram-computed@3.1.1:
+  version "3.1.1"
+  resolved "https://registry.npm.taobao.org/miniprogram-computed/download/miniprogram-computed-3.1.1.tgz#606692bd48bab49ebbd2e953789869bafaa6fbcf"
+  integrity sha1-YGaSvUi6tJ670ulTeJhpuvqm+88=
   dependencies:
-    "@types/wechat-miniprogram" "^3.0.0"
     fast-deep-equal "^2.0.1"
     rfdc "^1.1.4"
 

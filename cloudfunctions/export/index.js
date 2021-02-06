@@ -25,7 +25,8 @@ const TYPES = {
   OTHERS: { label: '其它', key: 'others' },
   ABNORMAL: { label: '异常', key: 'abnormal' },
   WEIGHT: { label: '体重 (kg)', key: 'weight' },
-  DEFECATION: { label: '排便次数', key: 'defecation' }
+  DEFECATION: { label: '排便次数', key: 'defecation' },
+  DEFECATION_REMARK: { label: '排便情况', key: 'defecationRemark' }
 }
 
 // 云函数入口函数
@@ -99,6 +100,7 @@ exports.main = async ({ from, to, groupBy = 'month' }, context) => {
       TYPES.SUPPLEMENT,
       TYPES.WEIGHT,
       TYPES.DEFECATION,
+      TYPES.DEFECATION_REMARK,
       TYPES.OTHERS,
       TYPES.ABNORMAL
     ]
@@ -142,6 +144,7 @@ exports.main = async ({ from, to, groupBy = 'month' }, context) => {
         { wch: 20 },
         { wch: 20 },
         { wch: 20 },
+        { wch: 10 },
         { wch: 10 },
         { wch: 10 },
         { wch: 20 },

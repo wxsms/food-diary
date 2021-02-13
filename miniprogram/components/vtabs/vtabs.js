@@ -14,7 +14,7 @@ Component({
     tabBarLineColor: { type: String, value: 'var(--weui-BRAND)' },
     tabBarInactiveTextColor: { type: String, value: 'var(--weui-FG-0)' },
     tabBarActiveTextColor: { type: String, value: 'var(--weui-TEXTGREEN)' },
-    tabBarInactiveBgColor: { type: String, value: 'var(--weui-BG-0)' },
+    tabBarInactiveBgColor: { type: String, value: 'transparent' },
     tabBarActiveBgColor: { type: String, value: 'var(--weui-BG)' },
     activeTab: { type: Number, value: 0 },
     animation: { type: Boolean, value: true }

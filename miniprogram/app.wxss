@@ -50,12 +50,8 @@ page {
   font-size: 14px;
 }
 
-.weui-cells {
+.cells-textarea {
   background-color: var(--weui-BG-3);
-}
-
-.weui-cell_example:before {
-  left: 52px;
 }
 
 .weui-textarea, .weui-input, .weui-label {

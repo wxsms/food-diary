@@ -52,7 +52,7 @@
           </block>
 
           <view wx:else>
-            <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cells weui-cells_after-title cells-textarea">
               <view class="weui-cell">
                 <view class="weui-cell__bd">
                   <textarea

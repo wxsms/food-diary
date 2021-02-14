@@ -57,10 +57,10 @@ lodash.uniq@4.5.0:
   resolved "https://registry.npm.taobao.org/lodash.uniq/download/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-luxon@1.25.0:
-  version "1.25.0"
-  resolved "https://registry.npm.taobao.org/luxon/download/luxon-1.25.0.tgz#d86219e90bc0102c0eb299d65b2f5e95efe1fe72"
-  integrity sha1-2GIZ6QvAECwOspnWWy9ele/h/nI=
+luxon@1.26.0:
+  version "1.26.0"
+  resolved "https://registry.npm.taobao.org/luxon/download/luxon-1.26.0.tgz#d3692361fda51473948252061d0f8561df02b578"
+  integrity sha1-02kjYf2lFHOUglIGHQ+FYd8CtXg=
 
 miniprogram-api-typings@3.2.2:
   version "3.2.2"

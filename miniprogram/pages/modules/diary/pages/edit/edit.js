@@ -1,5 +1,5 @@
 import { DIARY_OPTION_LIST, DIARY_TYPES } from '../../../../../constants/constants'
-import { getCache, cacheInput, cacheDelete } from '../../../../../store/recent-record.store'
+import { getCache, cacheInput, cacheDelete, maxSize } from '../../../../../store/recent-record.store'
 import { isReview } from '../../../../../utils/version.utils'
 import { getFoods } from '../../../../../store/scd-foods.store'
 import { debug, error } from '../../../../../utils/log.utils'
@@ -44,7 +44,7 @@ Component({
   methods: {
     onRecentHelp () {
       wx.showModal({
-        content: '最多保存 8 条记录，长按以删除',
+        content: `最多保存 ${maxSize} 条记录，长按以删除`,
         confirmText: '知道了',
         showCancel: false
       })

@@ -3,7 +3,7 @@ import reverse from 'lodash.reverse'
 import chunk from 'lodash.chunk'
 import { error } from '../utils/log.utils'
 
-const maxSize = 8
+export const maxSize = 10
 
 export function cacheInput (key, str) {
   const oldCache = getCache(key)

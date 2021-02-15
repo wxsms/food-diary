@@ -1,5 +1,4 @@
 import { DateTime } from 'luxon'
-import { debug } from './log.utils'
 
 export const FORMATS = {
   Y_MM_DD_SIMPLE: 'yyyy-LL-dd',
@@ -23,7 +22,6 @@ const WEEK_DAYS = {
 
 function _DateTime (ts) {
   const isDateTime = ts instanceof DateTime
-  // debug('_DateTime', isDateTime)
   return isDateTime ? ts : DateTime.fromMillis(ts)
 }
 

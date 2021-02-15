@@ -23,9 +23,12 @@ export function loading (show = true, text = LOADING_TEXTS.LOADING) {
 }
 
 export function toast (text, icon = 'none') {
-  wx.showToast({
-    title: text,
-    icon: icon,
-    duration: 2000
-  })
+  // 100 ms 的延迟，防止被 hideLoading 覆盖
+  setTimeout(() => {
+    wx.showToast({
+      title: text,
+      icon: icon,
+      duration: 2000
+    })
+  }, 100)
 }

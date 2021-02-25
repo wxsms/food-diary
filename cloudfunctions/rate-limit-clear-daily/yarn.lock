@@ -12,24 +12,25 @@
     lodash.set "4.3.2"
     lodash.unset "4.5.2"
 
-"@cloudbase/database@1.2.1":
-  version "1.2.1"
-  resolved "https://registry.npm.taobao.org/@cloudbase/database/download/@cloudbase/database-1.2.1.tgz#1c0ae23eafc0e37066614990929437c69d90c744"
-  integrity sha1-HAriPq/A43BmYUmQkpQ3xp2Qx0Q=
+"@cloudbase/database@1.2.2":
+  version "1.2.2"
+  resolved "https://registry.npm.taobao.org/@cloudbase/database/download/@cloudbase/database-1.2.2.tgz#24cc9310967c27bc1bb8fa24535f490289c8440a"
+  integrity sha1-JMyTEJZ8J7wbuPokU19JAonIRAo=
   dependencies:
     bson "^4.0.3"
     lodash.clonedeep "4.5.0"
     lodash.set "4.3.2"
     lodash.unset "4.5.2"
 
-"@cloudbase/node-sdk@2.3.3":
-  version "2.3.3"
-  resolved "https://registry.npm.taobao.org/@cloudbase/node-sdk/download/@cloudbase/node-sdk-2.3.3.tgz#7f010da12ad348830743fe118fa9f661acbdb318"
-  integrity sha1-fwENoSrTSIMHQ/4Rj6n2Yay9sxg=
+"@cloudbase/node-sdk@2.4.7":
+  version "2.4.7"
+  resolved "https://registry.npm.taobao.org/@cloudbase/node-sdk/download/@cloudbase/node-sdk-2.4.7.tgz#206a4ce6cc3137cf46a9392ca372117b8243d6b3"
+  integrity sha1-IGpM5swxN89GqTkso3IRe4JD1rM=
   dependencies:
-    "@cloudbase/database" "1.2.1"
+    "@cloudbase/database" "1.2.2"
     "@cloudbase/signature-nodejs" "1.0.0-beta.0"
     "@types/retry" "^0.12.0"
+    agentkeepalive "^4.1.3"
     is-regex "^1.0.4"
     jsonwebtoken "^8.5.1"
     lodash.merge "^4.6.1"
@@ -121,6 +122,15 @@
   version "0.12.0"
   resolved "https://registry.npm.taobao.org/@types/retry/download/@types/retry-0.12.0.tgz?cache=0&sync_timestamp=1596839932014&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fretry%2Fdownload%2F%40types%2Fretry-0.12.0.tgz#2b35eccfcee7d38cd72ad99232fbd58bffb3c84d"
   integrity sha1-KzXsz87n04zXKtmSMvvVi/+zyE0=
+
+agentkeepalive@^4.1.3:
+  version "4.1.4"
+  resolved "https://registry.npm.taobao.org/agentkeepalive/download/agentkeepalive-4.1.4.tgz?cache=0&sync_timestamp=1612490560568&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fagentkeepalive%2Fdownload%2Fagentkeepalive-4.1.4.tgz#d928028a4862cb11718e55227872e842a44c945b"
+  integrity sha1-2SgCikhiyxFxjlUieHLoQqRMlFs=
+  dependencies:
+    debug "^4.1.0"
+    depd "^1.1.2"
+    humanize-ms "^1.2.1"
 
 ajv@^6.12.3:
   version "6.12.4"
@@ -236,10 +246,22 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
+debug@^4.1.0:
+  version "4.3.1"
+  resolved "https://registry.npm.taobao.org/debug/download/debug-4.3.1.tgz?cache=0&sync_timestamp=1607566782124&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fdebug%2Fdownload%2Fdebug-4.3.1.tgz#f0d229c505e0c6d8c49ac553d1b13dc183f6b2ee"
+  integrity sha1-8NIpxQXgxtjEmsVT0bE9wYP2su4=
+  dependencies:
+    ms "2.1.2"
+
 delayed-stream@~1.0.0:
   version "1.0.0"
   resolved "https://registry.npm.taobao.org/delayed-stream/download/delayed-stream-1.0.0.tgz#df3ae199acadfb7d440aaae0b29e2272b24ec619"
   integrity sha1-3zrhmayt+31ECqrgsp4icrJOxhk=
+
+depd@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.npm.taobao.org/depd/download/depd-1.1.2.tgz#9bcd52e14c097763e749b274c4346ed2e560b5a9"
+  integrity sha1-m81S4UwJd2PnSbJ0xDRu0uVgtak=
 
 diff@^4.0.1:
   version "4.0.2"
@@ -333,6 +355,13 @@ http-signature@~1.2.0:
     assert-plus "^1.0.0"
     jsprim "^1.2.2"
     sshpk "^1.7.0"
+
+humanize-ms@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.npm.taobao.org/humanize-ms/download/humanize-ms-1.2.1.tgz#c46e3159a293f6b896da29316d8b6fe8bb79bbed"
+  integrity sha1-xG4xWaKT9riW2ikxbYtv6Lt5u+0=
+  dependencies:
+    ms "^2.0.0"
 
 ieee754@^1.1.4:
   version "1.1.13"
@@ -506,10 +535,15 @@ mime-types@^2.1.12, mime-types@~2.1.19:
   dependencies:
     mime-db "1.44.0"
 
-ms@^2.1.1:
+ms@2.1.2, ms@^2.1.1:
   version "2.1.2"
   resolved "https://registry.npm.taobao.org/ms/download/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
   integrity sha1-0J0fNXtEP0kzgqjrPM0YOHKuYAk=
+
+ms@^2.0.0:
+  version "2.1.3"
+  resolved "https://registry.npm.taobao.org/ms/download/ms-2.1.3.tgz?cache=0&sync_timestamp=1607433950466&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fms%2Fdownload%2Fms-2.1.3.tgz#574c8138ce1d2b5861f0b44579dbadd60c6615b2"
+  integrity sha1-V0yBOM4dK1hh8LRFedut1gxmFbI=
 
 oauth-sign@~0.9.0:
   version "0.9.0"
@@ -744,12 +778,12 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-wx-server-sdk@~2.3.0:
-  version "2.3.0"
-  resolved "https://registry.npm.taobao.org/wx-server-sdk/download/wx-server-sdk-2.3.0.tgz#ea29bf39cfdad70b2758057b22f4d7775f0f7267"
-  integrity sha1-6im/Oc/a1wsnWAV7IvTXd18Pcmc=
+wx-server-sdk@~2.4.0:
+  version "2.4.0"
+  resolved "https://registry.npm.taobao.org/wx-server-sdk/download/wx-server-sdk-2.4.0.tgz#5e14432ba0ef1c95485cf72c9359446eab392bde"
+  integrity sha1-XhRDK6DvHJVIXPcsk1lEbqs5K94=
   dependencies:
-    "@cloudbase/node-sdk" "2.3.3"
+    "@cloudbase/node-sdk" "2.4.7"
     protobufjs "6.8.8"
     tcb-admin-node latest
     tslib "^1.9.3"

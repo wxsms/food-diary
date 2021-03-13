@@ -2,7 +2,7 @@ import { STORAGE_KEYS } from '../constants/constants'
 import { debug, error } from './log.utils'
 
 export const version = '1.10.0'
-const _reviewVersion = { version: null }
+const _rVersion = { version: null }
 const _scdVersion = { version: null }
 
 function _isVersionExist (v) {
@@ -39,17 +39,17 @@ async function _compare (v, withVal) {
 }
 
 async function getVersions () {
-  if (_isVersionExist(_reviewVersion) && _isVersionExist(_scdVersion)) {
+  if (_isVersionExist(_rVersion) && _isVersionExist(_scdVersion)) {
     return
   }
   const db = wx.cloud.database()
   const { data } = await db.collection('versions').get()
-  _setVersionValue(_reviewVersion, data[0].review)
+  _setVersionValue(_rVersion, data[0].r)
   _setVersionValue(_scdVersion, data[0].scd)
 }
 
-export async function isReview () {
-  return await _compare(_reviewVersion, version)
+export async function isR () {
+  return await _compare(_rVersion, version)
 }
 
 export async function getScdVersion () {

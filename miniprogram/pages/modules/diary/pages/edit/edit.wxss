@@ -15,6 +15,6 @@
   /* todo */
 }
 
-.review-text {
+.r-text {
   white-space: pre;
 }

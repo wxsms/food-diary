@@ -28,7 +28,7 @@
               bindinput="onDefecationChange"
             />
           </mp-cell>
-          <mp-cell title="排便情况" wx:if="{{showDefecation && !isReview}}">
+          <mp-cell title="排便情况" wx:if="{{showDefecation && !r}}">
             <input
               type="text"
               value="{{defecationRemark}}"
@@ -39,12 +39,12 @@
           </mp-cell>
         </mp-cells>
         <block wx:else>
-          <block wx:if="{{isReview}}">
+          <block wx:if="{{r}}">
             <view wx:if="{{value}}">
               <view class="weui-cells weui-cells_after-title">
                 <view class="weui-cell">
                   <view class="weui-cell__bd">
-                    <view class="review-text">{{value ? value : '请选择...'}}</view>
+                    <view class="r-text">{{value ? value : '请选择...'}}</view>
                   </view>
                 </view>
               </view>
@@ -87,7 +87,7 @@
         </block>
       </block>
       <view class="weui-btn-area">
-        <button class="weui-btn" type="primary" wx:if="{{isReview && !isStatus}}">
+        <button class="weui-btn" type="primary" wx:if="{{r && !isStatus}}">
           <picker bindchange="onScdFoodChange" range="{{scdFoods}}">
             添加...
           </picker>

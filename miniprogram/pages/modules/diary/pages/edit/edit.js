@@ -1,6 +1,6 @@
 import { DIARY_OPTION_LIST, DIARY_TYPES } from '../../../../../constants/constants'
 import { getCache, cacheInput, cacheDelete, maxSize } from '../../../../../store/recent-record.store'
-import { isReview } from '../../../../../utils/version.utils'
+import { isR } from '../../../../../utils/version.utils'
 import { getFoods } from '../../../../../store/scd-foods.store'
 import { debug, error } from '../../../../../utils/log.utils'
 import { storeBindingsBehavior } from 'mobx-miniprogram-bindings'
@@ -27,7 +27,7 @@ Component({
     loaded: false,
     isStatus: false,
     showDelete: false,
-    isReview: false
+    r: false
   },
   storeBindings: {
     store,
@@ -84,14 +84,14 @@ Component({
     },
     async fetchScdData () {
       try {
-        const _isReview = await isReview()
-        if (_isReview) {
+        const r = await isR()
+        if (r) {
           loading()
           const data = await getFoods()
           this.setData({
             loaded: true,
             scdFoods: data.map(v => v.name),
-            isReview: _isReview
+            r: r
           })
         } else {
           this.setData({

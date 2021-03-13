@@ -1,5 +1,5 @@
 import { DIARY_OPTION_LIST, DIARY_TYPES } from '../../constants/constants'
-import { isReview, version } from '../../utils/version.utils'
+import { isR, version } from '../../utils/version.utils'
 import { storeBindingsBehavior } from 'mobx-miniprogram-bindings'
 import { store } from '../../store/store'
 import { nextTick } from '../../utils/wx.utils'
@@ -40,8 +40,8 @@ Component({
       debug('version:', version)
       debug('index:onLoad')
       loading()
-      const _isReview = await isReview()
-      const _options = (_isReview ? DIARY_OPTION_LIST.filter(v => v.inReviewMode) : DIARY_OPTION_LIST).map((v, i) => {
+      const r = await isR()
+      const _options = (r ? DIARY_OPTION_LIST.filter(v => v.r) : DIARY_OPTION_LIST).map((v, i) => {
         // const text = v.desc ? `${v.label}（${v.desc}）` : v.label
         const text = v.label
         const isAbnormal = v.key === DIARY_TYPES.ABNORMAL.key

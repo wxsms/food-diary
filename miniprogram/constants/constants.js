@@ -2,50 +2,50 @@ const _DIARY_TYPES = {
   BREAKFAST: {
     label: '早餐',
     key: 'breakfast',
-    inReviewMode: true
+    r: true
   },
   LUNCH: {
     label: '午餐',
     key: 'lunch',
-    inReviewMode: true
+    r: true
   },
   DINNER: {
     label: '晚餐',
     key: 'dinner',
-    inReviewMode: true
+    r: true
   },
   SUPPLEMENT: {
     label: '补充',
     desc: '正餐以外的其它进食',
     key: 'supplement',
-    inReviewMode: true
+    r: true
   },
   OTHERS: {
     label: '其它',
     desc: '用药，或者任意想写的',
     key: 'others',
-    inReviewMode: false
+    r: false
   },
   ABNORMAL: {
     label: '异常',
     desc: '感到不舒服？',
     key: 'abnormal',
-    inReviewMode: false
+    r: false
   },
   WEIGHT: {
     label: '体重',
     key: 'weight',
-    inReviewMode: false
+    r: false
   },
   DEFECATION: {
     label: '排便次数',
     key: 'defecation',
-    inReviewMode: false
+    r: false
   },
   DEFECATION_REMARK: {
     label: '排便情况',
     key: 'defecationRemark',
-    inReviewMode: false
+    r: false
   }
 }
 _DIARY_TYPES.STATUS = {
@@ -53,7 +53,7 @@ _DIARY_TYPES.STATUS = {
   key: 'status',
   desc: '体重、排便次数',
   keys: [_DIARY_TYPES.WEIGHT.key, _DIARY_TYPES.DEFECATION.key, _DIARY_TYPES.DEFECATION_REMARK.key],
-  inReviewMode: true
+  r: true
 }
 
 export const DIARY_TYPES = _DIARY_TYPES

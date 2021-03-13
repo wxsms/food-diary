@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "test": "node node_modules/jest-cli/bin/jest.js --runInBand --verbose"
+    "test": "node node_modules/jest-cli/bin/jest.js --runInBand --verbose ./tests"
   },
   "dependencies": {
     "lodash.chunk": "4.2.0",

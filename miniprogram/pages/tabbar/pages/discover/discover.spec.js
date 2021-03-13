@@ -15,12 +15,12 @@ describe('发现', () => {
   it('正常显示“CDAI 评分”功能', async () => {
     const cell = await page.$('mp-cells')
     const cells = await cell.$$('mp-cell')
-    expect(await cells[0].property('title')).toEqual('CDAI 评分')
+    expect(await (await cells[0].$('.weui-cell__hd')).text()).toEqual('CDAI 评分')
   })
 
   it('正常显示“类克用药记录”功能', async () => {
     const cell = await page.$('mp-cells')
     const cells = await cell.$$('mp-cell')
-    expect(await cells[1].property('title')).toEqual('类克用药记录')
+    expect(await (await cells[1].$('.weui-cell__hd')).text()).toEqual('类克用药记录')
   })
 })

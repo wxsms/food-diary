@@ -2570,9 +2570,9 @@ jest-worker@^26.6.2:
     merge-stream "^2.0.0"
     supports-color "^7.0.0"
 
-jest@^26.6.3:
+jest@26.6.3:
   version "26.6.3"
-  resolved "https://registry.npm.taobao.org/jest/download/jest-26.6.3.tgz?cache=0&sync_timestamp=1615211294512&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fjest%2Fdownload%2Fjest-26.6.3.tgz#40e8fdbe48f00dfa1f0ce8121ca74b88ac9148ef"
+  resolved "https://registry.npm.taobao.org/jest/download/jest-26.6.3.tgz?cache=0&sync_timestamp=1615211679035&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fjest%2Fdownload%2Fjest-26.6.3.tgz#40e8fdbe48f00dfa1f0ce8121ca74b88ac9148ef"
   integrity sha1-QOj9vkjwDfofDOgSHKdLiKyRSO8=
   dependencies:
     "@jest/core" "^26.6.3"
@@ -2936,12 +2936,12 @@ minimist@^1.1.1, minimist@^1.2.0, minimist@^1.2.5:
   resolved "https://registry.npm.taobao.org/minimist/download/minimist-1.2.5.tgz#67d66014b66a6a8aaa0c083c5fd58df4e4e97602"
   integrity sha1-Z9ZgFLZqaoqqDAg8X9WN9OTpdgI=
 
-miniprogram-api-typings@^3.3.0:
+miniprogram-api-typings@3.3.0:
   version "3.3.0"
-  resolved "https://registry.npm.taobao.org/miniprogram-api-typings/download/miniprogram-api-typings-3.3.0.tgz?cache=0&sync_timestamp=1614759684331&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fminiprogram-api-typings%2Fdownload%2Fminiprogram-api-typings-3.3.0.tgz#3275d2ae66887481a410aedec54fd11eb8c7261f"
+  resolved "https://registry.npm.taobao.org/miniprogram-api-typings/download/miniprogram-api-typings-3.3.0.tgz#3275d2ae66887481a410aedec54fd11eb8c7261f"
   integrity sha1-MnXSrmaIdIGkEK7exU/RHrjHJh8=
 
-miniprogram-automator@^0.10.0:
+miniprogram-automator@0.10.0:
   version "0.10.0"
   resolved "https://registry.npm.taobao.org/miniprogram-automator/download/miniprogram-automator-0.10.0.tgz#0078b844ff0094b4aa5287e9902ff1abf0639fd8"
   integrity sha1-AHi4RP8AlLSqUofpkC/xq/Bjn9g=

@@ -1,153 +1,156 @@
 {
-	"miniprogramRoot": "miniprogram/",
-	"cloudfunctionRoot": "cloudfunctions/",
-	"setting": {
-		"urlCheck": true,
-		"es6": true,
-		"enhance": true,
-		"postcss": true,
-		"preloadBackgroundData": false,
-		"minified": true,
-		"newFeature": true,
-		"coverView": true,
-		"nodeModules": true,
-		"autoAudits": false,
-		"showShadowRootInWxmlPanel": false,
-		"scopeDataCheck": false,
-		"checkInvalidKey": true,
-		"checkSiteMap": false,
-		"uploadWithSourceMap": true,
-		"compileHotReLoad": false,
-		"babelSetting": {
-			"ignore": [],
-			"disablePlugins": [],
-			"outputPath": ""
-		},
-		"useIsolateContext": true,
-		"useCompilerModule": false,
-		"userConfirmedUseCompilerModuleSwitch": false
-	},
-	"appid": "wx1464eb4525e157c7",
-	"projectname": "food-diary",
-	"libVersion": "2.11.0",
-	"simulatorType": "wechat",
-	"simulatorPluginLibVersion": {},
-	"cloudfunctionTemplateRoot": "cloudfunctionTemplate",
-	"condition": {
-		"search": {
-			"current": -1,
-			"list": []
-		},
-		"conversation": {
-			"current": -1,
-			"list": []
-		},
-		"plugin": {
-			"current": -1,
-			"list": []
-		},
-		"game": {
-			"list": []
-		},
-		"gamePlugin": {
-			"current": -1,
-			"list": []
-		},
-		"miniprogram": {
-			"current": -1,
-			"list": [
-				{
-					"id": 0,
-					"name": "我的",
-					"pathName": "pages/tabbar/pages/user/user",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 1,
-					"name": "关于",
-					"pathName": "pages/modules/user/pages/about/about",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 2,
-					"name": "状态曲线",
-					"pathName": "pages/modules/charts/pages/status-chart/status-chart",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 3,
-					"name": "scd",
-					"pathName": "pages/tabbar/pages/scd/scd",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 4,
-					"name": "更新日志",
-					"pathName": "pages/modules/user/pages/changelog/changelog",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 5,
-					"name": "日历",
-					"pathName": "pages/modules/diary/pages/calendar/calendar",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "导出",
-					"pathName": "pages/modules/user/pages/export/export",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 7,
-					"name": "scd食物详情",
-					"pathName": "pages/modules/scd/pages/detail/detail",
-					"query": "id=8c85b56b5f2a42db000b238e6642d5c3",
-					"scene": null
-				},
-				{
-					"id": 8,
-					"name": "cdai",
-					"pathName": "pages/modules/discover/pages/cdai/cdai",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 9,
-					"name": "cdai result",
-					"pathName": "pages/modules/discover/pages/cdai/result",
-					"query": "score=111",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "发现",
-					"pathName": "pages/tabbar/pages/discover/discover",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 11,
-					"name": "类克",
-					"pathName": "pages/modules/discover/pages/remicade/remicade",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "类克新增",
-					"pathName": "pages/modules/discover/pages/remicade/remicade-edit",
-					"query": "",
-					"scene": null
-				}
-			]
-		}
-	}
+  "miniprogramRoot": "miniprogram/",
+  "cloudfunctionRoot": "cloudfunctions/",
+  "setting": {
+    "urlCheck": true,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "preloadBackgroundData": false,
+    "minified": true,
+    "newFeature": true,
+    "coverView": true,
+    "nodeModules": true,
+    "autoAudits": false,
+    "showShadowRootInWxmlPanel": false,
+    "scopeDataCheck": false,
+    "checkInvalidKey": true,
+    "checkSiteMap": false,
+    "uploadWithSourceMap": true,
+    "compileHotReLoad": false,
+    "useMultiFrameRuntime": true,
+    "useApiHook": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "bundle": false,
+    "useIsolateContext": true,
+    "useCompilerModule": false,
+    "userConfirmedUseCompilerModuleSwitch": false,
+    "userConfirmedBundleSwitch": false,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true,
+    "useApiHostProcess": false
+  },
+  "appid": "wx1464eb4525e157c7",
+  "projectname": "food-diary",
+  "libVersion": "2.11.0",
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
+  "condition": {
+    "search": {
+      "list": []
+    },
+    "conversation": {
+      "list": []
+    },
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "id": 0,
+          "name": "我的",
+          "pathName": "pages/tabbar/pages/user/user",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 1,
+          "name": "关于",
+          "pathName": "pages/modules/user/pages/about/about",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 2,
+          "name": "状态曲线",
+          "pathName": "pages/modules/charts/pages/status-chart/status-chart",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 3,
+          "name": "scd",
+          "pathName": "pages/tabbar/pages/scd/scd",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 4,
+          "name": "更新日志",
+          "pathName": "pages/modules/user/pages/changelog/changelog",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 5,
+          "name": "日历",
+          "pathName": "pages/modules/diary/pages/calendar/calendar",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "导出",
+          "pathName": "pages/modules/user/pages/export/export",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 7,
+          "name": "scd食物详情",
+          "pathName": "pages/modules/scd/pages/detail/detail",
+          "query": "id=8c85b56b5f2a42db000b238e6642d5c3",
+          "scene": null
+        },
+        {
+          "id": 8,
+          "name": "cdai",
+          "pathName": "pages/modules/discover/pages/cdai/cdai",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 9,
+          "name": "cdai result",
+          "pathName": "pages/modules/discover/pages/cdai/result",
+          "query": "score=111",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "发现",
+          "pathName": "pages/tabbar/pages/discover/discover",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 11,
+          "name": "类克",
+          "pathName": "pages/modules/discover/pages/remicade/remicade",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "类克新增",
+          "pathName": "pages/modules/discover/pages/remicade/remicade-edit",
+          "query": "",
+          "scene": null
+        }
+      ]
+    }
+  }
 }

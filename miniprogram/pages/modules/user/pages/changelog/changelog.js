@@ -2,6 +2,13 @@ import themeMixin from '../../../../../mixins/theme.mixin'
 import shareMixin from '../../../../../mixins/share.mixin'
 
 const changelog = `
+## 1.10.1
+### 修复
+* 导出excel缺少排便情况的问题
+* 网络错误时 toast 一闪而过问题
+* 最多缓存记录调整为10条
+* 部分依赖库升级
+
 ## 1.10.0
 ### 新增
 * 排便支持记录具体情况了

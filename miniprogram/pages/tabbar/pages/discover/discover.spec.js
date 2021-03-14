@@ -3,7 +3,7 @@ module.exports = describe('发现', () => {
 
   beforeAll(async () => {
     page = await global.mp.reLaunch('/pages/tabbar/pages/discover/discover')
-    await page.waitFor(500)
+    // await page.waitFor(500)
   }, 30000)
 
   it('正常显示“CDAI 评分”功能', async () => {

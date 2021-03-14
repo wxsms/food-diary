@@ -7,6 +7,8 @@ describe('编辑日记', () => {
   let page = null
 
   function createEitSuit (index, name, key, foods) {
+    const isStatus = index === 4
+
     describe(name, () => {
       beforeAll(async () => {
         await global.mp.callWxMethod('removeStorage', {
@@ -53,104 +55,174 @@ describe('编辑日记', () => {
         expect(btn).toBeNull()
       })
 
-      it('首次进入不显示缓存', async () => {
+      it('非“状态”不显示状态输入，“状态”不显示常规输入', async () => {
         const form = await page.$('mp-form')
-        const recentV = await form.$('#recent-view')
-        expect(recentV).toBeNull()
+        const cells = await form.$('mp-cells')
+        if (isStatus) {
+          expect(cells).not.toBeNull()
+        } else {
+          expect(cells).toBeNull()
+        }
       })
 
-      it('正确保存用户首次输入内容', async () => {
-        const form = await page.$('mp-form')
-        const textarea = await form.$('textarea')
-        await textarea.input(foods[0])
-        expect(await textarea.value()).toEqual(foods[0])
+      if (!isStatus) {
+        it('首次进入不显示缓存', async () => {
+          const form = await page.$('mp-form')
+          const recentV = await form.$('#recent-view')
+          expect(recentV).toBeNull()
+        })
 
-        const btn = await form.$('#btn-save')
-        await btn.tap()
-        await page.waitFor(500)
-        page = await global.mp.currentPage()
+        it('正确保存用户首次输入内容', async () => {
+          const form = await page.$('mp-form')
+          const textarea = await form.$('textarea')
+          await textarea.input(foods[0])
+          expect(await textarea.value()).toEqual(foods[0])
 
-        const card = (await page.$$('card'))[index]
-        const badge = await card.$('.card-badge')
-        const text = await card.$('text')
-        expect(await badge.text()).toEqual(name)
-        expect(await text.text()).toEqual(foods[0])
+          const btn = await form.$('#btn-save')
+          await btn.tap()
+          await page.waitFor(500)
+          page = await global.mp.currentPage()
 
-        page = await goEdit(page, index)
-      })
+          const card = (await page.$$('card'))[index]
+          const badge = await card.$('.card-badge')
+          const text = await card.$('text')
+          expect(await badge.text()).toEqual(name)
+          expect(await text.text()).toEqual(foods[0])
 
-      it('有内容时显示删除按钮', async () => {
-        const form = await page.$('mp-form')
-        const btn = await form.$('#btn-delete')
-        expect(btn).not.toBeNull()
-        expect(await btn.text()).toContain('删除')
-        expect(await btn.property('type')).toEqual('warn')
-      })
+          page = await goEdit(page, index)
+        })
 
-      it('正确缓存用户首次输入内容', async () => {
-        const form = await page.$('mp-form')
-        const recentB = await form.$$('#recent-view button')
-        expect(recentB.length).toEqual(1)
-        expect(await recentB[0].text()).toEqual(foods[0])
-      })
+        it('有内容时显示删除按钮', async () => {
+          const form = await page.$('mp-form')
+          const btn = await form.$('#btn-delete')
+          expect(btn).not.toBeNull()
+          expect(await btn.text()).toContain('删除')
+          expect(await btn.property('type')).toEqual('warn')
+        })
 
-      it('正确保存用户二次输入内容', async () => {
-        const form = await page.$('mp-form')
-        const textarea = await form.$('textarea')
-        expect(await textarea.value()).toEqual(foods[0])
+        it('正确缓存用户首次输入内容', async () => {
+          const form = await page.$('mp-form')
+          const recentB = await form.$$('#recent-view button')
+          expect(recentB.length).toEqual(1)
+          expect(await recentB[0].text()).toEqual(foods[0])
+        })
 
-        await textarea.input(foods.join('\n'))
-        expect(await textarea.value()).toEqual(foods.join('\n'))
+        it('正确保存用户二次输入内容', async () => {
+          const form = await page.$('mp-form')
+          const textarea = await form.$('textarea')
+          expect(await textarea.value()).toEqual(foods[0])
 
-        const btn = await form.$('#btn-save')
-        await btn.tap()
-        await page.waitFor(500)
-        page = await global.mp.currentPage()
+          await textarea.input(foods.join('\n'))
+          expect(await textarea.value()).toEqual(foods.join('\n'))
 
-        const card = (await page.$$('card'))[index]
-        const badge = await card.$('.card-badge')
-        const text = await card.$('text')
-        expect(await badge.text()).toEqual(name)
-        expect(await text.text()).toEqual(foods.join('\n'))
+          const btn = await form.$('#btn-save')
+          await btn.tap()
+          await page.waitFor(500)
+          page = await global.mp.currentPage()
 
-        page = await goEdit(page, index)
-      })
+          const card = (await page.$$('card'))[index]
+          const badge = await card.$('.card-badge')
+          const text = await card.$('text')
+          expect(await badge.text()).toEqual(name)
+          expect(await text.text()).toEqual(foods.join('\n'))
 
-      it('正确缓存用户二次输入内容', async () => {
-        const form = await page.$('mp-form')
-        const recentB = await form.$$('#recent-view button')
-        expect(recentB.length).toEqual(3)
-        expect(await recentB[0].text()).toEqual(foods[2])
-        expect(await recentB[1].text()).toEqual(foods[1])
-        expect(await recentB[2].text()).toEqual(foods[0])
-      })
+          page = await goEdit(page, index)
+        })
 
-      it('正确使用缓存进行输入', async () => {
-        const form = await page.$('mp-form')
-        const textarea = await form.$('textarea')
-        const recentB = await form.$$('#recent-view button')
-        expect(recentB.length).toEqual(3)
+        it('正确缓存用户二次输入内容', async () => {
+          const form = await page.$('mp-form')
+          const recentB = await form.$$('#recent-view button')
+          expect(recentB.length).toEqual(3)
+          expect(await recentB[0].text()).toEqual(foods[2])
+          expect(await recentB[1].text()).toEqual(foods[1])
+          expect(await recentB[2].text()).toEqual(foods[0])
+        })
 
-        await textarea.input('')
-        expect(await textarea.value()).toEqual('')
-        await recentB[2].tap()
-        expect(await textarea.value()).toEqual(foods[0])
-        await recentB[0].tap()
-        expect(await textarea.value()).toEqual(`${foods[0]}\n${foods[2]}`)
-        await recentB[1].tap()
-        expect(await textarea.value()).toEqual(`${foods[0]}\n${foods[2]}\n${foods[1]}`)
+        it('正确使用缓存进行输入', async () => {
+          const form = await page.$('mp-form')
+          const textarea = await form.$('textarea')
+          const recentB = await form.$$('#recent-view button')
+          expect(recentB.length).toEqual(3)
 
-        const btn = await form.$('#btn-save')
-        await btn.tap()
-        await page.waitFor(500)
-        page = await global.mp.currentPage()
+          await textarea.input('')
+          expect(await textarea.value()).toEqual('')
+          await recentB[2].tap()
+          expect(await textarea.value()).toEqual(foods[0])
+          await recentB[0].tap()
+          expect(await textarea.value()).toEqual(`${foods[0]}\n${foods[2]}`)
+          await recentB[1].tap()
+          expect(await textarea.value()).toEqual(`${foods[0]}\n${foods[2]}\n${foods[1]}`)
 
-        const card = (await page.$$('card'))[index]
-        const badge = await card.$('.card-badge')
-        const text = await card.$('text')
-        expect(await badge.text()).toEqual(name)
-        expect(await text.text()).toEqual(`${foods[0]}\n${foods[2]}\n${foods[1]}`)
-      })
+          const btn = await form.$('#btn-save')
+          await btn.tap()
+          await page.waitFor(500)
+          page = await global.mp.currentPage()
+
+          const card = (await page.$$('card'))[index]
+          const badge = await card.$('.card-badge')
+          const text = await card.$('text')
+          expect(await badge.text()).toEqual(name)
+          expect(await text.text()).toEqual(`${foods[0]}\n${foods[2]}\n${foods[1]}`)
+        })
+      } else {
+        it('正确保存用户首次输入内容', async () => {
+          const form = await page.$('mp-form')
+          const cells = await form.$('mp-cells')
+          const cell = await cells.$$('mp-cell')
+          const input1 = await cell[0].$('input')
+          const input2 = await cell[1].$('input')
+          const input3 = await cell[2].$('input')
+
+          await input1.input(foods[0].toString())
+          await input2.input(foods[1].toString())
+          await input3.input(foods[2])
+
+          const btn = await form.$('#btn-save')
+          await btn.tap()
+          await page.waitFor(500)
+          page = await global.mp.currentPage()
+
+          const card = (await page.$$('card'))[index]
+          const badge = await card.$('.card-badge')
+          const text = await card.$$('text')
+          expect(await badge.text()).toEqual(name)
+          expect((await text[0].text()).trim()).toEqual(`体重：${foods[0]}kg`)
+          expect((await text[1].text()).trim()).toEqual(`排便：${foods[1]}次`)
+          expect((await text[2].text()).trim()).toEqual(`排便情况：${foods[2]}`)
+
+          page = await goEdit(page, index)
+        })
+
+        it('正确保存用户二次输入内容', async () => {
+          const form = await page.$('mp-form')
+          const cells = await form.$('mp-cells')
+          const cell = await cells.$$('mp-cell')
+          const input1 = await cell[0].$('input')
+          const input2 = await cell[1].$('input')
+          const input3 = await cell[2].$('input')
+
+          expect(await input1.value()).toEqual(foods[0].toString())
+          expect(await input2.value()).toEqual(foods[1].toString())
+          expect(await input3.value()).toEqual(foods[2])
+
+          await input1.input(foods[1].toString())
+          await input2.input(foods[0].toString())
+          await input3.input(foods[2] + '123')
+
+          const btn = await form.$('#btn-save')
+          await btn.tap()
+          await page.waitFor(500)
+          page = await global.mp.currentPage()
+
+          const card = (await page.$$('card'))[index]
+          const badge = await card.$('.card-badge')
+          const text = await card.$$('text')
+          expect(await badge.text()).toEqual(name)
+          expect((await text[0].text()).trim()).toEqual(`体重：${foods[1]}kg`)
+          expect((await text[1].text()).trim()).toEqual(`排便：${foods[0]}次`)
+          expect((await text[2].text()).trim()).toEqual(`排便情况：${foods[2]}123`)
+        })
+      }
     })
   }
 

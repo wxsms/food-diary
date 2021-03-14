@@ -61,7 +61,7 @@ Component({
       let showDelete = false
       if (todayRecord) {
         if (isStatus) {
-          showDelete = typeof weight === 'number' || weight === '' || typeof defecation === 'number' || defecation === '' || !!defecationRemark
+          showDelete = typeof weight === 'number' || typeof defecation === 'number' || !!defecationRemark
         } else {
           showDelete = !!value
         }

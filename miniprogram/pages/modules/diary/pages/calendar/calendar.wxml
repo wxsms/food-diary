@@ -27,7 +27,16 @@
       </view>
     </view>
   </view>
-  <view class="btns" wx:if="{{hasRecordInMonth}}">
-    <button bindtap="exportData" class="weui-btn" type="primary">导出</button>
+  <view class="btns">
+    <button
+      wx:if="{{hasRecordInMonth}}"
+      bindtap="exportData"
+      class="weui-btn"
+      type="primary"
+      id="btn-export"
+    >
+      导出
+    </button>
+    <button class="weui-btn" type="default" bindtap="back" id="btn-back">返回</button>
   </view>
 </view>

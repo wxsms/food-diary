@@ -1,4 +1,6 @@
-module.exports = describe('发现', () => {
+describe('发现', () => {
+  require('../../../../tests/setup')
+
   let page
 
   beforeAll(async () => {

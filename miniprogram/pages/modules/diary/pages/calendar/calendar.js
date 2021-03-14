@@ -86,6 +86,9 @@ Component({
     async exportData () {
       const { monthStart, monthEnd } = this.data
       await exportAndDownloadRecords({ from: monthStart.ts, to: monthEnd.ts })
+    },
+    back () {
+      wx.navigateBack()
     }
   }
 })

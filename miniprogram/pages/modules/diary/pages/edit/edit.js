@@ -295,6 +295,9 @@ Component({
       this.setData({
         value: (this.data.value + '\n' + this.data.scdFoods[value]).trim()
       })
+    },
+    back () {
+      wx.navigateBack()
     }
   }
 })

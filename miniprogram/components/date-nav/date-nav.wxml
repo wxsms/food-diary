@@ -1,5 +1,5 @@
 <view class="date-view">
-  <view class="date" bindtap="goPrevDay">
+  <view class="date yesterday" bindtap="goPrevDay">
     <mp-icon icon="back" color="var(--weui-FG-0)" size="{{7}}"/>
     <text decode>&nbsp;{{prevDateStr}}</text>
   </view>
@@ -7,7 +7,7 @@
     <text>{{currentDateStr}}</text>
     <text>{{currentDateWeekDayStr}}</text>
   </view>
-  <view class="date" bindtap="goNextDay">
+  <view class="date tomorrow" bindtap="goNextDay">
     <text decode>{{nextDateStr}}&nbsp;</text>
     <mp-icon icon="arrow" color="var(--weui-FG-0)" size="{{7}}"/>
   </view>

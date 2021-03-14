@@ -41,6 +41,3 @@ beforeAll(async () => {
 afterAll(async () => {
   await mp.disconnect()
 })
-
-require('../pages/index/index.spec')
-require('../pages/tabbar/pages/discover/discover.spec')

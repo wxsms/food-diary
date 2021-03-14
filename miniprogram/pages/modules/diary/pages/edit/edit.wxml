@@ -92,8 +92,9 @@
             添加...
           </picker>
         </button>
-        <button class="weui-btn" type="primary" bindtap="doSave">保存</button>
-        <button wx:if="{{showDelete}}" class="weui-btn" type="warn" bindtap="deleteRecord">删除</button>
+        <button class="weui-btn" type="primary" bindtap="doSave" id="btn-save">保存</button>
+        <button wx:if="{{showDelete}}" class="weui-btn" type="warn" bindtap="deleteRecord" id="btn-delete">删除</button>
+        <button class="weui-btn" type="default" bindtap="back" id="btn-back">返回</button>
       </view>
     </mp-form>
   </view>

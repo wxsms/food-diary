@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "test": "node node_modules/jest-cli/bin/jest.js ./tests --runInBand --verbose --forceExit --detectOpenHandles",
-    "test:watch": "npm run test -- --watch=true"
+    "test": "node node_modules/jest-cli/bin/jest.js --runInBand --verbose --forceExit --detectOpenHandles --testTimeout=30000",
+    "test:watch": "npm run test -- --watch"
   },
   "dependencies": {
     "lodash.chunk": "4.2.0",

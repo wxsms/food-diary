@@ -1,4 +1,4 @@
-const { goEdit, backEdit } = require('../../../../../tests/test.utils')
+const { goEdit, deleteAllCardsOnPage } = require('../../../../../tests/test.utils')
 const { edit } = require('../../../../../tests/data')
 
 describe('编辑日记', () => {
@@ -80,7 +80,7 @@ describe('编辑日记', () => {
 
           const btn = await form.$('#btn-save')
           await btn.tap()
-          await page.waitFor(500)
+          await page.waitFor(1000)
           page = await global.mp.currentPage()
 
           const card = (await page.$$('card'))[index]
@@ -117,7 +117,7 @@ describe('编辑日记', () => {
 
           const btn = await form.$('#btn-save')
           await btn.tap()
-          await page.waitFor(500)
+          await page.waitFor(1000)
           page = await global.mp.currentPage()
 
           const card = (await page.$$('card'))[index]
@@ -155,7 +155,7 @@ describe('编辑日记', () => {
 
           const btn = await form.$('#btn-save')
           await btn.tap()
-          await page.waitFor(500)
+          await page.waitFor(1000)
           page = await global.mp.currentPage()
 
           const card = (await page.$$('card'))[index]
@@ -179,7 +179,7 @@ describe('编辑日记', () => {
 
           const btn = await form.$('#btn-save')
           await btn.tap()
-          await page.waitFor(500)
+          await page.waitFor(1000)
           page = await global.mp.currentPage()
 
           const card = (await page.$$('card'))[index]
@@ -211,7 +211,7 @@ describe('编辑日记', () => {
 
           const btn = await form.$('#btn-save')
           await btn.tap()
-          await page.waitFor(500)
+          await page.waitFor(1000)
           page = await global.mp.currentPage()
 
           const card = (await page.$$('card'))[index]
@@ -234,34 +234,19 @@ describe('编辑日记', () => {
     page = await global.mp.reLaunch('/pages/index/index')
   })
 
+  describe('删除（测试前）', () => {
+    it('正确删除内容', async () => {
+      page = await deleteAllCardsOnPage(page)
+    })
+  })
+
   for (const e of edit) {
     createEitSuit(...e)
   }
 
-  describe('删除', () => {
+  describe('删除（测试后）', () => {
     it('正确删除内容', async () => {
-      const cards = await page.$$('card')
-      for (const _card of cards) {
-        const _view = await _card.$('.card')
-        if (!_view) {
-          continue
-        }
-        await _view.tap()
-        await page.waitFor(500)
-        page = await global.mp.currentPage()
-
-        const form = await page.$('mp-form')
-        const btn = await form.$('#btn-delete')
-        await btn.tap()
-        await page.waitFor(500)
-        page = await global.mp.currentPage()
-
-        const card = (await page.$$('card'))[0]
-        const badge = await card.$('.card-badge')
-        const text = await card.$('text')
-        expect(badge).toBeNull()
-        expect(text).toBeNull()
-      }
+      page = await deleteAllCardsOnPage(page)
     })
   })
 })

@@ -10,8 +10,10 @@ App({
       )
     }
     // wx.setBackgroundFetchToken({ token: 'scd-foods' })
+    // 1. 正式环境：dev-prpyj
+    // 2. 测试环境：test-5gowurs5e7bd49ed
     wx.cloud.init({
-      env: 'dev-prpyj',
+      env: 'test-5gowurs5e7bd49ed',
       traceUser: true
     })
     this.globalData = {}

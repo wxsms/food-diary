@@ -25,5 +25,34 @@ module.exports = {
     await btn2.tap()
     await page.waitFor(500)
     return await global.mp.currentPage()
+  },
+  async deleteAllCardsOnPage (page) {
+    const cards = await page.$$('card')
+    for (const _card of cards) {
+      const index = cards.indexOf(_card)
+      const _view = await _card.$('.card')
+      if (!_view) {
+        continue
+      }
+
+      await _view.tap()
+      await page.waitFor(500)
+      page = await global.mp.currentPage()
+
+      const form = await page.$('mp-form')
+      const btn = await form.$('#btn-delete')
+      await btn.tap()
+      await page.waitFor(500)
+      page = await global.mp.currentPage()
+
+      const card = (await page.$$('card'))[index]
+      if (card) {
+        const badge = await card.$('.card-badge')
+        const text = await card.$('text')
+        expect(badge).toBeNull()
+        expect(text).toBeNull()
+      }
+    }
+    return page
   }
 }

@@ -183,7 +183,7 @@ Component({
               ...toSave
             })
             cacheInput(this.data.type.key, this.data.value)
-            wx.navigateBack()
+            this.back()
           } else {
             toast(TOAST_ERRORS.NETWORK_ERR)
           }
@@ -199,7 +199,7 @@ Component({
               ...toSave
             })
             cacheInput(this.data.type.key, this.data.value)
-            wx.navigateBack()
+            this.back()
           } else {
             toast(TOAST_ERRORS.NETWORK_ERR)
           }
@@ -264,7 +264,7 @@ Component({
                     ...this.data.todayRecord,
                     ...params
                   })
-                  wx.navigateBack()
+                  this.back()
                 } else {
                   toast(TOAST_ERRORS.NETWORK_ERR)
                 }
@@ -276,7 +276,7 @@ Component({
                   .remove()
                 if (removed) {
                   this.setTodayRecord(null)
-                  wx.navigateBack()
+                  this.back()
                 } else {
                   toast(TOAST_ERRORS.NETWORK_ERR)
                 }

@@ -1,12 +1,4 @@
-const WEEK_DAYS = {
-  '1': '星期一',
-  '2': '星期二',
-  '3': '星期三',
-  '4': '星期四',
-  '5': '星期五',
-  '6': '星期六',
-  '0': '星期日'
-}
+const { WEEK_DAYS, goEdit, backEdit } = require('../../tests/test.utils')
 
 describe('首页', () => {
   require('../../tests/setup')
@@ -97,121 +89,51 @@ describe('首页', () => {
   })
 
   it('点击“早餐”正常跳转至编辑', async () => {
-    const as = await page.$('mp-actionsheet')
-    const btn = await page.$('#btn-add')
-    await btn.tap()
-    await page.waitFor(500)
-    const btn1 = (await as.$$('.weui-actionsheet__cell'))[0]
-    await btn1.tap()
-    await page.waitFor(500)
-    page = await global.mp.currentPage()
+    page = await goEdit(page, 0)
     expect(page.path).toContain('pages/modules/diary/pages/edit/edit')
     expect(page.query.diaryOptionIndex).toEqual('0')
-    const btn2 = await page.$('#btn-back')
-    await btn2.tap()
-    await page.waitFor(500)
-    page = await global.mp.currentPage()
+    page = await backEdit(page)
   })
 
   it('点击“午餐”正常跳转至编辑', async () => {
-    const as = await page.$('mp-actionsheet')
-    const btn = await page.$('#btn-add')
-    await btn.tap()
-    await page.waitFor(500)
-    const btn1 = (await as.$$('.weui-actionsheet__cell'))[1]
-    await btn1.tap()
-    await page.waitFor(500)
-    page = await global.mp.currentPage()
+    page = await goEdit(page, 1)
     expect(page.path).toContain('pages/modules/diary/pages/edit/edit')
     expect(page.query.diaryOptionIndex).toEqual('1')
-    const btn2 = await page.$('#btn-back')
-    await btn2.tap()
-    await page.waitFor(500)
-    page = await global.mp.currentPage()
+    page = await backEdit(page)
   })
 
   it('点击“晚餐”正常跳转至编辑', async () => {
-    const as = await page.$('mp-actionsheet')
-    const btn = await page.$('#btn-add')
-    await btn.tap()
-    await page.waitFor(500)
-    const btn1 = (await as.$$('.weui-actionsheet__cell'))[2]
-    await btn1.tap()
-    await page.waitFor(500)
-    page = await global.mp.currentPage()
+    page = await goEdit(page, 2)
     expect(page.path).toContain('pages/modules/diary/pages/edit/edit')
     expect(page.query.diaryOptionIndex).toEqual('2')
-    const btn2 = await page.$('#btn-back')
-    await btn2.tap()
-    await page.waitFor(500)
-    page = await global.mp.currentPage()
+    page = await backEdit(page)
   })
 
   it('点击“补充”正常跳转至编辑', async () => {
-    const as = await page.$('mp-actionsheet')
-    const btn = await page.$('#btn-add')
-    await btn.tap()
-    await page.waitFor(500)
-    const btn1 = (await as.$$('.weui-actionsheet__cell'))[3]
-    await btn1.tap()
-    await page.waitFor(500)
-    page = await global.mp.currentPage()
+    page = await goEdit(page, 3)
     expect(page.path).toContain('pages/modules/diary/pages/edit/edit')
     expect(page.query.diaryOptionIndex).toEqual('3')
-    const btn2 = await page.$('#btn-back')
-    await btn2.tap()
-    await page.waitFor(500)
-    page = await global.mp.currentPage()
+    page = await backEdit(page)
   })
 
   it('点击“状况”正常跳转至编辑', async () => {
-    const as = await page.$('mp-actionsheet')
-    const btn = await page.$('#btn-add')
-    await btn.tap()
-    await page.waitFor(500)
-    const btn1 = (await as.$$('.weui-actionsheet__cell'))[4]
-    await btn1.tap()
-    await page.waitFor(500)
-    page = await global.mp.currentPage()
+    page = await goEdit(page, 4)
     expect(page.path).toContain('pages/modules/diary/pages/edit/edit')
     expect(page.query.diaryOptionIndex).toEqual('4')
-    const btn2 = await page.$('#btn-back')
-    await btn2.tap()
-    await page.waitFor(500)
-    page = await global.mp.currentPage()
+    page = await backEdit(page)
   })
 
   it('点击“其它”正常跳转至编辑', async () => {
-    const as = await page.$('mp-actionsheet')
-    const btn = await page.$('#btn-add')
-    await btn.tap()
-    await page.waitFor(500)
-    const btn1 = (await as.$$('.weui-actionsheet__cell'))[5]
-    await btn1.tap()
-    await page.waitFor(500)
-    page = await global.mp.currentPage()
+    page = await goEdit(page, 5)
     expect(page.path).toContain('pages/modules/diary/pages/edit/edit')
     expect(page.query.diaryOptionIndex).toEqual('5')
-    const btn2 = await page.$('#btn-back')
-    await btn2.tap()
-    await page.waitFor(500)
-    page = await global.mp.currentPage()
+    page = await backEdit(page)
   })
 
   it('点击“异常”正常跳转至编辑', async () => {
-    const as = await page.$('mp-actionsheet')
-    const btn = await page.$('#btn-add')
-    await btn.tap()
-    await page.waitFor(500)
-    const btn1 = (await as.$$('.weui-actionsheet__cell'))[6]
-    await btn1.tap()
-    await page.waitFor(500)
-    page = await global.mp.currentPage()
+    page = await goEdit(page, 6)
     expect(page.path).toContain('pages/modules/diary/pages/edit/edit')
     expect(page.query.diaryOptionIndex).toEqual('6')
-    const btn2 = await page.$('#btn-back')
-    await btn2.tap()
-    await page.waitFor(500)
-    page = await global.mp.currentPage()
+    page = await backEdit(page)
   })
 })

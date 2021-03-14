@@ -9,16 +9,31 @@
     />
   </view>
   <view class="btns">
-    <button bindtap="showAddSheet" class="weui-btn" type="primary">添加...</button>
+    <button
+      bindtap="showAddSheet"
+      class="weui-btn"
+      type="primary"
+      id="btn-add"
+    >
+      添加...
+    </button>
     <button
       bindtap="copyYesterday"
       wx:if="{{yesterdayData && !todayRecord}}"
       class="weui-btn"
       type="default"
+      id="btn-same"
     >
       同前
     </button>
-    <button bindtap="goCalendar" class="weui-btn" type="default">日历</button>
+    <button
+      bindtap="goCalendar"
+      class="weui-btn"
+      type="default"
+      id="btn-calendar"
+    >
+      日历
+    </button>
   </view>
   <mp-actionSheet
     bindactiontap="goEdit"

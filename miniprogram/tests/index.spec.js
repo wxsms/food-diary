@@ -1,22 +1,46 @@
 const automator = require('miniprogram-automator')
 const path = require('path')
 
-describe('tests', () => {
-  let mp
+let mp
 
-  beforeAll(async () => {
-    mp = await automator.launch({
-      // cliPath: '/Applications/wechatwebdevtools.app/Contents/MacOS/cli',
-      cliPath: 'E:/Program Files (x86)/Tencent/微信web开发者工具/cli.bat',
-      projectPath: path.join(__dirname, '..', '..'),
+const launchOptions = {
+  // cliPath: '/Applications/wechatwebdevtools.app/Contents/MacOS/cli',
+  cliPath: 'E:/Program Files (x86)/Tencent/微信web开发者工具/cli.bat',
+  projectPath: path.join(__dirname, '..', '..'),
+  account: 'o6zAJsylrRFaTsWYMO8-WExne31Y'
+}
+
+beforeAll(async () => {
+  try {
+    mp = await automator.connect({
+      wsEndpoint: 'ws://localhost:9420',
     })
-    global.mp = mp
-  }, 60000)
+  } catch (err) {
+    console.error(err)
+    try {
+      mp = await automator.launch({ ...launchOptions })
+      // // 获取测试账号
+      // const testAccounts = await mp.testAccounts()
+      // console.log('test accounts:', testAccounts)
+      // if (testAccounts.length) {
+      //   // 如果存在测试号，则使用测试号重新登录
+      //   await mp.close()
+      //   mp = await automator.launch({
+      //     ...launchOptions,
+      //     account: testAccounts[0].openid
+      //   })
+      // }
+    } catch (err) {
+      console.error(err)
+    }
+  }
 
-  afterAll(async () => {
-    await mp.close()
-  })
+  global.mp = mp
+}, 60000)
 
-  require('../pages/index/index.spec')
-  require('../pages/tabbar/pages/discover/discover.spec')
+afterAll(async () => {
+  await mp.disconnect()
 })
+
+require('../pages/index/index.spec')
+require('../pages/tabbar/pages/discover/discover.spec')

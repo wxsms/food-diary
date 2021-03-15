@@ -17,10 +17,6 @@ describe('编辑日记', () => {
         page = await goEdit(page, index)
       })
 
-      afterAll(async () => {
-        await global.mp.restoreWxMethod('showModal')
-      })
-
       it('正确显示日期与类型', async () => {
         const title = await page.$('.page__title')
         const desc = await page.$('.page__desc')
@@ -232,6 +228,10 @@ describe('编辑日记', () => {
       cancel: false
     })
     page = await global.mp.reLaunch('/pages/index/index')
+  })
+
+  afterAll(async () => {
+    await global.mp.restoreWxMethod('showModal')
   })
 
   describe('删除（测试前）', () => {

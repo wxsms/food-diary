@@ -2936,10 +2936,10 @@ minimist@^1.1.1, minimist@^1.2.0, minimist@^1.2.5:
   resolved "https://registry.npm.taobao.org/minimist/download/minimist-1.2.5.tgz#67d66014b66a6a8aaa0c083c5fd58df4e4e97602"
   integrity sha1-Z9ZgFLZqaoqqDAg8X9WN9OTpdgI=
 
-miniprogram-api-typings@3.3.1:
-  version "3.3.1"
-  resolved "https://registry.npm.taobao.org/miniprogram-api-typings/download/miniprogram-api-typings-3.3.1.tgz#1cc58437873fe01c1b4f382aa7630bd73d848c42"
-  integrity sha1-HMWEN4c/4BwbTzgqp2ML1z2EjEI=
+miniprogram-api-typings@3.3.2:
+  version "3.3.2"
+  resolved "https://registry.nlark.com/miniprogram-api-typings/download/miniprogram-api-typings-3.3.2.tgz?cache=0&sync_timestamp=1619019642561&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fminiprogram-api-typings%2Fdownload%2Fminiprogram-api-typings-3.3.2.tgz#1e6aa65817e6534850141cd2af23eeff6ba61b4e"
+  integrity sha1-HmqmWBfmU0hQFBzSryPu/2umG04=
 
 miniprogram-automator@0.10.0:
   version "0.10.0"

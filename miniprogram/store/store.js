@@ -30,6 +30,8 @@ export const store = observable({
   showUpdateActionSheet: false,
   // 类克相关
   remicadeRecords: [],
+  // 安吉优（维得利珠）相关
+  vedolizumabRecords: [],
 
   // 计算属性
   // 当前日期数据相关
@@ -103,5 +105,8 @@ export const store = observable({
   }),
   setRemicadeRecords: action(function (data) {
     this.remicadeRecords = data
+  }),
+  setVedolizumabRecords: action(function (data) {
+    this.vedolizumabRecords = data
   })
 })

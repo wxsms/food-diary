@@ -1,0 +1,61 @@
+<view>
+  <mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
+  <view class="title">{{!!recordId ? '编辑' : '新增'}}</view>
+  <mp-form id="form" rules="{{rules}}" models="{{formData}}">
+    <mp-cells title="基本信息">
+      <picker
+        mode="date"
+        fields="day"
+        bindchange="onDateChange"
+      >
+        <mp-cell title="注射时间">{{formData.date}}</mp-cell>
+      </picker>
+      <mp-cell prop="time" title="注射次数">
+        <input
+          bind:input="formInputChange"
+          data-field="time"
+          type="number"
+          class="weui-input"
+          placeholder="如: 1"
+          value="{{formData.time}}"
+        />
+      </mp-cell>
+      <mp-cell prop="dosage" title="注射剂量">
+        <input
+          bind:input="formInputChange"
+          data-field="dosage"
+          type="number"
+          class="weui-input"
+          placeholder="mg, 如: 300"
+          value="{{formData.dosage}}"
+        />
+      </mp-cell>
+    </mp-cells>
+    <mp-cells title="浓度、抗体检测（选填）">
+      <mp-cell prop="concentration" title="药物浓度">
+        <input
+          bind:input="formInputChange"
+          data-field="concentration"
+          type="digit"
+          class="weui-input"
+          placeholder="ug/mL"
+          value="{{formData.concentration}}"
+        />
+      </mp-cell>
+      <mp-cell prop="antibody" title="药物抗体">
+        <input
+          bind:input="formInputChange"
+          data-field="antibody"
+          type="digit"
+          class="weui-input"
+          placeholder="AU/mL"
+          value="{{formData.antibody}}"
+        />
+      </mp-cell>
+    </mp-cells>
+  </mp-form>
+  <view class="btns">
+    <button class="weui-btn" type="primary" bindtap="submitForm">保存</button>
+    <button wx:if="{{!!recordId}}" class="weui-btn weui-btn-mt" type="warn" bindtap="deleteRecord">删除</button>
+  </view>
+</view>

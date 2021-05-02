@@ -2,5 +2,6 @@
   <mp-cells title="实用工具">
     <mp-cell link hover title="CDAI 评分" url="/pages/modules/discover/pages/cdai/cdai"/>
     <mp-cell link hover title="类克用药记录" url="/pages/modules/discover/pages/remicade/remicade"/>
+    <mp-cell link hover title="安吉优用药记录" url="/pages/modules/discover/pages/vedolizumab/vedolizumab"/>
   </mp-cells>
 </view>

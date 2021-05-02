@@ -1,0 +1,27 @@
+<view>
+  <view class="btns">
+    <button bindtap="goAdd" class="weui-btn" type="primary">添加</button>
+  </view>
+  <view class="next" wx:if="{{records && records.length}}">
+    <text>{{nextDate}}注射第{{nextTime}}次{{typeName}}（间隔{{nextSplit}}周）</text>
+  </view>
+  <view
+    wx:for="{{records}}"
+    wx:key="_id"
+    class="card"
+    hover-class="card-hover"
+    data-id="{{item._id}}"
+    bind:tap="goEdit"
+  >
+    <view class="card-badge">第 {{item.time}} 次{{typeName}}</view>
+    <block>
+      <text>注射时间：{{item.date}}\n</text>
+      <text>注射剂量：{{item.dosage}}mg\n</text>
+      <block wx:if="{{item.concentration || item.antibody}}">
+        <text wx:if="{{item.concentration}}">药物浓度：{{item.concentration}}ug/mL\n</text>
+        <text wx:if="{{item.antibody}}">药物抗体：{{item.antibody}}AU/mL\n</text>
+      </block>
+    </block>
+  </view>
+  <view class="bottom"></view>
+</view>

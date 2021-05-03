@@ -2,6 +2,10 @@ import themeMixin from '../../../../../mixins/theme.mixin'
 import shareMixin from '../../../../../mixins/share.mixin'
 
 const changelog = `
+## 1.11.0
+### 新增
+* 现在“用药记录”支持更多生物制剂了
+
 ## 1.10.1
 ### 修复
 * 导出excel缺少排便情况的问题

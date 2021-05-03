@@ -15,8 +15,6 @@
     </mp-cells>
   </view>
   <view class="weui-footer footer-fixed">
-    <view class="weui-footer__text">承接 IBD 相关公益项目开发</view>
-    <view class="weui-footer__text">如有需要，请联系我</view>
     <view class="weui-footer__text">Copyright © 2019-{{year}} Kairui Guo</view>
   </view>
 </view>

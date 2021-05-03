@@ -115,15 +115,58 @@ const mab_0268 = (prev) => {
 
 export const MAB = {
   REMICADE: {
+    sort: 1,
     id: 'remicade',
     name: '英夫利西单抗',
     productName: '类克',
     calcNextTime: mab_0268
   },
   VEDOLIZUMAB: {
+    sort: 2,
     id: 'vedolizumab',
     name: '维得利珠单抗',
     productName: '安吉优',
     calcNextTime: mab_0268
+  },
+  USTEKINUMAB: {
+    sort: 3,
+    id: 'ustekinumab',
+    name: '乌司奴单抗',
+    productName: '喜达诺',
+    calcNextTime: (prev) => {
+      const prevTime = prev.time
+      const prevDate = prev.date
+      let nextSplit = 12
+      if (prevTime === 1) {
+        nextSplit = 8
+      }
+      const date = new Date(prevDate)
+      const ts = date.getTime()
+      const nextDate = format(addWeek(ts, nextSplit), FORMATS.Y_M_D)
+      return {
+        nextTime: prevTime + 1,
+        nextDate,
+        nextSplit
+      }
+    }
+  },
+  ADALIMUMAB: {
+    sort: 4,
+    id: 'adalimumab',
+    name: '阿达木单抗',
+    productName: '修美乐',
+    calcNextTime: (prev) => {
+      const prevTime = prev.time
+      const prevDate = prev.date
+      const nextSplit = 2
+      const date = new Date(prevDate)
+      const ts = date.getTime()
+      const nextDate = format(addWeek(ts, nextSplit), FORMATS.Y_M_D)
+      return {
+        nextTime: prevTime + 1,
+        nextDate,
+        nextSplit
+      }
+    }
   }
 }

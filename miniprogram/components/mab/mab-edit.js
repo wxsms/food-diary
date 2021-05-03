@@ -46,7 +46,7 @@ Component({
         name: 'dosage',
         rules: [
           { required: true, message: '请输入注射剂量' },
-          { min: 100, message: '注射剂量不能小于 100' },
+          { min: 0, message: '注射剂量不能小于 0' },
           { validator: (rule, value) => validateNumber(value, '注射剂量') }
         ],
       },

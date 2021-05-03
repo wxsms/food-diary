@@ -28,10 +28,11 @@ export const store = observable({
   // scd 记录更新相关
   selectedScdFood: null,
   showUpdateActionSheet: false,
-  // 类克相关
+  // 生物制剂相关
   remicadeRecords: [],
-  // 安吉优（维得利珠）相关
   vedolizumabRecords: [],
+  ustekinumabRecords: [],
+  adalimumabRecords: [],
 
   // 计算属性
   // 当前日期数据相关
@@ -108,5 +109,11 @@ export const store = observable({
   }),
   setVedolizumabRecords: action(function (data) {
     this.vedolizumabRecords = data
+  }),
+  setUstekinumabRecords: action(function (data) {
+    this.ustekinumabRecords = data
+  }),
+  setAdalimumabRecords: action(function (data) {
+    this.adalimumabRecords = data
   })
 })

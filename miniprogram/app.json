@@ -47,7 +47,11 @@
         "pages/remicade/remicade",
         "pages/remicade/remicade-edit",
         "pages/vedolizumab/vedolizumab",
-        "pages/vedolizumab/vedolizumab-edit"
+        "pages/vedolizumab/vedolizumab-edit",
+        "pages/ustekinumab/ustekinumab",
+        "pages/ustekinumab/ustekinumab-edit",
+        "pages/adalimumab/adalimumab",
+        "pages/adalimumab/adalimumab-edit"
       ]
     }
   ],

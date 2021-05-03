@@ -6,6 +6,6 @@ import { MAB } from '../../../../constants/constants'
 Component({
   behaviors: [storeBindingsBehavior, themeMixin, shareMixin],
   data: {
-    mabs: Object.keys(MAB).map(k => MAB[k])
+    mabs: Object.keys(MAB).map(k => MAB[k]).sort((a, b) => a.sort - b.sort)
   }
 })

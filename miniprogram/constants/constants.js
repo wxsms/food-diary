@@ -119,6 +119,11 @@ export const MAB = {
     id: 'remicade',
     name: '英夫利西单抗',
     productName: '类克',
+    desc: `100mg/支，按体重给药，静脉，
+（20-40kg）2 支；
+（40-60kg）3 支；
+（60-80kg）4 支；
+第 0、2、6 周给药，后续每隔 8 周给药相同剂量。`,
     calcNextTime: mab_0268
   },
   VEDOLIZUMAB: {
@@ -126,6 +131,9 @@ export const MAB = {
     id: 'vedolizumab',
     name: '维得利珠单抗',
     productName: '安吉优',
+    desc: `300mg/瓶，静脉，
+第 0、2、6 周给药 300mg，
+后续每隔 8 周给药 300mg。`,
     calcNextTime: mab_0268
   },
   USTEKINUMAB: {
@@ -133,6 +141,12 @@ export const MAB = {
     id: 'ustekinumab',
     name: '乌司奴单抗',
     productName: '喜达诺',
+    desc: `第 0 周静脉，按体重计算：
+（<=55kg）2 瓶；
+（55-85kg）3 瓶；
+（>85kg）4瓶；
+第 8 周皮下注射 90mg，
+后续每隔 12 周给药一次。`,
     calcNextTime: (prev) => {
       const prevTime = prev.time
       const prevDate = prev.date
@@ -155,6 +169,10 @@ export const MAB = {
     id: 'adalimumab',
     name: '阿达木单抗',
     productName: '修美乐',
+    desc: `40mg/支，皮下注射
+初始（第 0 周）160mg，
+第二周 80mg，
+后续 40mg 每 2 周一次。`,
     calcNextTime: (prev) => {
       const prevTime = prev.time
       const prevDate = prev.date

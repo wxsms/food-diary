@@ -47,3 +47,7 @@
   margin-bottom: 20px;
   text-align: center;
 }
+
+.weui-btn-mt {
+  margin-top: 20px;
+}

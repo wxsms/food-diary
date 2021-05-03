@@ -66,6 +66,13 @@ Component({
       wx.navigateTo({
         url: `/pages/modules/discover/pages/${this.data.type.id}/${this.data.type.id}-edit`
       })
+    },
+    async showDetail () {
+      await wx.showModal({
+        showCancel: false,
+        title: `${this.data.type.name}（${this.data.type.productName}）`,
+        content: this.data.type.desc
+      })
     }
   }
 })

@@ -4,6 +4,7 @@
   </view>
   <view class="btns">
     <button bindtap="goAdd" class="weui-btn" type="primary">添加...</button>
+    <button bindtap="showDetail" class="weui-btn weui-btn-mt" type="default">简介</button>
   </view>
   <view class="next" wx:if="{{records && records.length}}">
     <text>{{nextDate}}注射第{{nextTime}}次（间隔{{nextSplit}}周）</text>

@@ -1,6 +1,6 @@
 import { isIos } from '../utils/system.utils'
 
-module.exports = Behavior({
+export default Behavior({
   data: {
     isIos: isIos()
   }

@@ -18,10 +18,7 @@ function validateNumber (value, fieldName) {
 Component({
   properties: {
     type: {
-      type: String
-    },
-    typeName: {
-      type: String
+      type: Object
     },
     recordId: {
       type: String
@@ -73,10 +70,10 @@ Component({
     this.storeBindings = createStoreBindings(this, {
       store,
       fields: {
-        records: store => store[`${this.data.type}Records`]
+        records: store => store[`${this.data.type.id}Records`]
       },
       actions: {
-        setRecords: `set${this.data.type.charAt(0).toUpperCase() + this.data.type.slice(1)}Records`
+        setRecords: `set${this.data.type.id.charAt(0).toUpperCase() + this.data.type.id.slice(1)}Records`
       }
     })
     await nextTick()
@@ -133,7 +130,7 @@ Component({
             const db = wx.cloud.database()
             try {
               const { stats: { removed } } = await db
-                .collection(`records-${this.data.type}`)
+                .collection(`records-${this.data.type.id}`)
                 .doc(this.data.recordId)
                 .remove()
               if (removed) {
@@ -179,7 +176,7 @@ Component({
           const db = wx.cloud.database()
           if (this.data.recordId) {
             await db
-              .collection(`records-${this.data.type}`)
+              .collection(`records-${this.data.type.id}`)
               .doc(this.data.recordId)
               .update({
                 data: {
@@ -195,7 +192,7 @@ Component({
             wx.navigateBack()
           } else {
             const { _id } = await db
-              .collection(`records-${this.data.type}`)
+              .collection(`records-${this.data.type.id}`)
               .add({
                 data: {
                   ..._formData,

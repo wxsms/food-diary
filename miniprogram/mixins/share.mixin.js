@@ -1,6 +1,6 @@
 import { debug } from '../utils/log.utils'
 
-module.exports = Behavior({
+export default Behavior({
   methods: {
     onShareAppMessage () {
       let path

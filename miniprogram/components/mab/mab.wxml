@@ -3,7 +3,7 @@
     <button bindtap="goAdd" class="weui-btn" type="primary">添加</button>
   </view>
   <view class="next" wx:if="{{records && records.length}}">
-    <text>{{nextDate}}注射第{{nextTime}}次{{typeName}}（间隔{{nextSplit}}周）</text>
+    <text>{{nextDate}}注射第{{nextTime}}次{{type.name}}（间隔{{nextSplit}}周）</text>
   </view>
   <view
     wx:for="{{records}}"
@@ -13,7 +13,7 @@
     data-id="{{item._id}}"
     bind:tap="goEdit"
   >
-    <view class="card-badge">第 {{item.time}} 次{{typeName}}</view>
+    <view class="card-badge">第 {{item.time}} 次{{type.name}}</view>
     <block>
       <text>注射时间：{{item.date}}\n</text>
       <text>注射剂量：{{item.dosage}}mg\n</text>

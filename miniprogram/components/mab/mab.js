@@ -2,16 +2,12 @@ import { createStoreBindings } from 'mobx-miniprogram-bindings'
 import { loading, toast, TOAST_ERRORS } from '../../utils/toast.utils'
 import { debug, error } from '../../utils/log.utils'
 import { store } from '../../store/store'
-import { addWeek, format, FORMATS } from '../../utils/date.utils'
 
 Component({
   properties: {
     type: {
-      type: String
+      type: Object
     },
-    typeName: {
-      type: String
-    }
   },
   data: {
     nextTime: '',
@@ -22,19 +18,9 @@ Component({
     'records' (_records) {
       const records = _records.slice()
       if (records && records.length) {
-        const prevTime = records[0].time
-        const prevDate = records[0].date
-        let nextSplit = 8
-        if (prevTime === 1) {
-          nextSplit = 2
-        } else if (prevTime === 2) {
-          nextSplit = 4
-        }
-        const date = new Date(prevDate)
-        const ts = date.getTime()
-        const nextDate = format(addWeek(ts, nextSplit), FORMATS.Y_M_D)
+        const { nextTime, nextDate, nextSplit } = this.data.type.calcNextTime(records[0])
         this.setData({
-          nextTime: prevTime + 1,
+          nextTime,
           nextDate,
           nextSplit
         })
@@ -45,10 +31,10 @@ Component({
     this.storeBindings = createStoreBindings(this, {
       store,
       fields: {
-        records: store => store[`${this.data.type}Records`]
+        records: store => store[`${this.data.type.id}Records`]
       },
       actions: {
-        setRecords: `set${this.data.type.charAt(0).toUpperCase() + this.data.type.slice(1)}Records`
+        setRecords: `set${this.data.type.id.charAt(0).toUpperCase() + this.data.type.id.slice(1)}Records`
       }
     })
     await this.fetchData()
@@ -60,7 +46,7 @@ Component({
         const { result } = await wx.cloud.callFunction({
           name: 'remicade',
           data: {
-            tableName: `records-${this.data.type}`
+            tableName: `records-${this.data.type.id}`
           }
         })
         this.setRecords(result || [])
@@ -73,12 +59,12 @@ Component({
     },
     goEdit ({ currentTarget: { dataset: { id } } }) {
       wx.navigateTo({
-        url: `/pages/modules/discover/pages/${this.data.type}/${this.data.type}-edit?id=${id}`
+        url: `/pages/modules/discover/pages/${this.data.type.id}/${this.data.type.id}-edit?id=${id}`
       })
     },
     goAdd () {
       wx.navigateTo({
-        url: `/pages/modules/discover/pages/${this.data.type}/${this.data.type}-edit`
+        url: `/pages/modules/discover/pages/${this.data.type.id}/${this.data.type.id}-edit`
       })
     }
   }

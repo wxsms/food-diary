@@ -17,7 +17,7 @@ const themeColors = {
   }
 }
 
-module.exports = Behavior({
+export default Behavior({
   data: {
     theme: 'light',
     themeColors: {

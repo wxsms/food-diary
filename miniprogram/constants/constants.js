@@ -1,3 +1,5 @@
+import { addWeek, format, FORMATS } from '../utils/date.utils'
+
 const _DIARY_TYPES = {
   BREAKFAST: {
     label: '早餐',
@@ -89,5 +91,39 @@ export const SCD_STATUS = {
   NOT_EAT: {
     value: 0,
     text: '没吃过'
+  }
+}
+
+const mab_0268 = (prev) => {
+  const prevTime = prev.time
+  const prevDate = prev.date
+  let nextSplit = 8
+  if (prevTime === 1) {
+    nextSplit = 2
+  } else if (prevTime === 2) {
+    nextSplit = 4
+  }
+  const date = new Date(prevDate)
+  const ts = date.getTime()
+  const nextDate = format(addWeek(ts, nextSplit), FORMATS.Y_M_D)
+  return {
+    nextTime: prevTime + 1,
+    nextDate,
+    nextSplit
+  }
+}
+
+export const MAB = {
+  REMICADE: {
+    id: 'remicade',
+    name: '英夫利西单抗',
+    productName: '类克',
+    calcNextTime: mab_0268
+  },
+  VEDOLIZUMAB: {
+    id: 'vedolizumab',
+    name: '维得利珠单抗',
+    productName: '安吉优',
+    calcNextTime: mab_0268
   }
 }

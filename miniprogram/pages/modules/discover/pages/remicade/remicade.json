@@ -2,5 +2,5 @@
   "usingComponents": {
     "mab": "/components/mab/mab"
   },
-  "navigationBarTitleText": "类克用药记录"
+  "navigationBarTitleText": "用药记录"
 }

@@ -157,14 +157,14 @@
         </mp-checkbox-group>
       </mp-cells>
 
-      <mp-cells title="贫血与体重">
+      <mp-cells title="贫血与体重" footer="提示：红细胞比容，又称红细胞压积，为血常规检测项目。">
         <mp-cell prop="hct" title="红细胞比容 (HCT)">
           <input
             bind:input="formInputChange"
             data-field="hct"
             type="digit"
             class="weui-input"
-            placeholder="请输入百分比"
+            placeholder="请输入百分比，如：45"
           />
         </mp-cell>
         <mp-cell prop="weight" title="体重 (kg)">

@@ -10,6 +10,6 @@
     />
   </mp-cells>
   <mp-cells title="实用工具">
-    <mp-cell link hover title="CDAI 评分" url="/pages/modules/discover/pages/cdai/cdai"/>
+    <mp-cell link hover title="克罗恩病活动指数（CDAI）评分" url="/pages/modules/discover/pages/cdai/cdai"/>
   </mp-cells>
 </view>

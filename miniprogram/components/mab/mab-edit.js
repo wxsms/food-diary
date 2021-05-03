@@ -133,7 +133,7 @@ Component({
             const db = wx.cloud.database()
             try {
               const { stats: { removed } } = await db
-                .collection('records-remicade')
+                .collection(`records-${this.data.type}`)
                 .doc(this.data.recordId)
                 .remove()
               if (removed) {
@@ -179,7 +179,7 @@ Component({
           const db = wx.cloud.database()
           if (this.data.recordId) {
             await db
-              .collection('records-remicade')
+              .collection(`records-${this.data.type}`)
               .doc(this.data.recordId)
               .update({
                 data: {
@@ -195,7 +195,7 @@ Component({
             wx.navigateBack()
           } else {
             const { _id } = await db
-              .collection('records-remicade')
+              .collection(`records-${this.data.type}`)
               .add({
                 data: {
                   ..._formData,

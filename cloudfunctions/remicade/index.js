@@ -8,14 +8,17 @@ const db = cloud.database()
 const MAX_LIMIT = 100
 
 // 云函数入口函数
-exports.main = async (event, context) => {
+exports.main = async (props) => {
+  const {
+    tableName = 'records-remicade'
+  } = props
   const wxContext = cloud.getWXContext()
   const where = {
     _openid: wxContext.OPENID
   }
   // 获取总数
   const { total } = await db
-    .collection('records-remicade')
+    .collection(tableName)
     .where(where)
     .count()
   if (total === 0) {
@@ -26,7 +29,7 @@ exports.main = async (event, context) => {
   const tasks = []
   for (let i = 0; i < batchTimes; i++) {
     tasks.push(db
-      .collection('records-remicade')
+      .collection(tableName)
       .where(where)
       .orderBy('createTime', 'desc')
       .skip(i * MAX_LIMIT)

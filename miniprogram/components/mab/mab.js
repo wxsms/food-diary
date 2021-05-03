@@ -58,7 +58,10 @@ Component({
       try {
         loading()
         const { result } = await wx.cloud.callFunction({
-          name: 'remicade'
+          name: 'remicade',
+          data: {
+            tableName: `records-${this.data.type}`
+          }
         })
         this.setRecords(result || [])
       } catch (e) {

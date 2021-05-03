@@ -45,7 +45,9 @@
         "pages/cdai/cdai",
         "pages/cdai/result",
         "pages/remicade/remicade",
-        "pages/remicade/remicade-edit"
+        "pages/remicade/remicade-edit",
+        "pages/vedolizumab/vedolizumab",
+        "pages/vedolizumab/vedolizumab-edit"
       ]
     }
   ],

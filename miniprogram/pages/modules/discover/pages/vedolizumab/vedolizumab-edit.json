@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "mab-edit": "/components/mab/mab-edit"
+  },
+  "navigationBarTitleText": "安吉优用药记录"
+}

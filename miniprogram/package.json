@@ -21,7 +21,7 @@
     "weui-miniprogram": "1.0.8"
   },
   "devDependencies": {
-    "jest": "27.0.3",
+    "jest": "27.0.4",
     "miniprogram-api-typings": "3.3.2",
     "miniprogram-automator": "0.10.0"
   }

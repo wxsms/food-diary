@@ -778,10 +778,10 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-wx-server-sdk@~2.4.0:
-  version "2.4.0"
-  resolved "https://registry.npm.taobao.org/wx-server-sdk/download/wx-server-sdk-2.4.0.tgz#5e14432ba0ef1c95485cf72c9359446eab392bde"
-  integrity sha1-XhRDK6DvHJVIXPcsk1lEbqs5K94=
+wx-server-sdk@~2.5.0:
+  version "2.5.1"
+  resolved "https://registry.nlark.com/wx-server-sdk/download/wx-server-sdk-2.5.1.tgz#59f4312f37e1bb2bd46769ec3e58b14fd5da0162"
+  integrity sha1-WfQxLzfhuyvUZ2nsPlixT9XaAWI=
   dependencies:
     "@cloudbase/node-sdk" "2.4.7"
     protobufjs "6.8.8"

@@ -2,6 +2,11 @@ import themeMixin from '../../../../../mixins/theme.mixin'
 import shareMixin from '../../../../../mixins/share.mixin'
 
 const changelog = `
+## 1.12.0
+### 新增
+* 现在“用药记录”支持自定义下次用药时间了
+* 优化了某些文案提示
+
 ## 1.11.0
 ### 新增
 * 现在“用药记录”支持更多生物制剂了

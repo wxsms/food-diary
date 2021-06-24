@@ -1,4 +1,4 @@
-<view>
+<view class="mab-edit-container">
   <mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
   <view class="title">{{!!recordId ? '编辑' : '新增'}}</view>
   <mp-form id="form" rules="{{rules}}" models="{{formData}}">
@@ -52,6 +52,16 @@
           value="{{formData.antibody}}"
         />
       </mp-cell>
+    </mp-cells>
+    <mp-cells title="下次注射时间（选填，不填则自动计算）">
+      <picker
+        mode="date"
+        fields="day"
+        bindchange="onNextDateChange"
+        value="{{formData.nextDate}}"
+      >
+        <mp-cell title="下次注射">{{formData.nextDate || '请选择...'}}</mp-cell>
+      </picker>
     </mp-cells>
   </mp-form>
   <view class="btns">

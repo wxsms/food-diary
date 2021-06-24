@@ -2,7 +2,7 @@ import { createStoreBindings } from 'mobx-miniprogram-bindings'
 import { debug, error } from '../../utils/log.utils'
 import { loading, LOADING_TEXTS, toast, TOAST_ERRORS } from '../../utils/toast.utils'
 import isString from 'lodash.isstring'
-import { addWeek, format, FORMATS } from '../../utils/date.utils'
+import { format, FORMATS } from '../../utils/date.utils'
 import { store } from '../../store/store'
 import find from 'lodash.find'
 import findIndex from 'lodash.findindex'
@@ -84,6 +84,7 @@ Component({
       this.setData({
         formData: {
           date: data.date,
+          nextDate: data.nextDate,
           time: data.time.toString(),
           dosage: data.dosage.toString(),
           concentration: data.concentration ? data.concentration.toString() : '',
@@ -108,6 +109,14 @@ Component({
         formData: {
           ...this.data.formData,
           date: value
+        }
+      })
+    },
+    onNextDateChange ({ detail: { value } }) {
+      this.setData({
+        formData: {
+          ...this.data.formData,
+          nextDate: value
         }
       })
     },

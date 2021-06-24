@@ -1,7 +1,8 @@
 import { createStoreBindings } from 'mobx-miniprogram-bindings'
 import { loading, toast, TOAST_ERRORS } from '../../utils/toast.utils'
-import { debug, error } from '../../utils/log.utils'
+import { error } from '../../utils/log.utils'
 import { store } from '../../store/store'
+import { diffWeeks, format, FORMATS } from '../../utils/date.utils'
 
 Component({
   properties: {
@@ -18,12 +19,23 @@ Component({
     'records' (_records) {
       const records = _records.slice()
       if (records && records.length) {
-        const { nextTime, nextDate, nextSplit } = this.data.type.calcNextTime(records[0])
-        this.setData({
-          nextTime,
-          nextDate,
-          nextSplit
-        })
+        const latest = records[0]
+        const { nextTime, nextDate, nextSplit } = this.data.type.calcNextTime(latest)
+        if (latest.nextDate) {
+          const nextDate = new Date(latest.nextDate).getTime()
+          const latestDate = new Date(latest.date).getTime()
+          this.setData({
+            nextTime,
+            nextDate: format(nextDate, FORMATS.Y_M_D),
+            nextSplit: diffWeeks(nextDate, latestDate)
+          })
+        } else {
+          this.setData({
+            nextTime,
+            nextDate,
+            nextSplit
+          })
+        }
       }
     }
   },

@@ -76,3 +76,7 @@ export function getWeekdayLong (ts) {
 export function getWeekday (ts) {
   return _DateTime(ts).weekday
 }
+
+export function diffWeeks (dt1, dt2) {
+  return Math.round(Math.abs(_DateTime(dt1).diff(_DateTime(dt2)).as('week')))
+}

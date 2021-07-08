@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "jest": "27.0.6",
-    "miniprogram-api-typings": "3.3.2",
+    "miniprogram-api-typings": "3.4.1",
     "miniprogram-automator": "0.10.0"
   }
 }

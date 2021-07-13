@@ -2420,10 +2420,10 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
-luxon@1.27.0:
-  version "1.27.0"
-  resolved "https://registry.nlark.com/luxon/download/luxon-1.27.0.tgz#ae10c69113d85dab8f15f5e8390d0cbeddf4f00f"
-  integrity sha1-rhDGkRPYXauPFfXoOQ0Mvt308A8=
+luxon@1.28.0:
+  version "1.28.0"
+  resolved "https://registry.nlark.com/luxon/download/luxon-1.28.0.tgz#e7f96daad3938c06a62de0fb027115d251251fbf"
+  integrity sha1-5/ltqtOTjAamLeD7AnEV0lElH78=
 
 make-dir@^3.0.0:
   version "3.1.0"

@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"@babel/runtime@^7.14.6":
+  version "7.14.6"
+  resolved "https://registry.nlark.com/@babel/runtime/download/@babel/runtime-7.14.6.tgz#535203bc0892efc7dec60bdc27b2ecf6e409062d"
+  integrity sha1-U1IDvAiS78fexgvcJ7Ls9uQJBi0=
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
 "@cloudbase/database@0.9.15":
   version "0.9.15"
   resolved "https://registry.npm.taobao.org/@cloudbase/database/download/@cloudbase/database-0.9.15.tgz#268e9b3120be6c99294e6645bc1871db8ba70d31"
@@ -574,13 +581,14 @@ ms@^2.1.1:
   resolved "https://registry.npm.taobao.org/ms/download/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
   integrity sha1-0J0fNXtEP0kzgqjrPM0YOHKuYAk=
 
-node-xlsx@^0.16.0:
-  version "0.16.0"
-  resolved "https://registry.npm.taobao.org/node-xlsx/download/node-xlsx-0.16.0.tgz#561719151e3df6a4abb4080e67f8162931fead51"
-  integrity sha1-VhcZFR499qSrtAgOZ/gWKTH+rVE=
+node-xlsx@^0.17.0:
+  version "0.17.1"
+  resolved "https://registry.nlark.com/node-xlsx/download/node-xlsx-0.17.1.tgz#29d7d38442bc4e7135d33758987cd22b1c3b290e"
+  integrity sha1-KdfThEK8TnE10zdYmHzSKxw7KQ4=
   dependencies:
+    "@babel/runtime" "^7.14.6"
     buffer-from "^1.1.1"
-    xlsx "^0.16.8"
+    xlsx "^0.17.0"
 
 oauth-sign@~0.9.0:
   version "0.9.0"
@@ -640,6 +648,11 @@ querystring@0.2.0:
   version "0.2.0"
   resolved "https://registry.npm.taobao.org/querystring/download/querystring-0.2.0.tgz?cache=0&sync_timestamp=1589682791876&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fquerystring%2Fdownload%2Fquerystring-0.2.0.tgz#b209849203bb25df820da756e747005878521620"
   integrity sha1-sgmEkgO7Jd+CDadW50cAWHhSFiA=
+
+regenerator-runtime@^0.13.4:
+  version "0.13.7"
+  resolved "https://registry.nlark.com/regenerator-runtime/download/regenerator-runtime-0.13.7.tgz#cac2dacc8a1ea675feaabaeb8ae833898ae46f55"
+  integrity sha1-ysLazIoepnX+qrrriugziYrkb1U=
 
 request-promise-core@1.1.4:
   version "1.1.4"
@@ -847,10 +860,10 @@ wx-server-sdk@latest:
     tcb-admin-node latest
     tslib "^1.9.3"
 
-xlsx@^0.16.8:
-  version "0.16.9"
-  resolved "https://registry.npm.taobao.org/xlsx/download/xlsx-0.16.9.tgz?cache=0&sync_timestamp=1605857070120&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fxlsx%2Fdownload%2Fxlsx-0.16.9.tgz#dacd5bb46bda6dd3743940c9c3dc1e2171826256"
-  integrity sha1-2s1btGvabdN0OUDJw9weIXGCYlY=
+xlsx@^0.17.0:
+  version "0.17.0"
+  resolved "https://registry.nlark.com/xlsx/download/xlsx-0.17.0.tgz#028176a0140967dcee1817d221678461e47481c8"
+  integrity sha1-AoF2oBQJZ9zuGBfSIWeEYeR0gcg=
   dependencies:
     adler-32 "~1.2.0"
     cfb "^1.1.4"

@@ -2498,10 +2498,10 @@ minimist@^1.2.5:
   resolved "https://registry.npm.taobao.org/minimist/download/minimist-1.2.5.tgz#67d66014b66a6a8aaa0c083c5fd58df4e4e97602"
   integrity sha1-Z9ZgFLZqaoqqDAg8X9WN9OTpdgI=
 
-miniprogram-api-typings@3.4.1:
-  version "3.4.1"
-  resolved "https://registry.nlark.com/miniprogram-api-typings/download/miniprogram-api-typings-3.4.1.tgz#17cef4c184d32b2e12e2deb5559d1c01c84fa891"
-  integrity sha1-F870wYTTKy4S4t61VZ0cAchPqJE=
+miniprogram-api-typings@3.4.2:
+  version "3.4.2"
+  resolved "https://registry.nlark.com/miniprogram-api-typings/download/miniprogram-api-typings-3.4.2.tgz#625460c4bde4a4c60162cc04dc05636cab6487b4"
+  integrity sha1-YlRgxL3kpMYBYswE3AVjbKtkh7Q=
 
 miniprogram-automator@0.10.0:
   version "0.10.0"

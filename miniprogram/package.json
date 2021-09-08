@@ -17,7 +17,7 @@
     "luxon": "1.28.0",
     "miniprogram-computed": "3.1.1",
     "mobx-miniprogram": "4.13.2",
-    "mobx-miniprogram-bindings": "2.0.0",
+    "mobx-miniprogram-bindings": "2.1.4",
     "weui-miniprogram": "1.0.8"
   },
   "devDependencies": {

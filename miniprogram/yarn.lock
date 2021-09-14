@@ -2503,10 +2503,10 @@ miniprogram-api-typings@3.4.2:
   resolved "https://registry.nlark.com/miniprogram-api-typings/download/miniprogram-api-typings-3.4.2.tgz#625460c4bde4a4c60162cc04dc05636cab6487b4"
   integrity sha1-YlRgxL3kpMYBYswE3AVjbKtkh7Q=
 
-miniprogram-automator@0.10.0:
-  version "0.10.0"
-  resolved "https://registry.npm.taobao.org/miniprogram-automator/download/miniprogram-automator-0.10.0.tgz#0078b844ff0094b4aa5287e9902ff1abf0639fd8"
-  integrity sha1-AHi4RP8AlLSqUofpkC/xq/Bjn9g=
+miniprogram-automator@0.11.0:
+  version "0.11.0"
+  resolved "https://registry.nlark.com/miniprogram-automator/download/miniprogram-automator-0.11.0.tgz#63d4b8273a454be461415d77291101353dc24483"
+  integrity sha1-Y9S4JzpFS+RhQV13KREBNT3CRIM=
   dependencies:
     debug "^4.1.1"
     jimp "^0.6.4"

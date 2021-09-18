@@ -3131,10 +3131,10 @@ webidl-conversions@^6.1.0:
   resolved "https://registry.npm.taobao.org/webidl-conversions/download/webidl-conversions-6.1.0.tgz#9111b4d7ea80acd40f5270d666621afa78b69514"
   integrity sha1-kRG01+qArNQPUnDWZmIa+ni2lRQ=
 
-weui-miniprogram@1.0.8:
-  version "1.0.8"
-  resolved "https://registry.npm.taobao.org/weui-miniprogram/download/weui-miniprogram-1.0.8.tgz#e7917c47a5d7e951b30694d939d0a2e5e005b274"
-  integrity sha1-55F8R6XX6VGzBpTZOdCi5eAFsnQ=
+weui-miniprogram@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.nlark.com/weui-miniprogram/download/weui-miniprogram-1.1.1.tgz#9c485d34dda53af2d107e7c6e9098173c8786756"
+  integrity sha1-nEhdNN2lOvLRB+fG6QmBc8h4Z1Y=
 
 whatwg-encoding@^1.0.5:
   version "1.0.5"

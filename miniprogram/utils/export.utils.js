@@ -14,7 +14,7 @@ export async function exportAndDownloadRecords ({ from, to, kind = EXPORT_KINDS.
     const rangeTip = from === 0 ? '全部' : `${format(from, FORMATS.Y_M)}至${format(to, FORMATS.Y_M)}`
     const { confirm } = await wx.showModal({
       title: '导出确认',
-      content: `导出以下时间段的记录：\r\n${rangeTip}\r\n每天可以导出一次`
+      content: `导出以下时间段的记录：\r\n${rangeTip}\r\n`
     })
     if (!confirm) {
       return

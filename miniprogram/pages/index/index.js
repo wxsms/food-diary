@@ -37,6 +37,19 @@ Component({
   },
   methods: {
     async onLoad () {
+      wx.showModal({
+        title: '重要提醒',
+        showCancel: false,
+        confirmText: '我知道了',
+        content: '由于微信小程序收费政策调整，且调整后每月收费昂贵，IBD 日记已无法继续为病友们提供免费服务。服务将于 2022 年 10 月 23 日下线。请各位用户在此日期之前自行完成数据导出与备份，超过时限后数据将被云服务提供商自动清理。小程序已取消每天一次的导出限制，请知悉！',
+        success (res) {
+          if (res.confirm) {
+            console.log('用户点击确定')
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
       debug('version:', version)
       debug('index:onLoad')
       loading()

@@ -1,7 +1,7 @@
 import { STORAGE_KEYS } from '../constants/constants'
 import { error } from './log.utils'
 
-export const version = '1.12.0'
+export const version = '1.13.0'
 const _rVersion = { version: null }
 const _scdVersion = { version: null }
 

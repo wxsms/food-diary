@@ -1,5 +1,5 @@
 <view class="container" data-weui-theme="{{theme}}">
-  <mp-cells title="时间粒度" footer="每天可以执行一次导出操作">
+  <mp-cells title="导出饮食记录">
     <mp-cell hover ext-class="cell-flat">
       <button class="cell-button">
         <picker
@@ -25,5 +25,11 @@
     <!--    <mp-cell hover ext-class="cell-flat" bind:tap="exportAll">-->
     <!--      <button class="cell-button">导出全部</button>-->
     <!--    </mp-cell>-->
+  </mp-cells>
+
+  <mp-cells title="导出 SCD 记录">
+    <mp-cell hover ext-class="cell-flat">
+      <button class="cell-button" bind:tap="exportScd">导出</button>
+    </mp-cell>
   </mp-cells>
 </view>
